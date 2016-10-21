@@ -16,7 +16,6 @@ class Scan(models.Model):
    
     def __unicode__(self):
         return "{0} | {1}".format(self.uniform_resource_locator, team_id)
-
 """
 Fields: scan, name, uploaded_to,   date
 Types: 1 - 1, char, file path char,DateTime 
@@ -32,7 +31,7 @@ class Zip(models.Model):
     date        = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return "{0}.zip".format(self.name)
+        return "{0}".format(self.name)
 
 @receiver(post_save, sender=Scan)
 def create_zip_for_scan(sender, instance, created, **kwargs):
@@ -44,7 +43,7 @@ def create_zip_for_scan(sender, instance, created, **kwargs):
 class MetaFile(models.Model):
     DOCUMENTATION = 'D'
     SCAN          = 'S'
-    FILE_CHOICES  = (
+    FILE_CHOIC= (
         (DOCUMENTATION, 'Documentation'),
         (SCAN         , 'Scan'         ),
     )

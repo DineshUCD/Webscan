@@ -1,0 +1,37 @@
+Dependency
+pip install django-user-roles
+
+With Gauntlt you can store additional step definitions  in the attack_adapters directory.
+Gauntlt also provides flexibility through a few generic step definitions that allow you to 
+check the output of arbitrary raw command lines. 
+
+Sample Gauntlt Hello world example:
+
+Background:
+@final
+Feature: hello world with gauntlt using the generic command line attack
+  Scenario: Check for the existence of the root user in /etc/passwd
+   When I launch a "generic" attack with:
+   """
+   cat /etc/passwd
+   """
+   Then the output should contain:
+   """
+   root
+   """
+Tags:
+The @slow tag tells Gauntlt to allow for a 30-second timeout.
+The @veryslow allows for a five-minute timeout.
+Anything witht he @ is a tag in gauntlt and it is one way to organize your attacks.
+Feel free to mix in tags that have origanizational meaning like @prod with tags that describe
+attack type, lke @web.
+
+
+Feature:
+Each attack should say what it is doing. We use the Feature keyword to express what the attack is doing,
+but take this space to give a good description to what you are doing in this attack. 
+
+
+Rules of Engagement:
+1. Configure Outbound SOCKS Proxy
+Tunnel your Burp Suite traffic through an outbound SOCKS Proxy. This ensures that testing traffic originates

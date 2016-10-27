@@ -83,10 +83,34 @@ class ZipArchive():
 
         #returning the associated value or the default if missing
         self.verbose = kwargs.pop('verbose', True) 
-        #Instantiating a model in now way touches your databasel for that, you need to save()
-        self.scan    = kwargs.pop('scan', Scan(uniform_resource_locator='http://scanme.nmap.org')) 
+        #Instantiating a model in now way touches your database; for that, you need to save()
+        self.scan = kwargs.pop('scan', Scan(uniform_resource_locator='http://scanme.nmap.org')) 
+        self.temporary_folder_path = os.path.join(settings.TEMPORARY_DIR, str(datetime.datetime.now()) + " " + str(self.scan).replace('http://', '', 1))
+        self.file_list = list()                
 
-                
+        os.makedirs(self.temporary_folder_path)
+
+    def track_file(self, absolute_path):
+        if not absolute_path:
+            return None
+        try:
+            assert not isinstance(absolute_path, basestring)
+            assert not isinstance(absolute_path[0], str) or absolute_path[0]
+            assert os.path.exists(absolute_path[0])
+            assert absolute_path[1]
+        except AssertionError as err:
+            sys.exit(1)
+        
+        if not os.path.exists(self.temporary_folder_path):
+            os.makedirs(self.temporary_folder_path)
+
+        base_filename = os.path.basename(absolute_path[0])
+        new_file_path = os.path.join( self.temporary_folder_path, base_filename )
+        shutil.move( absolute_path[0], new_file_path )
+        #Establish the file's relationship to the scan. 
+        MetaFile(scan=self.scan, store=self.scan.zip, report=base_filename, success=True, role=absolute_path[1]).save()
+        self.file_list.append(new_file_path)
+
     def archive_meta_files(self, file_list):
         """
         Zips the provided temporary files in settings.TEMPORARY_DIR by moving them to a folder
@@ -95,46 +119,24 @@ class ZipArchive():
 
         file_list is a tuple contianing absolute file path and role of file.
         """
-        """
-        # BEGIN argument validation
         if not file_list:
             return None
        
-        try:
-            for file_tuple in file_list:
-                assert not isinstance(file_tuple, basestring)
-                assert not isinstance(file_tuple[0], str) or file_tuple[0]
-                assert not os.path.exists(file_tuple[0])
-                assert file_tuple[1]
-        except AssertionError as assertion_error:
-            sys.exit(1)
-        # END argument validaiton
-        """
-        print "In function"
-        print len(file_list)
-        # default related_name is model name in lower case
-        self.scan.zip.name = str(datetime.datetime.now()) + " " + str(self.scan).replace('http://', '', 1)
-        print self.scan.zip.name 
-        for absolute_path in file_list: 
-            MetaFile(scan=self.scan, store=self.scan.zip, report=absolute_path[0], success=True, role=absolute_path[1]).save()
-         
-        zip_folder_name = os.path.join(settings.TEMPORARY_DIR, self.scan.zip.name)
-        print zip_folder_name
-        if not os.path.exists(zip_folder_name):
-            os.makedirs(zip_folder_name)
-
         for absolute_path in file_list:
-            shutil.move( absolute_path[0], os.path.join(zip_folder_name, absolute_path[0].split("/")[-1]) )
-        
+            self.track_file(absolute_path)
+
+        # default related_name is model name in lower case
+        self.scan.zip.name = self.temporary_folder_path
+         
+        base_directory = os.path.basename(self.temporary_folder_path)
+        root_directory = os.path.dirname(self.temporary_folder_path)
         #Zip the folder containing the meta files
-        zip_folder_path = shutil.make_archive(zip_folder_name, 'zip', os.path.dirname(zip_folder_name), self.scan.zip.name)
-        print zip_folder_path
-        self.scan.zip.name   = os.path.join(settings.ARCHIVE_DIR, self.scan.zip.name)
-	print self.scan.zip.name 
+        zip_folder_path = shutil.make_archive(base_name=self.temporary_folder_path, format='zip', root_dir=root_directory, base_dir=base_directory)
+        self.scan.zip.name = os.path.join(settings.ARCHIVE_DIR, base_directory)
 
         #Move the zip folder to the archive path
         shutil.move(zip_folder_path, self.scan.zip.name)
         self.scan.save()
 
         #delete the pre-zip folder in temporary
-        shutil.rmtree(zip_folder_name)
+        shutil.rmtree(self.temporary_folder_path)

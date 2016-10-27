@@ -48,34 +48,6 @@ class Command(BaseCommand):
                     configuration.write(cfgfile)
                 return absolute_paths[0]
 
-        """
-        def archive_meta_files(file_list, scan_model):
-            if not file_list:
-                return None
-
-            #default related_name is model name in lower case
-            scan.zip.name = str(datetime.datetime.now()) + " " + str(scan).replace('http://', '', 1)
-            for absolute_path in file_list:
-                MetaFile(scan=scan_model, store=scan_model.zip, report=absolute_path[0], success=True, role=absolute_path[1]).save()
-
-            zip_folder_name = os.path.join(settings.TEMPORARY_DIR, scan.zip.name)
-            if not os.path.exists(zip_folder_name):
-                os.makedirs(zip_folder_name)
-
-            for absolute_path in file_list:
-                shutil.move(absolute_path[0], os.path.join(zip_folder_name, absolute_path[0].split("/")[-1]))
-             
-            #Zip the folder containing the meta files
-            zip_folder_path = shutil.make_archive(zip_folder_name, 'zip', os.path.dirname(zip_folder_name), scan.zip.name)
-            #Rename the zip name in scan to the to-be set zip file path in archive
-            #temporary_name = scan.zip.name
-            scan.zip.name = str(os.path.join(settings.ARCHIVE_DIR, scan.zip.name))
-            #Move the zip folder to the archive path
-            shutil.move(zip_folder_path, scan.zip.name)
-            scan.save()
-            #delete the pre-zip folder in temporary
-            shutil.rmtree(zip_folder_name)
-        """            
         scan_id = int(options['scan'])
           
         try:
@@ -83,6 +55,8 @@ class Command(BaseCommand):
         except Scan.DoesNotExist:
             scan = None
             sys.exit(1)
+
+        zipper = ZipArchive(scan=scan)
 
         # Gets the current working directory from which manage.py is interpreted
         # All plugins in realtion to current working directory
@@ -137,5 +111,4 @@ class Command(BaseCommand):
         os.system(w3af_console + " -s " + w3af_script_file_path)
         os.system('gauntlt')
          
-        zipper = ZipArchive(scan=scan)
         zipper.archive_meta_files(meta_files)

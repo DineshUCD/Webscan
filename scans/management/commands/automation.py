@@ -76,16 +76,16 @@ class Command(BaseCommand):
         #Store w3af script in temporary/w3af_script.w3af
         #Stored template in plugins/config.ini
         w3af_console = find_file_in_directory(settings.PLUGINS_DIR, 'w3af_console', plugins_configuration) 
-        w3af_parameters = { 'url': str(scan.uniform_resource_locator), 'path': str(settings.TEMPORARY_DIR) }
+        w3af_parameters = { 'url': str(scan.uniform_resource_locator), 'path': zipper.temporary_folder_path }
         try:
             w3af_template = plugins_configuration['APPLICATIONS']['w3af_template']
         except KeyError as key:
             sys.exit(1)
         else:
-            w3af_script_file_path = str(os.path.join(settings.TEMPORARY_DIR, 'w3af_script.w3af'))
-            meta_files.append( (w3af_script_file_path, MetaFile.DOCUMENTATION) )
-            meta_files.append( (str(os.path.join(settings.TEMPORARY_DIR, 'w3af_results.xml')), MetaFile.SCAN) )
-            #meta_files.append( str(os.path.join(settings.PLUGINS_DIR, 'config.ini')) )
+            w3af_script_file_path = os.path.join(zipper.temporary_folder_path, 'w3af_script.w3af')
+            meta_files.append( (w3af_script_file_path                                          , MetaFile.DOCUMENTATION) )
+            meta_files.append( (os.path.join(zipper.temporary_folder_path, 'w3af_results.xml') , MetaFile.SCAN         ) )
+          
             with open(w3af_script_file_path, 'w') as w3af_script:
                 w3af_script.write( str(w3af_template.format(**w3af_parameters)) )
         #End configuration of w3af
@@ -99,11 +99,12 @@ class Command(BaseCommand):
         #Output: temporary/arachni_tests.afr, temporary/arachni_tests.xml <- Change in cucumber.yml
         
         # Write out to cucumber.yml first
-        gauntlt_yaml_configuration = "CURRENT_DIRECTORY=" + str(current_working_directory) + " URL=" + str(scan.uniform_resource_locator)
-        cucumber_profile_file_path = str(os.path.join(settings.CONFIG_DIR, 'cucumber.yml'))
+        gauntlt_yaml_configuration = "CURRENT_DIRECTORY=" + str(zipper.temporary_folder_path) + " URL=" + str(scan.uniform_resource_locator)
+        cucumber_profile_file_path = os.path.join(settings.CONFIG_DIR, 'cucumber.yml')
         meta_files.append( (cucumber_profile_file_path, MetaFile.DOCUMENTATION) )
-        meta_files.append( (str(os.path.join(settings.TEMPORARY_DIR, 'arachni_tests.xml')), MetaFile.SCAN) )
-        meta_files.append( (str(os.path.join(settings.TEMPORARY_DIR, 'arachni_tests.afr')), MetaFile.DOCUMENTATION) )
+        meta_files.append( (os.path.join(zipper.temporary_folder_path, 'arachni_tests.xml'), MetaFile.SCAN) )
+        meta_files.append( (os.path.join(zipper.temporary_folder_path, 'arachni_tests.afr'), MetaFile.DOCUMENTATION) )
+
         with open(cucumber_profile_file_path, 'w') as cucumber_profile:
             cucumber_profile.write(yaml.dump(dict(default=gauntlt_yaml_configuration), default_flow_style=False))
          

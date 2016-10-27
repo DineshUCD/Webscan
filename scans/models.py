@@ -15,7 +15,7 @@ class Scan(models.Model):
     date                     = models.DateTimeField(auto_now_add=True)
    
     def __unicode__(self):
-        return "{0} {1}".format(self.uniform_resource_locator, self.team_id)
+        return "{0}".format(self.uniform_resource_locator)
 """
 Fields: scan, name, uploaded_to,   date
 Types: 1 - 1, char, file path char,DateTime 

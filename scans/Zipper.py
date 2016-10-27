@@ -85,7 +85,8 @@ class ZipArchive():
         self.verbose = kwargs.pop('verbose', True) 
         #Instantiating a model in now way touches your database; for that, you need to save()
         self.scan = kwargs.pop('scan', Scan(uniform_resource_locator='http://scanme.nmap.org')) 
-        self.temporary_folder_path = os.path.join(settings.TEMPORARY_DIR, str(datetime.datetime.now()) + " " + str(self.scan).replace('http://', '', 1))
+        current_time = datetime.datetime.now()
+        self.temporary_folder_path = os.path.join(settings.TEMPORARY_DIR, str(datetime.datetime.now().strftime("%Y%M%d%H%M%S%f")) + str(self.scan).replace('http://', '', 1))
         self.file_list = list()                
 
         os.makedirs(self.temporary_folder_path)

@@ -16,7 +16,7 @@ Scenario: Using arachni, look for SQL injections and verify no issues are found
   When I launch an "arachni" attack with:
   """
 
-arachni --checks=<test> <url> --report-save-path=<path>/temporary/<filename>.afr
+arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
 
  """
 Then the output should contain " "
@@ -24,7 +24,7 @@ Then the output should contain " "
 When I launch an "arachni" attack with:
 
 """
-arachni_reporter <path>/temporary/<filename>.afr --reporter=xml:outfile=<path>/temporary/<filename>.xml
+arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
 
 """
 Then the output should contain " " 

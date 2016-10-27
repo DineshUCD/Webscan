@@ -1,0 +1,32 @@
+@final @reallyslow
+
+Feature: Look for SQL injections using arachni against a URL
+
+Scenario: Using arachni, look for SQL injections and verify no issues are found
+
+  Given "arachni" is installed
+  And the following environment variables:
+      | name      | environment_variable_name |
+      | path      | CURRENT_DIRECTORY         |  
+      | url       | URL                       |
+   And the following profile:
+     | name                | value                          |
+     | test                | *                              |
+     | filename            | arachni_tests                  |
+  When I launch an "arachni" attack with:
+  """
+
+arachni --checks=<test> <url> --report-save-path=<path>/temporary/<filename>.afr
+
+ """
+Then the output should contain " "
+
+When I launch an "arachni" attack with:
+
+"""
+arachni_reporter <path>/temporary/<filename>.afr --reporter=xml:outfile=<path>/temporary/<filename>.xml
+
+"""
+Then the output should contain " " 
+
+

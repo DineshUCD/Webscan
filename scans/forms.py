@@ -1,10 +1,11 @@
 from django import forms
+from django.http import HttpResponse
 from django.utils import html
 
 from threadfix_api import threadfix
 
 import configparser, requests, json, os, sys
-from requests.exceptions import ConnectionError
+from requests.exceptions import *
 from urllib2 import urlopen
 from .models import Scan, MetaFile, Zip
 
@@ -24,9 +25,9 @@ class ScanForm(forms.ModelForm):
         #If the response status code is not 200 OK, then return an empty choice list.
         try:
             threadfix_response = requests.get("https://devo-ssc-01.eng.netsuite.com/threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc", verify=False)
-        except (HTTPError, ConnectionError, Timeout, RateLimitExceeded) as e:
+        except (HTTPError, ConnectionError, Timeout) as e:
             threadfix_response = str(e)
-            pass
+            sys.exit(1)
 
         #'empty_value'
         # Return a failed choice of empty, None if Django cannot reach Threadfix

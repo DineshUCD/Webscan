@@ -16,6 +16,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPORARY_DIR = os.path.join(BASE_DIR, 'temporary')
 PLUGINS_DIR = os.path.join(BASE_DIR, "plugins")
+CONFIG_DIR = os.path.join(BASE_DIR, "config")
+ARCHIVE_DIR = os.path.join(BASE_DIR, "archive")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 

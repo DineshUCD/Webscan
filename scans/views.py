@@ -27,4 +27,5 @@ def index(request):
         # Upload to ThreadFix as well.
         if instance.team_id != -1:
             pass
+
     return render(request, 'scans/index.html', context)

@@ -26,7 +26,7 @@ class Upload(models.Model):
         (PARTIAL_FAILURE, 'PARTIAL FAILURE'),
     )
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False)
-    upload_date              = models.DateTimeField(auto_now_add=True, auto_now=True)
+    upload_date              = models.DateTimeField(auto_now=True)
     status                   = models.IntegerField(choices=STATUS_CHOICES, default=IDLE)
     scan                     = models.ManyToManyField(Scan)
 
@@ -38,4 +38,4 @@ class Upload(models.Model):
             return time_difference.total_seconds()
 
     def __unicode__(self):
-        return "{0} @ {1} for {2}".(self.status, self.uniform_resource_locator, scan.uniform_resource_locator)
+        return "{0} @ {1} for {2}".format(self.status, self.uniform_resource_locator, scan.uniform_resource_locator)

@@ -15,7 +15,7 @@ class Scan(models.Model):
     date                     = models.DateTimeField(auto_now_add=True)
    
     def __unicode__(self):
-        return "{0} | {1}".format(self.uniform_resource_locator, team_id)
+        return "{0} {1}".format(self.uniform_resource_locator, self.team_id)
 """
 Fields: scan, name, uploaded_to,   date
 Types: 1 - 1, char, file path char,DateTime 
@@ -43,13 +43,13 @@ def create_zip_for_scan(sender, instance, created, **kwargs):
 class MetaFile(models.Model):
     DOCUMENTATION = 'D'
     SCAN          = 'S'
-    FILE_CHOIC= (
+    FILE_CHOICES= (
         (DOCUMENTATION, 'Documentation'),
         (SCAN         , 'Scan'         ),
     )
     scan         = models.ForeignKey(Scan, on_delete=models.CASCADE)
-    store        = models.ForeignKey(Zip, null=True, blank=True)
-    report       = models.FilePathField(default="", match=".*\.(log|ini|xml|yml|zip)") 
+    store        = models.ForeignKey(Zip, on_delete=models.CASCADE)
+    report       = models.FilePathField(default="", match=".*\.(log|ini|xml|yml|zip|w3af|afr)") 
     success      = models.BooleanField(default=False)
     role         = models.CharField(max_length=1, choices=FILE_CHOICES, default=DOCUMENTATION)
     date         = models.DateTimeField(auto_now_add=True)
@@ -59,4 +59,4 @@ class MetaFile(models.Model):
         return self.report.split("/")[-1]
 
     def __unicode__(self):
-        return "{0} | {1}".format(self.scan.url, self.store.name)
+        return "{0} | {1}".format(self.scan.uniform_resource_locator, self.store.name)

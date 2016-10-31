@@ -21,9 +21,13 @@ ARCHIVE_DIR = os.path.join(BASE_DIR, "archive")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
+
+# API Urls
+THREADFIX_URL = "https://devo-ssc-01.eng.netsuite.com/threadfix"
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'bn5rh2j@r$2uas!s+#&4u!5!=560n^jk!)4yzqxrf@^#6!23vp'
-
+THREADFIX_API_KEY = "9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

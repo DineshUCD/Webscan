@@ -11,7 +11,7 @@ from webscanner import settings
 # Create your models here.
 class Scan(models.Model):
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False, help_text="Please use the following format: http(s)://")
-    team_id                  = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(-1), MaxValueValidator(10)])
+    application_id           = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(-1), MaxValueValidator(10)])
     date                     = models.DateTimeField(auto_now_add=True)
    
     def __unicode__(self):

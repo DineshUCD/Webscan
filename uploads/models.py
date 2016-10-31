@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.utils.timezone import utc
 
 import datetime, sys, os
-from webscanner import settings
+from webscanner.settings import *
 
 #Upload has a Many-to-Many relationship with Scan
 from scans.models import * 
@@ -28,7 +28,7 @@ class Upload(models.Model):
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False)
     upload_date              = models.DateTimeField(auto_now=True)
     status                   = models.IntegerField(choices=STATUS_CHOICES, default=IDLE)
-    scan                     = models.ManyToManyField(Scan)
+    scan                     = models.ForeignKey(Scan, on_delete=models.CASCADE)
 
     def get_elapsed_time(self):
         if upload_date:
@@ -36,6 +36,12 @@ class Upload(models.Model):
             # Django DateTimeField handles timezone aware datetime objects as well
             time_difference = datetime.datetime.utcnow().replace(tzinfo=utc) - self.upload_date
             return time_difference.total_seconds()
+
+    def get_threadfix_request(self, method_name):
+        if not method_name:
+            return None
+
+              
 
     def __unicode__(self):
         return "{0} @ {1} for {2}".format(self.status, self.uniform_resource_locator, scan.uniform_resource_locator)

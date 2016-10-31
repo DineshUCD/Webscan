@@ -14,6 +14,7 @@ def index(request):
     # No need for an instance here
     # sticks in a POST or renders empty form
     form = ScanForm(request.POST or None)
+
     context = {
         'form': form,
     }
@@ -25,7 +26,9 @@ def index(request):
         subprocess.call("python manage.py automation " + str(instance.id), shell=True)
          
         # Upload to ThreadFix as well.
-        if instance.team_id != -1:
+        if instance.application_id != -1:
             pass
+            #threadfix_rest_
+            #threadfix_upload = Upload(uniform_resource_locator=, status=Upload.PENDING, scan=instance).save()
 
     return render(request, 'scans/index.html', context)

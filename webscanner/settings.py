@@ -23,7 +23,7 @@ ARCHIVE_DIR = os.path.join(BASE_DIR, "archive")
 
 
 # API Urls
-THREADFIX_URL = "https://devo-ssc-01.eng.netsuite.com/threadfix"
+THREADFIX_URL = "http://devo-ssc-01.eng.netsuite.com/threadfix"
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'bn5rh2j@r$2uas!s+#&4u!5!=560n^jk!)4yzqxrf@^#6!23vp'

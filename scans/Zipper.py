@@ -109,7 +109,7 @@ class ZipArchive():
         new_file_path = os.path.join( self.temporary_folder_path, base_filename )
         shutil.move( absolute_path[0], new_file_path )
         #Establish the file's relationship to the scan. 
-        MetaFile(scan=self.scan, store=self.scan.zip, report=base_filename, success=True, role=absolute_path[1]).save()
+        MetaFile(scan=self.scan, store=self.scan.zip, report=base_filename, success=False, role=absolute_path[1]).save()
         self.file_list.append(new_file_path)
 
     def archive_meta_files(self, file_list):

@@ -57,11 +57,10 @@ class Uploader():
         else:
             pass
        
-
     def upload_scans(self):
         pool_responses = list()
 
-        pool = Pool(len(self.repository))
+        pool = Pool(processes=len(self.repository))
         
         for item in self.repository:
             pool_responses.append(pool.apply_async(upload_scan, item, callback=check_response))
@@ -72,6 +71,22 @@ class Uploader():
         for worker in pool._pool:
             assert not worker.is_alive()
 
-        return map(lambda pool_response: pool_response.get(), pool_responses)
-        
+        try:
+            threadfix_responses = map(lambda pool_response: pool_response.get(timeout=60), pool_responses)
+        except multiprocessing.TimeoutError as te:
+            pass
 
+        return threadfix_responses
+
+    def append_upload_files(self, uploads):
+        if not uploads:
+            return None
+
+        for item in uploads:
+            assert isinstance(item, tuple) or isinstance(item, list)
+            assert len(item) == 2
+            assert isinstance(item[1], int) and isinstance(item[0], basestring)
+
+        for details in uploads:
+            self.add_file(details[0], details[1])
+        return self.repository

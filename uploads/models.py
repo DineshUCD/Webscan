@@ -37,11 +37,5 @@ class Upload(models.Model):
             time_difference = datetime.datetime.utcnow().replace(tzinfo=utc) - self.upload_date
             return time_difference.total_seconds()
 
-    def get_threadfix_request(self, method_name):
-        if not method_name:
-            return None
-
-              
-
     def __unicode__(self):
         return "{0} @ {1} for {2}".format(self.status, self.uniform_resource_locator, scan.uniform_resource_locator)

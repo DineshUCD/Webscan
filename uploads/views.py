@@ -1,20 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from django.db.models import F
 
 from scans.models import *
 from uploads.models import *
 
-import subprocess, os, sys
+import datetime, subprocess, os, sys
 
 # Create your views here.
-def index(request, extra_context=None):
-    if not extra_context:
-        pass
+def index(request):
+    return render(request, 'uploads/index.html')
 
-    try:
-        instance = extra_context['instance']
-    except KeyError as invalid_model:
-	pass
-    
-    
-	
-    return render(request, 'uploads/index.html', extra_context)
+
+def results(request, upload_id):
+    upload = get_object_or_404(Upload, pk=upload_id)
+    threadfix_results = upload.scan.get_scan_data()
+     

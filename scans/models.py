@@ -40,7 +40,7 @@ class Zip(models.Model):
 @receiver(post_save, sender=Scan)
 def create_zip_for_scan(sender, instance, created, **kwargs):
     if created:
-        zip_name      = str(instance.uniform_resource_locator) + " " + str(datetime.datetime.now()) + ".zip"
+        zip_name      = str(datetime.datetime.now().strftime("%Y%M%d%H%M%S%f")) + str(instance).replace('http://','',1)
         zip_meta_data = Zip(scan=instance, name=zip_name)
         zip_meta_data.save()
 

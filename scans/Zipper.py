@@ -86,7 +86,7 @@ class ZipArchive():
         #Instantiating a model in now way touches your database; for that, you need to save()
         self.scan = kwargs.pop('scan', Scan(uniform_resource_locator='http://scanme.nmap.org')) 
         current_time = datetime.datetime.now()
-        self.temporary_folder_path = os.path.join(settings.TEMPORARY_DIR, str(datetime.datetime.now().strftime("%Y%M%d%H%M%S%f")) + str(self.scan).replace('http://', '', 1))
+        self.temporary_folder_path = os.path.join(settings.TEMPORARY_DIR, self.scan.zip.name)
         self.file_list = list()                
 
         os.makedirs(self.temporary_folder_path)
@@ -137,6 +137,9 @@ class ZipArchive():
 
         #Move the zip folder to the archive path
         shutil.move(zip_folder_path, self.scan.zip.name)
+
+        #Commit the changes to both models
+        self.scan.zip.save()
         self.scan.save()
 
         #delete the pre-zip folder in temporary

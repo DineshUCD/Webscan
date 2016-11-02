@@ -29,5 +29,5 @@ def index(request):
         if instance.application_id != -1:
 	    context['instance'] = instance
             return uploads.views.index(request, context)			
-`
+
     return render(request, 'scans/index.html', context)

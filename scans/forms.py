@@ -25,6 +25,7 @@ class ScanForm(forms.ModelForm):
         #If the response status code is not 200 OK, then return an empty choice list.
         try:
             # /rest/teams/ Get All Teams
+	    #threadfix_response = requests.get("https://devo-ssc-01.eng.netsuite.com/threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc", verify=False)
             threadfix_response = requests.get(THREADFIX_URL + "/rest/teams/?apiKey=" + THREADFIX_API_KEY, verify=False)
         except (HTTPError, ConnectionError, Timeout) as e:
             threadfix_response = str(e)

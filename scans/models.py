@@ -14,8 +14,8 @@ class Scan(models.Model):
     application_id           = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(-1), MaxValueValidator(10)])
     date                     = models.DateTimeField(auto_now_add=True)
 
-    def get_output_data(self):
-	return { 'output': map(lambda output: output.name, self.__metafile.all()), 'zip path': self.zip.name }
+    def get_scan_data(self):
+	return { 'output': map(lambda output: output.report, MetaFile.objects.filter(scan__id=self.id).filter(role=MetaFile.SCAN)), 'zip path': self.zip.name }
        
 
     def __unicode__(self):

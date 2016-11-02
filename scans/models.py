@@ -13,7 +13,11 @@ class Scan(models.Model):
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False, help_text="Please use the following format: http(s)://")
     application_id           = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(-1), MaxValueValidator(10)])
     date                     = models.DateTimeField(auto_now_add=True)
-   
+
+    def get_output_data(self):
+	return { 'output': map(lambda output: output.name, self.__metafile.all()), 'zip path': self.zip.name }
+       
+
     def __unicode__(self):
         return "{0}".format(self.uniform_resource_locator)
 """

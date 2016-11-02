@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import *
 
 from scans.models import *
+from uploads.models import *
 from scans.forms import *
-
+import uploads.views
 import subprocess, os, sys
-import pickle
+
 
 # Create your views here.
 def index(request):
@@ -25,10 +26,8 @@ def index(request):
 
         subprocess.call("python manage.py automation " + str(instance.id), shell=True)
          
-        # Upload to ThreadFix as well.
         if instance.application_id != -1:
-            pass
-            #threadfix_rest_
-            #threadfix_upload = Upload(uniform_resource_locator=, status=Upload.PENDING, scan=instance).save()
-
+	    context['instance'] = instance
+            return uploads.views.index(request, context)			
+`
     return render(request, 'scans/index.html', context)

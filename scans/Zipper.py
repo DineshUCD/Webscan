@@ -86,10 +86,12 @@ class ZipArchive():
         #Instantiating a model in now way touches your database; for that, you need to save()
         self.scan = kwargs.pop('scan', Scan(uniform_resource_locator='http://scanme.nmap.org')) 
         current_time = datetime.datetime.now()
-        self.temporary_folder_path = os.path.join(settings.TEMPORARY_DIR, self.scan.zip.name)
-        self.file_list = list()                
-
-        os.makedirs(self.temporary_folder_path)
+         
+        #Check if the zipfile exists in archive/ or another absolute path
+        if not os.path.exists(self.scan.zip.name):
+            self.temporary_folder_path = os.path.join(settings.TEMPORARY_DIR, self.scan.zip.name)
+            self.file_list = list()                
+            os.makedirs(self.temporary_folder_path)
 
     def track_file(self, absolute_path):
         if not absolute_path:
@@ -144,3 +146,21 @@ class ZipArchive():
 
         #delete the pre-zip folder in temporary
         shutil.rmtree(self.temporary_folder_path)
+
+    def unzip_file(self, file_list):
+        """
+        Unzip individual files from the archive and store the directory under temporary.
+        Operates fine under succession.
+        """
+        individual_extraction_path = list()
+        try:
+            archive = zipfile.ZipFile(self.scan.zip.name, 'r')
+            zip_basename = os.path.basename(self.scan.zip.name)
+            for item in file_list:
+                individual_extraction_path.append(archive.extract(os.path.join(zip_basename, item), settings.TEMPORARY_DIR))
+        except (IOError, KeyError) as err:
+            #There is no item named <item> in the archive.
+            #No such file or directory
+            return None
+
+        return individual_extraction_path 

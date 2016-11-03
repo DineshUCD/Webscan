@@ -27,7 +27,7 @@ def index(request):
         subprocess.call("python manage.py automation " + str(instance.id), shell=True)
          
         if instance.application_id != -1:
-            upload = Upload(scan=instance, uniform_resource_locator=THREADFIX_URL).save()
+            upload = Upload.objects.create(scan=instance, uniform_resource_locator=THREADFIX_URL)
             # Always return an HTTPResponseRedirect after successfully dealing with POST data.
             # This prevents data from being posted twice if a user hits the Back button.
 	    return HttpResponseRedirect(reverse('uploads:results', args=(upload.id, )))

@@ -15,8 +15,7 @@ class Scan(models.Model):
     date                     = models.DateTimeField(auto_now_add=True)
 
     def get_scan_data(self):
-	return { 'output': map(lambda output: output.report, MetaFile.objects.filter(scan__id=self.id).filter(role=MetaFile.SCAN)), 'zip path': self.zip.name }
-       
+	return { 'output': map(lambda output: output.report, MetaFile.objects.filter(scan__id=self.id).filter(role=MetaFile.SCAN)), 'zip path': self.zip.name }       
 
     def __unicode__(self):
         return "{0}".format(self.uniform_resource_locator)

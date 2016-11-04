@@ -7,6 +7,18 @@
 <input type='submit' value='Create Post' />
 </form>
 
+<table>
+{% if upload_response %}
+    {% for information in upload_response %}
+        <tr>
+            <td>{{ information.file }}</td>
+            <td>{{ information.threadfix_response }}</td>
+        </tr>
+    {% endfor %}
+{% endif %}
+<table>
+
+
 </body>
 </html>
 

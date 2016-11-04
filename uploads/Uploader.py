@@ -1,92 +1,69 @@
+#!/usr/bin/env python
+
 from webscanner.settings import *
 from threadfix_api import threadfix
 from multiprocessing import *
 
 import time, os, datetime, json, requests, urllib2
 
-def now():
-    return str(time.asctime(time.localtime(time.time())))
-
-class Uploader():
-
-    verbose = False
-    showDebugInfo = False
-
-    def __init__(self, *args, **kwargs):
-        """
-        Takes an Upload model and performs only ThreadFix upload using its operations.
-        
-        """
-        self.scan = kwargs.pop('scan', Scan(uniform_resource_locator='http://scanme.nmap.org'))
-        current_time = now()
-        self.tf = threadfix.ThreadFixAPI(THREADFIX_URL, THREADFIX_API_KEY, verify_ssl=False)
-        self.repository = list()
 
 
-    def add_file(self, path, application_id=-1):
-        if not os.path.isfile(path):
-            return None
 
-        try:
-            with open(path) as file:
-                pass
-        except IOError:
-            sys.exit(1)
-        finally:
-            self.repository.append( (application_id, path) )
-            return True
+def add_file(repository, path,application_id=-1):
+    if not os.path.isfile(path):
+        return None
 
-    def upload_scan(self, application_id, path):
-        try:
-            response_wrap = { 'file': path, 'application id': application_id }
-            threadfix_response = tf.upload_scan(application_id=application_id, file_path=path)
-        except (IOError, TimeoutError) as upload_error:
-            response_wrap['upload error'] = upload_error
-            return response_wrap
-        else:
-            response_wrap['threadfix response'] = threadfix_response
-            return response_wrap
-
-    def check_response(self, response_wrap):
-        try:
-            upload_error = response_wrap['upload error']
-        except KeyError as other_error:
-            threadfix_response = response_wrap['threadfix response']
-            if threadfix_response.message != "":
-                pass
-        else:
+    try:
+        with open(path) as file:
             pass
+    except IOError:
+       sys.exit(1)
+    finally:
+        repository.append( (application_id, path) )
+
+def add_files(repository, paths, application_id=-1):
+    if not paths:
+        return None
+    for item in paths:
+        add_file(repository, item, application_id)
+
+
+def upload_scan(application_id, path):
+    try:
+        response_wrap = { 'file': path, 'application_id': application_id }
+        tf = threadfix.ThreadFixAPI(THREADFIX_URL, THREADFIX_API_KEY, verify_ssl=False)
+        threadfix_response = tf.upload_scan(application_id=application_id, file_path=path)
+    except (IOError, TimeoutError) as upload_error:
+        response_wrap['upload_error'] = upload_error
+        return response_wrap
+    else:
+        response_wrap['threadfix_response'] = threadfix_response.message
+        return response_wrap
+
+def check_response(response_wrap):
+    try:
+        upload_error = response_wrap['upload_error']
+    except KeyError as other_error:
+        threadfix_response = response_wrap['threadfix_response']
+        if threadfix_response != "":
+            pass
+    else:
+        pass
+   
        
-    def upload_scans(self):
-        pool_responses = list()
+def upload_scans(repository):
+    pool = Pool(len(repository))
+    pool_responses = list()
+    for item in repository:
+        pool_responses.append(pool.apply_async(upload_scan, item, callback=check_response))
+    
+    pool.close()
+    pool.join()
 
-        pool = Pool(processes=len(self.repository))
+    for worker in pool._pool:
+        assert not worker.is_alive()
+
+    threadfix_responses = map(lambda pool_response: pool_response.get(timeout=10), pool_responses)  
+ 
+    return threadfix_responses         
         
-        for item in self.repository:
-            pool_responses.append(pool.apply_async(upload_scan, item, callback=check_response))
-
-        pool.close()
-        pool.join()
-  
-        for worker in pool._pool:
-            assert not worker.is_alive()
-
-        try:
-            threadfix_responses = map(lambda pool_response: pool_response.get(timeout=60), pool_responses)
-        except multiprocessing.TimeoutError as te:
-            pass
-
-        return threadfix_responses
-
-    def append_upload_files(self, uploads):
-        if not uploads:
-            return None
-
-        for item in uploads:
-            assert isinstance(item, tuple) or isinstance(item, list)
-            assert len(item) == 2
-            assert isinstance(item[1], int) and isinstance(item[0], basestring)
-
-        for details in uploads:
-            self.add_file(details[0], details[1])
-        return self.repository

@@ -28,8 +28,13 @@ def results(request, upload_id):
     if form.is_valid():
         upload_choices = form.cleaned_data['scan_results']
         archive = ZipArchive(scan=upload.scan)
-        archive.unzip_file(upload_choices)
-        
+        scan_unzip_files = archive.unzip_file(upload_choices)
+        repository = list()
+        add_files(repository, scan_unzip_files, 4)
+        upload_response = upload_scans(repository)
+        context['upload_response'] = upload_response
+       
+
     return render(request, 'uploads/results.html', context)
 
     

@@ -10,6 +10,8 @@ from uploads.forms import *
 from uploads.Uploader import *
 from uploads.Visualization import *
 
+from webscanner.logger import logger 
+
 import datetime, subprocess, os, sys
 
 # Create your views here.

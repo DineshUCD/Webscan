@@ -1,0 +1,7 @@
+2016-11-07 21:09:39,003 [INFO] requests.packages.urllib3.connectionpool: Starting new HTTPS connection (1): devo-ssc-01.eng.netsuite.com
+2016-11-07 21:09:42,032 [INFO] django.server: "GET /scans/ HTTP/1.1" 200 958
+2016-11-07 21:09:42,032 [INFO] django.server: "GET /scans/ HTTP/1.1" 200 958
+2016-11-07 21:09:42,154 [WARNING] django.request: Not Found: /favicon.ico
+2016-11-07 21:09:42,154 [WARNING] django.request: Not Found: /favicon.ico
+2016-11-07 21:09:42,155 [WARNING] django.server: "GET /favicon.ico HTTP/1.1" 404 2156
+2016-11-07 21:09:42,155 [WARNING] django.server: "GET /favicon.ico HTTP/1.1" 404 2156

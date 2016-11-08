@@ -1,6 +1,7 @@
 import os, logging
 
 from .settings import BASE_DIR
+from logstash_formatter import LogstashFormatterV1
 
 # The basic logger that other applications can import
 # The call to logging.getLogger() obtains (creating, if necessary) an instance of a logger.
@@ -12,6 +13,10 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False, # Retain Django's default logger
     'formatters': {
+        'logstash': {
+            '()': 'logstash_formatter.LogstashFormatter',
+            'format': '{"extra":{"app": "app_name"}}',
+        },
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
         },

@@ -7,7 +7,7 @@ from scandir import scandir
 import fnmatch
 from scans.models import *
 from scans.Zipper import *
-
+from webscanner.logger import logger
 #The class must be named Command, and subclass BaseCommand
 class Command(BaseCommand):
 
@@ -53,7 +53,7 @@ class Command(BaseCommand):
         try:
             scan = Scan.objects.get(pk=scan_id)
         except Scan.DoesNotExist:
-            scan = None
+            logger.critical("Unable to find Scan details for id: " + str(scan_id))
             sys.exit(1)
 
         zipper = ZipArchive(scan=scan)
@@ -80,7 +80,8 @@ class Command(BaseCommand):
         try:
             w3af_template = plugins_configuration['APPLICATIONS']['w3af_template']
         except KeyError as key:
-            sys.exit(1)
+            logger.error("Could not retrieve w3af configuration script. Scan id: " + str(scan_id))
+            w3af_script_file_path=''
         else:
             w3af_script_file_path = os.path.join(zipper.temporary_folder_path, 'w3af_script.w3af')
             meta_files.append( (w3af_script_file_path                                          , MetaFile.DOCUMENTATION) )

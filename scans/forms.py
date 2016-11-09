@@ -10,8 +10,9 @@ from requests.exceptions import *
 from urllib2 import urlopen
 from .models import Scan, MetaFile, Zip
 
-from webscanner.logger import logger
-
+#from webscanner.logger import logger
+import logging
+logger = logging.getLogger('scarab')
 class ScanForm(forms.ModelForm):
     class Meta:
         model  = Scan
@@ -30,7 +31,7 @@ class ScanForm(forms.ModelForm):
 	    #threadfix_response = requests.get("https://devo-ssc-01.eng.netsuite.com/threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc", verify=False)
             threadfix_response = requests.get(THREADFIX_URL + "rest/teams/?apiKey=" + THREADFIX_API_KEY, verify=False)
         except (HTTPError, ConnectionError, Timeout) as e:
-            logger.error(e.message.replace( '?apiKey=' + THREADFIX_API_KEY, '' ))                        
+            logger.error(e.message)#.replace( '?apiKey=' + THREADFIX_API_KEY, '' ))                        
             self.fields['application_id'].widget.attrs['readonly'] = True
             self.fields['application_id'].widget.attrs['disabled'] = True
             return None

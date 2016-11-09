@@ -45,14 +45,14 @@ LOGGING = {
     },
     'loggers': {
         # root configuration - for all the applications
-        '': {
-            'handlers': ['production_file', 'console'],
-            'level': 'DEBUG',
-        },
         'django': { # configure all of Django's loggers
-            'handlers': ['production_file', 'console'],
+            'handlers': ['console',],
             'level': 'INFO',
             'propogate': False,
+        },
+        'scarab': {
+            'handlers': ['production_file', 'console'],
+            'level': 'ERROR',
         },
     },
 }

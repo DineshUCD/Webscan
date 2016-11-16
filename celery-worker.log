@@ -1,0 +1,391 @@
+supervisor: couldn't chdir to ~/Documents/webscanner/webscanner: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to ~/Documents/webscanner/webscanner: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to ~/Documents/webscanner/webscanner: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to ~/Documents/webscanner/webscanner: ENOENT
+supervisor: child process was not spawned
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 276, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 478, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 500, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 345, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named webscanner.celery_tasks
+[2016-11-16 21:13:32,203: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-11-16 21:13:32,211: INFO/MainProcess] mingle: searching for neighbors
+[2016-11-16 21:13:33,237: INFO/MainProcess] mingle: all alone
+[2016-11-16 21:13:33,249: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2016-11-16 21:13:33,249: INFO/MainProcess] celery@djayasan ready.
+[2016-11-16 21:15:09,999: INFO/MainProcess] Received task: scans.tasks.add[e7c94c5e-42a3-4ed4-b757-30a7183c763e]  
+[2016-11-16 21:15:11,503: INFO/PoolWorker-2] Task scans.tasks.add[e7c94c5e-42a3-4ed4-b757-30a7183c763e] succeeded in 0.00781191700116s: ['archive
+', 'celery-worker.log
+', 'config
+', 'db.sqlite3
+', 'log
+', 'main.log
+', 'manage.py
+', 'plugin_api.py
+', 'plugins
+', 'README
+', 'scans
+', 'temporary
+', 'uploads
+', 'webscanner
+']
+[2016-11-16 21:17:45,804: INFO/MainProcess] Events of group {task} enabled by remote.
+[2016-11-16 21:21:54,245: INFO/MainProcess] Received task: scans.tasks.add[7f2c9848-c136-49d7-a69c-019811988b90]  
+[2016-11-16 21:21:55,807: INFO/PoolWorker-1] Task scans.tasks.add[7f2c9848-c136-49d7-a69c-019811988b90] succeeded in 0.00868260100106s: ['archive
+', 'celery-worker.log
+', 'config
+', 'db.sqlite3
+', 'log
+', 'main.log
+', 'manage.py
+', 'plugin_api.py
+', 'plugins
+', 'README
+', 'scans
+', 'temporary
+', 'uploads
+', 'webscanner
+']
+[2016-11-16 21:29:12,240: INFO/MainProcess] Received task: scans.tasks.add[d0c7a206-b1d4-4fbb-a839-b9364390d609]  
+[2016-11-16 21:29:13,001: INFO/PoolWorker-2] Task scans.tasks.add[d0c7a206-b1d4-4fbb-a839-b9364390d609] succeeded in 0.00467346200094s: ['archive
+', 'celery-worker.log
+', 'config
+', 'db.sqlite3
+', 'log
+', 'main.log
+', 'manage.py
+', 'plugin_api.py
+', 'plugins
+', 'README
+', 'scans
+', 'temporary
+', 'uploads
+', 'webscanner
+']
+[2016-11-16 21:43:04,642: INFO/MainProcess] Received task: scans.tasks.add[c6e4a350-f666-4bd5-b2be-d4e599517866]  
+[2016-11-16 21:43:05,446: INFO/PoolWorker-1] Task scans.tasks.add[c6e4a350-f666-4bd5-b2be-d4e599517866] succeeded in 0.00475282300067s: ['archive
+', 'celery-worker.log
+', 'config
+', 'db.sqlite3
+', 'log
+', 'main.log
+', 'manage.py
+', 'plugin_api.py
+', 'plugins
+', 'README
+', 'scans
+', 'temporary
+', 'uploads
+', 'webscanner
+']

@@ -58,6 +58,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+# Setting up Celery support in the Django Application
+CELERY_BROKER_URL         = 'pyamqp://'
+CELERY_RESULT_BACKEND     = 'redis://localhost'
+CELERY_ACCEPT_CONTENT     = ['json']
+CELERY_TASK_SERIALIZER    = 'json'
+CELERY_RESULT_SERIALIZER  = 'json'
+
+
 ROOT_URLCONF = 'webscanner.urls'
 
 TEMPLATES = [

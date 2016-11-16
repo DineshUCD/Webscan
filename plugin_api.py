@@ -2,7 +2,9 @@ import logging, os, sys, uuid, abc, subprocess, configparser
 
 from django.conf import settings
 
-class AbstractPlugin:
+class AbstractPlugin(object):
+
+    __metaclass__ = abc.ABCMeta
 
     """
     Abstract plugin implementation that implements a plugin's
@@ -28,9 +30,11 @@ class AbstractPlugin:
     def version(cls):
         return getattr(cls, "PLUGIN_VERSION", "0.0")
 
+    # This is a concrete method; just invoke with super().__init__(*args, **kwargs)
     def __init__(self, *args, **kwargs):
-        self.program_name = kwargs
-
+        self.scanner_name = kwargs.pop('scanner name', None)
+        self.child_stdout = None
+         
     def locate_program(self, program_name):
         if not program_name or not configuration:
             return None
@@ -41,8 +45,15 @@ class AbstractPlugin:
             if os.path.isfile(program_path) and os.access(program_path, os.X_OK):
                 return program_path
 
-
-    
-
+    @abc.abstractmethod
     def do_configure(self):
-        scanner_path = self.locate_program(
+        scanner_path = self.locate_program(self.scanner_name)
+        if not scanner_path:
+            raise Exception("Cannot find scanner program.")
+
+    # super().spawn() climbs the class hierarchy and returns the correct class that shall be called.
+    def spawn(self,  arguments):
+        if not arguments:
+            return None
+        p = subprocess.Popen(arguments, shell=True, stdout=subprocess.PIPE, close_fds=True)
+        self.child_stdout = p.stdout

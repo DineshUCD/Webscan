@@ -4,6 +4,7 @@ from django.http import *
 from scans.models import *
 from uploads.models import *
 from scans.forms import *
+from .tasks import *
 import uploads.views
 import subprocess, os, sys
 
@@ -19,7 +20,8 @@ def index(request):
     context = {
         'form': form,
     }
-
+    result = add.delay()
+    print result.get()
     if form.is_valid():
         # Save a new Scan from the form's data.
         instance = form.save()

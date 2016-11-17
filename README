@@ -30,8 +30,3 @@ attack type, lke @web.
 Feature:
 Each attack should say what it is doing. We use the Feature keyword to express what the attack is doing,
 but take this space to give a good description to what you are doing in this attack. 
-
-
-Rules of Engagement:
-1. Configure Outbound SOCKS Proxy
-Tunnel your Burp Suite traffic through an outbound SOCKS Proxy. This ensures that testing traffic originates

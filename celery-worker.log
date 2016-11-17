@@ -389,3 +389,37 @@ ImportError: No module named webscanner.celery_tasks
 ', 'uploads
 ', 'webscanner
 ']
+[2016-11-16 21:47:27,540: INFO/MainProcess] Received task: scans.tasks.add[5249846c-3186-425a-bb2c-126fa5424767]  
+[2016-11-16 21:47:28,466: INFO/PoolWorker-2] Task scans.tasks.add[5249846c-3186-425a-bb2c-126fa5424767] succeeded in 0.00569388099939s: ['archive
+', 'celery-worker.log
+', 'config
+', 'db.sqlite3
+', 'log
+', 'main.log
+', 'manage.py
+', 'plugin_api.py
+', 'plugins
+', 'README
+', 'scans
+', 'temporary
+', 'uploads
+', 'webscanner
+', 'webscanner-celery.conf
+']
+[2016-11-16 21:48:07,377: INFO/MainProcess] Received task: scans.tasks.add[b8674bab-302c-4301-989e-e130a9dbed15]  
+[2016-11-16 21:48:08,579: INFO/PoolWorker-1] Task scans.tasks.add[b8674bab-302c-4301-989e-e130a9dbed15] succeeded in 0.006091397001s: ['archive
+', 'celery-worker.log
+', 'config
+', 'db.sqlite3
+', 'log
+', 'main.log
+', 'manage.py
+', 'plugin_api.py
+', 'plugins
+', 'README
+', 'scans
+', 'temporary
+', 'uploads
+', 'webscanner
+', 'webscanner-celery.conf
+']

@@ -43,6 +43,16 @@ def create_zip_for_scan(sender, instance, created, **kwargs):
         zip_meta_data = Zip(scan=instance, name=zip_name)
         zip_meta_data.save()
 
+class Tool(models.Model):
+    scan = models.ForeignKey(Scan, on_delete=models.CASCADE)
+    module = models.CharField(max_length=256, default="", blank=True)
+    name = models.CharField(max_length=256, default="", blank=True)
+    work_directory = models.FilePathField(default="")
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return "{0}".format(self.name)
+    
 class MetaFile(models.Model):
     DOCUMENTATION = 'D'
     SCAN          = 'S'
@@ -52,6 +62,7 @@ class MetaFile(models.Model):
     )
     scan         = models.ForeignKey(Scan, on_delete=models.CASCADE)
     store        = models.ForeignKey(Zip, on_delete=models.CASCADE)
+    tool         = models.ForeignKey(Tool, on_delete=models.CASCADE)
     report       = models.FilePathField(default="", match=".*\.(log|ini|xml|yml|zip|w3af|afr)") 
     success      = models.BooleanField(default=False)
     role         = models.CharField(max_length=1, choices=FILE_CHOICES, default=DOCUMENTATION)

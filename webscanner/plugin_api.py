@@ -19,7 +19,6 @@ class AbstractPlugin(object):
         2. Plugin name
         3. Base Directory for executable
 
-    Plugin that spawns an external tool.
     """
 
     @classmethod

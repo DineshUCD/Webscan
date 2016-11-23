@@ -56,7 +56,7 @@ class Command(BaseCommand):
             logger.critical("Unable to find Scan details for id: " + str(scan_id))
             sys.exit(1)
 
-        zipper = ZipArchive(scan=scan)
+        zipper = ZipArchive(scan=scan_id)
 
         # Gets the current working directory from which manage.py is interpreted
         # All plugins in realtion to current working directory

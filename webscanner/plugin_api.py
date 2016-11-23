@@ -45,10 +45,18 @@ class AbstractPlugin(object):
                 return program_path
 
     @abc.abstractmethod
+    def do_run(self):
+        pass
+
+    @abc.abstractmethod
     def do_configure(self):
         scanner_path = self.locate_program(self.scanner_name)
         if not scanner_path:
             raise Exception("Cannot find scanner program.")
+
+    @abc.abstractmethod
+    def do_start(self):
+        pass
 
     # super().spawn() climbs the class hierarchy and returns the correct class that shall be called.
     def spawn(self,  arguments):

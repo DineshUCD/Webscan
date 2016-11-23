@@ -20,8 +20,8 @@ def index(request):
     context = {
         'form': form,
     }
-    result = add.delay()
-    print result.get()
+#    result = add.delay()
+ #   print result.get()
     if form.is_valid():
         # Save a new Scan from the form's data.
         instance = form.save()

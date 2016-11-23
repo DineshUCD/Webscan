@@ -84,7 +84,7 @@ class ZipArchive():
         #returning the associated value or the default if missing
         self.verbose = kwargs.pop('verbose', True) 
         #Instantiating a model in now way touches your database; for that, you need to save()
-        self.scan = kwargs.pop('scan', Scan(uniform_resource_locator='http://scanme.nmap.org')) 
+        self.scan = Scan.objects.get(pk=int(kwargs.pop('scan')))
         current_time = datetime.datetime.now()
          
         #Check if the zipfile exists in archive/ or another absolute path

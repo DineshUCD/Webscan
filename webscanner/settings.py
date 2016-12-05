@@ -61,6 +61,7 @@ MIDDLEWARE = [
 
 # Setting up Celery support in the Django Application
 CELERY_BROKER_URL         = 'pyamqp://'
+# 1. Do not use the database as your AMQP broker
 CELERY_RESULT_BACKEND     = 'redis://localhost'
 CELERY_ACCEPT_CONTENT     = ['json']
 CELERY_TASK_SERIALIZER    = 'json'

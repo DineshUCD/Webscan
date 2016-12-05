@@ -1,6 +1,7 @@
 import logging, os, sys, uuid, abc, subprocess, configparser
 
 from django.conf import settings
+from scans.models import *
 
 class AbstractPlugin(object):
 
@@ -32,8 +33,11 @@ class AbstractPlugin(object):
     # This is a concrete method; just invoke with super().__init__(*args, **kwargs)
     def __init__(self, *args, **kwargs):
         self.model_pk = kwargs.pop('model_pk', None)
-        self.scanner_name = None
+        #The model that contains collects the Scan information
+        self.model = None
+        # The pipe for the scanner to write out to.
         self.child_stdout = None
+        # The absolute path of the scanner executable; preferably, a console based program
         self.scanner_path = None
          
     def locate_program(self, program_name):
@@ -52,9 +56,20 @@ class AbstractPlugin(object):
 
     @abc.abstractmethod
     def do_configure(self):
+        """
+        Performs a scanner's common configuration such as locating it's executable
+        and obtaining the model that interfaces with it. 
+        
+        No.7 Do not pass Database/ORM objects to tasks
+        """
         self.scanner_path = self.locate_program(self.scanner_name)
         if not self.scanner_path:
             raise Exception("Cannot find scanner program.")
+
+        try:
+            self.model = Scan.objects.get(pk=int(self.model_pk))
+        except Scan.DoesNotExist:
+            sys.exit(1)
 
     @abc.abstractmethod
     def do_start(self):

@@ -31,8 +31,10 @@ class AbstractPlugin(object):
 
     # This is a concrete method; just invoke with super().__init__(*args, **kwargs)
     def __init__(self, *args, **kwargs):
-        self.scanner_name = kwargs.pop('scanner name', None)
+        self.model_pk = kwargs.pop('model_pk', None)
+        self.scanner_name = None
         self.child_stdout = None
+        self.scanner_path = None
          
     def locate_program(self, program_name):
         if not program_name or not configuration:
@@ -50,8 +52,8 @@ class AbstractPlugin(object):
 
     @abc.abstractmethod
     def do_configure(self):
-        scanner_path = self.locate_program(self.scanner_name)
-        if not scanner_path:
+        self.scanner_path = self.locate_program(self.scanner_name)
+        if not self.scanner_path:
             raise Exception("Cannot find scanner program.")
 
     @abc.abstractmethod

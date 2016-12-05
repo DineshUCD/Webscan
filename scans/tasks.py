@@ -12,11 +12,11 @@ import plugins
 import subprocess, os, datetime, sys, glob, importlib
 
 @shared_task
-def delegate(plugin_class):
+def delegate(plugin_class, model_id):
     if not plugin_class and not isinstance(plugin_class, AbstractPlugin):
         return None
 
-    instance = plugin_class()
+    instance = plugin_class(model_pk=model_id)
     return instance.do_run()
 
 class ScanPlan(object):

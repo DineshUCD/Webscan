@@ -5,6 +5,7 @@ from django.core.exceptions import *
 import shutil, configparser, os, sys, datetime, yaml
 from scandir import scandir
 import fnmatch
+from plugins.w3af import *
 from scans.models import *
 from scans.Zipper import *
 from webscanner.logger import logger
@@ -69,7 +70,7 @@ class Command(BaseCommand):
 
         # Store meta file absolute paths for archiving them after scans finish
         meta_files = list()
-
+        """
         #Configure w3af
         
         #Store w3af output file in temporary/w3af_results.xml
@@ -90,8 +91,9 @@ class Command(BaseCommand):
             with open(w3af_script_file_path, 'w') as w3af_script:
                 w3af_script.write( str(w3af_template.format(**w3af_parameters)) )
         #End configuration of w3af
-
-
+        """
+        instance = W3af(model_pk=scan_id)
+      
         #Configure Gauntlt
 
         #Editing the config\cucumber.yml file. A basic cucumber profile may consist of a 'default profile.'
@@ -110,7 +112,10 @@ class Command(BaseCommand):
             cucumber_profile.write(yaml.dump(dict(default=gauntlt_yaml_configuration), default_flow_style=False))
          
         #End configuration of gauntlt
-        os.system(w3af_console + " -s " + w3af_script_file_path)
+        #os.system(w3af_console + " -s " + w3af_script_file_path)
+        w3af_list = instance.do_start()
+        print w3af_list
+        meta_files.extend(w3af_list)
         os.system('gauntlt')
          
         zipper.archive_meta_files(meta_files)

@@ -36,8 +36,6 @@ class AbstractPlugin(object):
         
         #The model that contains collects the Scan information
         self.model        = None
-        # The pipe for the scanner to write out to.
-        self.child_stdout = None
         # The absolute path of the scanner executable; preferably, a console based program
         self.scanner_path = None
         # Store the metafiles for each scan in a list and return it to view after the scan finishes
@@ -45,7 +43,7 @@ class AbstractPlugin(object):
 
          
     def locate_program(self, program_name):
-        if not program_name or not configuration:
+        if not program_name:
             return None
 
         for path in os.getenv('PATH').split(os.pathsep):
@@ -55,18 +53,18 @@ class AbstractPlugin(object):
                 return program_path
 
     @abc.abstractmethod
-    def do_run(self):
+    def do_start(self):
         pass
 
     @abc.abstractmethod
-    def do_configure(self):
+    def do_configure(self, plugin_name):
         """
         Performs a scanner's common configuration such as locating it's executable
         and obtaining the model that interfaces with it. 
         
         No.7 Do not pass Database/ORM objects to tasks
         """
-        self.scanner_path = self.locate_program(self.scanner_name)
+        self.scanner_path = self.locate_program(plugin_name)
         if not self.scanner_path:
             raise Exception("Cannot find scanner program.")
 
@@ -76,12 +74,11 @@ class AbstractPlugin(object):
             sys.exit(1)
 
     @abc.abstractmethod
-    def do_start(self):
-        pass
+    def do_stop(self):
+        return self.meta_files
 
     # super().spawn() climbs the class hierarchy and returns the correct class that shall be called.
     def spawn(self,  arguments):
         if not arguments:
             return None
-        p = subprocess.Popen(arguments, shell=True, stdout=subprocess.PIPE, close_fds=True)
-        self.child_stdout = p.stdout
+        p = subprocess.Popen(arguments)

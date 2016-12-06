@@ -16,8 +16,8 @@ def delegate(plugin_class, model_id):
     if not plugin_class and not isinstance(plugin_class, AbstractPlugin):
         return None
 
-    instance = plugin_class(model_pk=model_id`)
-    return instance.do_run()
+    instance = plugin_class(model_pk=int(model_id))
+    return instance.do_start()
 
 class ScanPlan(object):
     """
@@ -49,4 +49,3 @@ class ScanPlan(object):
             sys.exit(1)
         else:
             self.zipper = ZipArchive(scan=int(scan_id))
-

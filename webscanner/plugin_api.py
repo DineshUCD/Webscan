@@ -33,12 +33,16 @@ class AbstractPlugin(object):
     # This is a concrete method; just invoke with super().__init__(*args, **kwargs)
     def __init__(self, *args, **kwargs):
         self.model_pk = kwargs.pop('model_pk', None)
+        
         #The model that contains collects the Scan information
-        self.model = None
+        self.model        = None
         # The pipe for the scanner to write out to.
         self.child_stdout = None
         # The absolute path of the scanner executable; preferably, a console based program
         self.scanner_path = None
+        # Store the metafiles for each scan in a list and return it to view after the scan finishes
+        self.meta_files   = list()
+
          
     def locate_program(self, program_name):
         if not program_name or not configuration:

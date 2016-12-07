@@ -423,3 +423,37 @@ ImportError: No module named webscanner.celery_tasks
 ', 'webscanner
 ', 'webscanner-celery.conf
 ']
+[2016-12-07 16:42:56,368: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-12-07 16:42:56,379: INFO/MainProcess] mingle: searching for neighbors
+[2016-12-07 16:42:57,441: INFO/MainProcess] mingle: all alone
+[2016-12-07 16:42:57,457: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2016-12-07 16:42:57,457: INFO/MainProcess] celery@djayasan ready.
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@djayasan v4.0.0 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-4.4.0-53-generic-x86_64-with-Ubuntu-16.04-xenial 2016-12-07 16:42:56
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x7fda3b5d1890
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 4 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2016-12-07 16:43:42,589: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-12-07 16:43:42,596: INFO/MainProcess] mingle: searching for neighbors
+[2016-12-07 16:43:43,617: INFO/MainProcess] mingle: all alone
+[2016-12-07 16:43:43,630: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2016-12-07 16:43:43,631: INFO/MainProcess] celery@djayasan ready.

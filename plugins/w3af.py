@@ -43,7 +43,7 @@ class W3af(AbstractPlugin):
         # End configuration of W3af
 
     def do_start(self):
-        arguments = [self.scanner_path, '-s', self.w3af_script_file_path]
+        arguments = self.scanner_path + ' -s ' + self.w3af_script_file_path
         print arguments
         super(W3af, self).spawn(arguments)
         return self.do_stop()

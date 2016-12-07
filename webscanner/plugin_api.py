@@ -1,4 +1,4 @@
-import logging, os, sys, uuid, abc, subprocess, configparser
+import logging, os, sys, uuid, abc, subprocess, configparser, traceback
 
 from django.conf import settings
 from scans.models import *
@@ -81,4 +81,4 @@ class AbstractPlugin(object):
     def spawn(self,  arguments):
         if not arguments:
             return None
-        p = subprocess.Popen(arguments)
+        sts = os.system(arguments)

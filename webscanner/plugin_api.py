@@ -1,4 +1,4 @@
-import logging, os, sys, uuid, abc, subprocess, configparser, traceback
+import logging, os, sys, uuid, abc, subprocess, configparser, traceback, json
 
 from django.conf import settings
 from scans.models import *
@@ -82,3 +82,6 @@ class AbstractPlugin(object):
         if not arguments:
             return None
         sts = os.system(arguments)
+
+    def __repr__(self):
+        return json.dumps(self.__dict__)

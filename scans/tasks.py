@@ -6,11 +6,10 @@ from webscanner.logger import logger
 from webscanner.settings import *
 from webscanner.plugin_api import *
 from scans.Zipper import *
-from plugins.w3af import *
+from plugins import *
 
-import plugins
 
-import subprocess, os, datetime, sys, glob, importlib
+import subprocess, os, datetime, sys, glob, importlib, inspect
 
 @shared_task
 def delegate(plugin_name, model_id):
@@ -40,11 +39,15 @@ def find_interface(plugin_name):
     try:
         plugin_interfaces = glob.glob( os.path.join( os.path.basename(PLUGINS_DIR), "*.py") )
         for item in plugin_interfaces:
-            module_name = item.replace("/", ".").replace(".py", "")
-            noninstance = getattr(importlib.import_module(module_name), plugin_name, None)
-            if noninstance:
-                return noninstance
-    except (AttributeError, ImportError) as plugin_finder_error:
+            if '__init__' in item:
+                continue
+            module_name     = item.replace("/", ".").replace(".py", "")
+            importlib.import_module(module_name)
+            classes         = [class_name[1] for class_name in inspect.getmembers( sys.modules[module_name], inspect.isclass )]
+            candidate_class = filter(lambda class_name: getattr(class_name, "PLUGIN_NAME", None) == plugin_name, classes)
+            if candidate_class:
+                return candidate_class[0]
+    except (AttributeError, ImportError, KetError) as plugin_finder_error:
         logger.critical(plugin_finder_error.message)
         sys.exit(1)
     else:

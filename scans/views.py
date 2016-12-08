@@ -25,8 +25,8 @@ def index(request):
         instance = form.save()
 
         zipper   = ZipArchive(scan=instance.id) 
+        header   = [delegate.s(plugin_name, instance.id) for plugin_name in ['w3af_console', 'gauntlt']]
         callback = collect_results.s()                           
-        header   = [delegate.s(plugin_name, instance.id) for plugin_name in ['W3af', 'Gauntlt']]
         result   = chord(header)(callback).get()
         zipper.archive_meta_files(result)   
         

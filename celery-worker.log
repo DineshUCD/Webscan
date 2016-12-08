@@ -86,3 +86,588 @@ Be a good boy and contribute with some money :)
 [2016-12-08 18:31:03,037: INFO/MainProcess] Received task: scans.tasks.collect_results[dfa7c3bb-3174-452d-b2b8-b8e2cc5b8860]  
 [2016-12-08 18:31:03,044: WARNING/PoolWorker-4] [[u'/home/djayasan/Documents/webscanner/temporary/20162908182919733903scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20162908182919733903scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20162908182919733903scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20162908182919733903scanme.nmap.org/arachni_tests.afr', u'D']]
 [2016-12-08 18:31:03,048: INFO/PoolWorker-4] Task scans.tasks.collect_results[dfa7c3bb-3174-452d-b2b8-b8e2cc5b8860] succeeded in 0.00452768299874s: [['/home/djayasan/Documents/webscanner/temporary/20162908182919733903scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20162908182919733903scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20162908182919733903scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20162908182919733903scanme.nmap.org/arachni_tests.afr', 'D']]
+[2016-12-08 22:34:06,293: INFO/MainProcess] Received task: scans.tasks.delegate[868b4b9c-48db-4efa-bd78-8b559057c2e5]  
+[2016-12-08 22:34:06,294: INFO/MainProcess] Received task: scans.tasks.delegate[6675cba6-ba24-4e71-802a-0007c94031a0]  
+[2016-12-08 22:34:06,296: ERROR/PoolWorker-1] Task scans.tasks.delegate[868b4b9c-48db-4efa-bd78-8b559057c2e5] raised unexpected: TypeError("'NoneType' object is not callable",)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 368, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 623, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 23, in delegate
+    instance = plugin(model_pk=int(model_id))
+TypeError: 'NoneType' object is not callable
+[2016-12-08 22:34:06,300: ERROR/PoolWorker-2] Chord callback for '0f2ce2e2-4c49-48aa-9f04-5e86a9b21f05' raised: ChordError(u'Dependency 868b4b9c-48db-4efa-bd78-8b559057c2e5 raised TypeError("\'NoneType\' object is not callable",)',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 275, in on_chord_part_return
+    callback.delay([unpack(tup, decode) for tup in resl])
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 228, in _unpack_chord_result
+    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
+ChordError: Dependency 868b4b9c-48db-4efa-bd78-8b559057c2e5 raised TypeError("'NoneType' object is not callable",)
+[2016-12-08 22:34:06,301: ERROR/PoolWorker-2] Task scans.tasks.delegate[6675cba6-ba24-4e71-802a-0007c94031a0] raised unexpected: TypeError("'NoneType' object is not callable",)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 368, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 623, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 23, in delegate
+    instance = plugin(model_pk=int(model_id))
+TypeError: 'NoneType' object is not callable
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@djayasan v4.0.0 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-4.4.0-53-generic-x86_64-with-Ubuntu-16.04-xenial 2016-12-08 18:28:34
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x7fab725c8890
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 4 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2016-12-08 22:35:24,621: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-12-08 22:35:24,628: INFO/MainProcess] mingle: searching for neighbors
+[2016-12-08 22:35:25,651: INFO/MainProcess] mingle: all alone
+[2016-12-08 22:35:25,664: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2016-12-08 22:35:25,664: INFO/MainProcess] celery@djayasan ready.
+[2016-12-08 22:35:45,159: INFO/MainProcess] Received task: scans.tasks.delegate[7c522ee6-6af0-45fb-964e-546cd58a2df0]  
+[2016-12-08 22:35:45,160: INFO/MainProcess] Received task: scans.tasks.delegate[88078c24-7083-41f1-90f6-5add17b7d17e]  
+[2016-12-08 22:35:45,671: ERROR/PoolWorker-1] Task scans.tasks.delegate[88078c24-7083-41f1-90f6-5add17b7d17e] raised unexpected: KeyError(u'plugins.__init__',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 368, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 623, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 22, in delegate
+    plugin   = find_interface(plugin_name)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 44, in find_interface
+    classes         = [class_name[1] for class_name in inspect.getmembers( sys.modules[module_name], inspect.isclass )]
+KeyError: u'plugins.__init__'
+[2016-12-08 22:35:45,673: ERROR/PoolWorker-4] Chord callback for '84b08b07-dea4-49f5-b70f-320b4d6d1fb2' raised: ChordError(u'Dependency 88078c24-7083-41f1-90f6-5add17b7d17e raised KeyError("u\'plugins.__init__\'",)',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 275, in on_chord_part_return
+    callback.delay([unpack(tup, decode) for tup in resl])
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 228, in _unpack_chord_result
+    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
+ChordError: Dependency 88078c24-7083-41f1-90f6-5add17b7d17e raised KeyError("u'plugins.__init__'",)
+[2016-12-08 22:35:45,675: ERROR/PoolWorker-4] Task scans.tasks.delegate[7c522ee6-6af0-45fb-964e-546cd58a2df0] raised unexpected: KeyError(u'plugins.__init__',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 368, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 623, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 22, in delegate
+    plugin   = find_interface(plugin_name)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 44, in find_interface
+    classes         = [class_name[1] for class_name in inspect.getmembers( sys.modules[module_name], inspect.isclass )]
+KeyError: u'plugins.__init__'
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@djayasan v4.0.0 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-4.4.0-53-generic-x86_64-with-Ubuntu-16.04-xenial 2016-12-08 22:35:24
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x7f0135835890
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 4 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2016-12-08 22:40:17,427: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-12-08 22:40:17,434: INFO/MainProcess] mingle: searching for neighbors
+[2016-12-08 22:40:18,455: INFO/MainProcess] mingle: all alone
+[2016-12-08 22:40:18,469: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2016-12-08 22:40:18,469: INFO/MainProcess] celery@djayasan ready.
+[2016-12-08 22:40:38,385: INFO/MainProcess] Received task: scans.tasks.delegate[737c26f3-41f9-4080-ab51-abe0fd0cf87b]  
+[2016-12-08 22:40:38,386: INFO/MainProcess] Received task: scans.tasks.delegate[031b5b63-1df5-4afc-a3af-f3b7898fbf63]  
+[2016-12-08 22:40:38,473: ERROR/PoolWorker-1] Task scans.tasks.delegate[031b5b63-1df5-4afc-a3af-f3b7898fbf63] raised unexpected: KeyError(u'plugins.gauntlt',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 368, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 623, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 22, in delegate
+    plugin   = find_interface(plugin_name)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 46, in find_interface
+    classes         = [class_name[1] for class_name in inspect.getmembers( sys.modules[module_name], inspect.isclass )]
+KeyError: u'plugins.gauntlt'
+[2016-12-08 22:40:38,477: WARNING/PoolWorker-3] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20164008224038344788scanme.nmap.org/w3af_script.w3af
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20164008224038344788scanme.nmap.org/w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target http://scanme.nmap.org
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+Found 1 URLs and 1 different points of injection.
+The list of URLs is:
+- http://scanme.nmap.org
+The list of fuzzable requests is:
+- http://scanme.nmap.org | Method: GET
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+The URL "http://scanme.nmap.org/" has the following allowed methods: GET, HEAD, OPTIONS, POST. This information was found in the request with id 17.
+Scan finished in 0 seconds.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+got shell?
+
+[2016-12-08 22:40:39,950: ERROR/PoolWorker-3] Chord callback for 'b0b330ac-371e-4a56-ba83-d7e1223a7590' raised: ChordError(u'Dependency 031b5b63-1df5-4afc-a3af-f3b7898fbf63 raised KeyError("u\'plugins.gauntlt\'",)',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 275, in on_chord_part_return
+    callback.delay([unpack(tup, decode) for tup in resl])
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 228, in _unpack_chord_result
+    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
+ChordError: Dependency 031b5b63-1df5-4afc-a3af-f3b7898fbf63 raised KeyError("u'plugins.gauntlt'",)
+[2016-12-08 22:40:39,951: INFO/PoolWorker-3] Task scans.tasks.delegate[737c26f3-41f9-4080-ab51-abe0fd0cf87b] succeeded in 1.483239719s: [('/home/djayasan/Documents/webscanner/temporary/20164008224038344788scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20164008224038344788scanme.nmap.org/w3af_results.xml', 'S')]
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@djayasan v4.0.0 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-4.4.0-53-generic-x86_64-with-Ubuntu-16.04-xenial 2016-12-08 22:40:17
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x7fda0c86e890
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 4 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2016-12-08 22:48:21,116: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-12-08 22:48:21,124: INFO/MainProcess] mingle: searching for neighbors
+[2016-12-08 22:48:22,142: INFO/MainProcess] mingle: all alone
+[2016-12-08 22:48:22,155: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2016-12-08 22:48:22,156: INFO/MainProcess] celery@djayasan ready.
+[2016-12-08 22:52:22,432: INFO/MainProcess] Received task: scans.tasks.delegate[46ca2201-47f1-4d38-83ed-947d1340cec3]  
+[2016-12-08 22:52:22,435: INFO/MainProcess] Received task: scans.tasks.delegate[45ed494e-e7e5-45d0-8f81-5834ec08e44c]  
+[2016-12-08 22:52:22,444: ERROR/PoolWorker-2] Task scans.tasks.delegate[45ed494e-e7e5-45d0-8f81-5834ec08e44c] raised unexpected: KeyError(u'plugins.gauntlt',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 368, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 623, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 22, in delegate
+    instance = plugin(model_pk=int(model_id))
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 46, in find_interface
+    classes         = [class_name[1] for class_name in inspect.getmembers( sys.modules[module_name], inspect.isclass )]
+KeyError: u'plugins.gauntlt'
+[2016-12-08 22:52:22,444: WARNING/PoolWorker-3] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20165208225222395613scanme.nmap.org/w3af_script.w3af
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20165208225222395613scanme.nmap.org/w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target http://scanme.nmap.org
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+Found 1 URLs and 1 different points of injection.
+The list of URLs is:
+- http://scanme.nmap.org
+The list of fuzzable requests is:
+- http://scanme.nmap.org | Method: GET
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+The URL "http://scanme.nmap.org/" has the following allowed methods: GET, HEAD, OPTIONS, POST. This information was found in the request with id 17.
+Scan finished in 0 seconds.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+spawned a remote shell today?
+
+[2016-12-08 22:52:23,913: ERROR/PoolWorker-3] Chord callback for '23ef3504-b1a3-4831-b357-cbc9fa64938a' raised: ChordError(u'Dependency 45ed494e-e7e5-45d0-8f81-5834ec08e44c raised KeyError("u\'plugins.gauntlt\'",)',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 275, in on_chord_part_return
+    callback.delay([unpack(tup, decode) for tup in resl])
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 228, in _unpack_chord_result
+    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
+ChordError: Dependency 45ed494e-e7e5-45d0-8f81-5834ec08e44c raised KeyError("u'plugins.gauntlt'",)
+[2016-12-08 22:52:23,915: INFO/PoolWorker-3] Task scans.tasks.delegate[46ca2201-47f1-4d38-83ed-947d1340cec3] succeeded in 1.47868043101s: [('/home/djayasan/Documents/webscanner/temporary/20165208225222395613scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20165208225222395613scanme.nmap.org/w3af_results.xml', 'S')]
+[2016-12-08 22:55:25,582: INFO/MainProcess] Received task: scans.tasks.delegate[5667537f-2bc4-4119-bc04-00c39e0a013f]  
+[2016-12-08 22:55:25,583: INFO/MainProcess] Received task: scans.tasks.delegate[00d07712-c282-4689-8484-81bffdf60914]  
+[2016-12-08 22:55:27,344: ERROR/PoolWorker-3] Task scans.tasks.delegate[00d07712-c282-4689-8484-81bffdf60914] raised unexpected: KeyError(u'plugins.gauntlt',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 368, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 623, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 22, in delegate
+    instance = plugin(model_pk=int(model_id))
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 46, in find_interface
+    classes         = [class_name[1] for class_name in inspect.getmembers( sys.modules[module_name], inspect.isclass )]
+KeyError: u'plugins.gauntlt'
+[2016-12-08 22:55:27,349: ERROR/PoolWorker-4] Chord callback for 'c49ff7c4-4eb5-4704-b9d0-ad3fc40fcde3' raised: ChordError(u'Dependency 00d07712-c282-4689-8484-81bffdf60914 raised KeyError("u\'plugins.gauntlt\'",)',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 275, in on_chord_part_return
+    callback.delay([unpack(tup, decode) for tup in resl])
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 228, in _unpack_chord_result
+    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
+ChordError: Dependency 00d07712-c282-4689-8484-81bffdf60914 raised KeyError("u'plugins.gauntlt'",)
+[2016-12-08 22:55:27,350: ERROR/PoolWorker-4] Task scans.tasks.delegate[5667537f-2bc4-4119-bc04-00c39e0a013f] raised unexpected: IOError(2, 'No such file or directory')
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 368, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 623, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 23, in delegate
+    return instance.do_start()
+  File "/home/djayasan/Documents/webscanner/plugins/w3af.py", line 17, in __init__
+    self.do_configure()
+  File "/home/djayasan/Documents/webscanner/plugins/w3af.py", line 41, in do_configure
+    with open(self.w3af_script_file_path, 'w') as w3af_script:
+IOError: [Errno 2] No such file or directory: u'/home/djayasan/Documents/webscanner/temporary/20165508225525545770https://www.google.com/w3af_script.w3af'
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@djayasan v4.0.0 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-4.4.0-53-generic-x86_64-with-Ubuntu-16.04-xenial 2016-12-08 22:48:20
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x7f70db066890
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 4 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2016-12-08 22:56:55,477: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-12-08 22:56:55,484: INFO/MainProcess] mingle: searching for neighbors
+[2016-12-08 22:56:56,506: INFO/MainProcess] mingle: all alone
+[2016-12-08 22:56:56,518: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2016-12-08 22:56:56,519: INFO/MainProcess] celery@djayasan ready.
+[2016-12-08 22:57:17,470: INFO/MainProcess] Received task: scans.tasks.delegate[73d4e25d-541d-4681-8467-f9386f1fffa6]  
+[2016-12-08 22:57:17,471: INFO/MainProcess] Received task: scans.tasks.delegate[20ccd47a-481c-4fa4-a57e-2f0e0549d83b]  
+[2016-12-08 22:57:17,494: ERROR/PoolWorker-4] Task scans.tasks.delegate[73d4e25d-541d-4681-8467-f9386f1fffa6] raised unexpected: IOError(2, 'No such file or directory')
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 368, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 623, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 23, in delegate
+    instance = plugin(model_pk=int(model_id))
+  File "/home/djayasan/Documents/webscanner/plugins/w3af.py", line 17, in __init__
+    self.do_configure()
+  File "/home/djayasan/Documents/webscanner/plugins/w3af.py", line 41, in do_configure
+    with open(self.w3af_script_file_path, 'w') as w3af_script:
+IOError: [Errno 2] No such file or directory: u'/home/djayasan/Documents/webscanner/temporary/20165708225717433635scanme.nmap.org/w3af_script.w3af'
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+[2016-12-08 22:58:08,396: INFO/MainProcess] Received task: scans.tasks.delegate[37b854f2-c3b1-4bac-94dc-c046158013f5]  
+[2016-12-08 22:58:08,399: INFO/MainProcess] Received task: scans.tasks.delegate[e8cf8269-99d2-44df-a789-5e013fc3b2f0]  
+[2016-12-08 22:58:08,433: ERROR/PoolWorker-2] Task scans.tasks.delegate[37b854f2-c3b1-4bac-94dc-c046158013f5] raised unexpected: IOError(2, 'No such file or directory')
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 368, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/trace.py", line 623, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/home/djayasan/Documents/webscanner/scans/tasks.py", line 23, in delegate
+    return instance.do_start()
+  File "/home/djayasan/Documents/webscanner/plugins/w3af.py", line 17, in __init__
+    self.do_configure()
+  File "/home/djayasan/Documents/webscanner/plugins/w3af.py", line 41, in do_configure
+    with open(self.w3af_script_file_path, 'w') as w3af_script:
+IOError: [Errno 2] No such file or directory: u'/home/djayasan/Documents/webscanner/temporary/20165808225808342788scanme.nmap.org/w3af_script.w3af'
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m43.073s
+[2016-12-08 22:59:00,799: ERROR/PoolWorker-1] Chord callback for 'd147a751-3c14-401b-a5a8-cbfd81cb1b3d' raised: ChordError(u'Dependency 73d4e25d-541d-4681-8467-f9386f1fffa6 raised IOError("[Errno 2] No such file or directory: u\'/home/djayasan/Documents/webscanner/temporary/20165708225717433635scanme.nmap.org/w3af_script.w3af\'",)',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 275, in on_chord_part_return
+    callback.delay([unpack(tup, decode) for tup in resl])
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 228, in _unpack_chord_result
+    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
+ChordError: Dependency 73d4e25d-541d-4681-8467-f9386f1fffa6 raised IOError("[Errno 2] No such file or directory: u'/home/djayasan/Documents/webscanner/temporary/20165708225717433635scanme.nmap.org/w3af_script.w3af'",)
+[2016-12-08 22:59:00,801: INFO/PoolWorker-1] Task scans.tasks.delegate[20ccd47a-481c-4fa4-a57e-2f0e0549d83b] succeeded in 103.329515186s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20165708225717433635scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20165708225717433635scanme.nmap.org/arachni_tests.afr', 'D')]
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m42.868s
+[2016-12-08 22:59:51,572: ERROR/PoolWorker-4] Chord callback for '6ae647aa-9ebf-4e79-a059-fa08b27ef7de' raised: ChordError(u'Dependency 37b854f2-c3b1-4bac-94dc-c046158013f5 raised IOError("[Errno 2] No such file or directory: u\'/home/djayasan/Documents/webscanner/temporary/20165808225808342788scanme.nmap.org/w3af_script.w3af\'",)',)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 275, in on_chord_part_return
+    callback.delay([unpack(tup, decode) for tup in resl])
+  File "/usr/local/lib/python2.7/dist-packages/celery/backends/redis.py", line 228, in _unpack_chord_result
+    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
+ChordError: Dependency 37b854f2-c3b1-4bac-94dc-c046158013f5 raised IOError("[Errno 2] No such file or directory: u'/home/djayasan/Documents/webscanner/temporary/20165808225808342788scanme.nmap.org/w3af_script.w3af'",)
+[2016-12-08 22:59:51,574: INFO/PoolWorker-4] Task scans.tasks.delegate[e8cf8269-99d2-44df-a789-5e013fc3b2f0] succeeded in 103.166770788s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20165808225808342788scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20165808225808342788scanme.nmap.org/arachni_tests.afr', 'D')]
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@djayasan v4.0.0 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-4.4.0-53-generic-x86_64-with-Ubuntu-16.04-xenial 2016-12-08 22:56:55
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x7f0a2ccfe890
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 4 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2016-12-08 23:00:15,692: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-12-08 23:00:15,701: INFO/MainProcess] mingle: searching for neighbors
+[2016-12-08 23:00:16,718: INFO/MainProcess] mingle: all alone
+[2016-12-08 23:00:16,729: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2016-12-08 23:00:16,730: INFO/MainProcess] celery@djayasan ready.
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@djayasan v4.0.0 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-4.4.0-53-generic-x86_64-with-Ubuntu-16.04-xenial 2016-12-08 23:00:15
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x7f61d4beb890
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 4 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2016-12-08 23:00:43,883: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2016-12-08 23:00:43,893: INFO/MainProcess] mingle: searching for neighbors
+[2016-12-08 23:00:44,910: INFO/MainProcess] mingle: all alone
+[2016-12-08 23:00:44,922: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2016-12-08 23:00:44,922: INFO/MainProcess] celery@djayasan ready.
+[2016-12-08 23:01:03,455: INFO/MainProcess] Received task: scans.tasks.delegate[eca18067-b654-40c6-b933-4b1aaf83168a]  
+[2016-12-08 23:01:03,457: INFO/MainProcess] Received task: scans.tasks.delegate[c11890fb-a7d1-4b66-b9e5-932e195f4405]  
+[2016-12-08 23:01:03,469: WARNING/PoolWorker-4] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/w3af_script.w3af
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target http://scanme.nmap.org
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+Found 1 URLs and 1 different points of injection.
+The list of URLs is:
+- http://scanme.nmap.org
+The list of fuzzable requests is:
+- http://scanme.nmap.org | Method: GET
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+The URL "http://scanme.nmap.org/" has the following allowed methods: GET, HEAD, OPTIONS, POST. This information was found in the request with id 17.
+Scan finished in 0 seconds.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+w3af, better than the regular script kiddie.
+
+[2016-12-08 23:01:04,963: INFO/PoolWorker-4] Task scans.tasks.delegate[eca18067-b654-40c6-b933-4b1aaf83168a] succeeded in 1.503882234s: [('/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/w3af_results.xml', 'S')]
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m42.631s
+[2016-12-08 23:02:46,426: INFO/MainProcess] Received task: scans.tasks.collect_results[b6c1bebd-835c-4852-aa04-3a84fc45a21e]  
+[2016-12-08 23:02:46,424: INFO/PoolWorker-1] Task scans.tasks.delegate[c11890fb-a7d1-4b66-b9e5-932e195f4405] succeeded in 102.966249527s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/arachni_tests.afr', 'D')]
+[2016-12-08 23:02:46,429: WARNING/PoolWorker-2] [[u'/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/arachni_tests.afr', u'D']]
+[2016-12-08 23:02:46,433: INFO/PoolWorker-2] Task scans.tasks.collect_results[b6c1bebd-835c-4852-aa04-3a84fc45a21e] succeeded in 0.00382855199859s: [['/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20160108230103417379scanme.nmap.org/arachni_tests.afr', 'D']]

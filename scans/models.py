@@ -5,11 +5,15 @@ from django.db.models import signals
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.validators import MinValueValidator, MaxValueValidator
-import datetime, sys, os
+
+from accounts.models import *
 from webscanner import settings
+
+import datetime, sys, os
 
 # Create your models here.
 class Scan(models.Model):
+    user_profile             = models.ForeignKey(UserProfile)
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False, help_text="Please use the following format: http(s)://")
     application_id           = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(-1), MaxValueValidator(10)])
     date                     = models.DateTimeField(auto_now_add=True)

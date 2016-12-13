@@ -35,20 +35,24 @@ def collect_results(meta_collection):
     print meta_files
     return meta_files
 
+
+def find_all_interfaces():
+    all_interfaces    = list()
+    plugin_interfaces = glob.glob(os.path.join(os.path.basename(PLUGINS_DIR),"*.py"))
+    for item in plugin_interfaces:
+        module_name     = item.replace("/", ".").replace(".py", "")
+        importlib.import_module(module_name)
+        classes         = [class_name[1] for class_name in inspect.getmembers(sys.modules[module_name], inspect.isclass)]
+        for class_name in classes:
+            plugin_name = getattr(class_name, "PLUGIN_NAME", None)
+            if plugin_name and issubclass(class_name, AbstractPlugin):
+                all_interfaces.append((plugin_name, class_name))
+    return all_interfaces
+
+        
 def find_interface(plugin_name):
-    try:
-        plugin_interfaces = glob.glob( os.path.join( os.path.basename(PLUGINS_DIR), "*.py") )
-        for item in plugin_interfaces:
-            if '__init__' in item:
-                continue
-            module_name     = item.replace("/", ".").replace(".py", "")
-            importlib.import_module(module_name)
-            classes         = [class_name[1] for class_name in inspect.getmembers( sys.modules[module_name], inspect.isclass )]
-            candidate_class = filter(lambda class_name: getattr(class_name, "PLUGIN_NAME", None) == plugin_name, classes)
-            if candidate_class:
-                return candidate_class[0]
-    except (AttributeError, ImportError, KetError) as plugin_finder_error:
-        logger.critical(plugin_finder_error.message)
-        sys.exit(1)
+    class_object = [classes[1] for classes in find_all_interfaces() if classes[0] == plugin_name]
+    if len(class_object) > 0:
+        return class_object[0]
     else:
         return None

@@ -27,9 +27,8 @@ def index(request):
     
     return render(request, 'uploads/index.html')
 
-@login_required(login_url='/accounts/login')
+@login_required(login_url='/accounts/login/')
 def results(request, upload_id):
-    #upload_primary_key = Upload.objects.filter(scan__user_profile__id = int(request.user.userprofile.id), id = int(upload_id))
 
     upload = get_object_or_404(Upload, scan__user_profile__id=int(request.user.userprofile.id), id=upload_id)
 
@@ -48,8 +47,5 @@ def results(request, upload_id):
         add_files(repository, scan_unzip_files, upload_id)
         upload_response = upload_scans(repository)
         context['upload_response'] = upload_response
-       
 
     return render(request, 'uploads/results.html', context)
-
-    

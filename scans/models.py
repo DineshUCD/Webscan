@@ -29,6 +29,16 @@ class Scan(models.Model):
 
     def __unicode__(self):
         return "{0}".format(self.uniform_resource_locator)
+
+class Plan(models.Model):
+    scan        = models.OneToOneField(Scan, on_delete=models.CASCADE, null=True, blank=True)
+    name        = models.CharField(max_length=50, default="")
+    created     = models.DateTimeField(auto_now_add=True)
+    description = models.CharField(max_length=256, default="", blank=True)
+    
+    def __unicode__(self):
+        return "{0} for {1} desciption: {2}".format(self.name, self.scan.uniform_resource_locator, self.description)
+
 """
 Fields: scan, name, uploaded_to,   date
 Types: 1 - 1, char, file path char,DateTime 
@@ -54,11 +64,11 @@ def create_zip_for_scan(sender, instance, created, **kwargs):
         zip_meta_data.save()
     
 class Tool(models.Model):
-    scan = models.ForeignKey(Scan, on_delete=models.CASCADE)
-    module = models.CharField(max_length=256, default="", blank=True)
-    name = models.CharField(max_length=256, default="", blank=True)
+    plan           = models.ForeignKey(Plan, on_delete=models.CASCADE)
+    module         = models.CharField(max_length=256, default="", blank=True)
+    name           = models.CharField(max_length=256, default="", blank=True)
     work_directory = models.FilePathField(default="")
-    date = models.DateTimeField(auto_now_add=True)
+    date           = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return "{0}".format(self.name)

@@ -36,7 +36,7 @@ class UserSession(models.Model):
     Only concerned with logged in user sessions.
     """
     user    = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="user")
-    session = models.ForeignKey(Session, on_delete=models.CASCADE)
+    session = models.ForeignKey(Session, on_delete=models.CASCADE, null=True)
 
 def user_logged_in_handler(sender, request, user, **kwargs):
     """

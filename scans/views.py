@@ -1,4 +1,5 @@
 from django.shortcuts import render, reverse
+from django.contrib.auth.decorators import login_required
 from django.http import *
 
 from scans.models import *
@@ -13,6 +14,7 @@ import subprocess, os, sys
 from webscanner.settings import *
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def index(request):
 
     # sticks in a POST or renders empty form
@@ -22,8 +24,11 @@ def index(request):
         'form': form,
     }
     if form.is_valid():
-        instance = form.save()
-
+        instance = form.save(commit=False)
+        instance.user_profile = request.user.userprofile
+        instance.save()
+        print instance.user_profile.user.username
+        print instance.id
         zipper   = ZipArchive(scan=instance.id) 
         callback = collect_results.s()                           
         header   = [delegate.s(plugin_name, instance.id) for plugin_name in ['w3af_console', 'gauntlt']]

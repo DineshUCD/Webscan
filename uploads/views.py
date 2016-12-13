@@ -1,6 +1,9 @@
 from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
 from django.db.models import F
 from django.http import *
+
+from accounts.models import *
 
 from scans.models import *
 from scans.Zipper import *
@@ -24,8 +27,9 @@ def index(request):
     
     return render(request, 'uploads/index.html')
 
-
+@login_required(login_url='/accounts/login')
 def results(request, upload_id):
+#    if upload_id == Upload.objects.get(
     upload = get_object_or_404(Upload, pk=upload_id)
     threadfix_items = upload.scan.get_scan_data()['output']
     form = ResultForm(request.POST or None, scan_results=threadfix_items)

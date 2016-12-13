@@ -1,0 +1,56 @@
+<style>
+body {
+    padding: 10px;
+}
+
+#exTab2 h3 {
+    color: white;
+    background-color: #428bca;
+    padding: 5px 15px;
+}
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<hr></hr>
+<div class="container"><h2>Example tab 2 (suing standard nav-tabs)</h2></div>
+
+<div id="exTab2" class="container">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#1" data-toggle="tab">Overview</a>
+        </li>
+        <li><a href="#2" data-toggle="tab">Sites & Scans</a>
+        </li>
+        <li><a href="#3" data-toggle="tab">Plugin & Plans</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="1">
+            <h3>Standard tab panel created on bootstrap using nav-tabs</h3>
+        </div>
+        <div class="tab-pane" id="2">
+            <h3>Notice the gap between the content and the tab after applying the background color</h3>
+            <script>
+                $(document).ready(function() {
+                    $('#sitesAndScans').load('{% url 'scans:index' %}');
+                }); 
+            </script>
+            <div id="sitesAndScans"></div>
+        </div>
+        <div class="tab-pane" id="3">
+            <h3>Add clearfix to the tab-content (see css)</h3>
+        </div>
+    </div>
+</div>
+
+<hr></hr>
+
+<!-- Bootstrap core JavaScript
+    ========================== -->
+    <!-- Place at the end of the document so the pages load faster -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

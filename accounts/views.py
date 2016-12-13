@@ -16,9 +16,12 @@ def register(request, template_name="registration/register.html"):
         if form.is_valid():
             form.save()
             un = postdata.get('username', '')
-            pw = postdata.get('password', '')
+            pw = postdata.get('password1', '')
+            print un
+            print pw
             from django.contrib.auth import login, authenticate
             new_user = authenticate(username=un, password=pw)
+            print new_user
             if new_user and new_user.is_active:
                 login(request, new_user)
                 url = urlresolvers.reverse('accounts:my_account')
@@ -28,10 +31,13 @@ def register(request, template_name="registration/register.html"):
     page_title = 'User Registration'
     return render(request, template_name, locals())
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def my_account(request, template_name="registration/my_account.html"):
     page_title='My Account'
     name = request.user.username
-    return render_to_response(template_name, locals(),
-        context=RequestContext(request))
+    return render(request, template_name, locals()) 
 
+@login_required(login_url='/accounts/login/')
+def my_dashboard(request, template_name="dashboard/index.html"):
+    return render(request, template_name, locals())
+ 

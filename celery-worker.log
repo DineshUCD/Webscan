@@ -835,3 +835,619 @@ spawned a remote shell today?
 [2016-12-08 23:13:07,575: INFO/MainProcess] Received task: scans.tasks.collect_results[ef717c45-a65b-4019-9076-3bb91be67d23]  
 [2016-12-08 23:13:07,577: WARNING/PoolWorker-1] [[u'/home/djayasan/Documents/webscanner/temporary/20161108231124489649scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20161108231124489649scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20161108231124489649scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20161108231124489649scanme.nmap.org/arachni_tests.afr', u'D']]
 [2016-12-08 23:13:07,578: INFO/PoolWorker-1] Task scans.tasks.collect_results[ef717c45-a65b-4019-9076-3bb91be67d23] succeeded in 0.00151852999988s: [['/home/djayasan/Documents/webscanner/temporary/20161108231124489649scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20161108231124489649scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20161108231124489649scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20161108231124489649scanme.nmap.org/arachni_tests.afr', 'D']]
+[2016-12-13 00:24:18,502: INFO/MainProcess] Received task: scans.tasks.delegate[edcf4f65-2bb9-4362-9cea-eba3d4330896]  
+[2016-12-13 00:24:18,504: INFO/MainProcess] Received task: scans.tasks.delegate[3c38ce82-89e0-4503-9984-8495cd0e256d]  
+[2016-12-13 00:24:18,509: WARNING/PoolWorker-2] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/w3af_script.w3af
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target http://scanme.nmap.org
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+Found 1 URLs and 1 different points of injection.
+The list of URLs is:
+- http://scanme.nmap.org
+The list of fuzzable requests is:
+- http://scanme.nmap.org | Method: GET
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+The URL "http://scanme.nmap.org/" has the following allowed methods: GET, HEAD, OPTIONS, POST. This information was found in the request with id 17.
+Scan finished in 0 seconds.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+May the brute force be with you.
+
+[2016-12-13 00:24:20,146: INFO/PoolWorker-2] Task scans.tasks.delegate[edcf4f65-2bb9-4362-9cea-eba3d4330896] succeeded in 1.641445409s: [('/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/w3af_results.xml', 'S')]
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m43.244s
+[2016-12-13 00:26:02,106: INFO/MainProcess] Received task: scans.tasks.collect_results[8a0714e0-ba78-46d1-a327-613222c92b12]  
+[2016-12-13 00:26:02,107: INFO/PoolWorker-4] Task scans.tasks.delegate[3c38ce82-89e0-4503-9984-8495cd0e256d] succeeded in 103.602828563s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/arachni_tests.afr', 'D')]
+[2016-12-13 00:26:02,109: WARNING/PoolWorker-3] [[u'/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/arachni_tests.afr', u'D']]
+[2016-12-13 00:26:02,111: INFO/PoolWorker-3] Task scans.tasks.collect_results[8a0714e0-ba78-46d1-a327-613222c92b12] succeeded in 0.0016064659867s: [['/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20162413002418463227scanme.nmap.org/arachni_tests.afr', 'D']]
+[2016-12-13 00:32:37,259: INFO/MainProcess] Received task: scans.tasks.delegate[a070daf2-7068-4c31-a364-bdbca8da2813]  
+[2016-12-13 00:32:37,261: INFO/MainProcess] Received task: scans.tasks.delegate[700e813f-b090-4964-bdaa-0316eb1e960d]  
+[2016-12-13 00:32:37,265: WARNING/PoolWorker-4] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/w3af_script.w3af
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target http://scanme.nmap.org
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+Found 1 URLs and 1 different points of injection.
+The list of URLs is:
+- http://scanme.nmap.org
+The list of fuzzable requests is:
+- http://scanme.nmap.org | Method: GET
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+The URL "http://scanme.nmap.org/" has the following allowed methods: GET, HEAD, OPTIONS, POST. This information was found in the request with id 17.
+Scan finished in 1 second.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+spawned a remote shell today?
+
+[2016-12-13 00:32:39,821: INFO/PoolWorker-4] Task scans.tasks.delegate[a070daf2-7068-4c31-a364-bdbca8da2813] succeeded in 2.55911121401s: [('/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/w3af_results.xml', 'S')]
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m42.578s
+[2016-12-13 00:34:20,132: INFO/PoolWorker-1] Task scans.tasks.delegate[700e813f-b090-4964-bdaa-0316eb1e960d] succeeded in 102.865482753s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/arachni_tests.afr', 'D')]
+[2016-12-13 00:34:20,135: INFO/MainProcess] Received task: scans.tasks.collect_results[121b75be-ace8-442b-8838-7199558f062c]  
+[2016-12-13 00:34:20,519: WARNING/PoolWorker-2] [[u'/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/arachni_tests.afr', u'D']]
+[2016-12-13 00:34:20,519: INFO/PoolWorker-2] Task scans.tasks.collect_results[121b75be-ace8-442b-8838-7199558f062c] succeeded in 0.000985897000646s: [['/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20163213003237221654scanme.nmap.org/arachni_tests.afr', 'D']]
+[2016-12-13 00:37:57,936: INFO/MainProcess] Received task: scans.tasks.delegate[712b081b-b8e5-4b07-82fd-f6877da8e517]  
+[2016-12-13 00:37:57,937: INFO/MainProcess] Received task: scans.tasks.delegate[2e0a2c32-ad3f-4043-8984-534cac53aa8e]  
+[2016-12-13 00:37:57,941: WARNING/PoolWorker-1] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/w3af_script.w3af
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target http://scanme.nmap.org
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+Found 1 URLs and 1 different points of injection.
+The list of URLs is:
+- http://scanme.nmap.org
+The list of fuzzable requests is:
+- http://scanme.nmap.org | Method: GET
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+The URL "http://scanme.nmap.org/" has the following allowed methods: GET, HEAD, OPTIONS, POST. This information was found in the request with id 17.
+Scan finished in 0 seconds.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+Be a good boy and contribute with some lines of code.
+
+[2016-12-13 00:37:59,458: INFO/PoolWorker-1] Task scans.tasks.delegate[712b081b-b8e5-4b07-82fd-f6877da8e517] succeeded in 1.520447377s: [('/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/w3af_results.xml', 'S')]
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m42.742s
+[2016-12-13 00:39:40,935: INFO/PoolWorker-3] Task scans.tasks.delegate[2e0a2c32-ad3f-4043-8984-534cac53aa8e] succeeded in 102.997162561s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/arachni_tests.afr', 'D')]
+[2016-12-13 00:39:40,935: INFO/MainProcess] Received task: scans.tasks.collect_results[9ed40b86-0b65-4a76-9a1d-1ad0dd6c1c97]  
+[2016-12-13 00:39:40,937: WARNING/PoolWorker-4] [[u'/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/arachni_tests.afr', u'D']]
+[2016-12-13 00:39:40,939: INFO/PoolWorker-4] Task scans.tasks.collect_results[9ed40b86-0b65-4a76-9a1d-1ad0dd6c1c97] succeeded in 0.00211799899989s: [['/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20163713003757926907scanme.nmap.org/arachni_tests.afr', 'D']]
+[2016-12-13 00:51:29,601: INFO/MainProcess] Received task: scans.tasks.delegate[0e420704-51ae-40f8-b71f-f6dee13f6543]  
+[2016-12-13 00:51:29,602: INFO/MainProcess] Received task: scans.tasks.delegate[8cd1e94f-85a0-4e3c-ad88-d8d641f7feef]  
+[2016-12-13 00:51:29,611: WARNING/PoolWorker-3] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/w3af_script.w3af
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target http://scanme.nmap.org
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+Found 1 URLs and 1 different points of injection.
+The list of URLs is:
+- http://scanme.nmap.org
+The list of fuzzable requests is:
+- http://scanme.nmap.org | Method: GET
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+The URL "http://scanme.nmap.org/" has the following allowed methods: GET, HEAD, OPTIONS, POST. This information was found in the request with id 17.
+Scan finished in 0 seconds.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+Bye.
+
+[2016-12-13 00:51:31,101: INFO/PoolWorker-3] Task scans.tasks.delegate[0e420704-51ae-40f8-b71f-f6dee13f6543] succeeded in 1.49381128799s: [('/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/w3af_results.xml', 'S')]
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m42.802s
+[2016-12-13 00:53:12,741: INFO/PoolWorker-2] Task scans.tasks.delegate[8cd1e94f-85a0-4e3c-ad88-d8d641f7feef] succeeded in 103.138125229s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/arachni_tests.afr', 'D')]
+[2016-12-13 00:53:12,742: INFO/MainProcess] Received task: scans.tasks.collect_results[d2f7a4a1-0447-4785-9825-01a5d2b63816]  
+[2016-12-13 00:53:12,743: WARNING/PoolWorker-1] [[u'/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/arachni_tests.afr', u'D']]
+[2016-12-13 00:53:12,744: INFO/PoolWorker-1] Task scans.tasks.collect_results[d2f7a4a1-0447-4785-9825-01a5d2b63816] succeeded in 0.00123104799422s: [['/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20165113005129565491scanme.nmap.org/arachni_tests.afr', 'D']]
+[2016-12-13 00:53:30,671: INFO/MainProcess] Received task: scans.tasks.delegate[d9c592f2-772c-41ce-82cd-96b7ea4e892b]  
+[2016-12-13 00:53:30,672: INFO/MainProcess] Received task: scans.tasks.delegate[41e35b10-fdcc-4956-b550-822c1ffda029]  
+[2016-12-13 00:53:32,598: WARNING/PoolWorker-2] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/w3af_script.w3af
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target https://www.google.com
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "gws". This information was found in the request with id 66.
+Found 2 URLs and 2 different points of injection.
+The list of URLs is:
+- https://www.google.com/search
+- https://www.google.com
+The list of fuzzable requests is:
+- https://www.google.com | Method: GET
+- https://www.google.com/search | Method: GET | Parameters: (csi="", hl="en", source="hp", biw="", bih="", q="", gbv="1")
+The web application sent a persistent cookie.
+The following scripts are vulnerable to a trivial form of XSRF:
+- https://www.google.com/search
+This is the information about the SSL certificate used in the target site:
+    
+    == Certificate information ==
+    {'OCSP': (u'http://clients1.google.com/ocsp',),
+     'caIssuers': (u'http://pki.google.com/GIAG2.crt',),
+     'crlDistributionPoints': (u'http://pki.google.com/GIAG2.crl',),
+     'issuer': ((('countryName', u'US'),),
+                (('organizationName', u'Google Inc'),),
+                (('commonName', u'Google Internet Authority G2'),)),
+     'notAfter': 'Feb 23 14:16:00 2017 GMT',
+     'notBefore': u'Dec  1 14:16:00 2016 GMT',
+     'serialNumber': u'30C9A33FB239662B',
+     'subject': ((('countryName', u'US'),),
+                 (('stateOrProvinceName', u'California'),),
+                 (('localityName', u'Mountain View'),),
+                 (('organizationName', u'Google Inc'),),
+                 (('commonName', u'www.google.com'),)),
+     'subjectAltName': (('DNS', 'www.google.com'),),
+     'version': 3L}
+    
+    == Used cipher ==
+    ('ECDHE-RSA-AES128-GCM-SHA256', 'TLSv1/SSLv3', 128)
+    
+    == Certificate dump ==
+    -----BEGIN CERTIFICATE-----
+    MIIEgDCCA2igAwIBAgIIMMmjP7I5ZiswDQYJKoZIhvcNAQELBQAwSTELMAkGA1UE
+    BhMCVVMxEzARBgNVBAoTCkdvb2dsZSBJbmMxJTAjBgNVBAMTHEdvb2dsZSBJbnRl
+    cm5ldCBBdXRob3JpdHkgRzIwHhcNMTYxMjAxMTQxNjAwWhcNMTcwMjIzMTQxNjAw
+    WjBoMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwN
+    TW91bnRhaW4gVmlldzETMBEGA1UECgwKR29vZ2xlIEluYzEXMBUGA1UEAwwOd3d3
+    Lmdvb2dsZS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCx8mHK
+    Iu9j6nUHGI9ULhq9ICYhhhwx4kZymMGSq2T2mi+05/hDDdT0jTsQPifFvcRXeHPs
+    9Ogsz51eiPovunn2ZQuVWjuAw1fPmR1RhmtjKs+/xLWqg/41HAViCi4lDRLOVXpm
+    lC2z3R2GtYwl3ZjeVPSfFKS7DlTn0UD+DFUg00y3AlSwUq1kus4HReQm4sUbPq1y
+    /GDBprEi6t1T+XOqQSworzo+1QGcFXJtsKS1H1MuoUTxZfxteYV5jEqo6dZ52keW
+    AWr1VkOXoBHxtLHNJn6Pqf8zwzRf4D9xU7ODye++1c4sfqb5SLzxNfSeBMBn7vCs
+    va1Do0eA3lvdiyUnAgMBAAGjggFLMIIBRzAdBgNVHSUEFjAUBggrBgEFBQcDAQYI
+    KwYBBQUHAwIwGQYDVR0RBBIwEIIOd3d3Lmdvb2dsZS5jb20waAYIKwYBBQUHAQEE
+    XDBaMCsGCCsGAQUFBzAChh9odHRwOi8vcGtpLmdvb2dsZS5jb20vR0lBRzIuY3J0
+    MCsGCCsGAQUFBzABhh9odHRwOi8vY2xpZW50czEuZ29vZ2xlLmNvbS9vY3NwMB0G
+    A1UdDgQWBBT7XM0qmOc7jA6zRp1B27aGf43v3jAMBgNVHRMBAf8EAjAAMB8GA1Ud
+    IwQYMBaAFErdBhYbvPZotXb1gba7Yhq6WoEvMCEGA1UdIAQaMBgwDAYKKwYBBAHW
+    eQIFATAIBgZngQwBAgIwMAYDVR0fBCkwJzAloCOgIYYfaHR0cDovL3BraS5nb29n
+    bGUuY29tL0dJQUcyLmNybDANBgkqhkiG9w0BAQsFAAOCAQEAmONQdFbMYWyzmtOC
+    9zMANcK2ABNXv2Zb4Ai8n1EROLRYgJG3y+pL9KXWA+dcoLYSDTJrqALKugRGgNLF
+    suQpC0jbarvc5ULrFpxIv/M8xqSW0f2alFcu7cjVJRpxIz5dF3WtTYc0Kl1cIZBO
+    cb1JwtcFJU/IYA02y8let51gSIyGi4PXCfEpie8SxfzN1QiUYIWm/ldA+3PPQNm3
+    31TfS+ZeHA7F8waGbMJFI6FEslWjvT0rybLrNotah4b5vpagjkT1ADwxsSj35oEh
+    0qiC4a50FDr/5otfwPKCj9AlbnfN/JbkZhMvH38MRPCGMqCilU7aY4Auh2qE2j2+
+    x0F3GQ==
+    -----END CERTIFICATE-----
+    
+An unidentified vulnerability was found at: "https://www.google.com/search", using HTTP method GET. The sent data was: "gbv=1&q=d'kc"z'gj'"%2A%2A5%2A(((%3B-%2A%60)&csi=56&hl=en&bih=56&source=hp&biw=56&btnG=Google%20Search&btnI=I'm%20Feeling%20Lucky". The modified parameter was "q". This vulnerability was found in the requests with ids 111, 127 and 129.
+The URL: https://www.google.com/search is vulnerable to cross-site request forgery.
+The server header for the remote web server is: "gws". This information was found in the request with id 66.
+This is the information about the SSL certificate used in the target site:
+    
+    == Certificate information ==
+    {'OCSP': (u'http://clients1.google.com/ocsp',),
+     'caIssuers': (u'http://pki.google.com/GIAG2.crt',),
+     'crlDistributionPoints': (u'http://pki.google.com/GIAG2.crl',),
+     'issuer': ((('countryName', u'US'),),
+                (('organizationName', u'Google Inc'),),
+                (('commonName', u'Google Internet Authority G2'),)),
+     'notAfter': 'Feb 23 14:16:00 2017 GMT',
+     'notBefore': u'Dec  1 14:16:00 2016 GMT',
+     'serialNumber': u'30C9A33FB239662B',
+     'subject': ((('countryName', u'US'),),
+                 (('stateOrProvinceName', u'California'),),
+                 (('localityName', u'Mountain View'),),
+                 (('organizationName', u'Google Inc'),),
+                 (('commonName', u'www.google.com'),)),
+     'subjectAltName': (('DNS', 'www.google.com'),),
+     'version': 3L}
+    
+    == Used cipher ==
+    ('ECDHE-RSA-AES128-GCM-SHA256', 'TLSv1/SSLv3', 128)
+    
+    == Certificate dump ==
+    -----BEGIN CERTIFICATE-----
+    MIIEgDCCA2igAwIBAgIIMMmjP7I5ZiswDQYJKoZIhvcNAQELBQAwSTELMAkGA1UE
+    BhMCVVMxEzARBgNVBAoTCkdvb2dsZSBJbmMxJTAjBgNVBAMTHEdvb2dsZSBJbnRl
+    cm5ldCBBdXRob3JpdHkgRzIwHhcNMTYxMjAxMTQxNjAwWhcNMTcwMjIzMTQxNjAw
+    WjBoMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwN
+    TW91bnRhaW4gVmlldzETMBEGA1UECgwKR29vZ2xlIEluYzEXMBUGA1UEAwwOd3d3
+    Lmdvb2dsZS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCx8mHK
+    Iu9j6nUHGI9ULhq9ICYhhhwx4kZymMGSq2T2mi+05/hDDdT0jTsQPifFvcRXeHPs
+    9Ogsz51eiPovunn2ZQuVWjuAw1fPmR1RhmtjKs+/xLWqg/41HAViCi4lDRLOVXpm
+    lC2z3R2GtYwl3ZjeVPSfFKS7DlTn0UD+DFUg00y3AlSwUq1kus4HReQm4sUbPq1y
+    /GDBprEi6t1T+XOqQSworzo+1QGcFXJtsKS1H1MuoUTxZfxteYV5jEqo6dZ52keW
+    AWr1VkOXoBHxtLHNJn6Pqf8zwzRf4D9xU7ODye++1c4sfqb5SLzxNfSeBMBn7vCs
+    va1Do0eA3lvdiyUnAgMBAAGjggFLMIIBRzAdBgNVHSUEFjAUBggrBgEFBQcDAQYI
+    KwYBBQUHAwIwGQYDVR0RBBIwEIIOd3d3Lmdvb2dsZS5jb20waAYIKwYBBQUHAQEE
+    XDBaMCsGCCsGAQUFBzAChh9odHRwOi8vcGtpLmdvb2dsZS5jb20vR0lBRzIuY3J0
+    MCsGCCsGAQUFBzABhh9odHRwOi8vY2xpZW50czEuZ29vZ2xlLmNvbS9vY3NwMB0G
+    A1UdDgQWBBT7XM0qmOc7jA6zRp1B27aGf43v3jAMBgNVHRMBAf8EAjAAMB8GA1Ud
+    IwQYMBaAFErdBhYbvPZotXb1gba7Yhq6WoEvMCEGA1UdIAQaMBgwDAYKKwYBBAHW
+    eQIFATAIBgZngQwBAgIwMAYDVR0fBCkwJzAloCOgIYYfaHR0cDovL3BraS5nb29n
+    bGUuY29tL0dJQUcyLmNybDANBgkqhkiG9w0BAQsFAAOCAQEAmONQdFbMYWyzmtOC
+    9zMANcK2ABNXv2Zb4Ai8n1EROLRYgJG3y+pL9KXWA+dcoLYSDTJrqALKugRGgNLF
+    suQpC0jbarvc5ULrFpxIv/M8xqSW0f2alFcu7cjVJRpxIz5dF3WtTYc0Kl1cIZBO
+    cb1JwtcFJU/IYA02y8let51gSIyGi4PXCfEpie8SxfzN1QiUYIWm/ldA+3PPQNm3
+    31TfS+ZeHA7F8waGbMJFI6FEslWjvT0rybLrNotah4b5vpagjkT1ADwxsSj35oEh
+    0qiC4a50FDr/5otfwPKCj9AlbnfN/JbkZhMvH38MRPCGMqCilU7aY4Auh2qE2j2+
+    x0F3GQ==
+    -----END CERTIFICATE-----
+    .
+The URL "https://www.google.com/" has the following allowed methods: CONNECT, GET, HEAD.
+Local File Inclusion was found at: "https://www.google.com/search", using HTTP method GET. The sent data was: "gbv=1&q=../../../../../../../../../../../../../../../etc/passwd%00&csi=56&hl=en&bih=56&source=hp&biw=56&btnG=Google%20Search&btnI=I'm%20Feeling%20Lucky". The modified parameter was "q". This vulnerability was found in the request with id 217.
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m42.961s
+[2016-12-13 00:55:15,888: INFO/PoolWorker-4] Task scans.tasks.delegate[41e35b10-fdcc-4956-b550-822c1ffda029] succeeded in 103.293605016s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/arachni_tests.afr', 'D')]
+[2016-12-13 01:01:20,493: INFO/MainProcess] Received task: scans.tasks.delegate[be9c82cb-52bd-4ee2-b9bc-2abf871a5998]  
+[2016-12-13 01:01:20,494: INFO/MainProcess] Received task: scans.tasks.delegate[07c5e2c8-1c29-4887-b15c-70527e8ef6a0]  
+[2016-12-13 01:01:21,320: WARNING/PoolWorker-3] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/w3af_script.w3af
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target http://scanme.nmap.org
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+Found 1 URLs and 1 different points of injection.
+The list of URLs is:
+- http://scanme.nmap.org
+The list of fuzzable requests is:
+- http://scanme.nmap.org | Method: GET
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+The URL "http://scanme.nmap.org/" has the following allowed methods: GET, HEAD, OPTIONS, POST. This information was found in the request with id 17.
+Scan finished in 0 seconds.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+GPL v2 inside.
+
+[2016-12-13 01:01:22,881: INFO/PoolWorker-3] Task scans.tasks.delegate[be9c82cb-52bd-4ee2-b9bc-2abf871a5998] succeeded in 1.56437539301s: [('/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/w3af_results.xml', 'S')]
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m43.017s
+[2016-12-13 01:03:04,620: INFO/PoolWorker-4] Task scans.tasks.delegate[07c5e2c8-1c29-4887-b15c-70527e8ef6a0] succeeded in 103.303183172s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/arachni_tests.afr', 'D')]
+[2016-12-13 01:03:04,622: INFO/MainProcess] Received task: scans.tasks.collect_results[4c605253-ecbd-4103-8972-22e93555febd]  
+[2016-12-13 01:03:04,625: WARNING/PoolWorker-3] [[u'/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/arachni_tests.afr', u'D']]
+[2016-12-13 01:03:04,625: INFO/PoolWorker-3] Task scans.tasks.collect_results[4c605253-ecbd-4103-8972-22e93555febd] succeeded in 0.00101661100052s: [['/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20160113010120456317scanme.nmap.org/arachni_tests.afr', 'D']]
+An unidentified web application error (HTTP response code 500) was found at: "https://www.google.com/search". Enable all plugins and try again, if the vulnerability still is not identified, please verify manually and report it to the w3af developers. This vulnerability was found in the request with id 332.
+The URL: "https://www.google.com" sent these cookies:
+- NID=91=qzM2j1OxAlSIvMsMvNoo87x9BDk0McwtEGl4uiixsnvOOR0RCQLoqcLzizynHDeixnVT1twSleJRwCE4qBulKdQZ6L504L06WzFbZ0-ud216_2IbOFN4h6g2In1X9fHg-I0W-mFZK-1_JQ; expires=Wed, 14-Jun-2017 00:53:33 GMT; path=/; domain=.google.com; HttpOnly
+The URL: "https://www.google.com/search" sent these cookies:
+- NID=91=pk1-2UXQ0Ft5eUqQO5acsOrJi10xz3X7tZMJp88u0eWhQ-cgRQd0tl0Pw7bcTtQr9ZjT4Sshcrub_QiLwl72yWHRw8n-1mx0kYCttVmoq5MsloT0sqW5ikJ2SJwQXvvsbvrN7JDOKigC3A; expires=Wed, 14-Jun-2017 00:53:49 GMT; path=/; domain=.google.com; HttpOnly
+- PAGEVERSION=Desktop;expires=Thu, 06-Dec-2046 00:54:01 GMT;path=/
+- NID=91=CveNSpIyV_H8Lnu38Eyz-EcwWYv0gOaVltNj7WW8q3boisAWy2HlNjv4dSzFrL0Fxx47mQamDmORzQ2v8aNnDA1-Da7rld9cWdofbaXxNDv-o9-yTTjuBtlPgyk5PcANM4tp3x7kXXRBTA; expires=Wed, 14-Jun-2017 00:53:54 GMT; path=/; domain=.google.com; HttpOnly
+- NID=91=wfcqtg3rklhGPoRjQ9-rE-n-MCzKonLabqExx4cIwunk6n1ncHFlB9Z21xInSIFCpCWCg9ucDxGAmwomzMwM8U1mAHwuP5Fik_DEcmuLLpzyyDL89K7zV1krR1QGom8BM7QiqxdtINjXXw; expires=Wed, 14-Jun-2017 00:53:56 GMT; path=/; domain=.google.com; HttpOnly
+- NID=91=XBE_xoV_jhVuuy-UqoX-Vc6tQO4NfPRCmCrDAnQZ50VWXOzuESJrEwJ1gRRsbZOctnIoz8vwsvs07ifCRapifEfgQOIcPd7ffWedGWjekpKSxHSgAQr_QhBmOHx137Kalt3XsV97jYXM_Q; expires=Wed, 14-Jun-2017 00:53:48 GMT; path=/; domain=.google.com; HttpOnly
+- GeoIP=US:CA:Santa_Rosa:38.46:-122.69:v4; Path=/; secure; Domain=.wikipedia.org
+- hl=en;path=/doodles
+- NID=91=LZhIMmZw4piRVu3_W8jrVzC5knPSzLnL7gyimQg4oPX8mCP8uXGcpXXXpO4DXj5GYqA0BsKBPQzpT3WlA6LIQJ700z1nJMIV1Tkf-fZqgCgbSZOB1rrwudVUuM9LbG8nCgII3kMiifHPWA; expires=Wed, 14-Jun-2017 00:53:51 GMT; path=/; domain=.google.com; HttpOnly
+Scan finished in 11 minutes 13 seconds.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+got shell?
+
+[2016-12-13 01:04:48,054: INFO/PoolWorker-2] Task scans.tasks.delegate[d9c592f2-772c-41ce-82cd-96b7ea4e892b] succeeded in 675.459345829s: [('/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/w3af_results.xml', 'S')]
+[2016-12-13 01:04:48,054: INFO/MainProcess] Received task: scans.tasks.collect_results[3d7c3de7-b539-4278-b0ce-d934bdb6a75f]  
+[2016-12-13 01:04:48,056: WARNING/PoolWorker-1] [[u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/arachni_tests.afr', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/w3af_results.xml', u'S']]
+[2016-12-13 01:04:48,056: INFO/PoolWorker-1] Task scans.tasks.collect_results[3d7c3de7-b539-4278-b0ce-d934bdb6a75f] succeeded in 0.000948567001615s: [['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/arachni_tests.afr', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20165313005330662786https://www.google.com/w3af_results.xml', 'S']]

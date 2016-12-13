@@ -27,8 +27,7 @@ def index(request):
         instance = form.save(commit=False)
         instance.user_profile = request.user.userprofile
         instance.save()
-        print instance.user_profile.user.username
-        print instance.id
+
         zipper   = ZipArchive(scan=instance.id) 
         callback = collect_results.s()                           
         header   = [delegate.s(plugin_name, instance.id) for plugin_name in ['w3af_console', 'gauntlt']]

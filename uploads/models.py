@@ -5,7 +5,7 @@ from django.db.models import signals
 from django.dispatch import receiver
 from django.utils.timezone import utc
 
-import datetime, sys, os
+import datetime, sys, os, uuid
 from webscanner.settings import *
 
 #Upload has a Many-to-Many relationship with Scan
@@ -29,6 +29,8 @@ class Upload(models.Model):
     upload_date              = models.DateTimeField(auto_now=True)
     status                   = models.IntegerField(choices=STATUS_CHOICES, default=IDLE)
     scan                     = models.ForeignKey(Scan, on_delete=models.CASCADE)
+    # Univerally unique identifiers are a good alternative to AutoField for primary_key.
+    id                       = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def get_elapsed_time(self):
         if upload_date:

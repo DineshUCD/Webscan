@@ -29,8 +29,10 @@ def index(request):
 
 @login_required(login_url='/accounts/login')
 def results(request, upload_id):
-#    if upload_id == Upload.objects.get(
-    upload = get_object_or_404(Upload, pk=upload_id)
+    #upload_primary_key = Upload.objects.filter(scan__user_profile__id = int(request.user.userprofile.id), id = int(upload_id))
+
+    upload = get_object_or_404(Upload, scan__user_profile__id=int(request.user.userprofile.id), id=upload_id)
+
     threadfix_items = upload.scan.get_scan_data()['output']
     form = ResultForm(request.POST or None, scan_results=threadfix_items)
     viz = DndTree()

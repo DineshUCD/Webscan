@@ -8,7 +8,8 @@ import configparser, requests, json, os, sys
 from webscanner.settings import *
 from requests.exceptions import *
 from urllib2 import urlopen
-from .models import Scan, MetaFile, Zip
+from .models import Scan, MetaFile, Zip, Tool, Plan
+from .tasks import find_all_interfaces, find_interface
 
 #from webscanner.logger import logger
 import logging
@@ -80,3 +81,15 @@ class ScanForm(forms.ModelForm):
           
     
         return cleaned_data
+
+class PlanForm(forms.ModelForm):
+    class Meta:
+        model = Plan
+        fields = ['name', 'description']
+
+    def __init__(self, *args, **kwargs):
+        super(PlanForm, self).__init__(*args, **kwargs)
+
+        CHOICES = tuple(find_all_interfaces())
+        if all(CHOICES): 
+            self.fields['plugins'] = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CHOICES)

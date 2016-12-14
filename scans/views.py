@@ -23,6 +23,7 @@ def index(request):
     context = {
         'form': form,
     }
+
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user_profile = request.user.userprofile
@@ -39,3 +40,22 @@ def index(request):
 	    return HttpResponseRedirect(reverse('uploads:results', args=(upload.id, )))
             
     return render(request, 'scans/index.html', context)
+
+@login_required(login_url='/accounts/login/')
+def setup(request):
+    form = PlanForm(request.POST or None)
+    context = {
+        'form': form, 
+    }
+
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.user_profile = request.user.userprofile
+        instance.save()
+
+        plugin_choices = form.cleaned_data['plugins']
+        print plugin_choices
+        item = plugin_choices[0](model_pk=1)
+        print item
+
+    return render(request, 'scans/setup.html', context)

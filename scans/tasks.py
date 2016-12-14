@@ -46,13 +46,13 @@ def find_all_interfaces():
         for class_name in classes:
             plugin_name = getattr(class_name, "PLUGIN_NAME", None)
             if plugin_name and issubclass(class_name, AbstractPlugin):
-                all_interfaces.append((plugin_name, class_name))
+                all_interfaces.append((plugin_name, plugin_name))
     return all_interfaces
 
         
 def find_interface(plugin_name):
-    class_object = [classes[1] for classes in find_all_interfaces() if classes[0] == plugin_name]
-    if len(class_object) > 0:
-        return class_object[0]
+    class_objects = [classes[0] for classes in find_all_interfaces() if classes[1] == plugin_name]
+    if len(class_objects) > 0:
+        return class_objects[0]
     else:
         return None

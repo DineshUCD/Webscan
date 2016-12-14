@@ -1,0 +1,17 @@
+{% load bootstrap3 %}
+<html>
+
+<body>
+<form method='POST' action='{% url 'scans:setup' %}'>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            {% bootstrap_icon "star" %} Submit
+        </button>
+    {% endbuttons %}
+</form>
+
+</body>
+</html>
+

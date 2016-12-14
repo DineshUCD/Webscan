@@ -46,7 +46,7 @@ def find_all_interfaces():
         for class_name in classes:
             plugin_name = getattr(class_name, "PLUGIN_NAME", None)
             if plugin_name and issubclass(class_name, AbstractPlugin):
-                all_interfaces.append((plugin_name, plugin_name))
+                all_interfaces.append((class_name, plugin_name))
     return all_interfaces
 
         
@@ -56,3 +56,10 @@ def find_interface(plugin_name):
         return class_objects[0]
     else:
         return None
+
+def find_class(import_path):
+    if '<class' in import_path:
+        import_path = re.findall("'([^']*)'", import_path)[0]
+    components = import_path.split('.')
+    module     = importlib.import_module('.'.join(components[:-1]))
+    return getattr(module, components[-1], None)

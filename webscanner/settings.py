@@ -42,9 +42,9 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts.apps.AccountsConfig',
-    'scans.apps.ScansConfig',
-    'uploads.apps.UploadsConfig',
+    'accounts',
+    'scans',
+    'uploads',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'inplaceeditform',
 ]
 
 MIDDLEWARE = [

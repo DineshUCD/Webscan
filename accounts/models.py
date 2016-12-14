@@ -7,7 +7,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in
 from django.contrib.sessions.models import Session
-
+from django.http import HttpRequest
 
 import sys, os
 # Create your models here.
@@ -54,3 +54,11 @@ def delete_user_sessions(user):
     user_sessions = UserSession.objects.filter(user = user)
     for user_session in user_sessions:
         user_sessions.session.delete()
+
+def set_session_dictionary(request, key, value):
+    user_session_link         = UserSession.objects.get(user=request.user, session_id=request.session.session_key)
+    user_session              = user_session_link.session
+    session_dictionary        = user_session.get_decoded()
+    session_dictionary[key]   = value
+    user_session.session_data = Session.objects.encode(session_dictionary)
+    user_session.save()

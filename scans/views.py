@@ -4,6 +4,7 @@ from django.http import *
 
 from scans.models import *
 from scans.Zipper import *
+from accounts.models import *
 from uploads.models import *
 from scans.forms import *
 from .tasks import *
@@ -52,10 +53,13 @@ def setup(request):
         instance = form.save(commit=False)
         instance.user_profile = request.user.userprofile
         instance.save()
-
+       
         plugin_choices = form.cleaned_data['plugins']
-        print plugin_choices
-        item = plugin_choices[0](model_pk=1)
-        print item
+        for plugin in plugin_choices:
+            Tool.objects.create(plan=instance, module=plugin)
 
+        set_session_dictionary(request, 'plugins', plugin_choices)
+
+        context['instance'] = instance
+        
     return render(request, 'scans/setup.html', context)

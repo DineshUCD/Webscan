@@ -49,16 +49,39 @@ def user_logged_in_handler(sender, request, user, **kwargs):
     )
 
 user_logged_in.connect(user_logged_in_handler)
- 
+
+
 def delete_user_sessions(user):
     user_sessions = UserSession.objects.filter(user = user)
     for user_session in user_sessions:
         user_sessions.session.delete()
 
-def set_session_dictionary(request, key, value):
-    user_session_link         = UserSession.objects.get(user=request.user, session_id=request.session.session_key)
+def set_session_object(request, key, value, session_handler_function):
+    user_session_link         = UserSession.objects.get(user__id=request.user.id, session_id=request.session.session_key)
     user_session              = user_session_link.session
     session_dictionary        = user_session.get_decoded()
-    session_dictionary[key]   = value
+    print session_dictionary
+    session_handler_function(session_dictionary, key, value)
     user_session.session_data = Session.objects.encode(session_dictionary)
     user_session.save()
+
+def get_session_variable(request, key):
+    user_session_link = UserSession.objects.get(user__id=request.user.id, session_id=request.session.session_key)
+    user_session      = user_session_link.session
+    return user_session.get_decoded()[key]
+
+def set_session_variable(session_dictionary, key, value):
+    session_dictionary[key] = value
+    print session_dictionary
+
+def set_session_list(session_dictionary, key, value):
+    if not key in session_dictionary or not type(session_dictionary[key]) is list:
+        session_dictionary[key] = list()
+    session_dictionary[key].append(value)
+    print session_dictionary
+
+def remove_from_session_list(session_dictionary, key, value):
+    if not key in session_dictionary or not type(session_dictionary[key]) is list:
+        return None
+    session_dictionary[key].remove(value)
+    print session_dictionary

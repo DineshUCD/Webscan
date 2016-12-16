@@ -41,7 +41,13 @@ body {
             <div id="sitesAndScans"></div>
         </div>
         <div class="tab-pane" id="3">
-            <h3>Add clearfix to the tab-content (see css)</h3>
+            <h3>Setup and save scan plans.</h3>
+            <script>
+                $(document).ready(function() {
+                    $('#setupScan').load('{% url 'scans:setup' %}');
+                });
+            </script>
+            <div id="setupScan"></div>
         </div>
     </div>
 </div>

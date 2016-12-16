@@ -31,13 +31,14 @@ class Scan(models.Model):
         return "{0}".format(self.uniform_resource_locator)
 
 class Plan(models.Model):
-    scan        = models.OneToOneField(Scan, on_delete=models.CASCADE, null=True, blank=True)
-    name        = models.CharField(max_length=50, default="")
-    created     = models.DateTimeField(auto_now_add=True)
-    description = models.CharField(max_length=256, default="", blank=True)
+    user_profile = models.ForeignKey(UserProfile)
+    scan         = models.OneToOneField(Scan, on_delete=models.CASCADE, null=True, blank=True)
+    name         = models.CharField(max_length=50, default="")
+    created      = models.DateTimeField(auto_now_add=True)
+    description  = models.CharField(max_length=256, default="", blank=True)
     
     def __unicode__(self):
-        return "{0} for {1} desciption: {2}".format(self.name, self.scan.uniform_resource_locator, self.description)
+        return "{0} for {1}".format(self.name, self.description)
 
 """
 Fields: scan, name, uploaded_to,   date

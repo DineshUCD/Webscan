@@ -68,7 +68,12 @@ def set_session_object(request, key, value, session_handler_function):
 def get_session_variable(request, key):
     user_session_link = UserSession.objects.get(user__id=request.user.id, session_id=request.session.session_key)
     user_session      = user_session_link.session
-    return user_session.get_decoded()[key]
+    try:
+        items = user_session.get_decoded()[key]
+    except KeyError as empty:
+        return None
+    else:
+        return items
 
 def set_session_variable(session_dictionary, key, value):
     session_dictionary[key] = value

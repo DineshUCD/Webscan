@@ -20,7 +20,8 @@ from webscanner.settings import *
 def index(request):
 
     # sticks in a POST or renders empty form
-    form = ScanForm(request.POST or None)
+    plan_pks = get_session_variable(request, 'add_scan')
+    form = ScanForm(request.POST or None, plan_pks=plan_pks)
 
     context = {
         'form': form,
@@ -30,7 +31,12 @@ def index(request):
         instance = form.save(commit=False)
         instance.user_profile = request.user.userprofile
         instance.save()
-
+        
+        # Validate primary keys in Controller
+        plan_pks = map(int, instance.plan_pks)
+        plans    = Plan.objects.filter(pk__in=plan_pks)
+        
+        
         zipper   = ZipArchive(scan=instance.id) 
         callback = collect_results.s()                           
         header   = [delegate.s(plugin_name, instance.id) for plugin_name in ['w3af_console', 'gauntlt']]

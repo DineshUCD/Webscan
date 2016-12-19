@@ -9,7 +9,7 @@ from scans.Zipper import *
 from plugins import *
 
 
-import subprocess, os, datetime, sys, glob, importlib, inspect
+import subprocess, os, datetime, sys, glob, importlib, inspect, re
 
 @shared_task
 def delegate(plugin_name, model_id):
@@ -18,7 +18,7 @@ def delegate(plugin_name, model_id):
                  its interfacing class must be of type AbstractPlugin
     model_id     is pased in for later lookup inside the plugin interface's instance
     """
-    plugin   = find_interface(plugin_name)
+    plugin   = find_class(plugin_name)
     instance = plugin(model_pk=int(model_id))
     return instance.do_start()
 

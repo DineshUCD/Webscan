@@ -14,14 +14,31 @@ from .tasks import find_all_interfaces, find_interface
 #from webscanner.logger import logger
 import logging
 logger = logging.getLogger('scarab')
+"""
+To Do: Append list of available scans from cookies to this form.
+Method: Pass in user cookie dictionary to form through kwargs,
+Should we pass in the request object or the primary keys themselves?
+
+"""
 class ScanForm(forms.ModelForm):
     class Meta:
         model  = Scan
         fields = [ 'uniform_resource_locator', 'application_id' ]
 
     def __init__(self, *args, **kwargs):
+        plan_pks = kwargs.pop('plan_pks', None) # Remove it from the stack. Do not pass to super...
         super(ScanForm, self).__init__(*args, **kwargs)
-
+        
+        
+        if not plan_pks or not isinstance(plan_pks, list): 
+            logger.error("Scan plan missing tool selection.")
+        else:
+            plans        = Plan.objects.filter(pk__in=plan_pks)
+            PLAN_CHOICES = tuple( [ (plan.id, str(plan)) for plan in plans ] )
+       
+            # Place in format (primary key of Plan, Plan's unicode name) inside CHOICES tuple 
+            self.fields['plan_pks'] = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=PLAN_CHOICES)
+       
         information = list()
         CHOICES     = list() 
         
@@ -72,8 +89,14 @@ class ScanForm(forms.ModelForm):
 
         # Verify URL Exists.
         uniform_resource_locator = cleaned_data.get('uniform_resource_locator') 
-
+        plan_selections          = cleaned_data.get('plan_pks')
         status_code              = urlopen(uniform_resource_locator).code
+
+        if not plan_selections:
+            raise forms.ValidationError("You must select an appropriate scan plan at /scan/setup/.")
+        elif len(plan_selections) > 1:
+            raise forms.ValidationError("You may not select more than one at a time!")
+        
         if (status_code / 100 >= 4):
             raise forms.ValidationError("URL " + uniform_resource_locator + " is not available.")
 

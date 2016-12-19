@@ -1,7 +1,8 @@
 from django.shortcuts import render, reverse, get_object_or_404
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.http import *
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from scans.models import *
 from scans.Zipper import *
 from accounts.models import *
@@ -64,23 +65,22 @@ def setup(request):
         
     return render(request, 'scans/setup.html', context)
 
-@login_required(login_url='/accounts/login/')
-def delete(request, plan_id):
-    plan = Plan.objects.filter(user_profile__id=int(request.user.userprofile.id)).get(pk=plan_id)
-    if request.method == 'POST':
-        if 'delete' in request.POST:
-            plan.delete()
-        else:
-            pass           
-    return HttpResponseRedirect(reverse('scans:setup'))
-
+class PlanDelete(DeleteView):
+    model = Plan
+    success_url = reverse_lazy('scans:setup')
+    template_name = 'scans/setup'
+    
+    def get_object(self, queryset=None):
+        obj = get_object_or_404(Plan, user_profile__id=self.request.user.userprofile.id, pk= int(self.kwargs['pk']))
+        return obj
+        
 class PlanUpdate(UpdateView):
     form_class = PlanForm
     model = Plan
     template_name = 'scans/setup.html'  
 
     def get_object(self, queryset=None):
-        obj = get_object_or_404(Plan, pk=self.kwargs['pk'])
+        obj = get_object_or_404(Plan, user_profile__id=self.request.user.userprofile.id, pk= int(self.kwargs['pk']))
         return obj
 
     def get_success_url(self, *args, **kwargs):

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<w3afrun start="1482176742" startstr="Mon Dec 19 19:45:42 2016" xmloutputversion="2.0">
+<w3afrun start="1482184117" startstr="Mon Dec 19 21:48:37 2016" xmloutputversion="2.0">
     <w3af-version>w3af - Web Application Attack and Audit Framework
 Version: 1.2
 Revision: unknown
@@ -44,7 +44,7 @@ Author: Andres Riancho and the w3af team.</w3af-version>
         <evasion/>
         <output>
             <plugin name="xmlFile">
-                <config parameter="fileName" value="/home/djayasan/Documents/webscanner/temporary/20164519194541208731scanme.nmap.org/w3af_results.xml"/>
+                <config parameter="fileName" value="/home/djayasan/Documents/webscanner/temporary/20164819214836730759scanme.nmap.org/w3af_results.xml"/>
             </plugin>
             <plugin name="console"/>
         </output>
@@ -76,7 +76,7 @@ Author: Andres Riancho and the w3af team.</w3af-version>
                         <header content="bytes" field="Accept-Ranges"/>
                         <header content="Accept-Encoding" field="Vary"/>
                         <header content="Apache/2.4.7 (Ubuntu)" field="Server"/>
-                        <header content="Mon, 19 Dec 2016 19:45:42 GMT" field="Date"/>
+                        <header content="Mon, 19 Dec 2016 21:48:37 GMT" field="Date"/>
                         <header content="text/html" field="Content-Type"/>
                     </headers>
                     <body content-encoding="text">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
@@ -279,7 +279,7 @@ document.write('&lt;A HREF=&quot;' + mylink + '&quot;&gt;&lt;IMG src=&quot;' + m
                 <httpresponse id="17">
                     <status>HTTP/1.1 200 OK</status>
                     <headers>
-                        <header content="Mon, 19 Dec 2016 19:45:42 GMT" field="Date"/>
+                        <header content="Mon, 19 Dec 2016 21:48:37 GMT" field="Date"/>
                         <header content="0" field="Content-Length"/>
                         <header content="text/html" field="Content-Type"/>
                         <header content="OPTIONS,GET,HEAD,POST" field="Allow"/>

@@ -33,7 +33,7 @@ audit:
   jsons: true
   xmls: true
 datastore:
-  report_path: "/home/djayasan/Documents/webscanner/temporary/20164519194541208731scanme.nmap.org/arachni_tests.afr"
+  report_path: "/home/djayasan/Documents/webscanner/temporary/20164819214836730759scanme.nmap.org/arachni_tests.afr"
 scope:
   redundant_path_patterns: {}
   dom_depth_limit: 5
@@ -132,8 +132,8 @@ no_fingerprinting: false
 authorized_by: 
 url: http://scanme.nmap.org/
 </options>
-  <start_datetime>2016-12-19T19:45:44+00:00</start_datetime>
-  <finish_datetime>2016-12-19T19:47:24+00:00</finish_datetime>
+  <start_datetime>2016-12-19T21:48:38+00:00</start_datetime>
+  <finish_datetime>2016-12-19T21:50:18+00:00</finish_datetime>
   <sitemap/>
   <issues/>
   <plugins/>

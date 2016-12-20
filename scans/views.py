@@ -33,13 +33,17 @@ def index(request):
         instance.save()
         
         # Validate primary keys in Controller
-        plan_pks = map(int, instance.plan_pks)
-        plans    = Plan.objects.filter(pk__in=plan_pks)
-        
-        
+
+        plans    = map(int, form.cleaned_data['plan_pks'])
+        tools    = Tool.objects.filter(plan__id__in=plans)
+       
+        modules  = list()
+        for tool in tools:
+            modules.append(tool.module)
+        print modules 
         zipper   = ZipArchive(scan=instance.id) 
         callback = collect_results.s()                           
-        header   = [delegate.s(plugin_name, instance.id) for plugin_name in ['w3af_console', 'gauntlt']]
+        header   = [delegate.s(plugin_name, instance.id) for plugin_name in modules]
         result   = chord(header)(callback).get()
         zipper.archive_meta_files(result)   
         
@@ -74,7 +78,7 @@ def setup(request):
 class PlanDelete(DeleteView):
     model = Plan
     success_url = reverse_lazy('scans:setup')
-    template_name = 'scans/setup'
+    template_name = 'scans/setup.html'
     
     def get_object(self, queryset=None):
         obj = get_object_or_404(Plan, user_profile__id=self.request.user.userprofile.id, pk= int(self.kwargs['pk']))
@@ -95,7 +99,6 @@ class PlanUpdate(UpdateView):
 @login_required(login_url='/accounts/login')
 def add_scan(request, plan_id):
     plan = get_object_or_404(Plan, user_profile__id=int(request.user.userprofile.id), pk=plan_id)
-    print 'add_scan' in request.POST    
     if request.method == 'POST':
         if 'add_scan' in request.POST:
             set_session_object(request, 'add_scan', plan.id, set_session_list)

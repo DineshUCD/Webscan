@@ -1,6 +1,7 @@
 import logging, os, sys, uuid, abc, subprocess, configparser, traceback, json
 
 from django.conf import settings
+from webscanner.settings import *
 from scans.models import *
 
 class AbstractPlugin(object):
@@ -70,6 +71,9 @@ class AbstractPlugin(object):
 
         try:
             self.model = Scan.objects.get(pk=int(self.model_pk))
+            self.temporary_folder_path = os.path.join( settings.TEMPORARY_DIR, self.model.zip.name )
+            if not os.path.exists( self.temporary_folder_path ):
+                os.makedirs( self.temporary_folder_path )
         except Scan.DoesNotExist:
             sys.exit(1)
 

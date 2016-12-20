@@ -24,16 +24,22 @@ def delegate(plugin_name, model_id):
     return instance.do_start()
 
 @shared_task
-def collect_results(meta_collection):
+def collect_results(meta_collection, **kwargs):
     """
     This callback can only be executed after all the tasks in the chord header have returned.
     meta_collection is a list of lists which contains files for each scanner in the plan.
     plan_instance handles the coordination of plugins in the Django view.
     """
+    instance_id = kwargs.pop('scan_identification', None)
+    zipper = ZipArchive(scan=int(instance_id))
+
     meta_files = list()
     for scan_files in meta_collection:
         meta_files.extend(scan_files)
     print meta_files
+    
+    zipper.archive_meta_files(meta_files)
+
     return meta_files
 
 

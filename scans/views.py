@@ -40,12 +40,12 @@ def index(request):
         modules  = list()
         for tool in tools:
             modules.append(tool.module)
-        print modules 
-        zipper   = ZipArchive(scan=instance.id) 
-        callback = collect_results.s()                           
+
+        #zipper   = ZipArchive(scan=instance.id) 
+        callback = collect_results.s(scan_identification=instance.id)                           
         header   = [delegate.s(plugin_name, instance.id) for plugin_name in modules]
-        result   = chord(header)(callback).get()
-        zipper.archive_meta_files(result)   
+        result   = chord(header)(callback)
+        #zipper.archive_meta_files(result)   
         
         if instance.application_id != -1:
             upload = Upload.objects.create(scan=instance, uniform_resource_locator=THREADFIX_URL)

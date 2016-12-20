@@ -88,9 +88,10 @@ class ZipArchive():
         current_time = datetime.datetime.now()
          
         #Check if the zipfile exists in archive/ or another absolute path
-        if not os.path.exists(self.scan.zip.name):
-            self.temporary_folder_path = os.path.join(settings.TEMPORARY_DIR, self.scan.zip.name)
-            self.file_list = list()                
+
+        self.temporary_folder_path = os.path.join(settings.TEMPORARY_DIR, self.scan.zip.name)
+        self.file_list = list()                
+        if not os.path.exists( self.temporary_folder_path ):
             os.makedirs(self.temporary_folder_path)
 
     def track_file(self, absolute_path):

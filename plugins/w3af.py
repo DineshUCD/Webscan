@@ -22,21 +22,20 @@ class W3af(AbstractPlugin):
         plugins_configuration = configparser.ConfigParser()
         plugins_configuration.read( os.path.join( settings.PLUGINS_DIR, 'config.ini' ) )
       
-        temporary_folder_path = os.path.join( settings.TEMPORARY_DIR, self.model.zip.name )
 
         # Configure W3af
         #Store w3af output file in temporary/w3af_resultzs.xml
         #Store w3af script in temporary/w3af_script.w3af
         #The stored w3af configuration script is in plugins/config.ini
-        w3af_parameters = { 'url': str(self.model.uniform_resource_locator), 'path': temporary_folder_path }
+        w3af_parameters = { 'url': str(self.model.uniform_resource_locator), 'path': self.temporary_folder_path }
         try:
             w3af_template = plugins_configuration['APPLICATIONS']['w3af_template']
         except KeyError as key:
             logger.warn("Unable to find w3af script configuration template for " + W3af.PLUGIN_NAME + ".")   
         else:
-            self.w3af_script_file_path = os.path.join( temporary_folder_path, 'w3af_script.w3af' )
-            self.meta_files.append( (self.w3af_script_file_path                             , MetaFile.DOCUMENTATION) )
-            self.meta_files.append( (os.path.join(temporary_folder_path, 'w3af_results.xml'), MetaFile.SCAN         ) )
+            self.w3af_script_file_path = os.path.join( self.temporary_folder_path, 'w3af_script.w3af' )
+            self.meta_files.append( (self.w3af_script_file_path                                  , MetaFile.DOCUMENTATION) )
+            self.meta_files.append( (os.path.join(self.temporary_folder_path, 'w3af_results.xml'), MetaFile.SCAN         ) )
             
             with open(self.w3af_script_file_path, 'w') as w3af_script:
                 w3af_script.write( str(w3af_template.format(**w3af_parameters)) )

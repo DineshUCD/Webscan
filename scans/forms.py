@@ -111,8 +111,26 @@ class PlanForm(forms.ModelForm):
         fields = ['name', 'description']
 
     def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
         super(PlanForm, self).__init__(*args, **kwargs)
 
         CHOICES = tuple(find_all_interfaces())
         if all(CHOICES): 
             self.fields['plugins'] = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CHOICES)
+
+    def clean(self):
+        cleaned_data = super(PlanForm, self).clean()
+        
+        plugin_choices = cleaned_data.get('plugins')
+        
+        Tool.objects.filter(plan__id=self.instance.id).delete()
+       
+        if not self.instance.user_profile: 
+            self.instance.user_profile = self.request.user.userprofile
+
+        self.instance.save()
+
+        for plugin in plugin_choices:
+            Tool.objects.create(plan=self.instance, module=plugin)
+
+        return cleaned_data

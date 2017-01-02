@@ -39,6 +39,7 @@ def index(request):
        
         modules  = list()
         for tool in tools:
+            print tool.module
             modules.append(tool.module)
 
         #zipper   = ZipArchive(scan=instance.id) 
@@ -56,7 +57,7 @@ def index(request):
 @login_required(login_url='/accounts/login/')
 def setup(request):
 
-    form = PlanForm(request.POST or None)
+    form = PlanForm(request.POST or None, request=request)
 
     context = {
         'form' : form, 
@@ -68,8 +69,8 @@ def setup(request):
         instance.user_profile = request.user.userprofile
         instance.save()
         plugin_choices = form.cleaned_data['plugins']
-        for plugin in plugin_choices:
-            Tool.objects.create(plan=instance, module=plugin)
+        #for plugin in plugin_choices:
+            #Tool.objects.create(plan=instance, module=plugin)
     
         set_session_object(request, 'plugins', plugin_choices, set_session_variable)
         

@@ -65,7 +65,7 @@ def create_zip_for_scan(sender, instance, created, **kwargs):
         zip_meta_data.save()
     
 class Tool(models.Model):
-    plan           = models.ForeignKey(Plan, on_delete=models.CASCADE)
+    plan           = models.ForeignKey(Plan)
     module         = models.CharField(max_length=256, default="", blank=True)
     name           = models.CharField(max_length=256, default="", blank=True)
     work_directory = models.FilePathField(default="")

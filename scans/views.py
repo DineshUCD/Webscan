@@ -1,8 +1,15 @@
 from django.shortcuts import render, reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from django.http import *
+from django.http import HttpResponse
 from django.views.generic.edit import UpdateView, DeleteView
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from scans.serializers import PlanSerializer
 from scans.models import *
 from scans.Zipper import *
 from accounts.models import *
@@ -54,6 +61,24 @@ def index(request):
             
     return render(request, 'scans/index.html', context)
 
+#Writing regular Django views using our Serializers
+@api_view(['GET', 'POST'])
+def plan_list(request, format=None):
+    """
+    List all plans, or create a new plan.
+    """
+    if request.method == 'GET':
+        plans = Plan.objects.filter(user_profile__id=int(request.user.userprofile.id))
+        serializer = PlanSerializer(plans, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = PlanSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+"""
 @login_required(login_url='/accounts/login/')
 def setup(request):
 
@@ -107,3 +132,4 @@ def add_scan(request, plan_id):
             set_session_object(request, 'add_scan', plan.id, remove_from_session_list)
 
     return HttpResponseRedirect(reverse('scans:setup'))
+"""

@@ -9,6 +9,8 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import mixins
+from rest_framework import generics
 from scans.serializers import PlanSerializer
 from scans.models import *
 from scans.Zipper import *
@@ -49,11 +51,9 @@ def index(request):
             print tool.module
             modules.append(tool.module)
 
-        #zipper   = ZipArchive(scan=instance.id) 
         callback = collect_results.s(scan_identification=instance.id)                           
         header   = [delegate.s(plugin_name, instance.id) for plugin_name in modules]
         result   = chord(header)(callback)
-        #zipper.archive_meta_files(result)   
         
         if instance.application_id != -1:
             upload = Upload.objects.create(scan=instance, uniform_resource_locator=THREADFIX_URL)
@@ -78,50 +78,33 @@ def plan_list(request, format=None):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def plan_detail(request, pk, format=None):
+    """
+    Retrieve, update, or delete a plan.
+    """
+    try:
+        plan = Plan.objects.filter(user_profile__id=int(request.user.userprofile.id), pk=pk)
+    except Plan.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = PlanSerializer(plan, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = PlanSerializer(plan, data=request.data, context={'request':request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        plan.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 """
-@login_required(login_url='/accounts/login/')
-def setup(request):
-
-    form = PlanForm(request.POST or None, request=request)
-
-    context = {
-        'form' : form, 
-        'plans': Plan.objects.filter(user_profile__id=int(request.user.userprofile.id)),
-    }
-
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.user_profile = request.user.userprofile
-        instance.save()
-        plugin_choices = form.cleaned_data['plugins']
-        #for plugin in plugin_choices:
-            #Tool.objects.create(plan=instance, module=plugin)
-    
-        set_session_object(request, 'plugins', plugin_choices, set_session_variable)
-        
-    return render(request, 'scans/setup.html', context)
-
-class PlanDelete(DeleteView):
-    model = Plan
-    success_url = reverse_lazy('scans:setup')
-    template_name = 'scans/setup.html'
-    
-    def get_object(self, queryset=None):
-        obj = get_object_or_404(Plan, user_profile__id=self.request.user.userprofile.id, pk= int(self.kwargs['pk']))
-        return obj
-        
-class PlanUpdate(UpdateView):
-    form_class = PlanForm
-    model = Plan
-    template_name = 'scans/setup.html'  
-
-    def get_object(self, queryset=None):
-        obj = get_object_or_404(Plan, user_profile__id=self.request.user.userprofile.id, pk= int(self.kwargs['pk']))
-        return obj
-
-    def get_success_url(self, *args, **kwargs):
-        return reverse('scans:setup')
-
 @login_required(login_url='/accounts/login')
 def add_scan(request, plan_id):
     plan = get_object_or_404(Plan, user_profile__id=int(request.user.userprofile.id), pk=plan_id)

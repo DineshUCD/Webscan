@@ -1,3 +1,6 @@
+{% load bootstrap3 %}
+
+
 <style>
 body {
     padding: 10px;
@@ -12,23 +15,71 @@ body {
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+$.ajaxSetup({ 
+     beforeSend: function(xhr, settings) {
+         function getCookie(name) {
+             var cookieValue = null;
+             if (document.cookie && document.cookie != '') {
+                 var cookies = document.cookie.split(';');
+                 for (var i = 0; i < cookies.length; i++) {
+                     var cookie = jQuery.trim(cookies[i]);
+                     // Does this cookie string begin with the name we want?
+                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                         break;
+                     }
+                 }
+             }
+             return cookieValue;
+         }
+         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+             // Only send the token to relative URLs i.e. locally.
+             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+         }
+     } 
+});
+});
+
+function callPlanList() {
+    var plan_name   = document.getElementById("plan_name").value;
+    var description = document.getElementById("plan_description").value;
+    var selection   = $("input:checkbox[id=plan_set]:checked").map(function(){ return $(this).val() }).get()
+    var tool_set    = Array()
+    for (var item=0; item < selection.length; item++) {
+        tool_set.push({ "module": selection[item] });
+    }
+    var json        = {"name":plan_name,"description": description,"tool_set":tool_set};
+    
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(json),
+        dataType: 'json',
+        url: "{% url 'scans:plan_list' %}",
+        success: function(response) { return True; }
+    });
+}
+</script>
 
 <hr></hr>
 <div class="container"><h2>Example tab 2 (suing standard nav-tabs)</h2></div>
 
 <div id="exTab2" class="container">
     <ul class="nav nav-tabs">
-        <li class="active">
-            <a href="#1" data-toggle="tab">Overview</a>
+        <li><a href="#1" data-toggle="tab">Overview</a>
         </li>
         <li><a href="#2" data-toggle="tab">Sites & Scans</a>
         </li>
-        <li><a href="#3" data-toggle="tab">Plugin & Plans</a>
+        <li class="active">
+            <li><a href="#3" data-toggle="tab">Plugin & Plans</a>
+            </li>
         </li>
     </ul>
 
     <div class="tab-content">
-        <div class="tab-pane active" id="1">
+        <div class="tab-pane" id="1">
             <h3>Standard tab panel created on bootstrap using nav-tabs</h3>
         </div>
         <div class="tab-pane" id="2">
@@ -40,14 +91,22 @@ body {
             </script>
             <div id="sitesAndScans"></div>
         </div>
-        <div class="tab-pane" id="3">
+        <div class="tab-pane active" id="3">
             <h3>Setup and save scan plans.</h3>
-            <script>
-                $(document).ready(function() {
-                    $('#setupScan').load('{% url 'scans:setup' %}');
-                });
-            </script>
-            <div id="setupScan"></div>
+            <form class="form-horizontal" id="plan">
+                <div class="form-group">
+                    <label for="plan_name">Scan name:</label>
+                    <input id="plan_name" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="plan_description">Scan description:</label>
+                    <input id="plan_description" type="text" class="form-control">
+                </div>
+                {% for tool in tool_set %}
+                    <label class="checkbox-inline"><input type="checkbox" id="plan_set" value="{{ tool.0 }}">{{ tool.1 }}</label>
+                {% endfor %}              
+                <button type="submit" onclick="callPlanList()" class="btn btn-default">Submit</button>
+            </form> 
         </div>
     </div>
 </div>

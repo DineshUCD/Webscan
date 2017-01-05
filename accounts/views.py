@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 
-
+from scans.tasks import find_all_interfaces
 
 # Create your views here.
 def register(request, template_name="registration/register.html"):
@@ -39,5 +39,8 @@ def my_account(request, template_name="registration/my_account.html"):
 
 @login_required(login_url='/accounts/login/')
 def my_dashboard(request, template_name="dashboard/index.html"):
-    return render(request, template_name, locals())
+    context = {
+        'tool_set' : find_all_interfaces(),
+    }
+    return render(request, template_name, context)
  

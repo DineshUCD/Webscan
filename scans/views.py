@@ -62,11 +62,17 @@ def index(request):
     return render(request, 'scans/index.html', context)
 
 #Writing regular Django views using our Serializers
+@csrf_exempt
 @api_view(['GET', 'POST'])
 def plan_list(request, format=None):
+
     """
     List all plans, or create a new plan.
     """
+    print request.method
+    print "DATA:"
+    print request.data
+
     if request.method == 'GET':
         plans = Plan.objects.filter(user_profile__id=int(request.user.userprofile.id))
         serializer = PlanSerializer(plans, many=True)
@@ -103,7 +109,23 @@ def plan_detail(request, pk, format=None):
     elif request.method == 'DELETE':
         plan.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+"""
+def setup(request):
 
+
+    form = PlanForm(request.POST or None)
+
+    context = {
+        'form' : form
+        'plans': Plan.objects.filter(user_profile__id=int(request.user.userprofile.id)),
+    }
+
+    if form.is_valid():
+        instance = form.save(commit = False)
+        instance.userprofile = request.user.userprofile
+        instance.save()
+
+"""    
 """
 @login_required(login_url='/accounts/login')
 def add_scan(request, plan_id):

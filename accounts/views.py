@@ -7,6 +7,8 @@ from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 
 from scans.tasks import find_all_interfaces
+from scans.models import Plan
+from accounts.models import UserProfile
 
 # Create your views here.
 def register(request, template_name="registration/register.html"):
@@ -41,6 +43,7 @@ def my_account(request, template_name="registration/my_account.html"):
 def my_dashboard(request, template_name="dashboard/index.html"):
     context = {
         'tool_set' : find_all_interfaces(),
+        'plans':      Plan.objects.filter(user_profile__id=int(request.user.userprofile.id)),
     }
     return render(request, template_name, context)
  

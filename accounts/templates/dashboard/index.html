@@ -1,6 +1,5 @@
 {% load bootstrap3 %}
 
-
 <style>
 body {
     padding: 10px;
@@ -15,6 +14,7 @@ body {
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script> 
 <script type="text/javascript">
 $(document).ready(function() {
 $.ajaxSetup({ 
@@ -41,7 +41,6 @@ $.ajaxSetup({
      } 
 });
 });
-
 function callPlanList() {
     var plan_name   = document.getElementById("plan_name").value;
     var description = document.getElementById("plan_description").value;
@@ -107,6 +106,35 @@ function callPlanList() {
                 {% endfor %}              
                 <button type="submit" onclick="callPlanList()" class="btn btn-default">Submit</button>
             </form> 
+
+            <p>X-editable::In-place editing</p>
+            <table class="table table-hover table-bordered">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                {% for plan in plans %}
+                    <!-- Different users will have different primary keys for their Plan model. -->
+                    <tr id="{{ plan.id }}">
+                        {% ifchanged %}
+                        <td class="edit">{{ plan.name }}</td>
+                        <td class="edit">{{ plan.description }}</td>
+                        <td class="edit">{{ plan.created }}</td>
+                        <td>
+                            <ul>
+                                {% for tool in plan.tool_set.all %}
+                                    <li>{{ tool.module }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        {% endifchanged %}
+                    </tr>
+                {% endfor %}
+            </table>
+
         </div>
     </div>
 </div>
@@ -119,3 +147,15 @@ function callPlanList() {
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://www.appelsiini.net/projects/jeditable/jquery.jeditable.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+$('.edit').editable(function(value, settings) {
+    console.log(this);
+    console.log(value);
+    console.log(settings);
+    return(value);
+    }, {
+       type : 'textarea',
+       submit : 'OK',
+});
+</script>

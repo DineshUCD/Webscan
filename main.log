@@ -123,3 +123,74 @@
 2017-01-07 00:48:15,904 [ERROR] scarab: Scan plan missing tool selection.
 2017-01-07 00:49:56,882 [ERROR] scarab: Scan plan missing tool selection.
 2017-01-07 00:52:33,128 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 17:59:17,030 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 17:59:17,033 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7eff3dd4de50>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 17:59:30,656 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 17:59:30,658 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7eff3d6ca910>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:20:50,099 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:20:50,104 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f29aa68fe90>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:21:40,623 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:21:40,631 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f516d128e90>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:22:38,798 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:22:38,801 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f485a5b3e90>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:23:23,070 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:23:23,076 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f8fc34b4e90>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:27:12,741 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:27:12,743 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f368c6fced0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:27:56,251 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:27:56,254 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f3979b61ed0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:33:35,316 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:33:35,318 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f3979b61510>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:34:08,337 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:34:08,340 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f82f6410ed0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:37:08,319 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:37:08,323 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f47e20caed0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:37:41,105 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:37:41,108 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7fda6900ced0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:41:18,179 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:41:18,182 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f0b38317ed0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:42:37,639 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:42:37,641 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f15a0c42ed0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:43:21,368 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:43:21,370 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f5dd320bed0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:44:29,387 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:44:29,390 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f1a2bc2dd10>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:45:34,643 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:45:34,647 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f0a9de1be90>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:46:16,516 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:46:16,518 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f7d6aaeae90>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:47:23,802 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:47:23,806 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f91f819ee90>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:48:11,862 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:48:11,865 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7fc1705ebe90>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 18:51:12,512 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 18:51:12,515 [ERROR] scarab: HTTPSConnectionPool(host='devo-ssc-01.eng.netsuite.com', port=443): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f8120b87e90>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution',))
+2017-01-09 19:01:06,132 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:01:31,537 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:02:05,564 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:02:23,546 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:03:46,491 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:05:52,417 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:06:42,689 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:07:38,788 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:08:51,259 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:13:30,146 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:14:29,890 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:14:49,687 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:16:31,163 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:19:39,588 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:25:34,906 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:27:48,359 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:29:26,723 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:31:20,298 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:35:08,428 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:36:09,737 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:39:48,695 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:40:44,744 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:41:43,375 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:42:53,416 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:45:54,261 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:46:50,520 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 19:51:22,022 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 20:17:00,225 [ERROR] scarab: Scan plan missing tool selection.
+2017-01-09 20:20:05,905 [ERROR] scarab: Scan plan missing tool selection.

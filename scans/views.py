@@ -1,7 +1,7 @@
 from django.shortcuts import render, reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
@@ -15,6 +15,7 @@ from scans.serializers import PlanSerializer
 from scans.models import *
 from scans.Zipper import *
 from accounts.models import *
+from accounts.views import *
 from uploads.models import *
 from scans.forms import *
 from .tasks import *
@@ -29,7 +30,8 @@ from webscanner.settings import *
 def index(request):
 
     # sticks in a POST or renders empty form
-    plan_pks = get_session_variable(request, 'add_scan')
+    user_session = request.user.userprofile.get_latest_session()
+    plan_pks = user_session.getitem('plan')
     form = ScanForm(request.POST or None, plan_pks=plan_pks)
 
     context = {
@@ -69,10 +71,6 @@ def plan_list(request, format=None):
     """
     List all plans, or create a new plan.
     """
-    print request.method
-    print "DATA:"
-    print request.data
-
     if request.method == 'GET':
         plans = Plan.objects.filter(user_profile__id=int(request.user.userprofile.id))
         serializer = PlanSerializer(plans, many=True)
@@ -126,15 +124,15 @@ def setup(request):
         instance.save()
 
 """    
-"""
-@login_required(login_url='/accounts/login')
-def add_scan(request, plan_id):
-    plan = get_object_or_404(Plan, user_profile__id=int(request.user.userprofile.id), pk=plan_id)
-    if request.method == 'POST':
-        if 'add_scan' in request.POST:
-            set_session_object(request, 'add_scan', plan.id, set_session_list)
-        elif 'unadd_scan' in request.POST:
-            set_session_object(request, 'add_scan', plan.id, remove_from_session_list)
 
-    return HttpResponseRedirect(reverse('scans:setup'))
-"""
+@login_required(login_url='/accounts/login')
+def deploy_plan(request, plan_id):
+    user_profile = request.user.userprofile
+    user_session = request.user.userprofile.get_latest_session()
+    plan = get_object_or_404(Plan, user_profile__id=int(user_profile.id), pk=plan_id)
+    if request.method == 'POST':
+        if 'deploy_plan' in request.POST:
+            user_session.set_session(user_session.appenditem  , plan=plan.id) 
+        elif 'undeploy_plan' in request.POST:
+            user_session.set_session(user_session.unappenditem, plan=plan.id)
+    return HttpResponseRedirect(reverse('accounts:dashboard'))

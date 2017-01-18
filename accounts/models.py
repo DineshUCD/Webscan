@@ -9,6 +9,8 @@ from django.contrib.auth.signals import user_logged_in
 from django.contrib.sessions.models import Session
 from django.http import HttpRequest
 
+from webscanner.logger import logger
+
 import sys, os
 # Create your models here.
 class UserProfile(models.Model):
@@ -19,6 +21,10 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return 'User Profile for: ' + self.user.username
 
+    def get_latest_session(self):
+        user_sessions = UserSession.objects.filter(user = self.user)
+        return user_sessions[len(user_sessions)-1]
+        
 def create_profile(sender, **kwargs):
     """
     Automatically creating a UserProfile object whenever a
@@ -38,6 +44,48 @@ class UserSession(models.Model):
     user    = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="user")
     session = models.ForeignKey(Session, on_delete=models.CASCADE, null=True)
 
+    def delete_user_session(self):
+        user_sessions = UserSessions.objects.filter(user = self.user)
+        for user_session in user_sessions:
+            user_sessions.session.delete()
+
+    def set_session(self, task_function, **kwargs):
+        session_dictionary = self.session.get_decoded()    
+        for key, value in kwargs.iteritems():
+            task_function(session_dictionary, key, value)
+        self.session.session_data = Session.objects.encode(session_dictionary)
+        self.session.save()
+        logger.info(session_dictionary)
+
+    def getitem(self, key):
+        try:
+            item = self.session.get_decoded()[key]
+        except KeyError as nonexistant:
+            return None
+        else: 
+            return item
+
+    def setitem(self, session_dictionary, key, value):
+        session_dictionary[key] = value
+
+    def appenditem(self, session_dictionary, key, value):
+        if not key in session_dictionary or not type(session_dictionary[key]) is list:
+            session_dictionary[key] = list()
+        session_dictionary[key].append(value) 
+
+    def delitem(self, session_dictionary, key):
+        try:
+            del session_dictionary[key]
+        except KeyError as nonexistant:
+            return None
+
+    def unappenditem(self, session_dictionary, key, value):
+        try:
+            session_dictionary[key].remove(value)
+        except (KeyError, ValueError) as e:
+            return None
+
+        
 def user_logged_in_handler(sender, request, user, **kwargs):
     """
     Save an instance of this mapping model every time a 
@@ -50,43 +98,3 @@ def user_logged_in_handler(sender, request, user, **kwargs):
 
 user_logged_in.connect(user_logged_in_handler)
 
-
-def delete_user_sessions(user):
-    user_sessions = UserSession.objects.filter(user = user)
-    for user_session in user_sessions:
-        user_sessions.session.delete()
-
-def set_session_object(request, key, value, session_handler_function):
-    user_session_link         = UserSession.objects.get(user__id=request.user.id, session_id=request.session.session_key)
-    user_session              = user_session_link.session
-    session_dictionary        = user_session.get_decoded()
-    print session_dictionary
-    session_handler_function(session_dictionary, key, value)
-    user_session.session_data = Session.objects.encode(session_dictionary)
-    user_session.save()
-
-def get_session_variable(request, key):
-    user_session_link = UserSession.objects.get(user__id=request.user.id, session_id=request.session.session_key)
-    user_session      = user_session_link.session
-    try:
-        items = user_session.get_decoded()[key]
-    except KeyError as empty:
-        return None
-    else:
-        return items
-
-def set_session_variable(session_dictionary, key, value):
-    session_dictionary[key] = value
-    print session_dictionary
-
-def set_session_list(session_dictionary, key, value):
-    if not key in session_dictionary or not type(session_dictionary[key]) is list:
-        session_dictionary[key] = list()
-    session_dictionary[key].append(value)
-    print session_dictionary
-
-def remove_from_session_list(session_dictionary, key, value):
-    if not key in session_dictionary or not type(session_dictionary[key]) is list:
-        return None
-    session_dictionary[key].remove(value)
-    print session_dictionary

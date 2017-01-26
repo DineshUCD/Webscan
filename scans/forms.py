@@ -4,12 +4,13 @@ from django.utils import html
 
 from threadfix_api import threadfix
 
-import configparser, requests, json, os, sys
-from webscanner.settings import *
-from requests.exceptions import *
+from webscanner.settings import THREADFIX_URL, THREADFIX_API_KEY
+from requests.exceptions import HTTPError, ConnectionError, Timeout
 from urllib2 import urlopen
 from .models import Scan, MetaFile, Zip, Tool, Plan
 from .tasks import find_all_interfaces, find_interface
+
+import configparser, requests, json, os, sys
 
 #from webscanner.logger import logger
 import logging

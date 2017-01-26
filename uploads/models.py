@@ -6,10 +6,9 @@ from django.dispatch import receiver
 from django.utils.timezone import utc
 
 import datetime, sys, os, uuid
-from webscanner.settings import *
 
 #Upload has a Many-to-Many relationship with Scan
-from scans.models import * 
+from scans.models import Scan 
 
 # Create your models here.
 class Upload(models.Model):

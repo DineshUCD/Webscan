@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-from accounts.models import *
+from accounts.models import UserProfile
 from webscanner import settings
 
 import datetime, sys, os

@@ -1,17 +1,15 @@
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from django.db.models import F
-from django.http import *
+from django.http import HttpResponse
 
-from accounts.models import *
+from scans.models import Scan
+from scans.Zipper import ZipArchive
 
-from scans.models import *
-from scans.Zipper import *
-
-from uploads.models import *
-from uploads.forms import *
-from uploads.Uploader import *
-from uploads.Visualization import *
+from uploads.models import Upload
+from uploads.forms import ResultForm
+from uploads.Uploader import add_files, upload_scans
+from uploads.Visualization import DndTree
 
 from webscanner.logger import logger 
 

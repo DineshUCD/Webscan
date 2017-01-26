@@ -2692,3 +2692,793 @@ got shell?
 [2017-01-02 19:10:07,903: INFO/MainProcess] Received task: scans.tasks.collect_results[f80ac739-b1cd-4dcf-a02f-a9c87d23a551]  
 [2017-01-02 19:10:07,907: WARNING/PoolWorker-2] [[u'/home/djayasan/Documents/webscanner/temporary/20170802190825045980scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20170802190825045980scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20170802190825045980scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20170802190825045980scanme.nmap.org/arachni_tests.afr', u'D']]
 [2017-01-02 19:10:07,930: INFO/PoolWorker-2] Task scans.tasks.collect_results[f80ac739-b1cd-4dcf-a02f-a9c87d23a551] succeeded in 0.0259331539855s: [['/home/djayasan/Documents/webscanner/temporary/20170802190825045980scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20170802190825045980scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20170802190825045980scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20170802190825045980scanme.nmap.org/arachni_tests.afr', 'D']]
+[2017-01-19 22:40:26,053: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-01-19 22:40:26,060: INFO/MainProcess] mingle: searching for neighbors
+[2017-01-19 22:40:27,080: INFO/MainProcess] mingle: all alone
+[2017-01-19 22:40:27,097: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2017-01-19 22:40:27,097: INFO/MainProcess] celery@djayasan ready.
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@djayasan v4.0.0 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-4.4.0-57-generic-x86_64-with-Ubuntu-16.04-xenial 2017-01-19 22:40:25
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x7f788092dd50
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 4 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2017-01-19 22:41:00,363: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-01-19 22:41:00,370: INFO/MainProcess] mingle: searching for neighbors
+[2017-01-19 22:41:01,395: INFO/MainProcess] mingle: all alone
+[2017-01-19 22:41:01,410: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2017-01-19 22:41:01,410: INFO/MainProcess] celery@djayasan ready.
+[2017-01-20 22:44:11,614: INFO/MainProcess] Received task: scans.tasks.delegate[4d38ac16-6140-41a0-bd73-0c13529569e4]  
+[2017-01-20 22:44:11,615: INFO/MainProcess] Received task: scans.tasks.delegate[e7d1602b-cb09-46a5-978c-c7bfdbb05590]  
+[2017-01-20 22:44:11,635: WARNING/PoolWorker-3] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/w3af_script.w3af
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org//w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target http://scanme.nmap.org/
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+Found 1 URLs and 1 different points of injection.
+The list of URLs is:
+- http://scanme.nmap.org/
+The list of fuzzable requests is:
+- http://scanme.nmap.org/ | Method: GET
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+The URL "http://scanme.nmap.org/" has the following allowed methods: GET, HEAD, OPTIONS, POST. This information was found in the request with id 17.
+Scan finished in 6 seconds.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+Be a good boy and contribute with some lines of code.
+
+[2017-01-20 22:44:19,540: INFO/PoolWorker-3] Task scans.tasks.delegate[4d38ac16-6140-41a0-bd73-0c13529569e4] succeeded in 7.923534109s: [('/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/w3af_results.xml', 'S')]
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m43.545s
+[2017-01-20 22:45:55,787: INFO/PoolWorker-2] Task scans.tasks.delegate[e7d1602b-cb09-46a5-978c-c7bfdbb05590] succeeded in 104.166862722s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/arachni_tests.afr', 'D')]
+[2017-01-20 22:45:55,787: INFO/MainProcess] Received task: scans.tasks.collect_results[1da6753f-d54b-473c-9fd0-e4fdb8c98a21]  
+[2017-01-20 22:45:55,796: WARNING/PoolWorker-4] [[u'/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/arachni_tests.afr', u'D']]
+[2017-01-20 22:45:55,824: INFO/PoolWorker-4] Task scans.tasks.collect_results[1da6753f-d54b-473c-9fd0-e4fdb8c98a21] succeeded in 0.0354436930065s: [['/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20174420224411569370scanme.nmap.org/arachni_tests.afr', 'D']]
+[2017-01-20 23:06:15,344: INFO/MainProcess] Received task: scans.tasks.delegate[ca9d57c3-6a12-418a-9740-6004f6f5c0b1]  
+[2017-01-20 23:06:15,345: INFO/MainProcess] Received task: scans.tasks.delegate[b39fd611-608f-47c3-a651-df2e45347b61]  
+[2017-01-20 23:06:15,369: WARNING/PoolWorker-2] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/w3af_script.w3af
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org//w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target http://scanme.nmap.org/
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+Found 1 URLs and 1 different points of injection.
+The list of URLs is:
+- http://scanme.nmap.org/
+The list of fuzzable requests is:
+- http://scanme.nmap.org/ | Method: GET
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+The URL "http://scanme.nmap.org/" has the following allowed methods: GET, HEAD, OPTIONS, POST. This information was found in the request with id 17.
+Scan finished in 0 seconds.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+Be a good boy and contribute with some money :)
+
+[2017-01-20 23:06:16,914: INFO/PoolWorker-2] Task scans.tasks.delegate[ca9d57c3-6a12-418a-9740-6004f6f5c0b1] succeeded in 1.567880093s: [('/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/w3af_results.xml', 'S')]
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m42.395s
+[2017-01-20 23:07:58,138: INFO/MainProcess] Received task: scans.tasks.collect_results[db8556ad-1a91-45ef-88df-f788d15fe317]  
+[2017-01-20 23:07:58,138: INFO/PoolWorker-1] Task scans.tasks.delegate[b39fd611-608f-47c3-a651-df2e45347b61] succeeded in 102.79133611s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/arachni_tests.afr', 'D')]
+[2017-01-20 23:07:58,142: WARNING/PoolWorker-3] [[u'/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/arachni_tests.afr', u'D']]
+[2017-01-20 23:07:58,164: INFO/PoolWorker-3] Task scans.tasks.collect_results[db8556ad-1a91-45ef-88df-f788d15fe317] succeeded in 0.0245349700126s: [['/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20170620230615307783scanme.nmap.org/arachni_tests.afr', 'D']]
+[2017-01-23 18:38:53,419: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[0, 0], {}, {"chord": null, "callbacks": null, "errbacks": null, "chain": null}]' (81b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:38:53,424: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[1, 1], {}, {"chord": null, "callbacks": null, "errbacks": null, "chain": null}]' (81b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:38:53,425: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[2, 2], {}, {"chord": null, "callbacks": null, "errbacks": null, "chain": null}]' (81b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:38:53,427: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[3, 3], {}, {"chord": null, "callbacks": null, "errbacks": null, "chain": null}]' (81b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:38:53,428: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[4, 4], {}, {"chord": null, "callbacks": null, "errbacks": null, "chain": null}]' (81b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:38:53,430: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[5, 5], {}, {"chord": null, "callbacks": null, "errbacks": null, "chain": null}]' (81b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:38:53,431: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[6, 6], {}, {"chord": null, "callbacks": null, "errbacks": null, "chain": null}]' (81b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:38:53,432: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[7, 7], {}, {"chord": null, "callbacks": null, "errbacks": null, "chain": null}]' (81b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:38:53,433: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[8, 8], {}, {"chord": null, "callbacks": null, "errbacks": null, "chain": null}]' (81b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:38:53,434: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[9, 9], {}, {"chord": null, "callbacks": null, "errbacks": null, "chain": null}]' (81b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:42:33,729: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[0, 0], {}, {"chord": {"chord_size": 10, "task": "webscanner.sometask", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "f13bfc6b-f0aa-30bc-9add-caf384575104", "task_id": "96a540a5-e039-447c-9fc1-bf7f924e928a"}}, "callbacks": null, "errbacks": null, "chain": null}]' (310b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:42:33,731: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[1, 1], {}, {"chord": {"chord_size": 10, "task": "webscanner.sometask", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "f13bfc6b-f0aa-30bc-9add-caf384575104", "task_id": "96a540a5-e039-447c-9fc1-bf7f924e928a"}}, "callbacks": null, "errbacks": null, "chain": null}]' (310b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:42:33,732: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[2, 2], {}, {"chord": {"chord_size": 10, "task": "webscanner.sometask", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "f13bfc6b-f0aa-30bc-9add-caf384575104", "task_id": "96a540a5-e039-447c-9fc1-bf7f924e928a"}}, "callbacks": null, "errbacks": null, "chain": null}]' (310b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:42:33,733: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[3, 3], {}, {"chord": {"chord_size": 10, "task": "webscanner.sometask", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "f13bfc6b-f0aa-30bc-9add-caf384575104", "task_id": "96a540a5-e039-447c-9fc1-bf7f924e928a"}}, "callbacks": null, "errbacks": null, "chain": null}]' (310b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:42:33,736: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[4, 4], {}, {"chord": {"chord_size": 10, "task": "webscanner.sometask", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "f13bfc6b-f0aa-30bc-9add-caf384575104", "task_id": "96a540a5-e039-447c-9fc1-bf7f924e928a"}}, "callbacks": null, "errbacks": null, "chain": null}]' (310b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:42:33,737: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[5, 5], {}, {"chord": {"chord_size": 10, "task": "webscanner.sometask", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "f13bfc6b-f0aa-30bc-9add-caf384575104", "task_id": "96a540a5-e039-447c-9fc1-bf7f924e928a"}}, "callbacks": null, "errbacks": null, "chain": null}]' (310b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:42:33,738: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[6, 6], {}, {"chord": {"chord_size": 10, "task": "webscanner.sometask", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "f13bfc6b-f0aa-30bc-9add-caf384575104", "task_id": "96a540a5-e039-447c-9fc1-bf7f924e928a"}}, "callbacks": null, "errbacks": null, "chain": null}]' (310b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:42:33,739: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[7, 7], {}, {"chord": {"chord_size": 10, "task": "webscanner.sometask", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "f13bfc6b-f0aa-30bc-9add-caf384575104", "task_id": "96a540a5-e039-447c-9fc1-bf7f924e928a"}}, "callbacks": null, "errbacks": null, "chain": null}]' (310b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:42:33,740: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[8, 8], {}, {"chord": {"chord_size": 10, "task": "webscanner.sometask", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "f13bfc6b-f0aa-30bc-9add-caf384575104", "task_id": "96a540a5-e039-447c-9fc1-bf7f924e928a"}}, "callbacks": null, "errbacks": null, "chain": null}]' (310b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-23 18:42:33,744: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[9, 9], {}, {"chord": {"chord_size": 10, "task": "webscanner.sometask", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "f13bfc6b-f0aa-30bc-9add-caf384575104", "task_id": "96a540a5-e039-447c-9fc1-bf7f924e928a"}}, "callbacks": null, "errbacks": null, "chain": null}]' (310b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@djayasan v4.0.0 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-4.4.0-57-generic-x86_64-with-Ubuntu-16.04-xenial 2017-01-19 22:41:00
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x7f5c175a5d50
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 4 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2017-01-26 22:09:54,567: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-01-26 22:09:54,580: INFO/MainProcess] mingle: searching for neighbors
+[2017-01-26 22:09:55,598: INFO/MainProcess] mingle: all alone
+[2017-01-26 22:09:55,609: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2017-01-26 22:09:55,609: INFO/MainProcess] celery@djayasan ready.
+[2017-01-26 22:46:01,508: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[0, 0], {}, {"chord": {"chord_size": 10, "task": "webscanner.tsum", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "c4212633-d002-3a7d-b2b0-9c9986f0d9e9", "task_id": "9b89e305-e069-41b0-82b3-31636f84ffa2"}}, "callbacks": null, "errbacks": null, "chain": null}]' (306b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-26 22:46:01,512: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[1, 1], {}, {"chord": {"chord_size": 10, "task": "webscanner.tsum", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "c4212633-d002-3a7d-b2b0-9c9986f0d9e9", "task_id": "9b89e305-e069-41b0-82b3-31636f84ffa2"}}, "callbacks": null, "errbacks": null, "chain": null}]' (306b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-26 22:46:01,521: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[2, 2], {}, {"chord": {"chord_size": 10, "task": "webscanner.tsum", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "c4212633-d002-3a7d-b2b0-9c9986f0d9e9", "task_id": "9b89e305-e069-41b0-82b3-31636f84ffa2"}}, "callbacks": null, "errbacks": null, "chain": null}]' (306b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-26 22:46:01,522: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[3, 3], {}, {"chord": {"chord_size": 10, "task": "webscanner.tsum", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "c4212633-d002-3a7d-b2b0-9c9986f0d9e9", "task_id": "9b89e305-e069-41b0-82b3-31636f84ffa2"}}, "callbacks": null, "errbacks": null, "chain": null}]' (306b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-26 22:46:01,522: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[4, 4], {}, {"chord": {"chord_size": 10, "task": "webscanner.tsum", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "c4212633-d002-3a7d-b2b0-9c9986f0d9e9", "task_id": "9b89e305-e069-41b0-82b3-31636f84ffa2"}}, "callbacks": null, "errbacks": null, "chain": null}]' (306b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-26 22:46:01,523: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[5, 5], {}, {"chord": {"chord_size": 10, "task": "webscanner.tsum", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "c4212633-d002-3a7d-b2b0-9c9986f0d9e9", "task_id": "9b89e305-e069-41b0-82b3-31636f84ffa2"}}, "callbacks": null, "errbacks": null, "chain": null}]' (306b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-26 22:46:01,524: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[6, 6], {}, {"chord": {"chord_size": 10, "task": "webscanner.tsum", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "c4212633-d002-3a7d-b2b0-9c9986f0d9e9", "task_id": "9b89e305-e069-41b0-82b3-31636f84ffa2"}}, "callbacks": null, "errbacks": null, "chain": null}]' (306b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-26 22:46:01,525: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[7, 7], {}, {"chord": {"chord_size": 10, "task": "webscanner.tsum", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "c4212633-d002-3a7d-b2b0-9c9986f0d9e9", "task_id": "9b89e305-e069-41b0-82b3-31636f84ffa2"}}, "callbacks": null, "errbacks": null, "chain": null}]' (306b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-26 22:46:01,526: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[8, 8], {}, {"chord": {"chord_size": 10, "task": "webscanner.tsum", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "c4212633-d002-3a7d-b2b0-9c9986f0d9e9", "task_id": "9b89e305-e069-41b0-82b3-31636f84ffa2"}}, "callbacks": null, "errbacks": null, "chain": null}]' (306b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-26 22:46:01,527: ERROR/MainProcess] Received unregistered task of type 'webscanner.add'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+u'[[9, 9], {}, {"chord": {"chord_size": 10, "task": "webscanner.tsum", "subtask_type": null, "kwargs": {}, "args": [], "immutable": false, "options": {"reply_to": "c4212633-d002-3a7d-b2b0-9c9986f0d9e9", "task_id": "9b89e305-e069-41b0-82b3-31636f84ffa2"}}, "callbacks": null, "errbacks": null, "chain": null}]' (306b)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery/worker/consumer/consumer.py", line 549, in on_task_received
+    strategy = strategies[type_]
+KeyError: 'webscanner.add'
+[2017-01-26 22:54:24,024: INFO/MainProcess] Received task: scans.tasks.delegate[d6b21c8a-d9ef-4425-95d7-d584527dacd8]  
+[2017-01-26 22:54:24,025: INFO/MainProcess] Received task: scans.tasks.delegate[28ae5c6a-818d-4023-902d-f150b1d826d1]  
+[2017-01-26 22:54:24,050: WARNING/PoolWorker-3] /usr/bin/w3af_console -s /home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/w3af_script.w3af
+Using the default profile...
+@final @reallyslow
+Feature: Look for SQL injections using arachni against a URL
+
+  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
+    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
+    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
+      | name | environment_variable_name |
+      | path | CURRENT_DIRECTORY         |
+      | url  | URL                       |
+    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
+      | name     | value         |
+      | test     | *             |
+      | filename | arachni_tests |
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+
+      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
+
+      """
+w3af>>> termios error: (25, 'Inappropriate ioctl for device')
+plugins
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> audit all
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> output config xmlFile
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> set fileName /home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org//w3af_results.xml
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins/output/config:xmlFile>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/plugins>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> target
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> set target http://scanme.nmap.org/
+termios error: (25, 'Inappropriate ioctl for device')
+w3af/config:target>>> back
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> start
+Auto-enabling plugin: grep.collectCookies
+Auto-enabling plugin: grep.httpAuthDetect
+Auto-enabling plugin: discovery.serverHeader
+Auto-enabling plugin: grep.error500
+Auto-enabling plugin: discovery.allowedMethods
+Auto-enabling plugin: discovery.frontpage_version
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+Found 1 URLs and 1 different points of injection.
+The list of URLs is:
+- http://scanme.nmap.org/
+The list of fuzzable requests is:
+- http://scanme.nmap.org/ | Method: GET
+The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)". This information was found in the request with id 18.
+The URL "http://scanme.nmap.org/" has the following allowed methods: GET, HEAD, OPTIONS, POST. This information was found in the request with id 17.
+Scan finished in 1 second.
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> exit
+termios error: (25, 'Inappropriate ioctl for device')
+w3af>>> 
+Be a good boy and contribute with some money :)
+
+[2017-01-26 22:54:26,083: INFO/PoolWorker-3] Task scans.tasks.delegate[d6b21c8a-d9ef-4425-95d7-d584527dacd8] succeeded in 2.056759903s: [('/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/w3af_results.xml', 'S')]
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
+      """
+      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
+
+      """
+    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
+
+1 scenario (1 passed)
+7 steps (7 passed)
+1m42.732s
+[2017-01-26 22:56:07,112: INFO/MainProcess] Received task: scans.tasks.collect_results[fdebc634-76a8-4ce3-9738-e692c88f1b3d]  
+[2017-01-26 22:56:07,113: INFO/PoolWorker-1] Task scans.tasks.delegate[28ae5c6a-818d-4023-902d-f150b1d826d1] succeeded in 103.081222554s: [('/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/arachni_tests.afr', 'D')]
+[2017-01-26 22:56:07,124: WARNING/PoolWorker-4] [[u'/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasan/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/arachni_tests.afr', u'D']]
+[2017-01-26 22:56:07,160: INFO/PoolWorker-4] Task scans.tasks.collect_results[fdebc634-76a8-4ce3-9738-e692c88f1b3d] succeeded in 0.0445718859846s: [['/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasan/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasan/Documents/webscanner/temporary/20175426225423986752scanme.nmap.org/arachni_tests.afr', 'D']]

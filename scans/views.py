@@ -1,29 +1,23 @@
 from django.shortcuts import render, reverse, get_object_or_404
-from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from django.views.generic.edit import UpdateView, DeleteView
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
+
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import mixins
-from rest_framework import generics
+
 from scans.serializers import PlanSerializer
-from scans.models import *
-from scans.Zipper import *
-from accounts.models import *
-from accounts.views import *
-from uploads.models import *
-from scans.forms import *
-from .tasks import *
-from celery import chord
-import uploads.views
+
+from scans.models import Plan, Tool
+from uploads.models import Upload
+from scans.forms import ScanForm
+from .tasks import delegate, collect_results
+from celery import chord, group
+
 import subprocess, os, sys
 
-from webscanner.settings import *
+from webscanner.settings import THREADFIX_URL
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -50,13 +44,13 @@ def index(request):
        
         modules  = list()
         for tool in tools:
-            print tool.module
             modules.append(tool.module)
 
-        callback = collect_results.s(scan_identification=instance.id)                           
         header   = [delegate.s(plugin_name, instance.id) for plugin_name in modules]
-        result   = chord(header)(callback)
-        
+        result   = (group(header) | collect_results.s(scan_identification=instance.id))()
+        print result.parent
+        print result
+
         if instance.application_id != -1:
             upload = Upload.objects.create(scan=instance, uniform_resource_locator=THREADFIX_URL)
 	    return HttpResponseRedirect(reverse('uploads:results', args=(upload.id, )))
@@ -107,23 +101,6 @@ def plan_detail(request, pk, format=None):
     elif request.method == 'DELETE':
         plan.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-"""
-def setup(request):
-
-
-    form = PlanForm(request.POST or None)
-
-    context = {
-        'form' : form
-        'plans': Plan.objects.filter(user_profile__id=int(request.user.userprofile.id)),
-    }
-
-    if form.is_valid():
-        instance = form.save(commit = False)
-        instance.userprofile = request.user.userprofile
-        instance.save()
-
-"""    
 
 @login_required(login_url='/accounts/login')
 def deploy_plan(request, plan_id):

@@ -78,12 +78,16 @@ class UserSession(models.Model):
             del session_dictionary[key]
         except KeyError as nonexistant:
             return None
+        else:
+            return True
 
     def unappenditem(self, session_dictionary, key, value):
         try:
             session_dictionary[key].remove(value)
         except (KeyError, ValueError) as e:
             return None
+        else:
+            return True
 
         
 def user_logged_in_handler(sender, request, user, **kwargs):
@@ -97,4 +101,3 @@ def user_logged_in_handler(sender, request, user, **kwargs):
     )
 
 user_logged_in.connect(user_logged_in_handler)
-

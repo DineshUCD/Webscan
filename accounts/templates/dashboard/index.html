@@ -98,6 +98,7 @@ function callPlanList() {
                 });
             </script>
             <div id="sitesAndScans"></div>
+            Result: <span id="result"></span>
         </div>
         <div class="tab-pane active" id="3">
             <h3>Setup and save scan plans.</h3>
@@ -182,9 +183,6 @@ function callPlanList() {
 <script src="https://www.appelsiini.net/projects/jeditable/jquery.jeditable.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 $('.edit').editable(function(value, settings) {
-    console.log(this);
-    console.log(value);
-    console.log(settings);
     return(value);
     }, {
        type : 'textarea',

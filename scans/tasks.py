@@ -1,11 +1,10 @@
 from __future__ import absolute_import, unicode_literals
 from django.conf import settings
 from celery import shared_task, Celery, Task, chord
-from .models import *
 from webscanner.logger import logger
-from webscanner.settings import *
-from webscanner.plugin_api import *
-from scans.Zipper import *
+from webscanner.settings import PLUGINS_DIR
+from webscanner.plugin_api import AbstractPlugin
+from scans.Zipper import ZipArchive
 from plugins import *
 
 
@@ -35,7 +34,8 @@ def collect_results(meta_collection, **kwargs):
     meta_files = list()
     for scan_files in meta_collection:
         meta_files.extend(scan_files)
-    print meta_files
+ 
+    logger.info(meta_files)
     
     zipper.archive_meta_files(meta_files)
 

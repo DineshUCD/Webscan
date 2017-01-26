@@ -18,6 +18,7 @@ from celery import chord, group
 import subprocess, os, sys
 
 from webscanner.settings import THREADFIX_URL
+from webscanner.logger import logger
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -48,8 +49,12 @@ def index(request):
 
         header   = [delegate.s(plugin_name, instance.id) for plugin_name in modules]
         result   = (group(header) | collect_results.s(scan_identification=instance.id))()
-        print result.parent
-        print result
+
+        # Call result.parent to get iterator on task ids of plugins
+        user_session.set_session(user_session.setitem, scan_result=result)
+
+        logger.info(result.parent)
+        logger.info(result)
 
         if instance.application_id != -1:
             upload = Upload.objects.create(scan=instance, uniform_resource_locator=THREADFIX_URL)

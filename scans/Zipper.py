@@ -6,7 +6,6 @@ from scans.models import *
 from django.conf import settings
 from django.core.exceptions import *
 
-
 #Function names should be lowercase, with words separated by underscores as necessary to improve readability.
 
 # BEGIN Utility Function definitions
@@ -85,6 +84,10 @@ class ZipArchive():
         self.verbose = kwargs.pop('verbose', True) 
         #Instantiating a model in now way touches your database; for that, you need to save()
         self.scan = Scan.objects.get(pk=int(kwargs.pop('scan')))
+
+        if kwargs:
+            raise TypeError('Unexpected **kwargs: %r' % kwargs)
+
         current_time = datetime.datetime.now()
          
         #Check if the zipfile exists in archive/ or another absolute path
@@ -95,22 +98,20 @@ class ZipArchive():
             os.makedirs(self.temporary_folder_path)
 
     def track_file(self, absolute_path):
-        if not absolute_path:
+        if not absolute_path or not os.path.exists(absolute_path[0]):
             return None
-        try:
-            assert not isinstance(absolute_path, basestring)
-            assert not isinstance(absolute_path[0], str) or absolute_path[0]
-            assert os.path.exists(absolute_path[0])
-            assert absolute_path[1]
-        except AssertionError as err:
-            sys.exit(1)
         
         if not os.path.exists(self.temporary_folder_path):
             os.makedirs(self.temporary_folder_path)
 
         base_filename = os.path.basename(absolute_path[0])
         new_file_path = os.path.join( self.temporary_folder_path, base_filename )
-        shutil.move( absolute_path[0], new_file_path )
+
+        try:
+            shutil.move( absolute_path[0], new_file_path )
+        except IOError as e:
+            logger.error("I/O error({0}): {1}".format(e.errno, e.strerror))
+
         #Establish the file's relationship to the scan. 
         MetaFile(scan=self.scan, store=self.scan.zip, report=base_filename, success=False, role=absolute_path[1]).save()
         self.file_list.append(new_file_path)
@@ -138,8 +139,14 @@ class ZipArchive():
         zip_folder_path = shutil.make_archive(base_name=self.temporary_folder_path, format='zip', root_dir=root_directory, base_dir=base_directory)
         self.scan.zip.name = os.path.join(settings.ARCHIVE_DIR, base_directory)
 
-        #Move the zip folder to the archive path
-        shutil.move(zip_folder_path, self.scan.zip.name)
+        if not os.path.exists(settings.ARCHIVE_DIR):
+            os.makedirs(settings.ARCHIVE_DIR)
+     
+        try: 
+            #Move the zip folder to the archive path
+            shutil.move(zip_folder_path, self.scan.zip.name)
+        except IOError as e:
+            logger.error("I/O error({0}): {1}".format(e.errno, e.strerror)
 
         #Commit the changes to both models
         self.scan.zip.save()

@@ -72,9 +72,10 @@ class AbstractPlugin(object):
         try:
             self.model = Scan.objects.get(pk=int(self.model_pk))
             self.temporary_folder_path = os.path.join( settings.TEMPORARY_DIR, self.model.zip.name )
-            if not os.path.exists( self.temporary_folder_path ):
-                os.makedirs( self.temporary_folder_path )
-        except Scan.DoesNotExist:
+            if not os.path.exists(self.temporary_folder_path):
+                os.makedirs(self.temporary_folder_path)
+        except (Scan.DoesNotExist, OSError) as e:
+            logger.error(e)
             sys.exit(1)
 
     @abc.abstractmethod

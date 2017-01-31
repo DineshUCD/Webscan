@@ -34,10 +34,12 @@ class Gauntlt(AbstractPlugin):
         with open(cucumber_profile_file_path, 'w') as cucumber_profile:
             cucumber_profile.write(yaml.dump(dict(default=gauntlt_yaml_configuration), default_flow_style=False))
         
+        os.chmod(cucumber_profile_file_path, 0o757)
         # End configuration of gauntlt
 
     def do_start(self):
         arguments = self.scanner_path
+        print arguments
         super(Gauntlt, self).spawn(arguments)
         return self.do_stop()
 

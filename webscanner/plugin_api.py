@@ -75,8 +75,7 @@ class AbstractPlugin(object):
             if not os.path.exists(self.temporary_folder_path):
                 os.makedirs(self.temporary_folder_path)
         except (Scan.DoesNotExist, OSError) as e:
-            logger.error(e)
-            sys.exit(1)
+            return None
 
     @abc.abstractmethod
     def do_stop(self):
@@ -86,7 +85,9 @@ class AbstractPlugin(object):
     def spawn(self,  arguments):
         if not arguments:
             return None
-        sts = os.system(arguments)
+        subprocess.call(arguments, shell=True)
+        #sts = subprocess.Popen(arguments, shell=True)
+        #sts = os.system(arguments)
 
     def __repr__(self):
         return json.dumps(self.__dict__)

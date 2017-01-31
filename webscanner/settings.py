@@ -35,7 +35,7 @@ THREADFIX_API_KEY = "9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 

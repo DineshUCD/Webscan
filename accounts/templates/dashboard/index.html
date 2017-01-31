@@ -1,10 +1,8 @@
+{% extends 'dashboard/base.html' %}
 {% load bootstrap3 %}
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
-</head>
+{% block content %}
+
 <style>
 body {
     padding: 10px;
@@ -18,43 +16,45 @@ body {
 
 </style>
 
+<body>
+
 <script type="text/javascript">
 $(document).ready(function() {
-$.ajaxSetup({ 
-     beforeSend: function(xhr, settings) {
-         function getCookie(name) {
-             var cookieValue = null;
-             if (document.cookie && document.cookie != '') {
-                 var cookies = document.cookie.split(';');
-                 for (var i = 0; i < cookies.length; i++) {
-                     var cookie = jQuery.trim(cookies[i]);
-                     // Does this cookie string begin with the name we want?
-                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                         break;
-                     }
-                 }
-             }
-             return cookieValue;
-         }
-         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-             // Only send the token to relative URLs i.e. locally.
-             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-         }
-     } 
-});
-$('select').select2({
-    tags: true
-});
+    $.ajaxSetup({ 
+        beforeSend: function(xhr, settings) {
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie != '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                // Only send the token to relative URLs i.e. locally.
+                xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+            }
+        } 
+    });
 
+    $('select').select2({
+        tags: true
+    });
 });
 
 
 function callPlanList() {
     var plan_name   = document.getElementById("plan_name").value;
     var description = document.getElementById("plan_description").value;
-    var selection   = $("input:checkbox[id=plan_set]:checked").map(function(){ return $(this).val() }).get()
-    var tool_set    = Array()
+    var selection   = $("input:checkbox[id=plan_set]:checked").map(function(){ return $(this).val() }).get();
+    var tool_set    = Array();
     for (var item=0; item < selection.length; item++) {
         tool_set.push({ "module": selection[item] });
     }
@@ -66,13 +66,13 @@ function callPlanList() {
         data: JSON.stringify(json),
         dataType: 'json',
         url: "{% url 'scans:plan_list' %}",
-        success: function(response) { return True; }
+        success: function(response) { $('body').load(document.URL + '#plans'); return true; }
     });
 }
 </script>
 
 <hr></hr>
-<div class="container"><h2>Example tab 2 (suing standard nav-tabs)</h2></div>
+<div class="container"><h2>Example tab 2 (using standard nav-tabs)</h2></div>
 
 <div id="exTab2" class="container">
     <ul class="nav nav-tabs">
@@ -114,14 +114,14 @@ function callPlanList() {
                 {% for tool in tool_set %}
                     <label class="checkbox-inline"><input type="checkbox" id="plan_set" value="{{ tool.0 }}">{{ tool.1 }}</label>
                 {% endfor %}              
-                <button type="submit" onclick="callPlanList()" class="btn btn-default">
+                <button type="button" onclick="callPlanList()" class="ui-state-default ui-corner-all">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                     Submit
                 </button>
             </form> 
 
             <p>X-editable::In-place editing</p>
-            <table class="table table-hover table-bordered">
+            <table id="plans" class="table table-hover table-bordered">
                 <thead class="thead-inverse">
                     <tr>
                         <th>Name</th>
@@ -167,20 +167,12 @@ function callPlanList() {
                     </tr>
                 {% endfor %}
             </table>
-
         </div>
     </div>
 </div>
 
 <hr></hr>
 
-<!-- Bootstrap core JavaScript
-    ========================== -->
-    <!-- Place at the end of the document so the pages load faster -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="https://www.appelsiini.net/projects/jeditable/jquery.jeditable.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 $('.edit').editable(function(value, settings) {
     return(value);
@@ -197,3 +189,6 @@ for(var ultools = 0; ultools < {{ plans|length }}; ultools++) {
 }
 
 </script>
+
+</body>
+{% endblock %}

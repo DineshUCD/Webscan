@@ -39,6 +39,8 @@ class W3af(AbstractPlugin):
             
             with open(self.w3af_script_file_path, 'w') as w3af_script:
                 w3af_script.write( str(w3af_template.format(**w3af_parameters)) )
+
+            os.chmod(self.w3af_script_file_path, 0o757)
         # End configuration of W3af
 
     def do_start(self):

@@ -146,7 +146,7 @@ class ZipArchive():
             #Move the zip folder to the archive path
             shutil.move(zip_folder_path, self.scan.zip.name)
         except IOError as e:
-            logger.error("I/O error({0}): {1}".format(e.errno, e.strerror)
+            logger.error("I/O error({0}): {1}".format(e.errno, e.strerror))
 
         #Commit the changes to both models
         self.scan.zip.save()

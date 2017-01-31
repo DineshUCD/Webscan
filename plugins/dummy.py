@@ -6,7 +6,7 @@ from webscanner.logger import logger
 from scans.models import *
 
 class Dummy(AbstractPlugin):
-    PLUGIN_NAME = "ls"
+    PLUGIN_NAME = "whoami"
     PLUGIN_VERSION = "1.0"
 
     def __init__(self, *args, **kwargs):
@@ -25,4 +25,4 @@ class Dummy(AbstractPlugin):
         return self.do_stop()
 
     def do_stop(self):
-        return super(Gauntlt, self).do_stop() 
+        return super(Dummy, self).do_stop() 

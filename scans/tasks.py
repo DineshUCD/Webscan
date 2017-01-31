@@ -5,7 +5,10 @@ from webscanner.logger import logger
 from webscanner.settings import PLUGINS_DIR
 from webscanner.plugin_api import AbstractPlugin
 from scans.Zipper import ZipArchive
-from plugins import *
+
+from plugins import gauntlt, w3af
+from plugins.gauntlt import Gauntlt
+from plugins.w3af import W3af
 
 
 import subprocess, os, datetime, sys, glob, importlib, inspect, re

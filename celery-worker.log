@@ -1,109 +1,30 @@
-[2017-01-31 22:04:46,819: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
-[2017-01-31 22:04:46,830: INFO/MainProcess] mingle: searching for neighbors
-[2017-01-31 22:04:47,851: INFO/MainProcess] mingle: all alone
-[2017-01-31 22:04:47,863: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+[2017-02-06 18:22:30,753: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-02-06 18:22:30,764: INFO/MainProcess] mingle: searching for neighbors
+[2017-02-06 18:22:31,785: INFO/MainProcess] mingle: all alone
+[2017-02-06 18:22:31,797: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
   warnings.warn('Using settings.DEBUG leads to a memory leak, never '
-[2017-01-31 22:04:47,863: INFO/MainProcess] celery@sec-tools-02 ready.
-
-worker: Warm shutdown (MainProcess)
- 
- -------------- celery@sec-tools-02 v4.0.2 (latentcall)
----- **** ----- 
---- * ***  * -- Linux-3.10.0-514.6.1.el7.x86_64-x86_64-with-oracle-7.3 2017-01-31 22:04:45
--- * - **** --- 
-- ** ---------- [config]
-- ** ---------- .> app:         webscanner:0x279c490
-- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
-- ** ---------- .> results:     redis://localhost/
-- *** --- * --- .> concurrency: 24 (prefork)
--- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
---- ***** ----- 
- -------------- [queues]
-                .> celery           exchange=celery(direct) key=celery
-                
-
-[tasks]
-  . scans.tasks.collect_results
-  . scans.tasks.delegate
-  . webscanner.celery_tasks.debug_task
-
-[2017-01-31 22:04:56,464: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
-[2017-01-31 22:04:56,475: INFO/MainProcess] mingle: searching for neighbors
-[2017-01-31 22:04:57,495: INFO/MainProcess] mingle: all alone
-[2017-01-31 22:04:57,508: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
-  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
-[2017-01-31 22:04:57,508: INFO/MainProcess] celery@sec-tools-02 ready.
-[2017-01-31 22:07:39,396: INFO/MainProcess] Received task: scans.tasks.delegate[fec98923-313c-4f58-8402-d34bcd176a1c]  
-[2017-01-31 22:07:39,397: INFO/MainProcess] Received task: scans.tasks.delegate[b1618003-588d-4371-807e-ddb97f049b55]  
-[2017-01-31 22:07:39,398: INFO/MainProcess] Received task: scans.tasks.delegate[4a3c025e-826a-4d3b-9d8b-d14478022b46]  
-[2017-01-31 22:07:39,406: WARNING/PoolWorker-4] /home/djayasankar/.rvm/gems/ruby-2.2.4/bin/gauntlt
-[2017-01-31 22:07:39,406: WARNING/PoolWorker-22] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/w3af_script.w3af
-djayasankar
-[2017-01-31 22:07:39,418: INFO/PoolWorker-10] Task scans.tasks.delegate[fec98923-313c-4f58-8402-d34bcd176a1c] succeeded in 0.0193726359867s: []
-Using the default profile...
-@final @reallyslow
-Feature: Look for SQL injections using arachni against a URL
-
-  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5
-    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1
-    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3
-      | name | environment_variable_name |
-      | path | CURRENT_DIRECTORY         |
-      | url  | URL                       |
-    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9
-      | name     | value         |
-      | test     | *             |
-      | filename | arachni_tests |
-    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
-      """
-
-      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr
-
-      """
-[34mw3af>>> [0mplugins
-[34mw3af/plugins>>> [0maudit all
-[34mw3af/plugins>>> [0moutput xmlFile
-Unknown plugin: 'xmlFile'
-[34mw3af/plugins>>> [0moutput config xmlFile
-Unknown plugin: 'xmlFile'
-[34mw3af/plugins>>> [0mset fileName /home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/w3af_results.xml
-Unknown command 'set'
-[34mw3af/plugins>>> [0mback
-[34mw3af>>> [0mback
-[34mw3af>>> [0mtarget
-[34mw3af/config:target>>> [0mset target http://scanme.nmap.org
-[34mw3af/config:target>>> [0mback
-The configuration has been saved.
-[34mw3af>>> [0mstart
-Enabling format_string's dependency error_500
-Enabling redos's dependency server_header
-Enabling dav's dependency allowed_methods
-Enabling frontpage's dependency frontpage_version
-The server header for the remote web server is: "Apache/2.4.7 (Ubuntu)".This information was found in the request with id 35.
-Found 1 URLs and 1 different injections points.
-The URL list is:
-- http://scanme.nmap.org/
-The list of fuzzable requests is:
-- Method: GET | http://scanme.nmap.org/
-Scan finished in 3 seconds.
-Stopping the core...
-[34mw3af>>> [0mexit
-[34mw3af>>> [0m
-Liked it? Sponsor the project!
-
-[2017-01-31 22:07:45,102: INFO/PoolWorker-22] Task scans.tasks.delegate[4a3c025e-826a-4d3b-9d8b-d14478022b46] succeeded in 5.70348827s: [('/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/w3af_results.xml', 'S')]
-    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
-    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5
-      """
-      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml
-
-      """
-    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131
-
-1 scenario (1 passed)
-7 steps (7 passed)
-2m16.519s
-[2017-01-31 22:09:56,243: INFO/PoolWorker-4] Task scans.tasks.delegate[b1618003-588d-4371-807e-ddb97f049b55] succeeded in 136.844041563s: [('/home/djayasankar/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/arachni_tests.afr', 'D')]
-[2017-01-31 22:09:56,244: INFO/MainProcess] Received task: scans.tasks.collect_results[f8af6b0f-cccf-4753-8621-756621967b55]  
-[2017-01-31 22:09:56,251: INFO/PoolWorker-15] [[u'/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/arachni_tests.afr', u'D']]
-[2017-01-31 22:09:56,276: INFO/PoolWorker-15] Task scans.tasks.collect_results[f8af6b0f-cccf-4753-8621-756621967b55] succeeded in 0.0306876509567s: [['/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasankar/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/20170731220739349055scanme.nmap.org/arachni_tests.afr', 'D']]
+[2017-02-06 18:22:31,797: INFO/MainProcess] celery@sec-tools-02 ready.
+[2017-02-06 18:23:09,749: INFO/MainProcess] Received task: scans.tasks.delegate[62f8caaf-4bb5-4dc0-8ee9-0fa66a1f8012]  
+[2017-02-06 18:23:09,750: INFO/MainProcess] Received task: scans.tasks.delegate[7ce64df3-398e-4d32-966e-02eb93d5d79c]  
+[2017-02-06 18:23:09,751: INFO/MainProcess] Received task: scans.tasks.delegate[494321d7-0fae-434c-9b46-e11f5d745131]  
+[2017-02-06 18:23:09,760: WARNING/PoolWorker-22] /home/djayasankar/.rvm/gems/ruby-2.2.4/bin/gauntlt
+[2017-02-06 18:23:09,760: WARNING/PoolWorker-14] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/w3af_script.w3af
+[2017-02-06 18:23:09,771: INFO/PoolWorker-15] Task scans.tasks.delegate[7ce64df3-398e-4d32-966e-02eb93d5d79c] succeeded in 0.0184439909644s: []
+[2017-02-06 18:23:15,676: INFO/PoolWorker-14] Task scans.tasks.delegate[494321d7-0fae-434c-9b46-e11f5d745131] succeeded in 5.92374420504s: [('/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/w3af_results.xml', 'S')]
+[2017-02-06 18:25:26,562: WARNING/PoolWorker-22] ['Using the default profile...\n', '@final @reallyslow\n', 'Feature: Look for SQL injections using arachni against a URL\n', '\n', '  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5\n', '    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1\n', '    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3\n', '      | name | environment_variable_name |\n', '      | path | CURRENT_DIRECTORY         |\n', '      | url  | URL                       |\n', '    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9\n', '      | name     | value         |\n', '      | test     | *             |\n', '      | filename | arachni_tests |\n', '    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5\n', '      """\n', '\n', '      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr\n', '\n', '      """\n', '    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131\n', '    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5\n', '      """\n', '      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml\n', '\n', '      """\n', '    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131\n', '\n', '1 scenario (1 passed)\n', '7 steps (7 passed)\n', '2m16.517s\n']
+[2017-02-06 18:25:26,588: INFO/PoolWorker-22] Task scans.tasks.delegate[62f8caaf-4bb5-4dc0-8ee9-0fa66a1f8012] succeeded in 136.83571364s: [('/home/djayasankar/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/arachni_tests.afr', 'D')]
+[2017-02-06 18:25:26,589: INFO/MainProcess] Received task: scans.tasks.collect_results[e6a99cd7-5292-4d4b-99ee-4f01b3138eb0]  
+[2017-02-06 18:25:26,596: INFO/PoolWorker-20] [[u'/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/arachni_tests.afr', u'D']]
+[2017-02-06 18:25:26,623: INFO/PoolWorker-20] Task scans.tasks.collect_results[e6a99cd7-5292-4d4b-99ee-4f01b3138eb0] succeeded in 0.0323074969929s: [['/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasankar/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/20172306182309704398scanme.nmap.org/arachni_tests.afr', 'D']]
+[2017-02-06 19:37:32,555: INFO/MainProcess] Received task: scans.tasks.delegate[b676ab9b-3449-4f85-8d8a-1b8187116a59]  
+[2017-02-06 19:37:32,556: INFO/MainProcess] Received task: scans.tasks.delegate[18d1d33a-8e68-4538-b4af-94d8ca64ed5e]  
+[2017-02-06 19:37:32,557: INFO/MainProcess] Received task: scans.tasks.delegate[3e628e11-c84c-4524-a37a-71db13b94448]  
+[2017-02-06 19:37:32,566: WARNING/PoolWorker-8] /home/djayasankar/.rvm/gems/ruby-2.2.4/bin/gauntlt
+[2017-02-06 19:37:32,566: WARNING/PoolWorker-5] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/w3af_script.w3af
+[2017-02-06 19:37:32,577: INFO/PoolWorker-4] Task scans.tasks.delegate[18d1d33a-8e68-4538-b4af-94d8ca64ed5e] succeeded in 0.0187748649623s: []
+[2017-02-06 19:37:38,500: INFO/PoolWorker-5] Task scans.tasks.delegate[3e628e11-c84c-4524-a37a-71db13b94448] succeeded in 5.94153777801s: [('/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/w3af_script.w3af', 'D'), ('/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/w3af_results.xml', 'S')]
+[2017-02-06 19:39:45,567: WARNING/PoolWorker-8] ['Using the default profile...\n', '@final @reallyslow\n', 'Feature: Look for SQL injections using arachni against a URL\n', '\n', '  Scenario: Using arachni, look for SQL injections and verify no issues are found # ./plugins/attacks/code_injection.attack:5\n', '    Given "arachni" is installed                                                  # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:1\n', '    And the following environment variables:                                      # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:3\n', '      | name | environment_variable_name |\n', '      | path | CURRENT_DIRECTORY         |\n', '      | url  | URL                       |\n', '    And the following profile:                                                    # gauntlt-1.0.12/lib/gauntlt/attack_adapters/gauntlt.rb:9\n', '      | name     | value         |\n', '      | test     | *             |\n', '      | filename | arachni_tests |\n', '    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5\n', '      """\n', '\n', '      arachni --checks=<test> <url> --report-save-path=<path>/<filename>.afr\n', '\n', '      """\n', '    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131\n', '    When I launch an "arachni" attack with:                                       # gauntlt-1.0.12/lib/gauntlt/attack_adapters/arachni.rb:5\n', '      """\n', '      arachni_reporter <path>/<filename>.afr --reporter=xml:outfile=<path>/<filename>.xml\n', '\n', '      """\n', '    Then the output should contain " "                                            # aruba-0.5.4/lib/aruba/cucumber.rb:131\n', '\n', '1 scenario (1 passed)\n', '7 steps (7 passed)\n', '2m12.714s\n']
+[2017-02-06 19:39:45,594: INFO/PoolWorker-8] Task scans.tasks.delegate[b676ab9b-3449-4f85-8d8a-1b8187116a59] succeeded in 133.035339528s: [('/home/djayasankar/Documents/webscanner/config/cucumber.yml', 'D'), ('/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/arachni_tests.xml', 'S'), ('/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/arachni_tests.afr', 'D')]
+[2017-02-06 19:39:45,595: INFO/MainProcess] Received task: scans.tasks.collect_results[93a1f1f4-a947-46d8-bff0-5f43e0d4765a]  
+[2017-02-06 19:39:45,602: INFO/PoolWorker-11] [[u'/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/arachni_tests.afr', u'D']]
+[2017-02-06 19:39:45,629: INFO/PoolWorker-11] Task scans.tasks.collect_results[93a1f1f4-a947-46d8-bff0-5f43e0d4765a] succeeded in 0.0321991189849s: [['/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasankar/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/20173706193732503833scanme.nmap.org/arachni_tests.afr', 'D']]

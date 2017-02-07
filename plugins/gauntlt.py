@@ -44,4 +44,7 @@ class Gauntlt(AbstractPlugin):
         return self.do_stop()
 
     def do_stop(self):
+        scenarios = self.standard_output[len(self.standard_output)-3]
+        
+   
         return super(Gauntlt, self).do_stop() 

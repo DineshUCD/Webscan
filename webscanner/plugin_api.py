@@ -1,9 +1,42 @@
-import logging, os, sys, uuid, abc, subprocess, configparser, traceback, json
+import inspect, logging, os, sys, uuid, abc, subprocess, configparser, traceback, json
 
 from django.conf import settings
 from webscanner.settings import *
+from webscanner.logger import logger
 from scans.models import *
 
+class Summary:
+
+    """
+    Create standardized glossary of terms:
+
+    """
+    def __init__(self, *args, **kwargs):
+        
+        # Get the stack frame at depth 1. Returns None if class name not available.
+        try:
+            caller = sys._getframe(1).f_locals['self'].__class__.__name__
+        except KeyError as e:
+            caller = None
+
+        self.plugin   = kwargs.pop('plugin', caller)
+
+        diagnostics = dict()
+        diagnostics[self.plugin] = dict()
+        self.json_str = diagnostics
+
+    def appenditem(key, value):
+        if not key in self.json_str or not type(self.json_str) is list:
+            self.json_str[key] = list()
+
+        self.json_str[key].append(value)
+
+    def setitem(key, value):
+        self.json_str[key] = value
+
+    def getinfo():
+        return self.json_str
+        
 class AbstractPlugin(object):
 
     __metaclass__ = abc.ABCMeta
@@ -40,8 +73,10 @@ class AbstractPlugin(object):
         # The absolute path of the scanner executable; preferably, a console based program
         self.scanner_path = None
         # Store the metafiles for each scan in a list and return it to view after the scan finishes
-        self.meta_files   = list()
-
+        # This is in JSON format for extensibility. 
+        self.output   = dict() 
+        # Stores the output of the plugin execution.
+        self.standard_output = None
          
     def locate_program(self, program_name):
         if not program_name:
@@ -85,9 +120,15 @@ class AbstractPlugin(object):
     def spawn(self,  arguments):
         if not arguments:
             return None
-        subprocess.call(arguments, shell=True)
-        #sts = subprocess.Popen(arguments, shell=True)
-        #sts = os.system(arguments)
+
+        try: 
+            sts = subprocess.Popen(arguments, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            self.standard_output = sts.stdout.readlines()
+            sts.stdout.close() 
+            sts.stderr.close()
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+            self.standard_output = None
+            return None
 
     def __repr__(self):
         return json.dumps(self.__dict__)

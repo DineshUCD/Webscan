@@ -16,13 +16,13 @@ class Scan(models.Model):
     user_profile             = models.ForeignKey(UserProfile)
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False, help_text="Please use the following format: http(s)://")
     application_id           = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(-1), MaxValueValidator(10)])
+    summary                  = models.FilePathField(default="", match=".*\.json")
     date                     = models.DateTimeField(auto_now_add=True)
     # We look to see if there is a task id for the original object. If it exists, we need to revoke this task and keep it from executing.
     task_id                  = models.CharField(max_length=256, blank=True, null=True)
 
     class Meta:
         unique_together = ['user_profile', 'id']
-
 
     def get_scan_data(self):
 	return { 'output': map(lambda output: output.report, MetaFile.objects.filter(scan__id=self.id).filter(role=MetaFile.SCAN)), 'zip path': self.zip.name }       
@@ -88,8 +88,7 @@ class MetaFile(models.Model):
     scan         = models.ForeignKey(Scan, on_delete=models.CASCADE)
     store        = models.ForeignKey(Zip, on_delete=models.CASCADE)
     tool         = models.ForeignKey(Tool, on_delete=models.CASCADE, null=True)
-    report       = models.FilePathField(default="", match=".*\.(log|ini|xml|yml|zip|w3af|afr)") 
-    success      = models.BooleanField(default=False)
+    report       = models.FilePathField(default="", match=".*\.(log|json|ini|xml|yml|zip|w3af|afr)") 
     role         = models.CharField(max_length=1, choices=FILE_CHOICES, default=DOCUMENTATION)
     date         = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)

@@ -45,6 +45,7 @@ def check_response(response_wrap):
         upload_error = response_wrap['upload_error']
     except KeyError as other_error:
         threadfix_response = response_wrap['threadfix_response']
+        print "Tfix resp: " + str(threadfix_response)
         if threadfix_response != "":
             pass
     else:
@@ -63,7 +64,7 @@ def upload_scans(repository):
     for worker in pool._pool:
         assert not worker.is_alive()
 
-    threadfix_responses = map(lambda pool_response: pool_response.get(timeout=10), pool_responses)  
+    threadfix_responses = map(lambda pool_response: pool_response.get(timeout=30), pool_responses)  
     
     for item in repository:
         directory = os.path.basename(item[1])

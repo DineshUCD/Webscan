@@ -47,7 +47,6 @@ def index(request):
         for tool in tools:
             modules.append(tool.module)
         
-        callback = collect_results.s(scan_identification=instance.id)
         header   = [delegate.s(plugin_name, instance.id) for plugin_name in modules]
         result   = (group(header) | collect_results.s(scan_identification=instance.id))()
 

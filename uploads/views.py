@@ -42,7 +42,7 @@ def results(request, upload_id):
         archive = ZipArchive(scan=upload.scan.id)
         scan_unzip_files = archive.unzip_file(upload_choices)
         repository = list()
-        add_files(repository, scan_unzip_files, upload_id)
+        add_files(repository, scan_unzip_files, upload.scan.application_id)
         upload_response = upload_scans(repository)
         context['upload_response'] = upload_response
 

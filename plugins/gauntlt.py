@@ -27,9 +27,9 @@ class Gauntlt(AbstractPlugin):
         # Write out to cucumber.yml first
         gauntlt_yaml_configuration = "CURRENT_DIRECTORY=" + str( self.temporary_folder_path ) + " URL=" + str( self.model.uniform_resource_locator )
         cucumber_profile_file_path = os.path.join(settings.CONFIG_DIR, 'cucumber.yml')
-        self.meta_files.append((cucumber_profile_file_path, MetaFile.DOCUMENTATION))
-        self.meta_files.append((os.path.join(self.temporary_folder_path, 'arachni_tests.xml'), MetaFile.SCAN))
-        self.meta_files.append((os.path.join(self.temporary_folder_path, 'arachni_tests.afr'), MetaFile.DOCUMENTATION))
+      
+        # The Gauntlt metafiles 
+        self.record(AbstractPlugin.FILES, [(cucumber_profile_file_path, MetaFile.DOCUMENTATION), (os.path.join(self.temporary_folder_path, 'arachni_tests.xml'), MetaFile.SCAN),(os.path.join(self.temporary_folder_path, 'arachni_tests.afr'), MetaFile.DOCUMENTATION)] )
        
         with open(cucumber_profile_file_path, 'w') as cucumber_profile:
             cucumber_profile.write(yaml.dump(dict(default=gauntlt_yaml_configuration), default_flow_style=False))
@@ -45,6 +45,4 @@ class Gauntlt(AbstractPlugin):
 
     def do_stop(self):
         scenarios = self.standard_output[len(self.standard_output)-3]
-        
-   
-        return super(Gauntlt, self).do_stop() 
+        return super(Gauntlt, self).do_stop()

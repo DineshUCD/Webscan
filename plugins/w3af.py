@@ -34,8 +34,9 @@ class W3af(AbstractPlugin):
             logger.warn("Unable to find w3af script configuration template for " + W3af.PLUGIN_NAME + ".")   
         else:
             self.w3af_script_file_path = os.path.join( self.temporary_folder_path, 'w3af_script.w3af' )
-            self.meta_files.append( (self.w3af_script_file_path                                  , MetaFile.DOCUMENTATION) )
-            self.meta_files.append( (os.path.join(self.temporary_folder_path, 'w3af_results.xml'), MetaFile.SCAN         ) )
+
+            # The W3af metafiles. 
+            self.record(AbstractPlugin.FILES, [(self.w3af_script_file_path, MetaFile.DOCUMENTATION), (os.path.join(self.temporary_folder_path, 'w3af_results.xml'), MetaFile.SCAN)] )
             
             with open(self.w3af_script_file_path, 'w') as w3af_script:
                 w3af_script.write( str(w3af_template.format(**w3af_parameters)) )
@@ -50,5 +51,4 @@ class W3af(AbstractPlugin):
         return self.do_stop()
 
     def do_stop(self):
-        return super(W3af, self).do_stop() 
-
+        return super(W3af, self).do_stop()

@@ -5,38 +5,6 @@ from webscanner.settings import *
 from webscanner.logger import logger
 from scans.models import *
 
-class Summary:
-
-    """
-    Create standardized glossary of terms:
-
-    """
-    def __init__(self, *args, **kwargs):
-        
-        # Get the stack frame at depth 1. Returns None if class name not available.
-        try:
-            caller = sys._getframe(1).f_locals['self'].__class__.__name__
-        except KeyError as e:
-            caller = None
-
-        self.plugin   = kwargs.pop('plugin', caller)
-
-        diagnostics = dict()
-        diagnostics[self.plugin] = dict()
-        self.json_str = diagnostics
-
-    def appenditem(key, value):
-        if not key in self.json_str or not type(self.json_str) is list:
-            self.json_str[key] = list()
-
-        self.json_str[key].append(value)
-
-    def setitem(key, value):
-        self.json_str[key] = value
-
-    def getinfo():
-        return self.json_str
-        
 class AbstractPlugin(object):
 
     __metaclass__ = abc.ABCMeta
@@ -55,6 +23,7 @@ class AbstractPlugin(object):
         3. Base Directory for executable
 
     """
+    FILES = "files"
 
     @classmethod
     def name(cls):
@@ -67,16 +36,28 @@ class AbstractPlugin(object):
     # This is a concrete method; just invoke with super().__init__(*args, **kwargs)
     def __init__(self, *args, **kwargs):
         self.model_pk = kwargs.pop('model_pk', None)
-        
+
         #The model that contains collects the Scan information
         self.model        = None
         # The absolute path of the scanner executable; preferably, a console based program
         self.scanner_path = None
-        # Store the metafiles for each scan in a list and return it to view after the scan finishes
-        # This is in JSON format for extensibility. 
-        self.output   = dict() 
         # Stores the output of the plugin execution.
         self.standard_output = None
+        
+        self.class_name = self.__class__.__name__
+ 
+        self.diagnostics = dict()
+        # Stores meta data on the scan in json format.
+        self.diagnostics[self.class_name] = dict()
+     
+    def record(self, key, value):
+     
+        if type(value) is list:
+            if not key in self.diagnostics[self.class_name] or not type(self.diagnostics[self.class_name]) is list:
+                self.diagnostics[self.class_name][key] = list()
+            self.diagnostics[self.class_name][key].extend(value)
+        else:
+            self.diagnostics[self.class_name][key] = value
          
     def locate_program(self, program_name):
         if not program_name:
@@ -114,7 +95,7 @@ class AbstractPlugin(object):
 
     @abc.abstractmethod
     def do_stop(self):
-        return self.meta_files
+        return self.diagnostics
 
     # super().spawn() climbs the class hierarchy and returns the correct class that shall be called.
     def spawn(self,  arguments):

@@ -25,7 +25,7 @@ def delegate(plugin_name, model_id):
     return instance.do_start()
 
 @shared_task
-def collect_results(meta_collection, **kwargs):
+def collect_results(meta, **kwargs):
     """
     This callback can only be executed after all the tasks in the chord header have returned.
     meta_collection is a list of lists which contains files for each scanner in the plan.
@@ -33,16 +33,20 @@ def collect_results(meta_collection, **kwargs):
     """
     instance_id = kwargs.pop('scan_identification', None)
     zipper = ZipArchive(scan=int(instance_id))
-
-    meta_files = list()
-    for scan_files in meta_collection:
-        meta_files.extend(scan_files)
  
-    logger.info(meta_files)
-    
-    zipper.archive_meta_files(meta_files)
+    # meta is type list
 
-    return meta_files
+    metafiles = list()
+    for json_str in meta:
+        for key, value in json_str.iteritems():
+            if AbstractPlugin.FILES in value:
+                metafiles.extend(value[AbstractPlugin.FILES])
+             
+    logger.info(metafiles)
+    
+    zipper.archive_meta_files(metafiles)
+
+    return metafiles
 
 
 def find_all_interfaces():

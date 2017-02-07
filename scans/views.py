@@ -49,7 +49,7 @@ def index(request):
         
         header   = [delegate.s(plugin_name, instance.id) for plugin_name in modules]
         result   = (group(header) | collect_results.s(scan_identification=instance.id))()
-
+       
         if instance.application_id != -1:
             upload = Upload.objects.create(scan=instance, uniform_resource_locator=THREADFIX_URL)
 	    return HttpResponseRedirect(reverse('uploads:results', args=(upload.id, )))

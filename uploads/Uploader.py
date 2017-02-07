@@ -32,6 +32,8 @@ def upload_scan(application_id, path):
     try:
         response_wrap = { 'file': path, 'application_id': application_id }
         tf = threadfix.ThreadFixAPI(THREADFIX_URL, THREADFIX_API_KEY, verify_ssl=False)
+        print application_id
+        print path
         threadfix_response = tf.upload_scan(application_id=application_id, file_path=path)
     except (IOError, TimeoutError) as upload_error:
         response_wrap['upload_error'] = upload_error

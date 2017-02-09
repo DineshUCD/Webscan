@@ -12,21 +12,8 @@ from scans.models import Scan
 
 # Create your models here.
 class Upload(models.Model):
-    PENDING         = 0
-    DONE            = 1
-    FAILED          = 2
-    IDLE            = 3
-    PARTIAL_FAILURE = 4
-    STATUS_CHOICES = (
-        (PENDING, 'PENDING'),
-        (DONE, 'DONE'),
-        (FAILED, 'FAILED'),
-        (IDLE, 'IDLE'),
-        (PARTIAL_FAILURE, 'PARTIAL FAILURE'),
-    )
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False)
     upload_date              = models.DateTimeField(auto_now=True)
-    status                   = models.IntegerField(choices=STATUS_CHOICES, default=IDLE)
     scan                     = models.ForeignKey(Scan, on_delete=models.CASCADE)
     # Univerally unique identifiers are a good alternative to AutoField for primary_key.
     id                       = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

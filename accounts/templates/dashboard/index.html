@@ -3,192 +3,47 @@
 
 {% block content %}
 
-<style>
-body {
-    padding: 10px;
-}
-
-#exTab2 h3 {
-    color: white;
-    background-color: #428bca;
-    padding: 5px 15px;
-}
-
-</style>
-
-<body>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    $.ajaxSetup({ 
-        beforeSend: function(xhr, settings) {
-            function getCookie(name) {
-                var cookieValue = null;
-                if (document.cookie && document.cookie != '') {
-                    var cookies = document.cookie.split(';');
-                    for (var i = 0; i < cookies.length; i++) {
-                        var cookie = jQuery.trim(cookies[i]);
-                        // Does this cookie string begin with the name we want?
-                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
-                        }
-                    }
-                }
-                return cookieValue;
-            }
-            if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-                // Only send the token to relative URLs i.e. locally.
-                xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-            }
-        } 
-    });
-
-    $('select').select2({
-        tags: true
-    });
-});
-
-
-function callPlanList() {
-    var plan_name   = document.getElementById("plan_name").value;
-    var description = document.getElementById("plan_description").value;
-    var selection   = $("input:checkbox[id=plan_set]:checked").map(function(){ return $(this).val() }).get();
-    var tool_set    = Array();
-    for (var item=0; item < selection.length; item++) {
-        tool_set.push({ "module": selection[item] });
-    }
-    var json        = {"name":plan_name,"description": description,"tool_set":tool_set};
-    
-    $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(json),
-        dataType: 'json',
-        url: "{% url 'scans:plan_list' %}",
-        success: function(response) { $('body').load(document.URL + '#plans'); return true; }
-    });
-}
-</script>
-
 <hr></hr>
-<div class="container"><h2>Example tab 2 (using standard nav-tabs)</h2></div>
 
-<div id="exTab2" class="container">
-    <ul class="nav nav-tabs">
-        <li><a href="#1" data-toggle="tab">Overview</a>
-        </li>
-        <li><a href="#2" data-toggle="tab">Sites & Scans</a>
-        </li>
-        <li class="active">
-            <li><a href="#3" data-toggle="tab">Plugin & Plans</a>
-            </li>
-        </li>
-    </ul>
+<div class="container">
 
-    <div class="tab-content">
-        <div class="tab-pane" id="1">
-            <h3>Standard tab panel created on bootstrap using nav-tabs</h3>
-        </div>
-        <div class="tab-pane" id="2">
-            <h3>Run a quick website scan using selected tools.</h3>
-            <script>
-                $(document).ready(function() {
-                    $('#sitesAndScans').load('{% url 'scans:index' %}');
-                });
-            </script>
-            <div id="sitesAndScans"></div>
-            Result: <span id="result"></span>
-        </div>
-        <div class="tab-pane active" id="3">
-            <h3>Setup and save scan plans.</h3>
-            <form class="form-horizontal" id="plan">
-                <div class="form-group">
-                    <label for="plan_name">Scan name:</label>
-                    <input id="plan_name" type="text" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="plan_description">Scan description:</label>
-                    <input id="plan_description" type="text" class="form-control">
-                </div>
-                {% for tool in tool_set %}
-                    <label class="checkbox-inline"><input type="checkbox" id="plan_set" value="{{ tool.0 }}">{{ tool.1 }}</label>
-                {% endfor %}              
-                <button type="button" onclick="callPlanList()" class="ui-state-default ui-corner-all">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                    Submit
-                </button>
-            </form> 
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#Scan">Scan</a></li>
+    <li><a data-toggle="tab" href="#Plan">Plan</a></li>
+    <li><a data-toggle="tab" href="#Scan_History">Scan History</a></li>
+  </ul>
 
-            <p>X-editable::In-place editing</p>
-            <table id="plans" class="table table-hover table-bordered">
-                <thead class="thead-inverse">
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Created</th>
-                        <th>Tools</th> 
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                {% for plan in plans %}
-                    <!-- Different users will have different primary keys for their Plan model. -->
-                    <tr id="{{ plan.id }}">
-                        <td class="edit">{{ plan.name }}</td>
-                        <td class="edit">{{ plan.description }}</td>
-                        <td class="edit">{{ plan.created }}</td>
-                        <td>
-                            <p>Old Tools:</p>
-                            <ul id="tools-{{ forloop.counter0 }}">
-                                {% for tool in plan.tool_set.all %}
-                                    <li>{{ tool.module }}</li>
-                                {% endfor %}
-                            </ul>
-                            <p>New Tools</p>
-                            <select id="select-{{ forloop.counter0 }}" style="width: 40%" multiple="multiple">
-                                {% for tool in tool_set %}
-                                    <option value="{{ tool.0 }}">{{ tool.1 }}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                        <td>
-                            <form method="POST" action="{% url 'scans:deploy_plan' plan.pk %}">
-                                {% csrf_token %}
-                                <button type="submit" name="deploy_plan" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                    Add Plan
-                                </button>
-                                <button type="submit" name="undeploy_plan" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                                    Remove Plan
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
+  <div class="tab-content">
+    <div id="Scan" class="tab-pane fade in active">
     </div>
+    <div id="Plan" class="tab-pane fade">
+    </div>
+    <div id="Scan_History" class="tab-pane fade">
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Action</th>
+              <th>Plan Name</th>
+              <th>Attack Point</th>
+              <th>Plan Type</th>
+              <th>State</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
-<hr></hr>
-
-<script type="text/javascript">
-$('.edit').editable(function(value, settings) {
-    return(value);
-    }, {
-       type : 'textarea',
-       submit : 'OK',
-});
-
-
-for(var ultools = 0; ultools < {{ plans|length }}; ultools++) {
-    $('#tools-' + ultools).on('click', 'li', function(e) {
-        $(this).remove();
-    });
-}
-
-</script>
-
-</body>
 {% endblock %}

@@ -17,8 +17,7 @@ class Scan(models.Model):
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False, help_text="Please use the following format: http(s)://")
     application_id           = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(-1), MaxValueValidator(10)])
     date                     = models.DateTimeField(auto_now_add=True)
-    # We look to see if there is a task id for the original object. If it exists, we need to revoke this task and keep it from executing.
-    task_id                  = models.CharField(max_length=256, blank=True, null=True)
+    success                  = models.NullBooleanField()
 
     class Meta:
         unique_together = ['user_profile', 'id']
@@ -73,6 +72,7 @@ class Tool(models.Model):
     name           = models.CharField(max_length=256, default="", blank=True)
     work_directory = models.FilePathField(default="")
     date           = models.DateTimeField(auto_now_add=True)
+    state          = models.CharField(max_length=256, default="", blank=True)
 
     def __unicode__(self):
         return "{0}".format(self.name)

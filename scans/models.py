@@ -16,7 +16,6 @@ class Scan(models.Model):
     user_profile             = models.ForeignKey(UserProfile)
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False, help_text="Please use the following format: http(s)://")
     application_id           = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(-1), MaxValueValidator(10)])
-    summary                  = models.FilePathField(default="", match=".*\.json")
     date                     = models.DateTimeField(auto_now_add=True)
     # We look to see if there is a task id for the original object. If it exists, we need to revoke this task and keep it from executing.
     task_id                  = models.CharField(max_length=256, blank=True, null=True)

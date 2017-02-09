@@ -12,7 +12,7 @@ from scans.serializers import PlanSerializer
 from scans.models import Plan, Tool
 from uploads.models import Upload
 from scans.forms import ScanForm
-from .tasks import delegate, collect_results
+from .tasks import add,tsum,delegate, collect_results
 from celery import chord, group
 
 import subprocess, os, sys
@@ -29,8 +29,17 @@ def index(request):
     plan_pks = user_session.getitem('plan')
     form = ScanForm(request.POST or None, plan_pks=plan_pks)
 
+    """
+    TEST PHASE BEGIN
+    """
+    test = (group([add.s(4,4), add.s(4,5)]) | tsum.s())()
+    """
+    TEST PHASE END
+    """
+
     context = {
         'form': form,
+        'test': test
     }
 
     if form.is_valid():
@@ -49,7 +58,9 @@ def index(request):
         
         header   = [delegate.s(plugin_name, instance.id) for plugin_name in modules]
         result   = (group(header) | collect_results.s(scan_identification=instance.id))()
-       
+
+        context['status'] = result.parent
+ 
         if instance.application_id != -1:
             upload = Upload.objects.create(scan=instance, uniform_resource_locator=THREADFIX_URL)
 	    return HttpResponseRedirect(reverse('uploads:results', args=(upload.id, )))

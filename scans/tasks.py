@@ -13,6 +13,22 @@ from plugins.w3af import W3af
 
 import subprocess, os, datetime, sys, glob, importlib, inspect, re
 
+"""
+Test tasks BEGIN
+"""
+
+@shared_task
+def add(x, y):
+    return x + y
+
+@shared_task
+def tsum(items):
+    return sum(items)
+
+"""
+Test tasks END
+"""
+
 @shared_task
 def delegate(plugin_name, model_id):
     """

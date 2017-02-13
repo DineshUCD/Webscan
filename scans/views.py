@@ -7,13 +7,13 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from scans.serializers import PlanSerializer
+from scans.serializers import ScanSerializer, PlanSerializer
 
-from scans.models import Plan, Tool
+from scans.models import Scan, Plan, Tool
 from uploads.models import Upload
 from scans.forms import ScanForm
-from .tasks import add,tsum,delegate, collect_results
 from celery import chord, group
+from .tasks import delegate, collect_results
 
 import subprocess, os, sys
 
@@ -21,6 +21,7 @@ from webscanner.settings import THREADFIX_URL
 from webscanner.logger import logger
 
 # Create your views here.
+"""
 @login_required(login_url='/accounts/login/')
 def index(request):
 
@@ -29,13 +30,7 @@ def index(request):
     plan_pks = user_session.getitem('plan')
     form = ScanForm(request.POST or None, plan_pks=plan_pks)
 
-    """
-    TEST PHASE BEGIN
-    """
     test = (group([add.s(4,4), add.s(4,5)]) | tsum.s())()
-    """
-    TEST PHASE END
-    """
 
     context = {
         'form': form,
@@ -65,8 +60,31 @@ def index(request):
             upload = Upload.objects.create(scan=instance, uniform_resource_locator=THREADFIX_URL)
 	    return HttpResponseRedirect(reverse('uploads:results', args=(upload.id, )))
             
-    return render(request, 'scans/index.html', context)
+    return render(request, 'scans/scans.html', context)
+"""
+# When deserializing data, we can either create a new instance, or update an existing one.
+@csrf_exempt
+@api_view(['GET', 'POST'])
+def scan_list(request, format=None):
+    """
+    List all scans, or create a new scan for a user.
+    """
+    if request.method == 'GET':
+        scans = Scan.objects.filter(user_profile__id=int(request.user.userprofile.id))
+        serializer = ScanSerializer(scans, many=True)
+        return Response(serializer.data)
 
+    elif request.method == 'POST': 
+        serializer = ScanSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+   
+            header = [delegate.s(tool.module, serializer.object.id) for tool in serializer.object.plan.tool_set.all()]
+            result = (group(header) | collect_results.s(scan_identification=serializer.object.id))()
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+         
 #Writing regular Django views using our Serializers
 @csrf_exempt
 @api_view(['GET', 'POST'])
@@ -79,7 +97,7 @@ def plan_list(request, format=None):
         plans = Plan.objects.filter(user_profile__id=int(request.user.userprofile.id))
         serializer = PlanSerializer(plans, many=True)
         return Response(serializer.data)
-
+    
     elif request.method == 'POST':
         serializer = PlanSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
@@ -121,5 +139,5 @@ def deploy_plan(request, plan_id):
         if 'deploy_plan' in request.POST:
             user_session.set_session(user_session.appenditem  , plan=plan.id) 
         elif 'undeploy_plan' in request.POST:
-            user_session.set_session(user_session.unappenditem, plan=plan.id)
+            user_session.set_session(user_session.unappenditem, plan=plan.id)  
     return HttpResponseRedirect(reverse('accounts:dashboard'))

@@ -70,3 +70,28 @@
 [2017-02-08 22:52:51,721: INFO/PoolWorker-3] Task scans.tasks.add[68716ad3-de0f-465a-985e-d132995c5bc3] succeeded in 0.00329981301911s: 8
 [2017-02-08 22:52:51,722: INFO/MainProcess] Received task: scans.tasks.tsum[f7517e2b-3d40-4fd7-a078-c10647831050]  
 [2017-02-08 22:52:51,731: INFO/PoolWorker-12] Task scans.tasks.tsum[f7517e2b-3d40-4fd7-a078-c10647831050] succeeded in 0.00720168510452s: 17
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@sec-tools-02 v4.0.2 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-3.10.0-514.6.1.el7.x86_64-x86_64-with-oracle-7.3 2017-02-07 23:12:31
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x2c03950
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 24 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.add
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . scans.tasks.tsum
+  . webscanner.celery_tasks.debug_task
+

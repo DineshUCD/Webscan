@@ -68,9 +68,13 @@ def create_zip_for_scan(sender, instance, created, **kwargs):
     
 class Tool(models.Model):
     plan           = models.ForeignKey(Plan)
+
+    # Example: "<class 'plugins.w3af.W3af'>"
     module         = models.CharField(max_length=256, default="", blank=True)
+
+    # Example: 'w3af_console'
     name           = models.CharField(max_length=256, default="", blank=True)
-    work_directory = models.FilePathField(default="")
+
     date           = models.DateTimeField(auto_now_add=True)
     state          = models.CharField(max_length=256, default="", blank=True)
 

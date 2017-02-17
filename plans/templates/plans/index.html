@@ -6,7 +6,6 @@
 
 <script src="{% static 'js/plan_views.js' %}" type="text/javascript"></script>
 
-<hr></hr>
 
 <div class="container">
   <div class="table-responsive">
@@ -27,7 +26,7 @@
           {% ifchanged %}
           <tr>
             <!-- # -->
-            <td>{{ forloop.counter1 }}</td>
+            <td>{{ forloop.counter }}</td>
 
             <!-- Action -->
             <td> 
@@ -71,6 +70,12 @@
 
     </table>
   </div>
+</div>
+
+<hr></hr>
+<div class="alert alert-success" id="success-alert" hidden="true">
+  <button type="button" class="close" data-dismiss="alert">X</button>
+    <center><strong>Added Plan to Launch Page!</strong></center>
 </div>
 
 {% endblock %}

@@ -1,12 +1,13 @@
-function ajaxHandler(json, mapping) {
-  var status = false;
+
+
+
+function ajaxHandler(json, mapping, callback) {
   $.ajax({
     type: "POST",
     data: json,
     url: mapping,
-    success: function() { status = true; },
+    success: callback
   });
-  return status;
 }
 
 function select(element, url) {
@@ -14,6 +15,10 @@ function select(element, url) {
   if (element.id != null) {
     data[element.id] = true;
   }
-  var result = ajaxHandler(data, url);
-  
+  ajaxHandler(data, url, function() {
+      $("#success-alert").alert();
+      $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+        $("#success-alert").slideUp(500);
+      }
+  )});
 }

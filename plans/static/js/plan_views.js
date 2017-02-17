@@ -1,6 +1,4 @@
 
-
-
 function ajaxHandler(json, mapping, callback) {
   $.ajax({
     type: "POST",
@@ -22,3 +20,8 @@ function select(element, url) {
       }
   )});
 }
+
+function create() {
+  //$('#planConfiguration').load("{% url 'plans:plans-new' %}");
+}
+

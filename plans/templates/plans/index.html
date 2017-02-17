@@ -6,7 +6,6 @@
 
 <script src="{% static 'js/plan_views.js' %}" type="text/javascript"></script>
 
-
 <div class="container">
   <div class="table-responsive">
     <table class="table table-bordered">
@@ -66,13 +65,33 @@
           </tr> 
           {% endifchanged %}
         {% endfor %}
-      </tbody>
-
     </table>
+  </div>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="float: right;" onclick="create()">
+    + Plan
+  </button>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Configure Plan Model</h4>
+      </div>
+      <div class="modal-body" id="planConfiguration">
+      </div>
+    </div>
   </div>
 </div>
 
-<hr></hr>
+
+<!-- Alerts users that a Plan has successfully been added to the Scan Page -->
 <div class="alert alert-success" id="success-alert" hidden="true">
   <button type="button" class="close" data-dismiss="alert">X</button>
     <center><strong>Added Plan to Launch Page!</strong></center>

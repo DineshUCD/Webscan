@@ -31,3 +31,14 @@ class ScanList(generics.ListCreateAPIView):
             result = (group(header) | collect_results.s(scan_identification=scan.id))()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def launch(request, template_name='scans/index.html'):
+  user_session = request.userprofile.get_latest_session()
+  plan_pks = user_session.getitem('plan')
+
+  context = dict()
+  
+  if plan_pks and isinstance(plan_pks, list):
+    context['plans'] = Plans.objects.filter(pk__in=plan_pks, user_profile__id=int(request.userprofile.id)) 
+
+  return render(request, template_name, context)

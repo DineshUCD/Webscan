@@ -7,8 +7,16 @@
 <script src="{% static 'js/plan_views.js' %}" type="text/javascript"></script>
 
 <div class="container">
+
+  <!-- Allow a user to search any column based on keywords -->
+  <div class="form-group pull-right">
+    <input type="text" class="search form-control" placeholder="What are you looking for?">
+  </div>  
+  <span class="counter pull-right"></span>
+
+  <!-- Table to display Plan dynamically updates on changes -->
   <div class="table-responsive">
-    <table class="table table-bordered">
+    <table class="table table-hover table-bordered results">
       <thead>
         <tr>
           <th>#</th>
@@ -18,6 +26,12 @@
           <th>Created On</th>
           <th>Tools</th>
         </tr>
+
+        <!-- If there are no search results, display a warning! -->
+        <tr class="warning no-result">
+          <td colspan="6"><i class="fa fa-warning"></i> No result</td>
+        </tr>        
+
       </thead>
 
       <tbody>
@@ -36,8 +50,8 @@
                   <span class="sr-only">Toggle Dropdown</span> 
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a id="add" onclick=select(this,"{% url 'plans:select' plan.pk %}")>Select</a></li>
-                  <li><a id="remove" onclick=select(this,"{% url 'plans:select' plan.pk %}")>Unselect</a></li>
+                  <li><a id="add" onclick=select(this,"{% url 'plans:select' plan.pk %}")>Add Plan to Scan Page</a></li>
+                  <li><a id="remove" onclick=select(this,"{% url 'plans:select' plan.pk %}")>Remove Plan from Scan Page</a></li>
                   <li class="divider"></li>
                     <!-- Opens the model's dialog box with prepopulated fields for a user to edit and save. -->
                   <li><a onclick=update("{% url 'plans:plans-edit' plan.pk %}")>Update</a></li> 
@@ -70,6 +84,12 @@
         {% endfor %}
     </table>
   </div>
+    
+  <!-- Redirect to Scan Page -->
+  <a href="{% url 'scans:ScanList' %}">
+    <span class="glyphicon glyphicon-plane" class="btn btn-default"></span>
+    To Scan Page
+  </a>
 
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="float: right;" onclick=create("{% url 'plans:plans-new' %}")>

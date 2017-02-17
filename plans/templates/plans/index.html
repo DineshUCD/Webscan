@@ -1,0 +1,76 @@
+{% extends 'scans/base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{%  block content %}
+
+<script src="{% static 'js/plan_views.js' %}" type="text/javascript"></script>
+
+<hr></hr>
+
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Action</th>
+          <th>Plan Name</th>
+          <th>Plan Description</th>
+          <th>Created On</th>
+          <th>Tools</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for plan in plans %}
+          {% ifchanged %}
+          <tr>
+            <!-- # -->
+            <td>{{ forloop.counter1 }}</td>
+
+            <!-- Action -->
+            <td> 
+              <div class="btn-group">
+                <button type="button" class="btn btn-danger">Action</button>
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span> 
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a id="add" onclick=select(this,"{% url 'plans:select' plan.pk %}")>Select</a></li>
+                  <li><a id="remove" onclick=select(this,"{% url 'plans:select' plan.pk %}")>Unselect</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Delete</a></li> 
+                </ul>
+              </div>
+            </td>
+              
+            <!-- Plan Name -->
+            <td>{{ plan.name }}</td>
+
+            <!-- Plan Description -->
+            <td>{{ plan.description }}</td>
+
+            <!-- The time which the current user created the plan. -->
+            <td>{{ plan.created }}</td>
+
+            <!-- The set of tools assigned to this plan. (Tools) -->
+            <td>
+              <ul>
+                {% for tool in plan.tool_set.all %}
+                  <li>{{ tool.name }}</li>
+                {% endfor %}
+              </ul>
+            </td>
+
+          </tr> 
+          {% endifchanged %}
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+{% endblock %}

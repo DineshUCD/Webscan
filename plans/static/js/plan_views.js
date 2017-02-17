@@ -1,4 +1,3 @@
-
 function ajaxHandler(json, mapping, callback) {
   $.ajax({
     type: "POST",
@@ -21,7 +20,16 @@ function select(element, url) {
   )});
 }
 
-function create() {
-  //$('#planConfiguration').load("{% url 'plans:plans-new' %}");
+function create(url) {
+  $('#planConfiguration').load(url);
 }
 
+function update(url) {
+  create(url);
+  $("#myModal").modal('show');
+}
+
+function remove(element, url) {
+  ajaxHandler(null, url, true);
+  $(element).closest('tr').remove();
+}

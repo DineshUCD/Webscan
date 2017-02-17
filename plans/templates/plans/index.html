@@ -39,7 +39,10 @@
                   <li><a id="add" onclick=select(this,"{% url 'plans:select' plan.pk %}")>Select</a></li>
                   <li><a id="remove" onclick=select(this,"{% url 'plans:select' plan.pk %}")>Unselect</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">Delete</a></li> 
+                    <!-- Opens the model's dialog box with prepopulated fields for a user to edit and save. -->
+                  <li><a onclick=update("{% url 'plans:plans-edit' plan.pk %}")>Update</a></li> 
+                    <!-- Removes the Plan object from DB and removes the corresponding table row -->
+                  <li><a onclick=remove(this,"{% url 'plans:plans-delete' plan.pk %}")>Delete</a></li> 
                 </ul>
               </div>
             </td>
@@ -69,7 +72,7 @@
   </div>
 
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="float: right;" onclick="create()">
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="float: right;" onclick=create("{% url 'plans:plans-new' %}")>
     + Plan
   </button>
 
@@ -94,7 +97,7 @@
 <!-- Alerts users that a Plan has successfully been added to the Scan Page -->
 <div class="alert alert-success" id="success-alert" hidden="true">
   <button type="button" class="close" data-dismiss="alert">X</button>
-    <center><strong>Added Plan to Launch Page!</strong></center>
+    <center><strong>Successfully processed selection!</strong></center>
 </div>
 
 {% endblock %}

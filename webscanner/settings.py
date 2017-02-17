@@ -43,6 +43,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 INSTALLED_APPS = [
     'accounts',
+    'plans',
     'scans',
     'uploads',
     'rest_framework',

@@ -7,7 +7,7 @@ from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 
 from scans.tasks import find_all_interfaces
-from scans.models import Plan
+from plans.models import Plan
 from accounts.models import UserProfile
 from webscanner.logger import logger
 

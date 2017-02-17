@@ -28,20 +28,6 @@ class Scan(models.Model):
     def __unicode__(self):
         return "{0}".format(self.uniform_resource_locator)
 
-class Plan(models.Model):
-    # Each user profile saves zero or many scans.
-    user_profile = models.ForeignKey(UserProfile)
-    # Each plan is associated with only one target URL vulnerability scan.
-    scan         = models.OneToOneField(Scan, on_delete=models.CASCADE, null=True, blank=True)
-    # Name of scan for client to identify them.
-    name         = models.CharField(max_length=50, default="")
-    created      = models.DateTimeField(auto_now_add=True)
-    # Describes the motivation for each Plan.
-    description  = models.CharField(max_length=256, default="", blank=True)
-    
-    def __unicode__(self):
-        return "{0} for {1}".format(self.name, self.description)
-
 """
 Fields: scan, name, uploaded_to,   date
 Types: 1 - 1, char, file path char,DateTime 
@@ -67,14 +53,11 @@ def create_zip_for_scan(sender, instance, created, **kwargs):
         zip_meta_data.save()
     
 class Tool(models.Model):
-    plan           = models.ForeignKey(Plan)
-
+    plan           = models.ForeignKey('plans.Plan')
     # Example: "<class 'plugins.w3af.W3af'>"
     module         = models.CharField(max_length=256, default="", blank=True)
-
     # Example: 'w3af_console'
     name           = models.CharField(max_length=256, default="", blank=True)
-
     date           = models.DateTimeField(auto_now_add=True)
     state          = models.CharField(max_length=256, default="", blank=True)
 

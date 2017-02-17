@@ -1,97 +1,96 @@
-[2017-02-07 23:12:32,852: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
-[2017-02-07 23:12:32,866: INFO/MainProcess] mingle: searching for neighbors
-[2017-02-07 23:12:33,887: INFO/MainProcess] mingle: all alone
-[2017-02-07 23:12:33,899: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+[2017-02-13 23:45:29,742: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-02-13 23:45:29,753: INFO/MainProcess] mingle: searching for neighbors
+[2017-02-13 23:45:30,774: INFO/MainProcess] mingle: all alone
+[2017-02-13 23:45:30,787: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
   warnings.warn('Using settings.DEBUG leads to a memory leak, never '
-[2017-02-07 23:12:33,899: INFO/MainProcess] celery@sec-tools-02 ready.
-[2017-02-08 21:48:53,693: INFO/MainProcess] Received task: scans.tasks.add[74e3ff90-0fe1-4a15-8858-9d65b312268c]  
-[2017-02-08 21:48:53,696: INFO/MainProcess] Received task: scans.tasks.add[144d9909-b5cf-44fd-b60a-3d4ed810164e]  
-[2017-02-08 21:48:53,706: INFO/PoolWorker-17] Task scans.tasks.add[74e3ff90-0fe1-4a15-8858-9d65b312268c] succeeded in 0.00771006196737s: 8
-[2017-02-08 21:48:53,723: INFO/PoolWorker-3] Task scans.tasks.add[144d9909-b5cf-44fd-b60a-3d4ed810164e] succeeded in 0.0246769010555s: 9
-[2017-02-08 21:48:53,724: INFO/MainProcess] Received task: scans.tasks.tsum[316676a0-b273-4b23-9e49-a0e8115c5135]  
-[2017-02-08 21:48:53,733: INFO/PoolWorker-21] Task scans.tasks.tsum[316676a0-b273-4b23-9e49-a0e8115c5135] succeeded in 0.00661900802515s: 17
-[2017-02-08 22:52:12,027: INFO/MainProcess] Received task: scans.tasks.add[79b9248d-0aac-41ef-8359-70aae7fc6255]  
-[2017-02-08 22:52:12,028: INFO/MainProcess] Received task: scans.tasks.add[6792cb6d-0b1e-4bfa-8db3-c9e49da17708]  
-[2017-02-08 22:52:12,324: INFO/PoolWorker-15] Task scans.tasks.add[6792cb6d-0b1e-4bfa-8db3-c9e49da17708] succeeded in 0.00723937316798s: 9
-[2017-02-08 22:52:12,341: INFO/PoolWorker-5] Task scans.tasks.add[79b9248d-0aac-41ef-8359-70aae7fc6255] succeeded in 0.0242749960162s: 8
-[2017-02-08 22:52:12,342: INFO/MainProcess] Received task: scans.tasks.tsum[41523094-286d-47cf-a0fa-b3157c807d0d]  
-[2017-02-08 22:52:12,351: INFO/PoolWorker-6] Task scans.tasks.tsum[41523094-286d-47cf-a0fa-b3157c807d0d] succeeded in 0.00674530398101s: 17
-[2017-02-08 22:52:16,683: INFO/MainProcess] Received task: scans.tasks.add[c4e994cb-f9f1-40bc-8cee-3422d1050369]  
-[2017-02-08 22:52:16,684: INFO/MainProcess] Received task: scans.tasks.add[85003693-fbcd-4493-8a7b-26d8794b2465]  
-[2017-02-08 22:52:17,325: INFO/PoolWorker-22] Task scans.tasks.add[85003693-fbcd-4493-8a7b-26d8794b2465] succeeded in 0.00766777410172s: 9
-[2017-02-08 22:52:17,342: INFO/PoolWorker-19] Task scans.tasks.add[c4e994cb-f9f1-40bc-8cee-3422d1050369] succeeded in 0.0245705288835s: 8
-[2017-02-08 22:52:17,342: INFO/MainProcess] Received task: scans.tasks.tsum[9892bfca-2d6d-4304-8db2-247dd6ae939c]  
-[2017-02-08 22:52:17,351: INFO/PoolWorker-10] Task scans.tasks.tsum[9892bfca-2d6d-4304-8db2-247dd6ae939c] succeeded in 0.00664194487035s: 17
-[2017-02-08 22:52:18,743: INFO/MainProcess] Received task: scans.tasks.add[9873be0c-b039-4fe6-8225-219db7c229f8]  
-[2017-02-08 22:52:18,744: INFO/MainProcess] Received task: scans.tasks.add[d964fefd-e5e1-4eb0-8e56-e100ac5fc50b]  
-[2017-02-08 22:52:19,704: INFO/PoolWorker-16] Task scans.tasks.add[d964fefd-e5e1-4eb0-8e56-e100ac5fc50b] succeeded in 0.00803359807469s: 9
-[2017-02-08 22:52:19,721: INFO/PoolWorker-11] Task scans.tasks.add[9873be0c-b039-4fe6-8225-219db7c229f8] succeeded in 0.0251606691163s: 8
-[2017-02-08 22:52:19,722: INFO/MainProcess] Received task: scans.tasks.tsum[3c7fde34-b792-4b0c-bea5-c85536265c77]  
-[2017-02-08 22:52:19,731: INFO/PoolWorker-2] Task scans.tasks.tsum[3c7fde34-b792-4b0c-bea5-c85536265c77] succeeded in 0.00671046902426s: 17
-[2017-02-08 22:52:37,912: INFO/MainProcess] Received task: scans.tasks.add[8476aa97-8e48-42e2-b7ae-cee998411d49]  
-[2017-02-08 22:52:37,912: INFO/MainProcess] Received task: scans.tasks.add[e7b7261f-2e90-431f-9c4e-a71c398c0738]  
-[2017-02-08 22:52:38,737: INFO/MainProcess] Received task: scans.tasks.add[594d83ce-fedb-4338-bc83-e8e2cf108a98]  
-[2017-02-08 22:52:38,739: INFO/MainProcess] Received task: scans.tasks.add[29b0e3eb-d4d4-4aaa-93c7-b9eff6eb28c0]  
-[2017-02-08 22:52:38,742: INFO/PoolWorker-17] Task scans.tasks.add[29b0e3eb-d4d4-4aaa-93c7-b9eff6eb28c0] succeeded in 0.00145770399831s: 9
-[2017-02-08 22:52:38,747: INFO/PoolWorker-8] Task scans.tasks.add[8476aa97-8e48-42e2-b7ae-cee998411d49] succeeded in 0.00808806298301s: 8
-[2017-02-08 22:52:38,764: INFO/PoolWorker-9] Task scans.tasks.add[e7b7261f-2e90-431f-9c4e-a71c398c0738] succeeded in 0.0251180541236s: 9
-[2017-02-08 22:52:38,764: INFO/PoolWorker-18] Task scans.tasks.add[594d83ce-fedb-4338-bc83-e8e2cf108a98] succeeded in 0.0253017481882s: 8
-[2017-02-08 22:52:38,765: INFO/MainProcess] Received task: scans.tasks.tsum[9f3d507e-262d-407d-bd9b-6cf548a65649]  
-[2017-02-08 22:52:38,765: INFO/MainProcess] Received task: scans.tasks.tsum[f7d262c6-3558-461a-bfd1-7a812a256380]  
-[2017-02-08 22:52:38,767: INFO/PoolWorker-21] Task scans.tasks.tsum[f7d262c6-3558-461a-bfd1-7a812a256380] succeeded in 0.000908017857s: 17
-[2017-02-08 22:52:38,774: INFO/PoolWorker-7] Task scans.tasks.tsum[9f3d507e-262d-407d-bd9b-6cf548a65649] succeeded in 0.00682928296737s: 17
-[2017-02-08 22:52:39,538: INFO/MainProcess] Received task: scans.tasks.add[ae9dddf5-0a8e-441a-98b0-6a621fc2e3ce]  
-[2017-02-08 22:52:39,539: INFO/MainProcess] Received task: scans.tasks.add[1ee20306-996a-42c3-9510-f49ae899aa66]  
-[2017-02-08 22:52:39,712: INFO/PoolWorker-5] Task scans.tasks.add[ae9dddf5-0a8e-441a-98b0-6a621fc2e3ce] succeeded in 0.00147075601853s: 8
-[2017-02-08 22:52:39,729: INFO/PoolWorker-15] Task scans.tasks.add[1ee20306-996a-42c3-9510-f49ae899aa66] succeeded in 0.0183937961701s: 9
-[2017-02-08 22:52:39,729: INFO/MainProcess] Received task: scans.tasks.tsum[ab7f649e-7986-4d2a-af59-8391a0cecd2e]  
-[2017-02-08 22:52:39,731: INFO/PoolWorker-6] Task scans.tasks.tsum[ab7f649e-7986-4d2a-af59-8391a0cecd2e] succeeded in 0.000871449941769s: 17
-[2017-02-08 22:52:40,646: INFO/MainProcess] Received task: scans.tasks.add[0f474573-56b8-4807-a858-4ad2a6ff5e3f]  
-[2017-02-08 22:52:40,647: INFO/MainProcess] Received task: scans.tasks.add[ff4b9e7b-c387-4e81-ae21-f51c3848786d]  
-[2017-02-08 22:52:41,713: INFO/PoolWorker-22] Task scans.tasks.add[ff4b9e7b-c387-4e81-ae21-f51c3848786d] succeeded in 0.00117597891949s: 9
-[2017-02-08 22:52:41,715: INFO/PoolWorker-19] Task scans.tasks.add[0f474573-56b8-4807-a858-4ad2a6ff5e3f] succeeded in 0.00308121694252s: 8
-[2017-02-08 22:52:41,716: INFO/MainProcess] Received task: scans.tasks.tsum[79b23d4b-183b-4554-8da5-fbe0ff61e7d7]  
-[2017-02-08 22:52:41,718: INFO/PoolWorker-10] Task scans.tasks.tsum[79b23d4b-183b-4554-8da5-fbe0ff61e7d7] succeeded in 0.000651425914839s: 17
-[2017-02-08 22:52:41,833: INFO/MainProcess] Received task: scans.tasks.add[8fd17ee7-1e2b-4437-b40f-450a32ddd273]  
-[2017-02-08 22:52:41,834: INFO/MainProcess] Received task: scans.tasks.add[c5ad3c15-9bf7-4e30-98cd-89b0d385de6f]  
-[2017-02-08 22:52:42,322: INFO/PoolWorker-11] Task scans.tasks.add[8fd17ee7-1e2b-4437-b40f-450a32ddd273] succeeded in 0.00126287806779s: 8
-[2017-02-08 22:52:42,339: INFO/PoolWorker-16] Task scans.tasks.add[c5ad3c15-9bf7-4e30-98cd-89b0d385de6f] succeeded in 0.0184549109545s: 9
-[2017-02-08 22:52:42,340: INFO/MainProcess] Received task: scans.tasks.tsum[adf3709b-79a9-4413-910c-ee885eba5ba8]  
-[2017-02-08 22:52:42,341: INFO/PoolWorker-2] Task scans.tasks.tsum[adf3709b-79a9-4413-910c-ee885eba5ba8] succeeded in 0.000673071015626s: 17
-[2017-02-08 22:52:45,199: INFO/MainProcess] Received task: scans.tasks.add[371aa4ed-22b9-44ac-9249-048fdb6061d6]  
-[2017-02-08 22:52:45,200: INFO/MainProcess] Received task: scans.tasks.add[05029fc7-ad9c-4061-af6c-3a2393e937e8]  
-[2017-02-08 22:52:45,715: INFO/PoolWorker-9] Task scans.tasks.add[05029fc7-ad9c-4061-af6c-3a2393e937e8] succeeded in 0.00128324190155s: 9
-[2017-02-08 22:52:45,732: INFO/PoolWorker-8] Task scans.tasks.add[371aa4ed-22b9-44ac-9249-048fdb6061d6] succeeded in 0.0184136040043s: 8
-[2017-02-08 22:52:45,733: INFO/MainProcess] Received task: scans.tasks.tsum[e87af201-a402-4630-8a3c-ba8620228a22]  
-[2017-02-08 22:52:45,742: INFO/PoolWorker-1] Task scans.tasks.tsum[e87af201-a402-4630-8a3c-ba8620228a22] succeeded in 0.00715284910984s: 17
-[2017-02-08 22:52:50,747: INFO/MainProcess] Received task: scans.tasks.add[68716ad3-de0f-465a-985e-d132995c5bc3]  
-[2017-02-08 22:52:50,748: INFO/MainProcess] Received task: scans.tasks.add[ee9d5b31-d6c9-42e7-8913-2d4ae02e5573]  
-[2017-02-08 22:52:51,720: INFO/PoolWorker-7] Task scans.tasks.add[ee9d5b31-d6c9-42e7-8913-2d4ae02e5573] succeeded in 0.00165063911118s: 9
-[2017-02-08 22:52:51,721: INFO/PoolWorker-3] Task scans.tasks.add[68716ad3-de0f-465a-985e-d132995c5bc3] succeeded in 0.00329981301911s: 8
-[2017-02-08 22:52:51,722: INFO/MainProcess] Received task: scans.tasks.tsum[f7517e2b-3d40-4fd7-a078-c10647831050]  
-[2017-02-08 22:52:51,731: INFO/PoolWorker-12] Task scans.tasks.tsum[f7517e2b-3d40-4fd7-a078-c10647831050] succeeded in 0.00720168510452s: 17
+[2017-02-13 23:45:30,787: INFO/MainProcess] celery@sec-tools-02 ready.
+[2017-02-13 23:45:30,788: INFO/MainProcess] Received task: scans.tasks.delegate[bec527ea-b6e6-450d-87e7-0ae581b2dc78]  
+[2017-02-13 23:45:30,789: INFO/MainProcess] Received task: scans.tasks.delegate[a159c374-1fe4-4c80-9fd1-6ceb7174f699]  
+[2017-02-13 23:45:30,789: INFO/MainProcess] Received task: scans.tasks.delegate[b65d52c8-498e-4204-9eb8-4c23adb43701]  
+[2017-02-13 23:45:30,790: INFO/MainProcess] Received task: scans.tasks.delegate[6d26ef38-1698-4dd2-be4f-53aa909db304]  
+[2017-02-13 23:45:30,790: INFO/MainProcess] Received task: scans.tasks.delegate[38c279fb-7ea2-4acd-b3d5-0696d37b4a21]  
+[2017-02-13 23:45:30,791: INFO/MainProcess] Received task: scans.tasks.delegate[4fbd5323-a61e-4141-87df-2486fe551f1c]  
+[2017-02-13 23:45:30,791: INFO/MainProcess] Received task: scans.tasks.delegate[5dc7e6fb-3502-4f07-8bb0-f1b789cba9ab]  
+[2017-02-13 23:45:30,792: INFO/MainProcess] Received task: scans.tasks.delegate[c1e4ead4-7063-4ea4-be01-9e6b52972035]  
+[2017-02-13 23:45:30,792: INFO/MainProcess] Received task: scans.tasks.delegate[2c167904-5005-427f-8ec9-550bafbdc631]  
+[2017-02-13 23:45:30,793: INFO/MainProcess] Received task: scans.tasks.delegate[d2660806-d9a9-4035-a861-ff295b10b6d7]  
+[2017-02-13 23:45:30,904: WARNING/PoolWorker-3] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20174313234312663924scanme.nmap.org/w3af_script.w3af
+[2017-02-13 23:45:30,904: WARNING/PoolWorker-19] /home/djayasankar/.rvm/gems/ruby-2.2.4/bin/gauntlt
+[2017-02-13 23:45:30,904: WARNING/PoolWorker-12] /home/djayasankar/.rvm/gems/ruby-2.2.4/bin/gauntlt
+[2017-02-13 23:45:30,906: WARNING/PoolWorker-15] /home/djayasankar/.rvm/gems/ruby-2.2.4/bin/gauntlt
+[2017-02-13 23:45:30,906: WARNING/PoolWorker-21] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20174113234115793126scanme.nmap.org/w3af_script.w3af
+[2017-02-13 23:45:30,906: WARNING/PoolWorker-8] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20174313234312502278scanme.nmap.org/w3af_script.w3af
+[2017-02-13 23:45:30,907: WARNING/PoolWorker-13] /home/djayasankar/.rvm/gems/ruby-2.2.4/bin/gauntlt
+[2017-02-13 23:45:30,907: WARNING/PoolWorker-20] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20173913233928668101scanme.nmap.org/w3af_script.w3af
+[2017-02-13 23:45:30,910: WARNING/PoolWorker-11] /home/djayasankar/.rvm/gems/ruby-2.2.4/bin/gauntlt
+[2017-02-13 23:45:30,911: WARNING/PoolWorker-18] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20174413234441829112scanme.nmap.org/w3af_script.w3af
 
 worker: Warm shutdown (MainProcess)
- 
- -------------- celery@sec-tools-02 v4.0.2 (latentcall)
----- **** ----- 
---- * ***  * -- Linux-3.10.0-514.6.1.el7.x86_64-x86_64-with-oracle-7.3 2017-02-07 23:12:31
--- * - **** --- 
-- ** ---------- [config]
-- ** ---------- .> app:         webscanner:0x2c03950
-- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
-- ** ---------- .> results:     redis://localhost/
-- *** --- * --- .> concurrency: 24 (prefork)
--- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
---- ***** ----- 
- -------------- [queues]
-                .> celery           exchange=celery(direct) key=celery
-                
-
-[tasks]
-  . scans.tasks.add
-  . scans.tasks.collect_results
-  . scans.tasks.delegate
-  . scans.tasks.tsum
-  . webscanner.celery_tasks.debug_task
-
+[2017-02-13 23:45:37,192: INFO/PoolWorker-20] Task scans.tasks.delegate[bec527ea-b6e6-450d-87e7-0ae581b2dc78] succeeded in 6.29638693994s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-13 23:45:37,616: INFO/PoolWorker-3] Task scans.tasks.delegate[5dc7e6fb-3502-4f07-8bb0-f1b789cba9ab] succeeded in 6.71988786501s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-13 23:45:37,618: INFO/PoolWorker-18] Task scans.tasks.delegate[2c167904-5005-427f-8ec9-550bafbdc631] succeeded in 6.71821962204s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-13 23:45:37,654: INFO/PoolWorker-21] Task scans.tasks.delegate[b65d52c8-498e-4204-9eb8-4c23adb43701] succeeded in 6.75851506414s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-13 23:45:37,681: INFO/PoolWorker-8] Task scans.tasks.delegate[38c279fb-7ea2-4acd-b3d5-0696d37b4a21] succeeded in 6.78574706009s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-13 23:45:38,655: ERROR/MainProcess] Chord callback for '40d40d35-924a-4046-83b4-87473dcdf76f' raised: ChordError(u"Dependency bec527ea-b6e6-450d-87e7-0ae581b2dc78 raised WorkerLostError('Worker exited prematurely: exitcode 0.',)",)
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/celery/backends/redis.py", line 281, in on_chord_part_return
+    callback.delay([unpack(tup, decode) for tup in resl])
+  File "/usr/lib64/python2.7/site-packages/celery/backends/redis.py", line 234, in _unpack_chord_result
+    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
+ChordError: Dependency bec527ea-b6e6-450d-87e7-0ae581b2dc78 raised WorkerLostError('Worker exited prematurely: exitcode 0.',)
+[2017-02-13 23:45:38,657: ERROR/MainProcess] Task handler raised error: WorkerLostError('Worker exited prematurely: exitcode 0.',)
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/billiard/pool.py", line 1224, in mark_as_worker_lost
+    human_status(exitcode)),
+WorkerLostError: Worker exited prematurely: exitcode 0.
+[2017-02-13 23:45:38,659: ERROR/MainProcess] Chord callback for 'f946f5f9-df9c-4c4c-ae4b-d2007199379c' raised: ChordError(u"Dependency 2c167904-5005-427f-8ec9-550bafbdc631 raised WorkerLostError('Worker exited prematurely: exitcode 0.',)",)
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/celery/backends/redis.py", line 281, in on_chord_part_return
+    callback.delay([unpack(tup, decode) for tup in resl])
+  File "/usr/lib64/python2.7/site-packages/celery/backends/redis.py", line 234, in _unpack_chord_result
+    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
+ChordError: Dependency 2c167904-5005-427f-8ec9-550bafbdc631 raised WorkerLostError('Worker exited prematurely: exitcode 0.',)
+[2017-02-13 23:45:38,660: ERROR/MainProcess] Task handler raised error: WorkerLostError('Worker exited prematurely: exitcode 0.',)
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/billiard/pool.py", line 1224, in mark_as_worker_lost
+    human_status(exitcode)),
+WorkerLostError: Worker exited prematurely: exitcode 0.
+[2017-02-13 23:45:38,683: ERROR/MainProcess] Chord callback for 'eca61e1e-47fc-4d21-8ddb-661efc338c09' raised: ChordError(u"Dependency b65d52c8-498e-4204-9eb8-4c23adb43701 raised WorkerLostError('Worker exited prematurely: exitcode 0.',)",)
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/celery/backends/redis.py", line 281, in on_chord_part_return
+    callback.delay([unpack(tup, decode) for tup in resl])
+  File "/usr/lib64/python2.7/site-packages/celery/backends/redis.py", line 234, in _unpack_chord_result
+    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
+ChordError: Dependency b65d52c8-498e-4204-9eb8-4c23adb43701 raised WorkerLostError('Worker exited prematurely: exitcode 0.',)
+[2017-02-13 23:45:38,684: ERROR/MainProcess] Task handler raised error: WorkerLostError('Worker exited prematurely: exitcode 0.',)
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/billiard/pool.py", line 1224, in mark_as_worker_lost
+    human_status(exitcode)),
+WorkerLostError: Worker exited prematurely: exitcode 0.
+[2017-02-13 23:45:39,197: ERROR/MainProcess] Chord callback for 'f23ac622-6639-4639-ae53-519648e30659' raised: ChordError(u"Dependency 38c279fb-7ea2-4acd-b3d5-0696d37b4a21 raised WorkerLostError('Worker exited prematurely: exitcode 0.',)",)
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/celery/backends/redis.py", line 281, in on_chord_part_return
+    callback.delay([unpack(tup, decode) for tup in resl])
+  File "/usr/lib64/python2.7/site-packages/celery/backends/redis.py", line 234, in _unpack_chord_result
+    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
+ChordError: Dependency 38c279fb-7ea2-4acd-b3d5-0696d37b4a21 raised WorkerLostError('Worker exited prematurely: exitcode 0.',)
+[2017-02-13 23:45:39,199: ERROR/MainProcess] Task handler raised error: WorkerLostError('Worker exited prematurely: exitcode 0.',)
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/billiard/pool.py", line 1224, in mark_as_worker_lost
+    human_status(exitcode)),
+WorkerLostError: Worker exited prematurely: exitcode 0.
+[2017-02-13 23:45:46,888: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-02-13 23:45:46,899: INFO/MainProcess] mingle: searching for neighbors
+[2017-02-13 23:45:47,919: INFO/MainProcess] mingle: all alone
+[2017-02-13 23:45:47,932: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2017-02-13 23:45:47,932: INFO/MainProcess] celery@sec-tools-02 ready.
+[2017-02-13 23:46:15,050: INFO/MainProcess] Received task: scans.tasks.delegate[4e56ea0a-e684-4287-ac15-327868fbf160]  
+[2017-02-13 23:46:15,051: INFO/MainProcess] Received task: scans.tasks.delegate[dbfcd7cd-bbfe-4799-a1b1-d781f00c22cf]  
+[2017-02-13 23:46:15,962: WARNING/PoolWorker-10] /home/djayasankar/.rvm/gems/ruby-2.2.4/bin/gauntlt
+[2017-02-13 23:46:15,962: WARNING/PoolWorker-2] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20174613234615002894scanme.nmap.org/w3af_script.w3af
+[2017-02-13 23:46:21,904: INFO/PoolWorker-2] Task scans.tasks.delegate[4e56ea0a-e684-4287-ac15-327868fbf160] succeeded in 5.94861384504s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-13 23:48:28,587: INFO/PoolWorker-10] Task scans.tasks.delegate[dbfcd7cd-bbfe-4799-a1b1-d781f00c22cf] succeeded in 132.631833991s: {'Gauntlt': {'files': [(...), (...), (...)]}}
+[2017-02-13 23:48:28,588: INFO/MainProcess] Received task: scans.tasks.collect_results[1bb9dbc7-353b-4e38-af0e-0e471bc61708]  
+[2017-02-13 23:48:28,595: INFO/PoolWorker-9] [[u'/home/djayasankar/Documents/webscanner/temporary/20174613234615002894scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20174613234615002894scanme.nmap.org/w3af_results.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20174613234615002894scanme.nmap.org/arachni_tests.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/20174613234615002894scanme.nmap.org/arachni_tests.afr', u'D']]
+[2017-02-13 23:48:28,621: INFO/PoolWorker-9] Task scans.tasks.collect_results[1bb9dbc7-353b-4e38-af0e-0e471bc61708] succeeded in 0.0314479619265s: [['/home/djayasankar/Documents/webscanner/temporary/20174613234615002894scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20174613234615002894scanme.nmap.org/w3af_results.xml', 'S'], ['/home/djayasankar/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20174613234615002894scanme.nmap.org/arachni_tests.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/20174613234615002894scanme.nmap.org/arachni_tests.afr', 'D']]

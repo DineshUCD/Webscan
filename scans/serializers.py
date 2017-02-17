@@ -1,44 +1,16 @@
 from rest_framework import serializers
-from rest_framework.fields import CurrentUserDefault
-from scans.models import Tool, Plan, Scan
+from scans.models import Tool, Scan
+from plans.serializers import PlanSerializer
 from urllib2 import urlopen
 
-class ToolSerializer(serializers.ModelSerializer):
-    allow_null = True
-    class Meta:
-        model = Tool
-        fields = ('module','name',)
-
-class PlanSerializer(serializers.ModelSerializer):
-    tool_set = ToolSerializer(many=True)
-
-    class Meta:
-        model = Plan
-        fields = ('name', 'description', 'tool_set')
-   
-    def create(self, validated_data):
-        tools_data = validated_data.pop('tool_set')
-
-        request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            validated_data['user_profile'] = request.user.userprofile
-        
-         #Plan object created with name and description.
-         #Missing (scan,).
-        plan = Plan.objects.create(**validated_data)
-
-        for tool_data in tools_data:
-            Tool.objects.create(plan=plan, **tool_data)
-    
-        return plan
 
 #provide a way of serializing and deserializing the Scan instances 
 #into representations such as json
 class ScanSerializer(serializers.ModelSerializer):
-
+    plan = PlanSerializer
     class Meta:
-        meta = Scan
-        fields = ('uniform_resource_locator',)
+        model = Scan
+        fields = ('uniform_resource_locator', 'plan')
          
     def validate_uniform_resource_locator(self, value):
         status_code = urlopen(value).code
@@ -47,11 +19,18 @@ class ScanSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        request          = self.context.get("request")
-        #Passed from the HTML front-end via an AJAX API call.
-        plan_primary_key = int(validated_data.pop("plan_primary_key"))
-        validated_data['plan'] = Plan.objects.filter(id=plan_primary_key, user_profile__id=int(request.user.userprofile.id)).first()
+        request = self.context.get("request")
         if request and hasattr(request, "user"):
             validated_data['user_profile'] = request.user.userprofile
         scan = Scan.objects.create(**validated_data)
+
+        #Containers and user defined types are mutable
+        validated_data['plan'].scan = scan
+        validated_data['plan'].save()
+        
         return scan
+
+    def to_representation(self, instance):
+        ret = super(ScanSerializer, self).to_representation(instancE)
+        ret['plan'] = str(instance.plan).lower()
+        return ret

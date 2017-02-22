@@ -10,6 +10,7 @@ from scans.serializers import ScanSerializer
 
 from scans.models import Scan
 from uploads.models import Upload
+from plans.models import Plan
 
 from celery import chord, group
 from .tasks import delegate, collect_results
@@ -33,12 +34,12 @@ class ScanList(generics.ListCreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def launch(request, template_name='scans/index.html'):
-  user_session = request.userprofile.get_latest_session()
+  user_session = request.user.userprofile.get_latest_session()
   plan_pks = user_session.getitem('plan')
 
   context = dict()
   
   if plan_pks and isinstance(plan_pks, list):
-    context['plans'] = Plans.objects.filter(pk__in=plan_pks, user_profile__id=int(request.userprofile.id)) 
+    context['plans'] = Plan.objects.filter(pk__in=plan_pks, user_profile__id=int(request.user.userprofile.id)) 
 
   return render(request, template_name, context)

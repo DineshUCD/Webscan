@@ -7,5 +7,6 @@ from . import views
 
 app_name = 'scans'
 urlpatterns = [
-    url(r'^$', views.ScanList.as_view(), name='ScanList'),
+    url(r'^v1/list/$', views.ScanList.as_view(), name='ScanList'),
+    url(r'^$', views.launch, name='index'),
 ]

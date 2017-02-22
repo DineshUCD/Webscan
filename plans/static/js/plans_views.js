@@ -1,3 +1,7 @@
+$(document).ready(function() {
+  $('#planning').dataTable();
+});
+
 function ajaxHandler(json, mapping, callback) {
   $.ajax({
     type: "POST",

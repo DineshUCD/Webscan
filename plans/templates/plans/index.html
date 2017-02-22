@@ -4,19 +4,16 @@
 
 {%  block content %}
 
-<script src="{% static 'js/plan_views.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/plans_views.js' %}" type="text/javascript"></script>
 
 <div class="container">
 
-  <!-- Allow a user to search any column based on keywords -->
-  <div class="form-group pull-right">
-    <input type="text" class="search form-control" placeholder="What are you looking for?">
-  </div>  
-  <span class="counter pull-right"></span>
 
   <!-- Table to display Plan dynamically updates on changes -->
-  <div class="table-responsive">
-    <table class="table table-hover table-bordered results">
+  <div class="pinned">
+    <!-- Table's title -->
+    <p class="h5" style="float:left;">Create Plan(s)</p>
+    <table id="planning" class="table table-hover table-bordered">
       <thead>
         <tr>
           <th>#</th>
@@ -26,12 +23,6 @@
           <th>Created On</th>
           <th>Tools</th>
         </tr>
-
-        <!-- If there are no search results, display a warning! -->
-        <tr class="warning no-result">
-          <td colspan="6"><i class="fa fa-warning"></i> No result</td>
-        </tr>        
-
       </thead>
 
       <tbody>
@@ -86,8 +77,8 @@
   </div>
     
   <!-- Redirect to Scan Page -->
-  <a href="{% url 'scans:ScanList' %}">
-    <span class="glyphicon glyphicon-plane" class="btn btn-default"></span>
+  <a href="{% url 'scans:index' %}">
+    <span class="glyphicon glyphicon-plane"></span>
     To Scan Page
   </a>
 

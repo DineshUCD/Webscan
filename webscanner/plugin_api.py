@@ -38,7 +38,9 @@ class AbstractPlugin(object):
         self.model_pk = kwargs.pop('model_pk', None)
 
         #The model that contains collects the Scan information
-        self.model        = None
+        self.model = None
+        #The tool that is associated with the scan's plugin.
+        self.tool = None
         # The absolute path of the scanner executable; preferably, a console based program
         self.scanner_path = None
         # Stores the output of the plugin execution.
@@ -49,11 +51,16 @@ class AbstractPlugin(object):
         self.diagnostics = dict()
         # Stores meta data on the scan in json format.
         self.diagnostics[self.class_name] = dict()
-     
+
+    def set_metafile(self, filevariable, role):
+        filename = os.path.basename(filevariable)
+        metafile = MetaFile(scan=self.model, store=self.model.zip, tool=self.tool, report=filename, role=role).save()
+        self.record(AbstractPlugin.FILES, [(filevariable, role)])
+        
     def record(self, key, value):
      
         if type(value) is list:
-            if not key in self.diagnostics[self.class_name] or not type(self.diagnostics[self.class_name]) is list:
+            if not key in self.diagnostics[self.class_name] or not type(self.diagnostics[self.class_name][key]) is list:
                 self.diagnostics[self.class_name][key] = list()
             self.diagnostics[self.class_name][key].extend(value)
         else:
@@ -90,7 +97,9 @@ class AbstractPlugin(object):
             self.temporary_folder_path = os.path.join( settings.TEMPORARY_DIR, self.model.zip.name )
             if not os.path.exists(self.temporary_folder_path):
                 os.makedirs(self.temporary_folder_path)
-        except (Scan.DoesNotExist, OSError) as e:
+            self.tool = self.model.plan.tool_set.get(name=str(self.__class__.PLUGIN_NAME))
+            print self.tool
+        except (Scan.DoesNotExist, Tool.DoesNotExist, OSError) as e:
             return None
 
     @abc.abstractmethod

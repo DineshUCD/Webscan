@@ -113,7 +113,6 @@ class ZipArchive():
             logger.error("I/O error({0}): {1}".format(e.errno, e.strerror))
 
         #Establish the file's relationship to the scan. 
-        MetaFile(scan=self.scan, store=self.scan.zip, report=base_filename, role=absolute_path[1]).save()
         self.file_list.append(new_file_path)
 
     def archive_meta_files(self, file_list):

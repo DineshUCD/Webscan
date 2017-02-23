@@ -27,9 +27,12 @@ class Gauntlt(AbstractPlugin):
         # Write out to cucumber.yml first
         gauntlt_yaml_configuration = "CURRENT_DIRECTORY=" + str( self.temporary_folder_path ) + " URL=" + str( self.model.uniform_resource_locator )
         cucumber_profile_file_path = os.path.join(settings.CONFIG_DIR, 'cucumber.yml')
-      
+        
+
         # The Gauntlt metafiles 
-        self.record(AbstractPlugin.FILES, [(cucumber_profile_file_path, MetaFile.DOCUMENTATION), (os.path.join(self.temporary_folder_path, 'arachni_tests.xml'), MetaFile.SCAN),(os.path.join(self.temporary_folder_path, 'arachni_tests.afr'), MetaFile.DOCUMENTATION)] )
+        self.set_metafile(cucumber_profile_file_path, MetaFile.DOCUMENTATION)
+        self.set_metafile(os.path.join(self.temporary_folder_path, 'arachni_tests.xml'), MetaFile.SCAN)
+        self.set_metafile(os.path.join(self.temporary_folder_path, 'arachni_tests.afr'), MetaFile.DOCUMENTATION)
        
         with open(cucumber_profile_file_path, 'w') as cucumber_profile:
             cucumber_profile.write(yaml.dump(dict(default=gauntlt_yaml_configuration), default_flow_style=False))

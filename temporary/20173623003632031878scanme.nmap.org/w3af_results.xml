@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w3af-run start="1487810195" start-long="Thu Feb 23 00:36:35 2017" version="2.1">
+    <w3af-version>w3af - Web Application Attack and Audit Framework
+Version: 1.7.6
+Revision: b6d12b0dc3 - 20 Jan 2017 13:06
+Branch: master
+Local changes: Yes
+Author: Andres Riancho and the w3af team.</w3af-version>
+    <scan-info target="http://scanme.nmap.org/">
+        <audit>
+            <plugin name="file_upload"/>
+            <plugin name="csrf"/>
+            <plugin name="un_ssl"/>
+            <plugin name="os_commanding"/>
+            <plugin name="lfi"/>
+            <plugin name="sqli"/>
+            <plugin name="blind_sqli"/>
+            <plugin name="phishing_vector"/>
+            <plugin name="generic"/>
+            <plugin name="format_string"/>
+            <plugin name="websocket_hijacking"/>
+            <plugin name="shell_shock"/>
+            <plugin name="memcachei"/>
+            <plugin name="ldapi"/>
+            <plugin name="buffer_overflow"/>
+            <plugin name="redos"/>
+            <plugin name="global_redirect"/>
+            <plugin name="xpath"/>
+            <plugin name="cors_origin"/>
+            <plugin name="htaccess_methods"/>
+            <plugin name="dav"/>
+            <plugin name="ssi"/>
+            <plugin name="eval"/>
+            <plugin name="rosetta_flash"/>
+            <plugin name="xss"/>
+            <plugin name="xst"/>
+            <plugin name="ssl_certificate"/>
+            <plugin name="preg_replace"/>
+            <plugin name="mx_injection"/>
+            <plugin name="response_splitting"/>
+            <plugin name="rfd"/>
+            <plugin name="rfi"/>
+            <plugin name="frontpage"/>
+        </audit>
+        <infrastructure>
+            <plugin name="server_header"/>
+            <plugin name="allowed_methods"/>
+            <plugin name="frontpage_version"/>
+        </infrastructure>
+        <bruteforce/>
+        <grep>
+            <plugin name="error_500"/>
+        </grep>
+        <evasion/>
+        <output>
+            <plugin name="xml_file">
+                <config parameter="output_file" value="/home/djayasankar/Documents/webscanner/temporary/20173623003632031878scanme.nmap.org/w3af_results.xml"/>
+            </plugin>
+            <plugin name="console"/>
+        </output>
+        <mangle/>
+        <crawl/>
+        <auth/>
+    </scan-info>
+    <vulnerability id="[37]" method="GET" name="Server header" plugin="server_header" severity="Information" url="None" var="None">
+        <description>The server header for the remote web server is: &quot;Apache/2.4.7 (Ubuntu)&quot;.</description>
+        <http-transactions>
+            <http-transaction id="37">
+                <http-request>
+                    <status>GET http://scanme.nmap.org/ HTTP/1.1</status>
+                    <headers>
+                        <header content="scanme.nmap.org" field="Host"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 200 OK</status>
+                    <headers>
+                        <header content="2724" field="content-length"/>
+                        <header content="gzip" field="content-encoding"/>
+                        <header content="bytes" field="accept-ranges"/>
+                        <header content="Accept-Encoding" field="vary"/>
+                        <header content="timeout=5, max=100" field="keep-alive"/>
+                        <header content="Apache/2.4.7 (Ubuntu)" field="server"/>
+                        <header content="Keep-Alive" field="connection"/>
+                        <header content="Thu, 23 Feb 2017 00:36:35 GMT" field="date"/>
+                        <header content="text/html" field="content-type"/>
+                    </headers>
+                    <body content-encoding="text">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;title&gt;Go ahead and ScanMe!&lt;/title&gt;
+
+&lt;link REL=&quot;SHORTCUT ICON&quot; HREF=&quot;/shared/images/tiny-eyeicon.png&quot; TYPE=&quot;image/png&quot;&gt;
+&lt;META NAME=&quot;ROBOTS&quot; CONTENT=&quot;NOARCHIVE&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/shared/css/insecdb.css&quot; type=&quot;text/css&quot;&gt;
+&lt;!--Google Analytics Code--&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-11009417-1', 'auto');
+  ga('send', 'pageview');
+
+&lt;/script&gt;
+&lt;!--END Google Analytics Code--&gt;
+
+&lt;!--Google Custom Site Search boilerplate Javascript--&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  (function() {
+    var cx = 'partner-pub-0078565546631069:bx60rb-fytx';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+&lt;/script&gt;
+&lt;!--End Google Custom Site Search boilerplate Javascript--&gt;
+
+&lt;/HEAD&gt;
+&lt;BODY BGCOLOR=&quot;#2A0D45&quot; TEXT=&quot;#000000&quot;&gt;
+
+&lt;TABLE CELLPADDING=&quot;0&quot; WIDTH=&quot;100%&quot; CELLSPACING=&quot;0&quot;&gt;
+&lt;TR&gt;&lt;TD ALIGN=&quot;left&quot;&gt;&lt;A HREF=&quot;/&quot;&gt;&lt;IMG BORDER=0 ALT=&quot;Home page logo&quot;
+SRC=&quot;/images/sitelogo.png&quot; HEIGHT=90 WIDTH=168&gt;&lt;/A&gt;&lt;/TD&gt;
+&lt;TD VALIGN=&quot;bottom&quot; ALIGN=&quot;right&quot;&gt;
+&lt;!-- Begin TopBanner Code --&gt;
+&lt;!-- AdSpeed.com Serving Code 7.9.6 for [Zone] TopBanner [Any Dimension] --&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;//g.adspeed.net/ad.php?do=js&amp;amp;zid=14678&amp;amp;wd=-1&amp;amp;ht=-1&amp;amp;target=_blank&quot;&gt;&lt;/script&gt;
+&lt;!-- AdSpeed.com End --&gt;
+&lt;!-- End Banner Code --&gt;
+
+&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;
+&lt;TABLE WIDTH=&quot;100%&quot; CELLPADDING=&quot;0&quot; CELLSPACING=&quot;0&quot;&gt;&lt;TR&gt;
+&lt;TD ALIGN=&quot;left&quot; WIDTH=&quot;130&quot; VALIGN=&quot;top&quot; class=&quot;sidebar&quot;&gt;
+
+&lt;!-- SECWIKI PORTAL INSERT --&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/&quot;&gt;Nmap Security Scanner&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/&quot;&gt;Intro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/book/man.html&quot;&gt;Ref Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/book/install.html&quot;&gt;Install Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/download.html&quot;&gt;Download&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/changelog.html&quot;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/book/&quot;&gt;Book&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/docs.html&quot;&gt;Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/&quot;&gt;Security Lists&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/nmap-announce/&quot;&gt;Nmap Announce&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/nmap-dev/&quot;&gt;Nmap Dev&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/bugtraq/&quot;&gt;Bugtraq&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/fulldisclosure/&quot;&gt;Full Disclosure&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/pen-test/&quot;&gt;Pen Test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/basics/&quot;&gt;Basics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/&quot;&gt;More&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org&quot;&gt;Security Tools&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/pass-audit/&quot;&gt;Password audit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/sniffers/&quot;&gt;Sniffers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/vuln-scanners/&quot;&gt;Vuln scanners&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/web-scanners/&quot;&gt;Web scanners&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/wireless/&quot;&gt;Wireless&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/sploits/&quot;&gt;Exploitation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/packet-crafters/&quot;&gt;Packet crafters&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/&quot;&gt;More&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/&quot;&gt;Site News&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/advertising.html&quot;&gt;Advertising&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/fyodor/&quot;&gt;About/Contact&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;!-- SiteSearch Google --&gt;
+&lt;form action=&quot;https://nmap.org/search.html&quot; id=&quot;cse-search-box-sidebar&quot;&gt;
+  &lt;div&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;cx&quot; value=&quot;partner-pub-0078565546631069:bx60rb-fytx&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;cof&quot; value=&quot;FORID:9&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;ie&quot; value=&quot;ISO-8859-1&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;q&quot; size=&quot;16&quot;&gt;
+    &lt;input type=&quot;submit&quot; name=&quot;sa&quot; value=&quot;Site Search&quot;&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+&lt;!-- End SiteSearch Google --&gt;
+&lt;/li&gt;
+&lt;!-- These can come back if I ever update them ...
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/links.html&quot;&gt;Exceptional Links&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/reading.html&quot;&gt;Good Reading&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/sploits.html&quot;&gt;Exploit World&lt;/a&gt;&lt;/li&gt;
+--&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/advertising.html&quot;&gt;Sponsors:&lt;/a&gt;
+  &lt;br&gt;&lt;br&gt;
+  
+&lt;!-- Begin Sidebar Banner Code --&gt;
+&lt;A HREF=&quot;http://www.acunetix.com/web-vulnerability-manager/?utm_source=insecure&amp;utm_medium=box&amp;utm_term=chess&amp;utm_campaign=insecure &quot;&gt;&lt;IMG SRC=&quot;/shared/images/Acunetix/acx_Chess-WB.gif&quot; BORDER=0 ALT=&quot;Acunetix&quot;&gt;&lt;/A&gt;
+&lt;!-- End Sidebar Banner Code --&gt;
+
+&lt;BR&gt;&lt;BR&gt;
+
+&lt;!-- Begin Bottom (Google) Sidebar Banner Code --&gt;
+&lt;script async src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+&lt;!-- SidebarSkyScraper --&gt;
+&lt;ins class=&quot;adsbygoogle&quot;
+     style=&quot;display:inline-block;width:120px;height:600px&quot;
+     data-ad-client=&quot;ca-pub-0078565546631069&quot;
+     data-ad-slot=&quot;9829251079&quot;&gt;&lt;/ins&gt;
+&lt;script&gt;
+(adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;!-- End Bottom (Google) Sidebar Banner Code --&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/TD&gt;
+&lt;TD BGCOLOR=&quot;#FFFFFF&quot; VALIGN=&quot;top&quot; ALIGN=&quot;left&quot;&gt;&lt;IMG
+SRC=&quot;/shared/images/topleftcurve.gif&quot; alt=&quot;/&quot;&gt;&lt;TABLE CELLPADDING=&quot;4&quot; WIDTH=&quot;100%&quot; style=&quot;table-layout: fixed;&quot;&gt;&lt;TR&gt;&lt;TD BGCOLOR=&quot;#FFFFFF&quot;&gt;
+
+&lt;p&gt;Hello, and welcome to Scanme.Nmap.Org, a service provided by the &lt;a href=&quot;http://nmap.org&quot;&gt;Nmap Security Scanner Project&lt;/a&gt; and &lt;a href=&quot;http://insecure.org&quot;&gt;Insecure.Org&lt;/a&gt;.
+
+&lt;p&gt;We set up this machine to help folks learn about Nmap and also to test and make sure that their Nmap installation (or Internet connection) is working properly.  You are authorized to scan this machine with Nmap or other port scanners.  Try not to hammer on the server too hard.  A few scans in a day is fine, but dont scan 100 times a day or use this site to test your ssh brute-force password cracking tool.
+
+&lt;p&gt;Thanks&lt;br&gt;
+-&lt;a href=&quot;http://insecure.org/fyodor&quot;&gt;Fyodor&lt;/a&gt;
+
+&lt;/TD&gt;&lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/TD&gt;&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;&lt;/TD&gt;&lt;TD ALIGN=&quot;center&quot;&gt;
+&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;
+[ &lt;A HREF=&quot;https://nmap.org&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Nmap&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://sectools.org&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Sec Tools&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://seclists.org/&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Mailing Lists&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Site News&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/fyodor/&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;About/Contact&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/advertising.html&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Advertising&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/privacy.html&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Privacy&lt;/FONT&gt;&lt;/A&gt; ]&lt;BR&gt;
+&lt;/FONT&gt;
+
+&lt;!-- SiteSearch Google --&gt;
+&lt;div class=&quot;gcse-searchbox-only&quot; data-resultsUrl=&quot;https://nmap.org/search.html&quot;&gt;&lt;/div&gt;
+&lt;!-- End SiteSearch Google --&gt;
+
+&lt;!-- Bottom Banner --&gt;
+&lt;!-- Adsense --&gt;
+&lt;script async src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+&lt;!-- PageBottom728x90 --&gt;
+&lt;ins class=&quot;adsbygoogle&quot;
+     style=&quot;display:inline-block;width:728px;height:90px&quot;
+     data-ad-client=&quot;ca-pub-0078565546631069&quot;
+     data-ad-slot=&quot;2743510915&quot;&gt;&lt;/ins&gt;
+&lt;script&gt;
+(adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;!-- End Bottom Banner --&gt;
+&lt;/TD&gt;&lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+
+</body>
+                </http-response>
+            </http-transaction>
+        </http-transactions>
+    </vulnerability>
+    <vulnerability id="[38, 63, 75, 80, 83, 99]" method="GET" name="Allowed HTTP methods" plugin="allowed_methods" severity="Information" url="http://scanme.nmap.org/" var="None">
+        <description>The URL &quot;http://scanme.nmap.org/&quot; has the following enabled HTTP methods: CONNECT, GET, HEAD, OPTIONS, POST</description>
+        <long-description>There are a number of HTTP methods that can be used on a webserver (`OPTIONS`, `HEAD`, `GET`, `POST`, `PUT`, `DELETE` etc.). Each of these methods perform a different function and each have an associated level of risk when their use is permitted on the webserver.
+
+A client can use the `OPTIONS` method within a request to query a server to determine which methods are allowed.
+
+Cyber-criminals will almost always perform this simple test as it will give a very quick indication of any high-risk methods being permitted by the server. The tool discovered that several methods are supported by the server.</long-description>
+        <fix-guidance>It is recommended that a whitelisting approach be taken to explicitly permit the HTTP methods required by the application and block all others.
+
+Typically the only HTTP methods required for most applications are `GET` and `POST`. All other methods perform actions that are rarely required or perform actions that are inherently risky. These risky methods (such as `PUT`, `DELETE`, etc) should be protected by strict limitations, such as ensuring that the channel is secure (SSL/TLS enabled) and only authorised and trusted clients are permitted to use them.</fix-guidance>
+        <fix-effort>50</fix-effort>
+        <references>
+            <reference title="Apache.org" url="http://httpd.apache.org/docs/2.2/mod/core.html#limitexcept"/>
+        </references>
+        <http-transactions>
+            <http-transaction id="38">
+                <http-request>
+                    <status>OPTIONS http://scanme.nmap.org/ HTTP/1.1</status>
+                    <headers>
+                        <header content="scanme.nmap.org" field="Host"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 200 OK</status>
+                    <headers>
+                        <header content="0" field="content-length"/>
+                        <header content="timeout=5, max=81" field="keep-alive"/>
+                        <header content="Apache/2.4.7 (Ubuntu)" field="server"/>
+                        <header content="Keep-Alive" field="connection"/>
+                        <header content="GET,HEAD,POST,OPTIONS" field="allow"/>
+                        <header content="Thu, 23 Feb 2017 00:36:36 GMT" field="date"/>
+                        <header content="text/html" field="content-type"/>
+                    </headers>
+                </http-response>
+            </http-transaction>
+            <http-transaction id="63">
+                <http-request>
+                    <status>HEAD http://scanme.nmap.org/ HTTP/1.1</status>
+                    <headers>
+                        <header content="scanme.nmap.org" field="Host"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 200 OK</status>
+                    <headers>
+                        <header content="2724" field="content-length"/>
+                        <header content="gzip" field="content-encoding"/>
+                        <header content="bytes" field="accept-ranges"/>
+                        <header content="Accept-Encoding" field="vary"/>
+                        <header content="timeout=5, max=94" field="keep-alive"/>
+                        <header content="Apache/2.4.7 (Ubuntu)" field="server"/>
+                        <header content="Keep-Alive" field="connection"/>
+                        <header content="Thu, 23 Feb 2017 00:36:36 GMT" field="date"/>
+                        <header content="text/html" field="content-type"/>
+                    </headers>
+                </http-response>
+            </http-transaction>
+            <http-transaction id="75">
+                <http-request>
+                    <status>OPTIONS http://scanme.nmap.org/ HTTP/1.1</status>
+                    <headers>
+                        <header content="scanme.nmap.org" field="Host"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 200 OK</status>
+                    <headers>
+                        <header content="0" field="content-length"/>
+                        <header content="timeout=5, max=99" field="keep-alive"/>
+                        <header content="Apache/2.4.7 (Ubuntu)" field="server"/>
+                        <header content="Keep-Alive" field="connection"/>
+                        <header content="GET,HEAD,POST,OPTIONS" field="allow"/>
+                        <header content="Thu, 23 Feb 2017 00:36:37 GMT" field="date"/>
+                        <header content="text/html" field="content-type"/>
+                    </headers>
+                </http-response>
+            </http-transaction>
+            <http-transaction id="80">
+                <http-request>
+                    <status>GET http://scanme.nmap.org/ HTTP/1.1</status>
+                    <headers>
+                        <header content="scanme.nmap.org" field="Host"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 200 OK</status>
+                    <headers>
+                        <header content="2724" field="content-length"/>
+                        <header content="gzip" field="content-encoding"/>
+                        <header content="bytes" field="accept-ranges"/>
+                        <header content="Accept-Encoding" field="vary"/>
+                        <header content="timeout=5, max=99" field="keep-alive"/>
+                        <header content="Apache/2.4.7 (Ubuntu)" field="server"/>
+                        <header content="Keep-Alive" field="connection"/>
+                        <header content="Thu, 23 Feb 2017 00:36:37 GMT" field="date"/>
+                        <header content="text/html" field="content-type"/>
+                    </headers>
+                    <body content-encoding="text">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;title&gt;Go ahead and ScanMe!&lt;/title&gt;
+
+&lt;link REL=&quot;SHORTCUT ICON&quot; HREF=&quot;/shared/images/tiny-eyeicon.png&quot; TYPE=&quot;image/png&quot;&gt;
+&lt;META NAME=&quot;ROBOTS&quot; CONTENT=&quot;NOARCHIVE&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/shared/css/insecdb.css&quot; type=&quot;text/css&quot;&gt;
+&lt;!--Google Analytics Code--&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-11009417-1', 'auto');
+  ga('send', 'pageview');
+
+&lt;/script&gt;
+&lt;!--END Google Analytics Code--&gt;
+
+&lt;!--Google Custom Site Search boilerplate Javascript--&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  (function() {
+    var cx = 'partner-pub-0078565546631069:bx60rb-fytx';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+&lt;/script&gt;
+&lt;!--End Google Custom Site Search boilerplate Javascript--&gt;
+
+&lt;/HEAD&gt;
+&lt;BODY BGCOLOR=&quot;#2A0D45&quot; TEXT=&quot;#000000&quot;&gt;
+
+&lt;TABLE CELLPADDING=&quot;0&quot; WIDTH=&quot;100%&quot; CELLSPACING=&quot;0&quot;&gt;
+&lt;TR&gt;&lt;TD ALIGN=&quot;left&quot;&gt;&lt;A HREF=&quot;/&quot;&gt;&lt;IMG BORDER=0 ALT=&quot;Home page logo&quot;
+SRC=&quot;/images/sitelogo.png&quot; HEIGHT=90 WIDTH=168&gt;&lt;/A&gt;&lt;/TD&gt;
+&lt;TD VALIGN=&quot;bottom&quot; ALIGN=&quot;right&quot;&gt;
+&lt;!-- Begin TopBanner Code --&gt;
+&lt;!-- AdSpeed.com Serving Code 7.9.6 for [Zone] TopBanner [Any Dimension] --&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;//g.adspeed.net/ad.php?do=js&amp;amp;zid=14678&amp;amp;wd=-1&amp;amp;ht=-1&amp;amp;target=_blank&quot;&gt;&lt;/script&gt;
+&lt;!-- AdSpeed.com End --&gt;
+&lt;!-- End Banner Code --&gt;
+
+&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;
+&lt;TABLE WIDTH=&quot;100%&quot; CELLPADDING=&quot;0&quot; CELLSPACING=&quot;0&quot;&gt;&lt;TR&gt;
+&lt;TD ALIGN=&quot;left&quot; WIDTH=&quot;130&quot; VALIGN=&quot;top&quot; class=&quot;sidebar&quot;&gt;
+
+&lt;!-- SECWIKI PORTAL INSERT --&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/&quot;&gt;Nmap Security Scanner&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/&quot;&gt;Intro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/book/man.html&quot;&gt;Ref Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/book/install.html&quot;&gt;Install Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/download.html&quot;&gt;Download&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/changelog.html&quot;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/book/&quot;&gt;Book&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/docs.html&quot;&gt;Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/&quot;&gt;Security Lists&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/nmap-announce/&quot;&gt;Nmap Announce&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/nmap-dev/&quot;&gt;Nmap Dev&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/bugtraq/&quot;&gt;Bugtraq&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/fulldisclosure/&quot;&gt;Full Disclosure&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/pen-test/&quot;&gt;Pen Test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/basics/&quot;&gt;Basics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/&quot;&gt;More&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org&quot;&gt;Security Tools&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/pass-audit/&quot;&gt;Password audit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/sniffers/&quot;&gt;Sniffers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/vuln-scanners/&quot;&gt;Vuln scanners&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/web-scanners/&quot;&gt;Web scanners&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/wireless/&quot;&gt;Wireless&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/sploits/&quot;&gt;Exploitation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/packet-crafters/&quot;&gt;Packet crafters&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/&quot;&gt;More&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/&quot;&gt;Site News&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/advertising.html&quot;&gt;Advertising&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/fyodor/&quot;&gt;About/Contact&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;!-- SiteSearch Google --&gt;
+&lt;form action=&quot;https://nmap.org/search.html&quot; id=&quot;cse-search-box-sidebar&quot;&gt;
+  &lt;div&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;cx&quot; value=&quot;partner-pub-0078565546631069:bx60rb-fytx&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;cof&quot; value=&quot;FORID:9&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;ie&quot; value=&quot;ISO-8859-1&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;q&quot; size=&quot;16&quot;&gt;
+    &lt;input type=&quot;submit&quot; name=&quot;sa&quot; value=&quot;Site Search&quot;&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+&lt;!-- End SiteSearch Google --&gt;
+&lt;/li&gt;
+&lt;!-- These can come back if I ever update them ...
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/links.html&quot;&gt;Exceptional Links&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/reading.html&quot;&gt;Good Reading&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/sploits.html&quot;&gt;Exploit World&lt;/a&gt;&lt;/li&gt;
+--&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/advertising.html&quot;&gt;Sponsors:&lt;/a&gt;
+  &lt;br&gt;&lt;br&gt;
+  
+&lt;!-- Begin Sidebar Banner Code --&gt;
+&lt;A HREF=&quot;http://www.acunetix.com/web-vulnerability-manager/?utm_source=insecure&amp;utm_medium=box&amp;utm_term=chess&amp;utm_campaign=insecure &quot;&gt;&lt;IMG SRC=&quot;/shared/images/Acunetix/acx_Chess-WB.gif&quot; BORDER=0 ALT=&quot;Acunetix&quot;&gt;&lt;/A&gt;
+&lt;!-- End Sidebar Banner Code --&gt;
+
+&lt;BR&gt;&lt;BR&gt;
+
+&lt;!-- Begin Bottom (Google) Sidebar Banner Code --&gt;
+&lt;script async src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+&lt;!-- SidebarSkyScraper --&gt;
+&lt;ins class=&quot;adsbygoogle&quot;
+     style=&quot;display:inline-block;width:120px;height:600px&quot;
+     data-ad-client=&quot;ca-pub-0078565546631069&quot;
+     data-ad-slot=&quot;9829251079&quot;&gt;&lt;/ins&gt;
+&lt;script&gt;
+(adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;!-- End Bottom (Google) Sidebar Banner Code --&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/TD&gt;
+&lt;TD BGCOLOR=&quot;#FFFFFF&quot; VALIGN=&quot;top&quot; ALIGN=&quot;left&quot;&gt;&lt;IMG
+SRC=&quot;/shared/images/topleftcurve.gif&quot; alt=&quot;/&quot;&gt;&lt;TABLE CELLPADDING=&quot;4&quot; WIDTH=&quot;100%&quot; style=&quot;table-layout: fixed;&quot;&gt;&lt;TR&gt;&lt;TD BGCOLOR=&quot;#FFFFFF&quot;&gt;
+
+&lt;p&gt;Hello, and welcome to Scanme.Nmap.Org, a service provided by the &lt;a href=&quot;http://nmap.org&quot;&gt;Nmap Security Scanner Project&lt;/a&gt; and &lt;a href=&quot;http://insecure.org&quot;&gt;Insecure.Org&lt;/a&gt;.
+
+&lt;p&gt;We set up this machine to help folks learn about Nmap and also to test and make sure that their Nmap installation (or Internet connection) is working properly.  You are authorized to scan this machine with Nmap or other port scanners.  Try not to hammer on the server too hard.  A few scans in a day is fine, but dont scan 100 times a day or use this site to test your ssh brute-force password cracking tool.
+
+&lt;p&gt;Thanks&lt;br&gt;
+-&lt;a href=&quot;http://insecure.org/fyodor&quot;&gt;Fyodor&lt;/a&gt;
+
+&lt;/TD&gt;&lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/TD&gt;&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;&lt;/TD&gt;&lt;TD ALIGN=&quot;center&quot;&gt;
+&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;
+[ &lt;A HREF=&quot;https://nmap.org&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Nmap&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://sectools.org&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Sec Tools&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://seclists.org/&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Mailing Lists&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Site News&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/fyodor/&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;About/Contact&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/advertising.html&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Advertising&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/privacy.html&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Privacy&lt;/FONT&gt;&lt;/A&gt; ]&lt;BR&gt;
+&lt;/FONT&gt;
+
+&lt;!-- SiteSearch Google --&gt;
+&lt;div class=&quot;gcse-searchbox-only&quot; data-resultsUrl=&quot;https://nmap.org/search.html&quot;&gt;&lt;/div&gt;
+&lt;!-- End SiteSearch Google --&gt;
+
+&lt;!-- Bottom Banner --&gt;
+&lt;!-- Adsense --&gt;
+&lt;script async src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+&lt;!-- PageBottom728x90 --&gt;
+&lt;ins class=&quot;adsbygoogle&quot;
+     style=&quot;display:inline-block;width:728px;height:90px&quot;
+     data-ad-client=&quot;ca-pub-0078565546631069&quot;
+     data-ad-slot=&quot;2743510915&quot;&gt;&lt;/ins&gt;
+&lt;script&gt;
+(adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;!-- End Bottom Banner --&gt;
+&lt;/TD&gt;&lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+
+</body>
+                </http-response>
+            </http-transaction>
+            <http-transaction id="83">
+                <http-request>
+                    <status>CONNECT http://scanme.nmap.org/ HTTP/1.1</status>
+                    <headers>
+                        <header content="scanme.nmap.org" field="Host"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 400 Bad Request</status>
+                    <headers>
+                        <header content="Thu, 23 Feb 2017 00:36:37 GMT" field="date"/>
+                        <header content="306" field="content-length"/>
+                        <header content="text/html; charset=iso-8859-1" field="content-type"/>
+                        <header content="close" field="connection"/>
+                        <header content="Apache/2.4.7 (Ubuntu)" field="server"/>
+                    </headers>
+                    <body content-encoding="text">&lt;!DOCTYPE HTML PUBLIC &quot;-//IETF//DTD HTML 2.0//EN&quot;&gt;
+&lt;html&gt;&lt;head&gt;
+&lt;title&gt;400 Bad Request&lt;/title&gt;
+&lt;/head&gt;&lt;body&gt;
+&lt;h1&gt;Bad Request&lt;/h1&gt;
+&lt;p&gt;Your browser sent a request that this server could not understand.&lt;br /&gt;
+&lt;/p&gt;
+&lt;hr&gt;
+&lt;address&gt;Apache/2.4.7 (Ubuntu) Server at scanme.nmap.org Port 80&lt;/address&gt;
+&lt;/body&gt;&lt;/html&gt;
+</body>
+                </http-response>
+            </http-transaction>
+            <http-transaction id="99">
+                <http-request>
+                    <status>POST http://scanme.nmap.org/ HTTP/1.1</status>
+                    <headers>
+                        <header content="0" field="Content-length"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                        <header content="scanme.nmap.org" field="Host"/>
+                        <header content="application/x-www-form-urlencoded" field="Content-type"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 200 OK</status>
+                    <headers>
+                        <header content="2724" field="content-length"/>
+                        <header content="gzip" field="content-encoding"/>
+                        <header content="bytes" field="accept-ranges"/>
+                        <header content="Accept-Encoding" field="vary"/>
+                        <header content="timeout=5, max=100" field="keep-alive"/>
+                        <header content="Apache/2.4.7 (Ubuntu)" field="server"/>
+                        <header content="Keep-Alive" field="connection"/>
+                        <header content="Thu, 23 Feb 2017 00:36:37 GMT" field="date"/>
+                        <header content="text/html" field="content-type"/>
+                    </headers>
+                    <body content-encoding="text">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;title&gt;Go ahead and ScanMe!&lt;/title&gt;
+
+&lt;link REL=&quot;SHORTCUT ICON&quot; HREF=&quot;/shared/images/tiny-eyeicon.png&quot; TYPE=&quot;image/png&quot;&gt;
+&lt;META NAME=&quot;ROBOTS&quot; CONTENT=&quot;NOARCHIVE&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/shared/css/insecdb.css&quot; type=&quot;text/css&quot;&gt;
+&lt;!--Google Analytics Code--&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-11009417-1', 'auto');
+  ga('send', 'pageview');
+
+&lt;/script&gt;
+&lt;!--END Google Analytics Code--&gt;
+
+&lt;!--Google Custom Site Search boilerplate Javascript--&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  (function() {
+    var cx = 'partner-pub-0078565546631069:bx60rb-fytx';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+&lt;/script&gt;
+&lt;!--End Google Custom Site Search boilerplate Javascript--&gt;
+
+&lt;/HEAD&gt;
+&lt;BODY BGCOLOR=&quot;#2A0D45&quot; TEXT=&quot;#000000&quot;&gt;
+
+&lt;TABLE CELLPADDING=&quot;0&quot; WIDTH=&quot;100%&quot; CELLSPACING=&quot;0&quot;&gt;
+&lt;TR&gt;&lt;TD ALIGN=&quot;left&quot;&gt;&lt;A HREF=&quot;/&quot;&gt;&lt;IMG BORDER=0 ALT=&quot;Home page logo&quot;
+SRC=&quot;/images/sitelogo.png&quot; HEIGHT=90 WIDTH=168&gt;&lt;/A&gt;&lt;/TD&gt;
+&lt;TD VALIGN=&quot;bottom&quot; ALIGN=&quot;right&quot;&gt;
+&lt;!-- Begin TopBanner Code --&gt;
+&lt;!-- AdSpeed.com Serving Code 7.9.6 for [Zone] TopBanner [Any Dimension] --&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;//g.adspeed.net/ad.php?do=js&amp;amp;zid=14678&amp;amp;wd=-1&amp;amp;ht=-1&amp;amp;target=_blank&quot;&gt;&lt;/script&gt;
+&lt;!-- AdSpeed.com End --&gt;
+&lt;!-- End Banner Code --&gt;
+
+&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;
+&lt;TABLE WIDTH=&quot;100%&quot; CELLPADDING=&quot;0&quot; CELLSPACING=&quot;0&quot;&gt;&lt;TR&gt;
+&lt;TD ALIGN=&quot;left&quot; WIDTH=&quot;130&quot; VALIGN=&quot;top&quot; class=&quot;sidebar&quot;&gt;
+
+&lt;!-- SECWIKI PORTAL INSERT --&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/&quot;&gt;Nmap Security Scanner&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/&quot;&gt;Intro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/book/man.html&quot;&gt;Ref Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/book/install.html&quot;&gt;Install Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/download.html&quot;&gt;Download&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/changelog.html&quot;&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/book/&quot;&gt;Book&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nmap.org/docs.html&quot;&gt;Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/&quot;&gt;Security Lists&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/nmap-announce/&quot;&gt;Nmap Announce&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/nmap-dev/&quot;&gt;Nmap Dev&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/bugtraq/&quot;&gt;Bugtraq&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/fulldisclosure/&quot;&gt;Full Disclosure&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/pen-test/&quot;&gt;Pen Test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/basics/&quot;&gt;Basics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://seclists.org/&quot;&gt;More&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org&quot;&gt;Security Tools&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/pass-audit/&quot;&gt;Password audit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/sniffers/&quot;&gt;Sniffers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/vuln-scanners/&quot;&gt;Vuln scanners&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/web-scanners/&quot;&gt;Web scanners&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/wireless/&quot;&gt;Wireless&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/sploits/&quot;&gt;Exploitation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/tag/packet-crafters/&quot;&gt;Packet crafters&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sectools.org/&quot;&gt;More&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/&quot;&gt;Site News&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/advertising.html&quot;&gt;Advertising&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/fyodor/&quot;&gt;About/Contact&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;!-- SiteSearch Google --&gt;
+&lt;form action=&quot;https://nmap.org/search.html&quot; id=&quot;cse-search-box-sidebar&quot;&gt;
+  &lt;div&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;cx&quot; value=&quot;partner-pub-0078565546631069:bx60rb-fytx&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;cof&quot; value=&quot;FORID:9&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;ie&quot; value=&quot;ISO-8859-1&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;q&quot; size=&quot;16&quot;&gt;
+    &lt;input type=&quot;submit&quot; name=&quot;sa&quot; value=&quot;Site Search&quot;&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+&lt;!-- End SiteSearch Google --&gt;
+&lt;/li&gt;
+&lt;!-- These can come back if I ever update them ...
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/links.html&quot;&gt;Exceptional Links&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/reading.html&quot;&gt;Good Reading&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/sploits.html&quot;&gt;Exploit World&lt;/a&gt;&lt;/li&gt;
+--&gt;
+&lt;li&gt;&lt;a href=&quot;http://insecure.org/advertising.html&quot;&gt;Sponsors:&lt;/a&gt;
+  &lt;br&gt;&lt;br&gt;
+  
+&lt;!-- Begin Sidebar Banner Code --&gt;
+&lt;A HREF=&quot;http://www.acunetix.com/web-vulnerability-manager/?utm_source=insecure&amp;utm_medium=box&amp;utm_term=chess&amp;utm_campaign=insecure &quot;&gt;&lt;IMG SRC=&quot;/shared/images/Acunetix/acx_Chess-WB.gif&quot; BORDER=0 ALT=&quot;Acunetix&quot;&gt;&lt;/A&gt;
+&lt;!-- End Sidebar Banner Code --&gt;
+
+&lt;BR&gt;&lt;BR&gt;
+
+&lt;!-- Begin Bottom (Google) Sidebar Banner Code --&gt;
+&lt;script async src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+&lt;!-- SidebarSkyScraper --&gt;
+&lt;ins class=&quot;adsbygoogle&quot;
+     style=&quot;display:inline-block;width:120px;height:600px&quot;
+     data-ad-client=&quot;ca-pub-0078565546631069&quot;
+     data-ad-slot=&quot;9829251079&quot;&gt;&lt;/ins&gt;
+&lt;script&gt;
+(adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;!-- End Bottom (Google) Sidebar Banner Code --&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/TD&gt;
+&lt;TD BGCOLOR=&quot;#FFFFFF&quot; VALIGN=&quot;top&quot; ALIGN=&quot;left&quot;&gt;&lt;IMG
+SRC=&quot;/shared/images/topleftcurve.gif&quot; alt=&quot;/&quot;&gt;&lt;TABLE CELLPADDING=&quot;4&quot; WIDTH=&quot;100%&quot; style=&quot;table-layout: fixed;&quot;&gt;&lt;TR&gt;&lt;TD BGCOLOR=&quot;#FFFFFF&quot;&gt;
+
+&lt;p&gt;Hello, and welcome to Scanme.Nmap.Org, a service provided by the &lt;a href=&quot;http://nmap.org&quot;&gt;Nmap Security Scanner Project&lt;/a&gt; and &lt;a href=&quot;http://insecure.org&quot;&gt;Insecure.Org&lt;/a&gt;.
+
+&lt;p&gt;We set up this machine to help folks learn about Nmap and also to test and make sure that their Nmap installation (or Internet connection) is working properly.  You are authorized to scan this machine with Nmap or other port scanners.  Try not to hammer on the server too hard.  A few scans in a day is fine, but dont scan 100 times a day or use this site to test your ssh brute-force password cracking tool.
+
+&lt;p&gt;Thanks&lt;br&gt;
+-&lt;a href=&quot;http://insecure.org/fyodor&quot;&gt;Fyodor&lt;/a&gt;
+
+&lt;/TD&gt;&lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/TD&gt;&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;&lt;/TD&gt;&lt;TD ALIGN=&quot;center&quot;&gt;
+&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;
+[ &lt;A HREF=&quot;https://nmap.org&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Nmap&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://sectools.org&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Sec Tools&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://seclists.org/&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Mailing Lists&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Site News&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/fyodor/&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;About/Contact&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/advertising.html&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Advertising&lt;/FONT&gt;&lt;/A&gt; |
+  &lt;A HREF=&quot;http://insecure.org/privacy.html&quot;&gt;&lt;FONT COLOR=&quot;#FFFFFF&quot;&gt;Privacy&lt;/FONT&gt;&lt;/A&gt; ]&lt;BR&gt;
+&lt;/FONT&gt;
+
+&lt;!-- SiteSearch Google --&gt;
+&lt;div class=&quot;gcse-searchbox-only&quot; data-resultsUrl=&quot;https://nmap.org/search.html&quot;&gt;&lt;/div&gt;
+&lt;!-- End SiteSearch Google --&gt;
+
+&lt;!-- Bottom Banner --&gt;
+&lt;!-- Adsense --&gt;
+&lt;script async src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+&lt;!-- PageBottom728x90 --&gt;
+&lt;ins class=&quot;adsbygoogle&quot;
+     style=&quot;display:inline-block;width:728px;height:90px&quot;
+     data-ad-client=&quot;ca-pub-0078565546631069&quot;
+     data-ad-slot=&quot;2743510915&quot;&gt;&lt;/ins&gt;
+&lt;script&gt;
+(adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;!-- End Bottom Banner --&gt;
+&lt;/TD&gt;&lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+
+</body>
+                </http-response>
+            </http-transaction>
+        </http-transactions>
+    </vulnerability>
+</w3af-run>

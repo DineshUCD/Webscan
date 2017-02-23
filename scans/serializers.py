@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from scans.models import Tool, Scan
+from plans.models import Plan
 from plans.serializers import PlanSerializer
 from urllib2 import urlopen
 
@@ -18,6 +19,14 @@ class ScanSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("URL " + str(value) + " is not available.")
         return value
 
+    def validate_plan(self, value):
+        request = self.context.get("request")
+         # Returns True if the QuerySet contains any results, and False if not.
+        if Plan.objects.filter(pk=value.pk, user_profile__id=request.user.userprofile.id).exists():
+            return value
+        else:
+            return None
+
     def create(self, validated_data):
         request = self.context.get("request")
         if request and hasattr(request, "user"):
@@ -31,6 +40,6 @@ class ScanSerializer(serializers.ModelSerializer):
         return scan
 
     def to_representation(self, instance):
-        ret = super(ScanSerializer, self).to_representation(instancE)
+        ret = super(ScanSerializer, self).to_representation(instance)
         ret['plan'] = str(instance.plan).lower()
         return ret

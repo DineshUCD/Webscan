@@ -13,7 +13,7 @@
   <form role="form" data-toggle="validator">
     <div class="form-group has-feedback">
       <label for="target" class="control-label">Target URL:</label>
-      <input type="url" class="form-control" id="target" required>
+      <input id="uniform_resource_locator" type="url" class="form-control" id="target" required>
     </div>
   </form>
 
@@ -50,7 +50,7 @@
                   <span class="sr-only">Toggle Dropdown</span> 
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a>Launch Plan for Target URL</a></li>
+                  <li><a id="{{ plan.pk }}" onclick="launch(this)">Launch Plan for Target URL</a></li>
                 </ul>
               </div>
             </td>

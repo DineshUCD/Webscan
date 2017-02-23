@@ -32,14 +32,18 @@ class W3af(AbstractPlugin):
             w3af_template = plugins_configuration['APPLICATIONS']['w3af_template']
         except KeyError as key:
             logger.warn("Unable to find w3af script configuration template for " + W3af.PLUGIN_NAME + ".")   
-        else:
+        finally:
             self.w3af_script_file_path = os.path.join( self.temporary_folder_path, 'w3af_script.w3af' )
 
             # The W3af metafiles. 
-            self.record(AbstractPlugin.FILES, [(self.w3af_script_file_path, MetaFile.DOCUMENTATION), (os.path.join(self.temporary_folder_path, 'w3af_results.xml'), MetaFile.SCAN)] )
-            
-            with open(self.w3af_script_file_path, 'w') as w3af_script:
-                w3af_script.write( str(w3af_template.format(**w3af_parameters)) )
+            self.set_metafile(self.w3af_script_file_path, MetaFile.DOCUMENTATION)
+            self.set_metafile(os.path.join(self.temporary_folder_path, 'w3af_results.xml'), MetaFile.SCAN)
+             
+            try:  
+                with open(self.w3af_script_file_path, 'w') as w3af_script:
+                    w3af_script.write( str(w3af_template.format(**w3af_parameters)) )
+            except IOError as e:
+                return None
 
             os.chmod(self.w3af_script_file_path, 0o757)
         # End configuration of W3af

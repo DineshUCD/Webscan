@@ -33,6 +33,13 @@ class ScanList(generics.ListCreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class ScanDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ScanSerializer
+
+    def get_queryset(self):
+        queryset = Scan.objects.filter(user_profile__id=int(self.request.user.userprofile.id))
+        return queryset
+
 def launch(request, template_name='scans/index.html'):
     user_session = request.user.userprofile.get_latest_session()
     plan_pks = user_session.getitem('plan')
@@ -42,12 +49,4 @@ def launch(request, template_name='scans/index.html'):
     if plan_pks and isinstance(plan_pks, list):
         context['plans'] = Plan.objects.filter(pk__in=plan_pks, user_profile__id=int(request.user.userprofile.id)) 
 
-    return render(request, template_name, context)
-
-def history(request, template_name='scans/history'):
-    # Contains Attack Point, State, Plan, and Date
-    scans = Scan.objects.filter(user_profile__id=int(self.request.user.userprofile.id))
-    context = {
-        'scans': scans,
-    }
     return render(request, template_name, context)

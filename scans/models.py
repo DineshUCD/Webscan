@@ -72,7 +72,7 @@ class Tool(models.Model):
     name           = models.CharField(max_length=256, default="", blank=True)
     date           = models.DateTimeField(auto_now_add=True)
     state          = models.CharField(max_length=7, choices=Scan.ALL_STATES, blank=True)
-    task           = models.UUIDField(default=uuid.uuid4, editable=True)
+    task_id        = models.UUIDField(default=uuid.uuid4, editable=True)
 
     def __unicode__(self):
         return "{0}".format(self.name)

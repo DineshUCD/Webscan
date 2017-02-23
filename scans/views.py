@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from scans.serializers import ScanSerializer
 
-from scans.models import Scan
+from scans.models import Scan, Tool
 from uploads.models import Upload
 from plans.models import Plan
 
@@ -34,11 +34,12 @@ class ScanList(generics.ListCreateAPIView):
             #Store Queue task id in Scan model & Save
             Scan.objects.filter(pk=scan.pk).update(task_id=str(result))
             scan.refresh_from_db()
-            print scan.task_id
+
             #Store group task results in appropriate tools. 
             #result.parent[#] gives appropriate task id in the order tasks were listed in group.
-           
-
+            for task_uuid, tool in zip(result.parent, scan.plan.tool_set.all()):
+                Tool.objects.filter(pk=tool.pk).update(task_id=str(task_uuid))
+            
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

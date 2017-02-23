@@ -64,7 +64,6 @@ def collect_results(meta, **kwargs):
 
     return metafiles
 
-
 def find_all_interfaces():
     all_interfaces    = list()
     plugin_interfaces = glob.glob(os.path.join(os.path.basename(PLUGINS_DIR),"*.py"))

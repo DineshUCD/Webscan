@@ -18,4 +18,4 @@ class Plan(models.Model):
     description  = models.CharField(max_length=256, default="", blank=True)
 
     def __unicode__(self):
-        return "{0} for {1}".format(self.name, self.description)
+        return "Name: {0}, Description: {1}".format(self.name, self.description)

@@ -1,15 +1,120 @@
-[2017-02-23 20:37:56,270: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
-[2017-02-23 20:37:56,284: INFO/MainProcess] mingle: searching for neighbors
-[2017-02-23 20:37:57,305: INFO/MainProcess] mingle: all alone
-[2017-02-23 20:37:57,316: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+[2017-02-24 00:41:19,590: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-02-24 00:41:19,601: INFO/MainProcess] mingle: searching for neighbors
+[2017-02-24 00:41:20,621: INFO/MainProcess] mingle: all alone
+[2017-02-24 00:41:20,634: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
   warnings.warn('Using settings.DEBUG leads to a memory leak, never '
-[2017-02-23 20:37:57,316: INFO/MainProcess] celery@sec-tools-02 ready.
-[2017-02-23 20:38:58,227: INFO/MainProcess] Received task: scans.tasks.delegate[f4dac8ea-1c19-4dc6-9c54-e1072cfd2881]  
-[2017-02-23 20:38:58,228: INFO/MainProcess] Received task: scans.tasks.delegate[c4f27e3a-d046-4605-8696-fa222d3ae217]  
-[2017-02-23 20:38:58,358: WARNING/PoolWorker-6] whoami
-[2017-02-23 20:38:58,362: WARNING/PoolWorker-17] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20173823203858176390scanme.nmap.org/w3af_script.w3af
-[2017-02-23 20:38:58,371: INFO/PoolWorker-6] Task scans.tasks.delegate[f4dac8ea-1c19-4dc6-9c54-e1072cfd2881] succeeded in 0.0233972407877s: {'Dummy': {}}
-[2017-02-23 20:39:04,328: INFO/PoolWorker-17] Task scans.tasks.delegate[c4f27e3a-d046-4605-8696-fa222d3ae217] succeeded in 5.98052421166s: {'W3af': {'files': [(...), (...)]}}
-[2017-02-23 20:39:04,329: INFO/MainProcess] Received task: scans.tasks.collect_results[c80d5de0-3053-403c-880b-14aa5aabe57c]  
-[2017-02-23 20:39:04,337: INFO/PoolWorker-13] [[u'/home/djayasankar/Documents/webscanner/temporary/20173823203858176390scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20173823203858176390scanme.nmap.org/w3af_results.xml', u'S']]
-[2017-02-23 20:39:04,350: INFO/PoolWorker-13] Task scans.tasks.collect_results[c80d5de0-3053-403c-880b-14aa5aabe57c] succeeded in 0.019672267139s: [['/home/djayasankar/Documents/webscanner/temporary/20173823203858176390scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20173823203858176390scanme.nmap.org/w3af_results.xml', 'S']]
+[2017-02-24 00:41:20,634: INFO/MainProcess] celery@sec-tools-02 ready.
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@sec-tools-02 v4.0.2 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-3.10.0-514.6.1.el7.x86_64-x86_64-with-oracle-7.3 2017-02-24 00:41:18
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x3296950
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 24 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2017-02-24 00:45:07,715: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-02-24 00:45:07,726: INFO/MainProcess] mingle: searching for neighbors
+[2017-02-24 00:45:08,747: INFO/MainProcess] mingle: all alone
+[2017-02-24 00:45:08,759: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2017-02-24 00:45:08,760: INFO/MainProcess] celery@sec-tools-02 ready.
+[2017-02-24 00:45:19,028: INFO/MainProcess] Received task: scans.tasks.delegate[5534503b-3742-4b92-93bc-e7057e0d6d01]  
+[2017-02-24 00:45:19,029: INFO/MainProcess] Received task: scans.tasks.delegate[eb3d55c6-4bdb-46a4-a32d-0e70f1ebb200]  
+[2017-02-24 00:45:20,788: WARNING/PoolWorker-5] whoami
+[2017-02-24 00:45:20,789: WARNING/PoolWorker-19] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20174524004518981667scanme.nmap.org/w3af_script.w3af
+[2017-02-24 00:45:20,796: INFO/PoolWorker-5] Task scans.tasks.delegate[5534503b-3742-4b92-93bc-e7057e0d6d01] succeeded in 0.0244065248407s: {'Dummy': {}}
+[2017-02-24 00:45:26,755: INFO/PoolWorker-19] Task scans.tasks.delegate[eb3d55c6-4bdb-46a4-a32d-0e70f1ebb200] succeeded in 5.98401125101s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-24 00:45:26,756: INFO/MainProcess] Received task: scans.tasks.collect_results[0898b245-3862-418a-b1d5-a9b13671cc9c]  
+[2017-02-24 00:45:26,770: INFO/PoolWorker-3] [[u'/home/djayasankar/Documents/webscanner/temporary/20174524004518981667scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20174524004518981667scanme.nmap.org/w3af_results.xml', u'S']]
+[2017-02-24 00:45:26,776: INFO/PoolWorker-3] Task scans.tasks.collect_results[0898b245-3862-418a-b1d5-a9b13671cc9c] succeeded in 0.0188451553695s: [['/home/djayasankar/Documents/webscanner/temporary/20174524004518981667scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20174524004518981667scanme.nmap.org/w3af_results.xml', 'S']]
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@sec-tools-02 v4.0.2 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-3.10.0-514.6.1.el7.x86_64-x86_64-with-oracle-7.3 2017-02-24 00:45:06
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x1e4d950
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 24 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2017-02-24 00:56:41,123: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-02-24 00:56:41,135: INFO/MainProcess] mingle: searching for neighbors
+[2017-02-24 00:56:42,155: INFO/MainProcess] mingle: all alone
+[2017-02-24 00:56:42,168: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2017-02-24 00:56:42,168: INFO/MainProcess] celery@sec-tools-02 ready.
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@sec-tools-02 v4.0.2 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-3.10.0-514.6.1.el7.x86_64-x86_64-with-oracle-7.3 2017-02-24 00:56:40
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x2144950
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 24 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2017-02-24 00:59:27,261: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-02-24 00:59:27,272: INFO/MainProcess] mingle: searching for neighbors
+[2017-02-24 00:59:28,292: INFO/MainProcess] mingle: all alone
+[2017-02-24 00:59:28,304: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2017-02-24 00:59:28,304: INFO/MainProcess] celery@sec-tools-02 ready.
+[2017-02-24 01:00:26,250: INFO/MainProcess] Received task: scans.tasks.delegate[b04e8af8-bac3-45bb-b417-64c419057326]  
+[2017-02-24 01:00:26,251: INFO/MainProcess] Received task: scans.tasks.delegate[691c5a42-b11a-4ba4-8b9f-00c3c6d54d9c]  
+[2017-02-24 01:00:26,377: WARNING/PoolWorker-2] whoami
+[2017-02-24 01:00:26,379: WARNING/PoolWorker-16] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20170024010026197659scanme.nmap.org/w3af_script.w3af
+[2017-02-24 01:00:26,385: INFO/PoolWorker-2] Task scans.tasks.delegate[b04e8af8-bac3-45bb-b417-64c419057326] succeeded in 0.0247737327591s: {'Dummy': {}}
+[2017-02-24 01:00:32,410: INFO/PoolWorker-16] Task scans.tasks.delegate[691c5a42-b11a-4ba4-8b9f-00c3c6d54d9c] succeeded in 6.05003566574s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-24 01:00:32,411: INFO/MainProcess] Received task: scans.tasks.collect_results[9018015e-a87e-462e-8e72-a405b6148560]  
+[2017-02-24 01:00:32,426: INFO/PoolWorker-10] [[u'/home/djayasankar/Documents/webscanner/temporary/20170024010026197659scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20170024010026197659scanme.nmap.org/w3af_results.xml', u'S']]
+[2017-02-24 01:00:32,433: INFO/PoolWorker-10] Task scans.tasks.collect_results[9018015e-a87e-462e-8e72-a405b6148560] succeeded in 0.0200119032525s: [['/home/djayasankar/Documents/webscanner/temporary/20170024010026197659scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20170024010026197659scanme.nmap.org/w3af_results.xml', 'S']]
+[2017-02-24 01:00:48,327: INFO/MainProcess] Received task: scans.tasks.delegate[27a085c0-c255-42ff-ace1-6c03a0d4468e]  
+[2017-02-24 01:00:48,328: INFO/MainProcess] Received task: scans.tasks.delegate[9f44a5de-77d4-43b6-afbf-444d400557e2]  
+[2017-02-24 01:00:48,398: WARNING/PoolWorker-18] w3af_console
+[2017-02-24 01:00:48,403: WARNING/PoolWorker-18] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20170024010048318560scanme.nmap.org/w3af_script.w3af
+[2017-02-24 01:00:48,402: INFO/PoolWorker-5] Task scans.tasks.delegate[27a085c0-c255-42ff-ace1-6c03a0d4468e] succeeded in 0.0203153206967s: {'Dummy': {}}
+[2017-02-24 01:00:54,411: INFO/PoolWorker-18] Task scans.tasks.delegate[9f44a5de-77d4-43b6-afbf-444d400557e2] succeeded in 6.02886652527s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-24 01:00:54,412: INFO/MainProcess] Received task: scans.tasks.collect_results[0b996cad-e11e-4783-8e5c-22d421af601a]  
+[2017-02-24 01:00:54,426: INFO/PoolWorker-17] [[u'/home/djayasankar/Documents/webscanner/temporary/20170024010048318560scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20170024010048318560scanme.nmap.org/w3af_results.xml', u'S']]
+[2017-02-24 01:00:54,433: INFO/PoolWorker-17] Task scans.tasks.collect_results[0b996cad-e11e-4783-8e5c-22d421af601a] succeeded in 0.0199740231037s: [['/home/djayasankar/Documents/webscanner/temporary/20170024010048318560scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20170024010048318560scanme.nmap.org/w3af_results.xml', 'S']]

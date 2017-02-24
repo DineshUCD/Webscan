@@ -30,3 +30,4 @@ class PlanSerializer(serializers.ModelSerializer):
             Tool.objects.create(plan=plan, **tool_data)
 
         return plan
+

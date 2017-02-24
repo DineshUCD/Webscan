@@ -14,21 +14,13 @@ from plugins.w3af import W3af
 import subprocess, os, datetime, sys, glob, importlib, inspect, re
 
 """
-Test tasks BEGIN
+A task can only be in a single state, but it can progress through
+several states. The stages of a typical task can be:
+PENDING -> STARTED -> SUCCESS
+
+The started state is a special state that is only recorded if
+the task_track_started setting is enabled!
 """
-
-@shared_task
-def add(x, y):
-    return x + y
-
-@shared_task
-def tsum(items):
-    return sum(items)
-
-"""
-Test tasks END
-"""
-
 @shared_task
 def delegate(plugin_name, model_id):
     """

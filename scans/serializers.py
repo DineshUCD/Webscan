@@ -36,7 +36,6 @@ class ScanSerializer(serializers.ModelSerializer):
         if request and hasattr(request, "user"):
             validated_data['user_profile'] = request.user.userprofile
         scan = Scan.objects.create(**validated_data)
-        
         #Containers and user defined types are mutable
         validated_data['plan'].scan = scan
         validated_data['plan'].save()
@@ -50,6 +49,8 @@ class ScanSerializer(serializers.ModelSerializer):
         state  = str(result.state)[:7]
         ret['state'] = state
         Scan.objects.filter(pk=instance.pk).update(state=state)
+
+        ret['date'] = instance.date
 
         ret['tools'] = list()
         for tool in instance.plan.tool_set.all():

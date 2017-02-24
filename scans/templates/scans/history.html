@@ -1,0 +1,59 @@
+{% extends 'scans/base.html' %}
+{% load bootstrap3 %}
+
+{% load static %}
+
+{% block content %}
+
+<script src="{% static 'js/scans_history.js' %}" type="text/javascript"></script>
+
+<!-- Container for Scan History table -->
+<div class="container">
+
+  <!-- Table's title -->
+  <p class="h5" style="float:left;">Scan History</p>
+
+  <table id="history" class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>Plan Name</th>
+        <th>Attack Point</th>
+        <th>State</th>
+        <th>Date Created</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+    <!-- Scan List API populates the rows 
+      1. Call Scan List API /scans/<version number>?/list/
+      2. Parse through JSON response.
+      3. Create rows and cells associated with each row.
+      4. Populate the innerHTML for each cell by row.
+    -->
+    </tbody>
+  </table>
+ 
+  <!-- Redirect to Scan Launch Page -->
+  <a href="{% url 'scans:index' %}">
+    <span class="glyphicon glyphicon-plane"></span>
+    To Scan Page
+  </a>
+ 
+</div>
+
+<!-- DIV template for the Action button -->
+<div id="action" class="btn-group" style="display:none;">
+  <button type="button" class="btn btn-danger">Action</button>
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a id="rescan">Rescan</a></li>
+    <li><a id="details">Go to Details</a></li>
+  </ul>
+</div>
+
+
+{% endblock %}

@@ -118,3 +118,12 @@ worker: Warm shutdown (MainProcess)
 [2017-02-24 01:00:54,412: INFO/MainProcess] Received task: scans.tasks.collect_results[0b996cad-e11e-4783-8e5c-22d421af601a]  
 [2017-02-24 01:00:54,426: INFO/PoolWorker-17] [[u'/home/djayasankar/Documents/webscanner/temporary/20170024010048318560scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20170024010048318560scanme.nmap.org/w3af_results.xml', u'S']]
 [2017-02-24 01:00:54,433: INFO/PoolWorker-17] Task scans.tasks.collect_results[0b996cad-e11e-4783-8e5c-22d421af601a] succeeded in 0.0199740231037s: [['/home/djayasankar/Documents/webscanner/temporary/20170024010048318560scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20170024010048318560scanme.nmap.org/w3af_results.xml', 'S']]
+[2017-02-24 18:06:53,437: INFO/MainProcess] Received task: scans.tasks.delegate[f13265e2-69f5-4afa-80e5-79ad3ea2edd6]  
+[2017-02-24 18:06:53,437: INFO/MainProcess] Received task: scans.tasks.delegate[09934a95-e589-4bbb-88f7-c22473baa632]  
+[2017-02-24 18:06:54,825: WARNING/PoolWorker-23] whoami
+[2017-02-24 18:06:54,826: WARNING/PoolWorker-7] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20170624180653380074scanme.nmap.org/w3af_script.w3af
+[2017-02-24 18:06:54,833: INFO/PoolWorker-23] Task scans.tasks.delegate[f13265e2-69f5-4afa-80e5-79ad3ea2edd6] succeeded in 0.0245445519686s: {'Dummy': {}}
+[2017-02-24 18:07:00,786: INFO/PoolWorker-7] Task scans.tasks.delegate[09934a95-e589-4bbb-88f7-c22473baa632] succeeded in 5.97712176619s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-24 18:07:00,786: INFO/MainProcess] Received task: scans.tasks.collect_results[de94dffd-4be4-4b85-9aa6-f7e978163004]  
+[2017-02-24 18:07:00,800: INFO/PoolWorker-1] [[u'/home/djayasankar/Documents/webscanner/temporary/20170624180653380074scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20170624180653380074scanme.nmap.org/w3af_results.xml', u'S']]
+[2017-02-24 18:07:00,807: INFO/PoolWorker-1] Task scans.tasks.collect_results[de94dffd-4be4-4b85-9aa6-f7e978163004] succeeded in 0.0197525080293s: [['/home/djayasankar/Documents/webscanner/temporary/20170624180653380074scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20170624180653380074scanme.nmap.org/w3af_results.xml', 'S']]

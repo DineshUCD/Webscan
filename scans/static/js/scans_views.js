@@ -15,6 +15,23 @@ function ajaxHandler(json, mapping, callback) {
   });
 }
 
+function recent() {
+  $.get("/scans/list", {'recent':true}, function( data ) {
+    //Remove all the rows in the table.
+    $("#ongoing tbody tr").remove();
+
+    var tbody = document.getElementById("ongoing").getElementsByTagName("tbody")[0];
+    
+    console.log(data);
+
+  }).done(function() {
+      $('#ongoing').dataTable();
+    })
+    .fail(function() {
+  
+   });
+}
+
 function launch(element) {
   var data = {};
   var pk = parseInt(element.id);
@@ -30,3 +47,4 @@ function launch(element) {
 
   return true;
 }
+

@@ -93,17 +93,19 @@
 
     <thead>
       <tr>
-        <th>#</th>
         <th>Plan Information</th> 
         <th>Status</th>
       </tr>
     </thead>
-  
-    <!-- TO DO: API to GET currently running scans and delete row after t time. --> 
-
+     
+   <tbody> 
+     <!-- Use an API to GET scans that are only t time old
+       1  1 Call Scan List API /scans/list/ with 'recent' in request. Call Scan List API /scans/list/ with 'recent' in request.
+      --> 
+   </tbody>
   </table>
 
-  <a href="" style="float:right;">
+  <a href="{% url 'scans:scan-history' %}" style="float:right;">
     <span class="glyphicon glyphicon-book"></span>
     Scan History
   </a> 

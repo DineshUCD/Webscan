@@ -15,15 +15,25 @@ from plans.models import Plan
 from celery import chord, group
 from .tasks import delegate, collect_results
 
+import sys, os
+from datetime import datetime, timedelta
+
 # Create your views here.
 # When deserializing data, we can either create a new instance, or update an existing one.
 class ScanList(generics.ListCreateAPIView):
     serializer_class = ScanSerializer
 
     def get_queryset(self):
-        queryset = Scan.objects.filter(user_profile__id=int(self.request.user.userprofile.id))
-        return queryset
+        queryset = None
+        print self.request
+        print self.request.GET 
+        if self.request.method == 'GET' and 'recent' in self.request.GET:
+            queryset = Scan.objects.filter(user_profile__id=self.request.user.userprofile.id, date__gte=datetime.now()-timedelta(seconds=30))
+        else:
+            queryset = Scan.objects.filter(user_profile__id=int(self.request.user.userprofile.id))
 
+        return queryset
+            
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():

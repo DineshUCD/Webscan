@@ -11,7 +11,7 @@ from .forms import PlanForm
 # Create your views here.
 def my_plans(request, template_name='plans/index.html'):
     context = {
-        'plans': Plan.objects.filter(user_profile__id=int(request.user.userprofile.id))
+        'plans': Plan.objects.filter(user_profile__id=int(request.user.userprofile.id), scan=None)
     }
     return render(request, template_name, context)
  

@@ -1,30 +1,22 @@
-from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
-from django.db.models import F
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, render_to_response, reverse
+
+from rest_framework import status, generics
+from rest_framework.response import Response
 
 from scans.models import Scan
 from scans.Zipper import ZipArchive
 
 from uploads.models import Upload
-from uploads.forms import ResultForm
-from uploads.Uploader import add_files, upload_scans
+from uploads.Uploader import upload_scans
 from uploads.Visualization import DndTree
+
+from uploads.serializers import UploadSerializer
 
 from webscanner.logger import logger 
 
-import datetime, subprocess, os, sys
-
-# Create your views here.
-def index(request):
-    """
-    Collect all the Scan Results for a user, display previews of a selected scan,
-    and redirect the user to the results upload page.    
-    """
-    scans = Scan.objects.all()
-    
-    return render(request, 'uploads/index.html')
-
+"""
 @login_required(login_url='/accounts/login/')
 def results(request, upload_id):
 
@@ -40,10 +32,27 @@ def results(request, upload_id):
     if form.is_valid():
         upload_choices = form.cleaned_data['scan_results']
         archive = ZipArchive(scan=upload.scan.id)
-        scan_unzip_files = archive.unzip_file(upload_choices)
+        scan_unzip_files = archive.unzip(upload_choices)
         repository = list()
         add_files(repository, scan_unzip_files, upload.scan.application_id)
         upload_response = upload_scans(repository)
         context['upload_response'] = upload_response
 
-    return render(request, 'uploads/results.html', context)
+    $return render(request, 'uploads/results.html', context)
+"""
+
+class UploadList(generics.ListCreateAPIView):
+    serializer_class = UploadSerializer
+    
+    def get_queryset(self):
+        queryset = Upload.objects.filter(scan__user_profile__id=self.request.user.userprofile.id)
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            upload = serializer.save()
+            print request.data
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+

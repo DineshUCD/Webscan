@@ -52,10 +52,10 @@ class AbstractPlugin(object):
         # Stores meta data on the scan in json format.
         self.diagnostics[self.class_name] = dict()
 
-    def set_metafile(self, filevariable, role):
-        filename = os.path.basename(filevariable)
+    def set_metafile(self, absolute_file_path, role):
+        filename = os.path.basename(absolute_file_path)
         metafile = MetaFile(scan=self.model, store=self.model.zip, tool=self.tool, report=filename, role=role).save()
-        self.record(AbstractPlugin.FILES, [(filevariable, role)])
+        self.record(AbstractPlugin.FILES, [(absolute_file_path, role)])
         
     def record(self, key, value):
      

@@ -1,0 +1,103 @@
+{% extends 'scans/base.html' %}
+{% load bootstrap3 %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Hidden Input for Scan Primary Key -->
+<input type="hidden" name="pk" value="{{ scan.pk }}" readonly>
+
+<!-- Container for a single scan summary. -->
+<div class="container">
+  
+
+  <div class="table-responsive"> <!--Scroll horizontally on small devices. -->
+    <!-- Table title -->
+    <p class="h5" style="float:left;">Summary</p>
+
+    <table class="table table-bordered table-hover">
+
+      <thead>
+        <tr>  
+          <th>Plan Name</th>
+          <th>Plan Description</th>
+          <th>Target</th>
+          <th>Started</th>
+          <th>State</th>
+        </tr>
+      </thead>
+ 
+      <tbody>
+        <tr> 
+          <td>{{ scan.plan.name }}</td>
+          <td>{{ scan.plan.description }}</td>
+          <td>{{ scan.uniform_resource_locator }}</td>
+          <td>{{ scan.date }}</td>
+          <td>{{ scan_state }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+
+    <a href="{% url 'plans:plans-list' %}" style="float:right;">
+      <span class="glyphicon glyphicon-shopping-cart"></span>
+      Manage Plans
+    </a>
+
+  </div>
+
+
+</div>
+
+<!-- Container for tools data -->
+<div class="container">
+  <div class="table-responsive"> <!--Scroll through tools table -->
+    <!-- Table title -->
+    <p class="h5" style="float:left;">Results</p>
+
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Files</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>    
+
+      <tbody>
+        {% for tool in tools %}
+          {% ifchanged %}
+            <tr>
+              <td>{{ tool.name }}</td>
+              <td>
+                {% for output in tool.files %}
+                  <strong>{{ output.report }}</strong>
+                {% endfor %}
+              </td>
+              <td>{{ tool.state }}</td>
+              <td> 
+                {% for output in tool.files %}
+                  <input type="checkbox" value={{ output.report }}>
+                {% endfor %}
+              </td>
+            </tr>
+          {% endifchanged %}
+        {% endfor %}
+      </tbody>  
+    </table>
+
+  </div>
+
+</div>
+
+<!-- Container for Threadfix URL selector -->
+<form method='POST' action=''>
+  {% csrf_token %}
+  {{ form.as_p }}
+</form>
+
+
+
+{% endblock %}

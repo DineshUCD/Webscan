@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
-import zipfile, shutil, configparser, os, sys, datetime, fnmatch
+import zipfile, shutil, configparser, os, sys, datetime, fnmatch, logging
 from multiprocessing import Pool
 from scans.models import *
 from django.conf import settings
 from django.core.exceptions import *
+
+logger = logging.getLogger('scarab')
 
 #Function names should be lowercase, with words separated by underscores as necessary to improve readability.
 
@@ -88,12 +90,14 @@ class ZipArchive():
         if kwargs:
             raise TypeError('Unexpected **kwargs: %r' % kwargs)
 
-        current_time = datetime.datetime.now()
-         
         #Check if the zipfile exists in archive/ or another absolute path
+        self.zip_basename = os.path.basename(self.scan.zip.name)
+        self.temporary_folder_path = os.path.join(settings.TEMPORARY_DIR, self.zip_basename)
+        self.archive_folder_path = os.path.join(settings.ARCHIVE_DIR, self.zip_basename)
 
-        self.temporary_folder_path = os.path.join(settings.TEMPORARY_DIR, self.scan.zip.name)
         self.file_list = list()                
+
+          # Check if temporary directory exists.
         if not os.path.exists( self.temporary_folder_path ):
             os.makedirs(self.temporary_folder_path)
 
@@ -101,9 +105,6 @@ class ZipArchive():
         if not absolute_path or not os.path.exists(absolute_path[0]):
             return None
         
-        if not os.path.exists(self.temporary_folder_path):
-            os.makedirs(self.temporary_folder_path)
-
         base_filename = os.path.basename(absolute_path[0])
         new_file_path = os.path.join( self.temporary_folder_path, base_filename )
 
@@ -128,22 +129,18 @@ class ZipArchive():
        
         for absolute_path in file_list:
             self.track_file(absolute_path)
-
-        # default related_name is model name in lower case
-        self.scan.zip.name = self.temporary_folder_path
          
         base_directory = os.path.basename(self.temporary_folder_path)
         root_directory = os.path.dirname(self.temporary_folder_path)
         #Zip the folder containing the meta files
         zip_folder_path = shutil.make_archive(base_name=self.temporary_folder_path, format='zip', root_dir=root_directory, base_dir=base_directory)
-        self.scan.zip.name = os.path.join(settings.ARCHIVE_DIR, base_directory)
 
         if not os.path.exists(settings.ARCHIVE_DIR):
             os.makedirs(settings.ARCHIVE_DIR)
      
         try: 
             #Move the zip folder to the archive path
-            shutil.move(zip_folder_path, self.scan.zip.name)
+            shutil.move(zip_folder_path, self.archive_folder_path)
         except IOError as e:
             logger.error("I/O error({0}): {1}".format(e.errno, e.strerror))
 
@@ -154,20 +151,20 @@ class ZipArchive():
         #delete the pre-zip folder in temporary
         shutil.rmtree(self.temporary_folder_path)
 
-    def unzip_file(self, file_list):
+    def unzip(self, file_list):
         """
         Unzip individual files from the archive and store the directory under temporary.
         Operates fine under succession.
         """
         individual_extraction_path = list()
         try:
-            archive = zipfile.ZipFile(self.scan.zip.name, 'r')
-            zip_basename = os.path.basename(self.scan.zip.name)
+            archive = zipfile.ZipFile(self.archive_folder_path, 'r')
             for item in file_list:
-                individual_extraction_path.append(archive.extract(os.path.join(zip_basename, item), settings.TEMPORARY_DIR))
+                individual_extraction_path.append(archive.extract(os.path.join(self.zip_basename, item), settings.TEMPORARY_DIR))
         except (IOError, KeyError) as err:
             #There is no item named <item> in the archive.
             #No such file or directory
+            logger.error("I/O error({0}): {1}".format(e.errno, e.strerror))
             return None
 
-        return individual_extraction_path 
+        return individual_extraction_path

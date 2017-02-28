@@ -8,12 +8,15 @@ from rest_framework.response import Response
 
 from scans.serializers import ScanSerializer
 
-from scans.models import Scan, Tool
+from scans.models import Scan, Tool, MetaFile
 from uploads.models import Upload
+from uploads.forms import UploadForm
 from plans.models import Plan
 
 from celery import chord, group
 from .tasks import delegate, collect_results
+
+from webscanner.settings import THREADFIX_URL
 
 import sys, os
 from datetime import datetime, timedelta
@@ -51,13 +54,6 @@ class ScanList(generics.ListCreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class ScanDetail(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = ScanSerializer
-
-    def get_queryset(self):
-        queryset = Scan.objects.filter(user_profile__id=int(self.request.user.userprofile.id))
-        return queryset
-
 def launch(request, template_name='scans/index.html'):
     user_session = request.user.userprofile.get_latest_session()
     plan_pks = user_session.getitem('plan')
@@ -66,5 +62,27 @@ def launch(request, template_name='scans/index.html'):
   
     if plan_pks and isinstance(plan_pks, list):
         context['plans'] = Plan.objects.filter(pk__in=plan_pks, user_profile__id=int(request.user.userprofile.id)) 
-
+    
     return render(request, template_name, context)
+
+def detail(request, pk, template_name='scans/detail.html'): 
+    scan = get_object_or_404(Scan, user_profile__id=int(request.user.userprofile.id), pk=pk)
+
+    form = UploadForm(request.POST or None)
+    
+    context = {
+        'scan': scan,
+        'form': form,
+        'tools':list()
+    }
+    context['scan_state'] = scan.get_state()
+
+    # Require tool name, tool files, and tool status
+    tools = scan.plan.tool_set.all()
+    for tool in tools:  
+        scan_files = tool.metafile_set.filter(role=MetaFile.SCAN)
+        state = tool.get_state()
+        context['tools'].append({ 'name':tool.name, 'state': state, 'files': scan_files })
+     
+    return render(request, template_name, context)
+

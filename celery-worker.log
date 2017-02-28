@@ -1,62 +1,109 @@
-[2017-02-27 09:05:16,290: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
-[2017-02-27 09:05:16,301: INFO/MainProcess] mingle: searching for neighbors
-[2017-02-27 09:05:17,322: INFO/MainProcess] mingle: all alone
-[2017-02-27 09:05:17,334: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+[2017-02-28 13:51:33,501: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-02-28 13:51:33,512: INFO/MainProcess] mingle: searching for neighbors
+[2017-02-28 13:51:34,533: INFO/MainProcess] mingle: all alone
+[2017-02-28 13:51:34,545: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
   warnings.warn('Using settings.DEBUG leads to a memory leak, never '
-[2017-02-27 09:05:17,335: INFO/MainProcess] celery@sec-tools-02 ready.
-[2017-02-27 09:26:24,176: INFO/MainProcess] Received task: scans.tasks.delegate[02a13659-d7f5-4871-82f0-102bd7b65c5b]  
-[2017-02-27 09:26:24,177: INFO/MainProcess] Received task: scans.tasks.delegate[f45fb6f0-2180-499a-b7bd-2ace1717c273]  
-[2017-02-27 09:26:24,694: WARNING/PoolWorker-2] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20172627092624122770scanme.nmap.org/w3af_script.w3af
-[2017-02-27 09:26:24,694: WARNING/PoolWorker-4] whoami
-[2017-02-27 09:26:24,701: INFO/PoolWorker-4] Task scans.tasks.delegate[02a13659-d7f5-4871-82f0-102bd7b65c5b] succeeded in 0.0254233828746s: {'Dummy': {}}
-[2017-02-27 09:26:30,671: INFO/PoolWorker-2] Task scans.tasks.delegate[f45fb6f0-2180-499a-b7bd-2ace1717c273] succeeded in 5.99509992218s: {'W3af': {'files': [(...), (...)]}}
-[2017-02-27 09:26:30,672: INFO/MainProcess] Received task: scans.tasks.collect_results[afa47b2e-4997-43bf-8411-6b7e5771c991]  
-[2017-02-27 09:26:30,684: INFO/PoolWorker-14] [[u'/home/djayasankar/Documents/webscanner/temporary/20172627092624122770scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20172627092624122770scanme.nmap.org/w3af_results.xml', u'S']]
-[2017-02-27 09:26:30,691: INFO/PoolWorker-14] Task scans.tasks.collect_results[afa47b2e-4997-43bf-8411-6b7e5771c991] succeeded in 0.0184076242149s: [['/home/djayasankar/Documents/webscanner/temporary/20172627092624122770scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20172627092624122770scanme.nmap.org/w3af_results.xml', 'S']]
-[2017-02-27 09:29:38,972: INFO/MainProcess] Received task: scans.tasks.delegate[8657a5e0-3585-40e3-a049-258ecdedf829]  
-[2017-02-27 09:29:38,973: INFO/MainProcess] Received task: scans.tasks.delegate[6e772493-4d45-4741-95b0-da5a8b4bbc45]  
-[2017-02-27 09:29:40,890: WARNING/PoolWorker-7] whoami
-[2017-02-27 09:29:40,891: WARNING/PoolWorker-15] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20172927092938924663scanme.nmap.org/w3af_script.w3af
-[2017-02-27 09:29:40,898: INFO/PoolWorker-7] Task scans.tasks.delegate[8657a5e0-3585-40e3-a049-258ecdedf829] succeeded in 0.0235241577029s: {'Dummy': {}}
-[2017-02-27 09:29:46,853: INFO/PoolWorker-15] Task scans.tasks.delegate[6e772493-4d45-4741-95b0-da5a8b4bbc45] succeeded in 5.9784258632s: {'W3af': {'files': [(...), (...)]}}
-[2017-02-27 09:29:46,853: INFO/MainProcess] Received task: scans.tasks.collect_results[df4b94f2-c6e9-4de4-b1a0-272ccf13292a]  
-[2017-02-27 09:29:46,866: INFO/PoolWorker-1] [[u'/home/djayasankar/Documents/webscanner/temporary/20172927092938924663scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20172927092938924663scanme.nmap.org/w3af_results.xml', u'S']]
-[2017-02-27 09:29:46,873: INFO/PoolWorker-1] Task scans.tasks.collect_results[df4b94f2-c6e9-4de4-b1a0-272ccf13292a] succeeded in 0.0180917172693s: [['/home/djayasankar/Documents/webscanner/temporary/20172927092938924663scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20172927092938924663scanme.nmap.org/w3af_results.xml', 'S']]
-[2017-02-27 09:52:49,632: INFO/MainProcess] Received task: scans.tasks.delegate[9b89a1de-0caf-4a91-96f9-bdb8f83d644e]  
-[2017-02-27 09:52:49,633: INFO/MainProcess] Received task: scans.tasks.delegate[7c6693f8-3a03-4fe9-a821-128f8ddfcd33]  
-[2017-02-27 09:52:50,355: WARNING/PoolWorker-6] w3af_console
-[2017-02-27 09:52:50,360: WARNING/PoolWorker-6] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20175227095249576684scanme.nmap.org/w3af_script.w3af
-[2017-02-27 09:52:50,360: INFO/PoolWorker-9] Task scans.tasks.delegate[9b89a1de-0caf-4a91-96f9-bdb8f83d644e] succeeded in 0.0203870749101s: {'Dummy': {}}
-[2017-02-27 09:52:57,311: INFO/PoolWorker-6] Task scans.tasks.delegate[7c6693f8-3a03-4fe9-a821-128f8ddfcd33] succeeded in 6.97099158587s: {'W3af': {'files': [(...), (...)]}}
-[2017-02-27 09:52:57,312: INFO/MainProcess] Received task: scans.tasks.collect_results[ea730f17-b7ee-4d63-ba3b-eee6ae1a92ab]  
-[2017-02-27 09:52:57,325: INFO/PoolWorker-3] [[u'/home/djayasankar/Documents/webscanner/temporary/20175227095249576684scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20175227095249576684scanme.nmap.org/w3af_results.xml', u'S']]
-[2017-02-27 09:52:57,333: INFO/PoolWorker-3] Task scans.tasks.collect_results[ea730f17-b7ee-4d63-ba3b-eee6ae1a92ab] succeeded in 0.0200438140891s: [['/home/djayasankar/Documents/webscanner/temporary/20175227095249576684scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20175227095249576684scanme.nmap.org/w3af_results.xml', 'S']]
-[2017-02-27 09:54:53,367: INFO/MainProcess] Received task: scans.tasks.delegate[388b9f7b-8d6b-474f-b64c-1f89c5d41722]  
-[2017-02-27 09:54:53,367: INFO/MainProcess] Received task: scans.tasks.delegate[302988fe-2618-4258-b44d-c44d6a9fea50]  
-[2017-02-27 09:54:54,485: WARNING/PoolWorker-21] whoami
-[2017-02-27 09:54:54,486: WARNING/PoolWorker-17] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20175427095453313986scanme.nmap.org/w3af_script.w3af
-[2017-02-27 09:54:54,492: INFO/PoolWorker-21] Task scans.tasks.delegate[388b9f7b-8d6b-474f-b64c-1f89c5d41722] succeeded in 0.0237345458008s: {'Dummy': {}}
-[2017-02-27 09:55:00,424: INFO/PoolWorker-17] Task scans.tasks.delegate[302988fe-2618-4258-b44d-c44d6a9fea50] succeeded in 5.95570776565s: {'W3af': {'files': [(...), (...)]}}
-[2017-02-27 09:55:00,425: INFO/MainProcess] Received task: scans.tasks.collect_results[037dfb6b-6b4b-451a-81b9-d294d19171a2]  
-[2017-02-27 09:55:00,439: INFO/PoolWorker-12] [[u'/home/djayasankar/Documents/webscanner/temporary/20175427095453313986scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20175427095453313986scanme.nmap.org/w3af_results.xml', u'S']]
-[2017-02-27 09:55:00,446: INFO/PoolWorker-12] Task scans.tasks.collect_results[037dfb6b-6b4b-451a-81b9-d294d19171a2] succeeded in 0.0197159382515s: [['/home/djayasankar/Documents/webscanner/temporary/20175427095453313986scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20175427095453313986scanme.nmap.org/w3af_results.xml', 'S']]
-[2017-02-27 09:55:33,483: INFO/MainProcess] Received task: scans.tasks.delegate[4e0ab880-6154-4a78-be45-464e06c16f34]  
-[2017-02-27 09:55:33,484: INFO/MainProcess] Received task: scans.tasks.delegate[05bae352-fef2-49a6-a34f-6cf02ea33e9c]  
-[2017-02-27 09:55:34,523: WARNING/PoolWorker-22] whoami
-[2017-02-27 09:55:34,523: WARNING/PoolWorker-24] w3af_console
-[2017-02-27 09:55:34,529: WARNING/PoolWorker-24] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20175527095533474249scanme.nmap.org/w3af_script.w3af
-[2017-02-27 09:55:34,531: INFO/PoolWorker-22] Task scans.tasks.delegate[4e0ab880-6154-4a78-be45-464e06c16f34] succeeded in 0.0230173841119s: {'Dummy': {}}
-[2017-02-27 09:55:40,497: INFO/PoolWorker-24] Task scans.tasks.delegate[05bae352-fef2-49a6-a34f-6cf02ea33e9c] succeeded in 5.98900509998s: {'W3af': {'files': [(...), (...)]}}
-[2017-02-27 09:55:40,498: INFO/MainProcess] Received task: scans.tasks.collect_results[6d976844-4d74-4513-90c2-5d36470c5673]  
-[2017-02-27 09:55:40,511: INFO/PoolWorker-8] [[u'/home/djayasankar/Documents/webscanner/temporary/20175527095533474249scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20175527095533474249scanme.nmap.org/w3af_results.xml', u'S']]
-[2017-02-27 09:55:40,519: INFO/PoolWorker-8] Task scans.tasks.collect_results[6d976844-4d74-4513-90c2-5d36470c5673] succeeded in 0.0193645199761s: [['/home/djayasankar/Documents/webscanner/temporary/20175527095533474249scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20175527095533474249scanme.nmap.org/w3af_results.xml', 'S']]
-[2017-02-27 10:04:23,091: INFO/MainProcess] Received task: scans.tasks.delegate[d68e14e8-8855-4865-afb2-0b81a6fd818a]  
-[2017-02-27 10:04:23,092: INFO/MainProcess] Received task: scans.tasks.delegate[572e8a32-7e47-47f0-9e2b-2b59806ccba0]  
-[2017-02-27 10:04:23,110: WARNING/PoolWorker-2] whoami
-[2017-02-27 10:04:23,117: WARNING/PoolWorker-19] w3af_console
-[2017-02-27 10:04:23,117: INFO/PoolWorker-2] Task scans.tasks.delegate[d68e14e8-8855-4865-afb2-0b81a6fd818a] succeeded in 0.0152757000178s: {'Dummy': {}}
-[2017-02-27 10:04:23,122: WARNING/PoolWorker-19] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/20170427100423030812scanme.nmap.org/w3af_script.w3af
-[2017-02-27 10:04:29,085: INFO/PoolWorker-19] Task scans.tasks.delegate[572e8a32-7e47-47f0-9e2b-2b59806ccba0] succeeded in 5.98298257124s: {'W3af': {'files': [(...), (...)]}}
-[2017-02-27 10:04:29,086: INFO/MainProcess] Received task: scans.tasks.collect_results[82083785-a803-419a-9cb0-48c96a8b2195]  
-[2017-02-27 10:04:29,099: INFO/PoolWorker-23] [[u'/home/djayasankar/Documents/webscanner/temporary/20170427100423030812scanme.nmap.org/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/20170427100423030812scanme.nmap.org/w3af_results.xml', u'S']]
-[2017-02-27 10:04:29,105: INFO/PoolWorker-23] Task scans.tasks.collect_results[82083785-a803-419a-9cb0-48c96a8b2195] succeeded in 0.0180158647709s: [['/home/djayasankar/Documents/webscanner/temporary/20170427100423030812scanme.nmap.org/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/20170427100423030812scanme.nmap.org/w3af_results.xml', 'S']]
+[2017-02-28 13:51:34,545: INFO/MainProcess] celery@sec-tools-02 ready.
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@sec-tools-02 v4.0.2 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-3.10.0-514.6.1.el7.x86_64-x86_64-with-oracle-7.3 2017-02-28 13:51:32
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x2c98950
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 24 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2017-02-28 15:40:24,731: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-02-28 15:40:24,745: INFO/MainProcess] mingle: searching for neighbors
+[2017-02-28 15:40:25,765: INFO/MainProcess] mingle: all alone
+[2017-02-28 15:40:25,777: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2017-02-28 15:40:25,777: INFO/MainProcess] celery@sec-tools-02 ready.
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@sec-tools-02 v4.0.2 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-3.10.0-514.6.1.el7.x86_64-x86_64-with-oracle-7.3 2017-02-28 15:40:23
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         webscanner:0x1a64950
+- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
+- ** ---------- .> results:     redis://localhost/
+- *** --- * --- .> concurrency: 24 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . scans.tasks.collect_results
+  . scans.tasks.delegate
+  . webscanner.celery_tasks.debug_task
+
+[2017-02-28 15:40:34,783: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-02-28 15:40:34,794: INFO/MainProcess] mingle: searching for neighbors
+[2017-02-28 15:40:35,815: INFO/MainProcess] mingle: all alone
+[2017-02-28 15:40:35,827: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2017-02-28 15:40:35,828: INFO/MainProcess] celery@sec-tools-02 ready.
+[2017-02-28 15:41:11,140: INFO/MainProcess] Received task: scans.tasks.delegate[361d0879-8bee-4046-bfd6-4993fc396625]  
+[2017-02-28 15:41:11,141: INFO/MainProcess] Received task: scans.tasks.delegate[cdf2205a-5742-425c-beb2-abf340315aec]  
+[2017-02-28 15:41:11,883: WARNING/PoolWorker-3] whoami
+[2017-02-28 15:41:11,884: WARNING/PoolWorker-11] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/Z27sn0uljz/w3af_script.w3af
+[2017-02-28 15:41:11,891: INFO/PoolWorker-3] Task scans.tasks.delegate[361d0879-8bee-4046-bfd6-4993fc396625] succeeded in 0.0245997500606s: {'Dummy': {}}
+[2017-02-28 15:41:26,897: INFO/PoolWorker-11] Task scans.tasks.delegate[cdf2205a-5742-425c-beb2-abf340315aec] succeeded in 15.0301478589s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-28 15:41:26,898: INFO/MainProcess] Received task: scans.tasks.collect_results[1232eaeb-4719-44cc-b7bf-26f6490dce5f]  
+[2017-02-28 15:41:26,912: INFO/PoolWorker-19] [[u'/home/djayasankar/Documents/webscanner/temporary/Z27sn0uljz/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/Z27sn0uljz/w3af_results.xml', u'S']]
+[2017-02-28 15:41:26,919: INFO/PoolWorker-19] Task scans.tasks.collect_results[1232eaeb-4719-44cc-b7bf-26f6490dce5f] succeeded in 0.0196599122137s: [['/home/djayasankar/Documents/webscanner/temporary/Z27sn0uljz/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/Z27sn0uljz/w3af_results.xml', 'S']]
+[2017-02-28 15:42:30,530: INFO/MainProcess] Received task: scans.tasks.delegate[2d97a11a-84b6-4ad1-9adb-a1c98f7039d0]  
+[2017-02-28 15:42:30,531: INFO/MainProcess] Received task: scans.tasks.delegate[64e0b8c6-294f-4311-9546-b2ebb63a1ff9]  
+[2017-02-28 15:42:30,868: WARNING/PoolWorker-5] w3af_console
+[2017-02-28 15:42:30,873: INFO/PoolWorker-6] Task scans.tasks.delegate[2d97a11a-84b6-4ad1-9adb-a1c98f7039d0] succeeded in 0.0202253707685s: {'Dummy': {}}
+[2017-02-28 15:42:30,873: WARNING/PoolWorker-5] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/JB7QGkBpxK/w3af_script.w3af
+[2017-02-28 15:42:37,336: INFO/PoolWorker-5] Task scans.tasks.delegate[64e0b8c6-294f-4311-9546-b2ebb63a1ff9] succeeded in 6.4834305807s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-28 15:42:37,336: INFO/MainProcess] Received task: scans.tasks.collect_results[67ab979f-4695-481c-a6dd-637a72a4325c]  
+[2017-02-28 15:42:37,350: INFO/PoolWorker-17] [[u'/home/djayasankar/Documents/webscanner/temporary/JB7QGkBpxK/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/JB7QGkBpxK/w3af_results.xml', u'S']]
+[2017-02-28 15:42:37,357: INFO/PoolWorker-17] Task scans.tasks.collect_results[67ab979f-4695-481c-a6dd-637a72a4325c] succeeded in 0.0192946894094s: [['/home/djayasankar/Documents/webscanner/temporary/JB7QGkBpxK/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/JB7QGkBpxK/w3af_results.xml', 'S']]
+[2017-02-28 15:44:42,538: INFO/MainProcess] Received task: scans.tasks.delegate[17510f01-6c66-4dea-b46a-ad3af134f096]  
+[2017-02-28 15:44:42,539: INFO/MainProcess] Received task: scans.tasks.delegate[a63d5aef-2bec-471f-8d87-43419c2406b7]  
+[2017-02-28 15:44:44,099: WARNING/PoolWorker-22] whoami
+[2017-02-28 15:44:44,100: WARNING/PoolWorker-14] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/3kXNO8a5ho/w3af_script.w3af
+[2017-02-28 15:44:44,106: INFO/PoolWorker-22] Task scans.tasks.delegate[17510f01-6c66-4dea-b46a-ad3af134f096] succeeded in 0.0239649522118s: {'Dummy': {}}
+[2017-02-28 15:44:44,366: INFO/MainProcess] Received task: scans.tasks.delegate[40ec9af8-9661-43d0-9cfc-2430056c7fee]  
+[2017-02-28 15:44:44,367: INFO/MainProcess] Received task: scans.tasks.delegate[b11de4eb-5fce-4d47-91b3-4f53cfab7b64]  
+[2017-02-28 15:44:45,901: WARNING/PoolWorker-12] w3af_console
+[2017-02-28 15:44:45,905: INFO/PoolWorker-1] Task scans.tasks.delegate[40ec9af8-9661-43d0-9cfc-2430056c7fee] succeeded in 0.020358167123s: {'Dummy': {}}
+[2017-02-28 15:44:45,906: WARNING/PoolWorker-12] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/dpCGHtxG49/w3af_script.w3af
+[2017-02-28 15:44:59,058: INFO/PoolWorker-14] Task scans.tasks.delegate[a63d5aef-2bec-471f-8d87-43419c2406b7] succeeded in 14.975891328s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-28 15:44:59,059: INFO/MainProcess] Received task: scans.tasks.collect_results[1ac43a08-6016-48d3-88e3-db7893004544]  
+[2017-02-28 15:44:59,073: INFO/PoolWorker-10] [[u'/home/djayasankar/Documents/webscanner/temporary/3kXNO8a5ho/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/3kXNO8a5ho/w3af_results.xml', u'S']]
+[2017-02-28 15:44:59,080: INFO/PoolWorker-10] Task scans.tasks.collect_results[1ac43a08-6016-48d3-88e3-db7893004544] succeeded in 0.0197034208104s: [['/home/djayasankar/Documents/webscanner/temporary/3kXNO8a5ho/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/3kXNO8a5ho/w3af_results.xml', 'S']]
+[2017-02-28 15:45:00,836: INFO/PoolWorker-12] Task scans.tasks.delegate[b11de4eb-5fce-4d47-91b3-4f53cfab7b64] succeeded in 14.9513018141s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-28 15:45:00,838: INFO/MainProcess] Received task: scans.tasks.collect_results[02088ed0-0d56-4cb1-b8ee-71238edb0f01]  
+[2017-02-28 15:45:00,851: INFO/PoolWorker-8] [[u'/home/djayasankar/Documents/webscanner/temporary/dpCGHtxG49/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/dpCGHtxG49/w3af_results.xml', u'S']]
+[2017-02-28 15:45:00,858: INFO/PoolWorker-8] Task scans.tasks.collect_results[02088ed0-0d56-4cb1-b8ee-71238edb0f01] succeeded in 0.0193550526164s: [['/home/djayasankar/Documents/webscanner/temporary/dpCGHtxG49/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/dpCGHtxG49/w3af_results.xml', 'S']]
+[2017-02-28 15:45:34,003: INFO/MainProcess] Received task: scans.tasks.delegate[67048677-8a37-4cf3-8151-6ad3b550c1ef]  
+[2017-02-28 15:45:34,003: INFO/MainProcess] Received task: scans.tasks.delegate[7ef9b090-cf61-44e1-86cc-7e058e201154]  
+[2017-02-28 15:45:34,144: WARNING/PoolWorker-23] w3af_console
+[2017-02-28 15:45:34,149: INFO/PoolWorker-18] Task scans.tasks.delegate[67048677-8a37-4cf3-8151-6ad3b550c1ef] succeeded in 0.0202620970085s: {'Dummy': {}}
+[2017-02-28 15:45:34,149: WARNING/PoolWorker-23] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/c3SkrRHxQF/w3af_script.w3af
+[2017-02-28 15:45:49,101: INFO/PoolWorker-23] Task scans.tasks.delegate[7ef9b090-cf61-44e1-86cc-7e058e201154] succeeded in 14.9720738651s: {'W3af': {'files': [(...), (...)]}}
+[2017-02-28 15:45:49,102: INFO/MainProcess] Received task: scans.tasks.collect_results[f4b7bab4-2c2d-462f-8c61-34ab3c8483ef]  
+[2017-02-28 15:45:49,115: INFO/PoolWorker-9] [[u'/home/djayasankar/Documents/webscanner/temporary/c3SkrRHxQF/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/c3SkrRHxQF/w3af_results.xml', u'S']]
+[2017-02-28 15:45:49,122: INFO/PoolWorker-9] Task scans.tasks.collect_results[f4b7bab4-2c2d-462f-8c61-34ab3c8483ef] succeeded in 0.0192092880607s: [['/home/djayasankar/Documents/webscanner/temporary/c3SkrRHxQF/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/c3SkrRHxQF/w3af_results.xml', 'S']]

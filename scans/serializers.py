@@ -2,7 +2,6 @@ from rest_framework import serializers
 from scans.models import Tool, Scan
 from plans.models import Plan
 from plans.serializers import PlanSerializer
-from webscanner.celery_tasks import app
 from urllib2 import urlopen
 
 
@@ -44,21 +43,11 @@ class ScanSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         ret = super(ScanSerializer, self).to_representation(instance)
         ret['plan'] = str(instance.plan).lower()
-        
-        result = app.AsyncResult(str(instance.task_id))
-        state  = str(result.state)[:7]
-        ret['state'] = state
-        Scan.objects.filter(pk=instance.pk).update(state=state)
-
+        ret['state'] = instance.get_state()
         ret['date'] = instance.date
-
         ret['tools'] = list()
         for tool in instance.plan.tool_set.all():
-            result = app.AsyncResult(str(tool.task_id))
-            state = str(result.state)[:7]
-
+            state = tool.get_state()
             ret['tools'].append({tool.name:state})
-            Tool.objects.filter(pk=tool.pk).update(state=state)
-               
-                     
+                                   
         return ret

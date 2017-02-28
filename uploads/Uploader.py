@@ -7,27 +7,6 @@ from multiprocessing import *
 import time, os, datetime, json, requests, urllib2
 
 
-
-
-def add_file(repository, path,application_id=-1):
-    if not os.path.isfile(path):
-        return None
-
-    try:
-        with open(path) as file:
-            pass
-    except IOError:
-       sys.exit(1)
-    finally:
-        repository.append( (application_id, path) )
-
-def add_files(repository, paths, application_id=-1):
-    if not paths:
-        return None
-    for item in paths:
-        add_file(repository, item, application_id)
-
-
 def upload_scan(application_id, path):
     try:
         response_wrap = { 'file': path, 'application_id': application_id }
@@ -51,11 +30,11 @@ def check_response(response_wrap):
         pass
    
        
-def upload_scans(repository):
+def upload_scans(repository, application_id):
     pool = Pool(len(repository))
     pool_responses = list()
     for item in repository:
-        pool_responses.append(pool.apply_async(upload_scan, item, callback=check_response))
+        pool_responses.append(pool.apply_async(upload_scan, (application_id, item,), callback=check_response))
     
     pool.close()
     pool.join()

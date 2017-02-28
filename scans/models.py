@@ -4,12 +4,12 @@ from django.db import models
 from django.db.models import signals
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from django.core.validators import MinValueValidator, MaxValueValidator
 
 from accounts.models import UserProfile
+from webscanner.celery_tasks  import app
 from webscanner import settings
 
-import datetime, sys, os, uuid
+import datetime, sys, os, uuid, string, random
 
 # Create your models here.
 class Scan(models.Model):
@@ -26,7 +26,6 @@ class Scan(models.Model):
 
     user_profile             = models.ForeignKey(UserProfile)
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False, help_text="Please use the following format: http(s)://")
-    application_id           = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(-1), MaxValueValidator(10)])
     date                     = models.DateTimeField(auto_now_add=True)
     state                    = models.CharField(max_length=7, choices=ALL_STATES, default=PENDING)
     task_id                  = models.UUIDField(default=uuid.uuid4, editable=True)
@@ -36,6 +35,12 @@ class Scan(models.Model):
 
     def get_scan_data(self):
 	return { 'output': map(lambda output: output.report, MetaFile.objects.filter(scan__id=self.id).filter(role=MetaFile.SCAN)), 'zip path': self.zip.name }       
+
+    def get_state(self):
+        result = app.AsyncResult(str(self.task_id))
+        state = str(result.state)[:7]
+        Scan.objects.filter(pk=self.pk).update(state=state) 
+        return state
 
     def __unicode__(self):
         return "{0}".format(self.uniform_resource_locator)
@@ -60,7 +65,7 @@ class Zip(models.Model):
 @receiver(post_save, sender=Scan)
 def create_zip_for_scan(sender, instance, created, **kwargs):
     if created:
-        zip_name      = str(datetime.datetime.now().strftime("%Y%M%d%H%M%S%f")) + str(instance).replace('http://','',1)
+        zip_name      = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(10))
         zip_meta_data = Zip(scan=instance, name=zip_name)
         zip_meta_data.save()
     
@@ -73,6 +78,12 @@ class Tool(models.Model):
     date           = models.DateTimeField(auto_now_add=True)
     state          = models.CharField(max_length=7, choices=Scan.ALL_STATES, blank=True)
     task_id        = models.UUIDField(default=uuid.uuid4, editable=True)
+
+    def get_state(self):
+        result = app.AsyncResult(str(self.task_id))
+        state = str(result.state)[:7]
+        Tool.objects.filter(pk=self.pk).update(state=state)
+        return state
 
     def __unicode__(self):
         return "{0}".format(self.name)

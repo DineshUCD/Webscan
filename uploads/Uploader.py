@@ -43,11 +43,13 @@ def upload_scans(repository, application_id):
         assert not worker.is_alive()
 
     threadfix_responses = map(lambda pool_response: pool_response.get(timeout=30), pool_responses)  
-    
+
+    """    
     for item in repository:
         directory = os.path.basename(item[1])
         if os.path.exists(directory):
             shutil.rmtree(directory)
- 
+    """
+
     return threadfix_responses         
         

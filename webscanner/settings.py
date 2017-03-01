@@ -31,7 +31,7 @@ THREADFIX_URL = "http://sec-tools-01.eng.netsuite.com/threadfix/"
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'bn5rh2j@r$2uas!s+#&4u!5!=560n^jk!)4yzqxrf@^#6!23vp'
-THREADFIX_API_KEY = "9ip21QrkHG4royNF0Rw8MMOeLZH7sPzQPYRn0TUwQtc"
+THREADFIX_API_KEY = "yGfGZcoPpjEMPwVdx6aqchbejiLn1GJQIUdnEDKMYes"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

@@ -35,10 +35,9 @@ class UploadForm(forms.Form):
 
         if threadfix_response.status_code == 200:
             parsed_statistics = json.loads(threadfix_response.text)
-            print parsed_statistics
             team_information  = parsed_statistics['object']
             if not parsed_statistics['success'] or not team_information:
-                print "EXIT"
+                return None
             team_count        = len(team_information)
 
 

@@ -1,0 +1,87 @@
+#Send large files through Django
+import os, tempfile, zipfile, json
+
+from django.http import HttpResponse, JsonResponse, StreamingHttpResponse
+from wsgiref.util import FileWrapper
+
+from scans.Zipper import ZipArchive
+
+import os, mimetypes, logging
+
+logger = logging.getLogger('scarab')
+
+def extract_from_archival(resources, scan_pk):
+
+    #flatten the list of filepaths
+    filenames = str(resources).translate(None, "[]'").split(',')
+    archive = ZipArchive(scan=scan_pk)
+    output = archive.unzip(filenames)
+
+    if not output:
+        logger.error('Resource Not Found')
+    elif isinstance(output, list) and len(s) == 1:
+        return output[0]
+    
+    return output
+
+def send_file(request):
+    """
+    Send a file through Django without loading the whole file into memory at once.
+    The FileWrapper will turn the file object into an iterator for chunks of 8KB.
+    """
+    if not request.method == 'GET':
+        return JsonResponse(data={'message': 'View Does Not Exist.'}, status=404)
+
+    __file__ = request.GET.get('resources', None)
+    scan_pk  = request.GET.get('scan', None)
+
+    #Find __file__ using scan_pk
+    __file__ = extract_from_archival(__file__, scan_pk)
+
+    if not __file__ or not scan_pk:
+        return JsonResponse(data={'message': 'Suspicious Operation'}, status=400)
+
+    filename = os.path.basename(__file__) #Select your file here.
+    chunksize = 8192
+    wrapper = FileWrapper(open(__file__), chunksize)
+    response = StreamingHttpResponse(wrapper, content_type=mimetype.guess_type(__file__)[0])
+    response['Content-Length'] = os.path.getsize(__file__)
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    return response
+
+def send_zipfile(request):
+    """
+    Create a  ZIP file on disk and transmit it in chunks of 8KB
+    without loading the whole file into memory. tempfiles are stored in /tmp.
+    A similar approach can be used for large dynamic PDF files
+    """
+    if not request.method == 'GET':
+        return JsonResponse(data={'message': 'View Does Not Exist.'}, status=404)
+
+    files = request.GET.get('resources', None)
+    scan_pk = request.GET.get('scan', None)
+
+    #Find files using scan_pk
+    files = extract_from_archival(files, scan_pk)
+
+    if not files or not scan_pk:
+        return JsonResponse(data={'message': 'Invalid Resource Request'}, status=400)
+   
+    #<fdopen>, indicating an open file handle, but no corresponding directory entry
+    temp = tempfile.TemporaryFile()
+    archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
+
+    try:
+        for index in range(len(files)):
+            filename = #Select File here
+            archive.write(filename, '%s' % os.path.basename(filename))
+        archive.close()
+        wrapper = FileWrapper(temp)
+        response = HttpResponse(wrapper, content_type='application/zip')
+        response['Content-Disposition'] = 'attachment; filename=results.zip'
+        response['Content-Length'] = temp.tell()
+        temp.seek(0)
+    except (TypeError, IOError) as err:
+        return JsonResponse({'message': 'Suspicious Operation'}, status=400)
+
+    return response

@@ -42,7 +42,6 @@ class Gauntlt(AbstractPlugin):
 
     def do_start(self):
         arguments = self.scanner_path
-        print arguments
         super(Gauntlt, self).spawn(arguments)
         return self.do_stop()
 

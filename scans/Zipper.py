@@ -106,15 +106,15 @@ class ZipArchive():
             return None
         
         base_filename = os.path.basename(absolute_path[0])
-        new_file_path = os.path.join( self.temporary_folder_path, base_filename )
+        temporary_file_path = os.path.join( self.temporary_folder_path, base_filename )
 
         try:
-            shutil.move( absolute_path[0], new_file_path )
+            shutil.move( absolute_path[0], temporary_file_path )
         except IOError as e:
             logger.error("I/O error({0}): {1}".format(e.errno, e.strerror))
 
         #Establish the file's relationship to the scan. 
-        self.file_list.append(new_file_path)
+        self.file_list.append(temporary_file_path)
 
     def archive_meta_files(self, file_list):
         """
@@ -126,7 +126,8 @@ class ZipArchive():
         """
         if not file_list:
             return None
-       
+      
+          #Move the configuration files to the appropriate filder in temporary directory. 
         for absolute_path in file_list:
             self.track_file(absolute_path)
          
@@ -156,15 +157,17 @@ class ZipArchive():
         Unzip individual files from the archive and store the directory under temporary.
         Operates fine under succession.
         """
-        individual_extraction_path = list()
+        extraction_paths = list()
         try:
             archive = zipfile.ZipFile(self.archive_folder_path, 'r')
             for item in file_list:
-                individual_extraction_path.append(archive.extract(os.path.join(self.zip_basename, item), settings.TEMPORARY_DIR))
+                extraction_paths.append(archive.extract(os.path.join(self.zip_basename, item), settings.TEMPORARY_DIR))
         except (IOError, KeyError) as err:
             #There is no item named <item> in the archive.
             #No such file or directory
             logger.error("I/O error({0}): {1}".format(e.errno, e.strerror))
             return None
+        finally:
+            archive.close() #Close the zipfile
 
-        return individual_extraction_path
+        return extraction_paths

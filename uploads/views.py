@@ -14,6 +14,8 @@ from uploads.Visualization import DndTree
 
 from uploads.serializers import UploadSerializer
 
+from uploads.Downloader import extract_from_archival
+
 from webscanner.logger import logger 
 
 """
@@ -51,7 +53,7 @@ class UploadList(generics.ListCreateAPIView):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             upload = serializer.save()
-            print request.data
+            
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -4,18 +4,33 @@ import os, tempfile, zipfile, json
 from django.http import HttpResponse, JsonResponse, StreamingHttpResponse
 from wsgiref.util import FileWrapper
 
+from scans.models import Scan
 from scans.Zipper import ZipArchive
 
 import os, mimetypes, logging
 
 logger = logging.getLogger('scarab')
 
+#Do not verify UserProfile here. Alllows for Admin use.
 def extract_from_archival(resources, scan_pk):
+    if not resources or not scan_pk:
+        logger.error("Invalid resource extraction request.")
+        return None
 
     #flatten the list of filepaths
-    filenames = str(resources).translate(None, "[]'").split(',')
+    try:
+        container = list()
+        for resource in resources:
+            if isinstance(resource, list):
+                container.extend(resource)
+            else:
+                container.append(resource)
+    except (MemoryError, RuntimeError) as err:
+        logger.error("Error in gathering resources: {0}".format(err))
+        return None
+
     archive = ZipArchive(scan=scan_pk)
-    output = archive.unzip(filenames)
+    output = archive.unzip(container)
 
     if not output:
         logger.error('Resource Not Found')
@@ -36,10 +51,13 @@ def send_file(request):
     scan_pk  = request.GET.get('scan', None)
 
     #Find __file__ using scan_pk
+    if not Scan.objects.filter(pk=scan_pk, user_profile__id=request.user.userprofile.id).exists():
+        return JsonResponse(data={'message': 'Suspicious Operation'}, status=400)
+
     __file__ = extract_from_archival(__file__, scan_pk)
 
-    if not __file__ or not scan_pk:
-        return JsonResponse(data={'message': 'Suspicious Operation'}, status=400)
+    if not __file__:
+        return JsonResponse(data={'message': 'Resource Not Found'}, status=400)
 
     filename = os.path.basename(__file__) #Select your file here.
     chunksize = 8192
@@ -61,10 +79,13 @@ def send_zipfile(request):
     files = request.GET.get('resources', None)
     scan_pk = request.GET.get('scan', None)
 
+    if not Scan.objects.filter(pk=scan_pk, user_profile__id=request.user.userprofile.id).exists():
+        return JsonResponse(data={'message': 'Suspicious Operation'}, status=400)
+
     #Find files using scan_pk
     files = extract_from_archival(files, scan_pk)
 
-    if not files or not scan_pk:
+    if not files:
         return JsonResponse(data={'message': 'Invalid Resource Request'}, status=400)
    
     #<fdopen>, indicating an open file handle, but no corresponding directory entry
@@ -75,7 +96,6 @@ def send_zipfile(request):
         for index in range(len(files)):
             filename = #Select File here
             archive.write(filename, '%s' % os.path.basename(filename))
-        archive.close()
         wrapper = FileWrapper(temp)
         response = HttpResponse(wrapper, content_type='application/zip')
         response['Content-Disposition'] = 'attachment; filename=results.zip'
@@ -83,5 +103,7 @@ def send_zipfile(request):
         temp.seek(0)
     except (TypeError, IOError) as err:
         return JsonResponse({'message': 'Suspicious Operation'}, status=400)
+    finally:
+        archive.close()
 
     return response

@@ -5,6 +5,8 @@
 
 {% block content %}
 
+<script src="{% static 'js/scans_detail.js' %}" type="application/javascript"></script>
+
 <!-- Hidden Input for Scan Primary Key -->
 <input type="hidden" name="pk" value="{{ scan.pk }}" readonly>
 
@@ -90,14 +92,48 @@
 
   </div>
 
+  <hr>
+
+  <!-- Download selected files in a zip -->
+  <button type="button" class="btn btn-default btn-sm" style="float:left;">
+    <span class="glyphicon glyphicon-cloud-download"></span> Download
+  </button>
+
+  <!-- Upload selected files to ThreadFix -->
+  <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal" style="float:left; margin-left: 10px">
+    <span class="glyphicon glyphicon-new-window"></span> Upload
+  </button>
+
+  <br />
+  <br />
+
+
 </div>
 
-<!-- Container for Threadfix URL selector -->
-<form method='POST' action=''>
-  {% csrf_token %}
-  {{ form.as_p }}
-</form>
-
-
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
+  <form method='POST' action=''>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <h4 class="modal-title" id="myModalLabel">Upload To ThreadFix Application</h4>
+        </div>
+        <div class="modal-body">
+          <!-- Container for Threadfix URL selector -->
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% buttons %}
+            <button type="submit" class="btn btn-primary">
+              <span class="glyphicon glyphicon-cloud-upload"></span> Submit
+            </button>
+          {% endbuttons %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
 {% endblock %}

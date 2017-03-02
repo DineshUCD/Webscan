@@ -10,3 +10,21 @@ function ajaxHandler(json, mapping, callback) {
   });
 }
 
+function upload() {
+  var data = {};
+  var pk = parseInt(document.getElementsByName("pk")[0].value);
+  var output = Array();
+  $("input:checkbox:checked").each(function() {
+    output.push($(this).val());
+  });
+
+  var url = '/uploads/list/';
+
+  data['uniform_resource_locator'] = 'http://sec-tools-01.eng.netsuite.com/threadfix/';
+  data['scan'] = pk;
+  data['resources'] = output;
+  
+  ajaxHandler(data, url, true);
+
+  return true;
+}   

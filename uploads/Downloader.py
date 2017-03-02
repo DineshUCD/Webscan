@@ -93,8 +93,7 @@ def send_zipfile(request):
     archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
 
     try:
-        for index in range(len(files)):
-            filename = #Select File here
+        for filename in files:
             archive.write(filename, '%s' % os.path.basename(filename))
         wrapper = FileWrapper(temp)
         response = HttpResponse(wrapper, content_type='application/zip')

@@ -28,4 +28,4 @@ class Upload(models.Model):
             return time_difference.total_seconds()
 
     def __unicode__(self):
-        return "Upload to {1} for {2}".format(self.status, self.uniform_resource_locator, self.scan.uniform_resource_locator)
+        return "Upload to {0} for {1}".format(self.uniform_resource_locator, self.scan.uniform_resource_locator)

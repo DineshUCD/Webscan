@@ -14,7 +14,7 @@ logger = logging.getLogger('scarab')
 #Do not verify UserProfile here. Alllows for Admin use.
 def extract_from_archival(resources, scan_pk):
     if not resources or not scan_pk:
-        logger.error("Invalid resource extraction request.")
+        logger.error("The requested resource does not support one or more of the given parameters.")
         return None
 
     #flatten the list of filepaths
@@ -26,7 +26,7 @@ def extract_from_archival(resources, scan_pk):
             else:
                 container.append(resource)
     except (MemoryError, RuntimeError) as err:
-        logger.error("Error in gathering resources: {0}".format(err))
+        logger.error("Unexpected internal server error: {0}".format(err))
         return None
 
     archive = ZipArchive(scan=scan_pk)
@@ -34,8 +34,6 @@ def extract_from_archival(resources, scan_pk):
 
     if not output:
         logger.error('Resource Not Found')
-    elif isinstance(output, list) and len(s) == 1:
-        return output[0]
     
     return output
 
@@ -54,9 +52,9 @@ def send_file(request):
     if not Scan.objects.filter(pk=scan_pk, user_profile__id=request.user.userprofile.id).exists():
         return JsonResponse(data={'message': 'Suspicious Operation'}, status=400)
 
-    __file__ = extract_from_archival(__file__, scan_pk)
-
-    if not __file__:
+    try:
+        __file__ = extract_from_archival(__file__, scan_pk)[0]
+    except IndexError as err:
         return JsonResponse(data={'message': 'Resource Not Found'}, status=400)
 
     filename = os.path.basename(__file__) #Select your file here.
@@ -67,6 +65,7 @@ def send_file(request):
     response['Content-Disposition'] = "attachment; filename=%s" % filename
     return response
 
+#workhorse class to download
 def send_zipfile(request):
     """
     Create a  ZIP file on disk and transmit it in chunks of 8KB

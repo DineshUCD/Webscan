@@ -53,8 +53,18 @@ class UploadList(generics.ListCreateAPIView):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             upload = serializer.save()
-            print request.data            
-
+             
+            application_id = request.data.get('application_id', None)
+            resources = list()
+            for resource in request.data.get('resources', []):
+                resources.append(resource)
+            scan_pk = request.data.get('scan', None)
+             
+            if Scan.objects.filter(pk=scan_pk, user_profile__id=self.request.userprofile.id).exists():
+                unzipped = extract_from_archival(resources, scan_pk)
+                upload_response = upload_scans(unzipped)
+                
+             
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    

@@ -123,7 +123,7 @@
           {% csrf_token %}
           {% bootstrap_form form %}
           {% buttons %}
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" onclick=upload("{% url 'uploads:upload-list' %}")>
               <span class="glyphicon glyphicon-cloud-upload"></span> Submit
             </button>
           {% endbuttons %}

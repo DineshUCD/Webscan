@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w3af-run start="1488410789" start-long="Wed Mar 01 15:26:29 2017" version="2.1">
+    <w3af-version>w3af - Web Application Attack and Audit Framework
+Version: 1.7.6
+Revision: b6d12b0dc3 - 20 Jan 2017 13:06
+Branch: master
+Local changes: Yes
+Author: Andres Riancho and the w3af team.</w3af-version>
+    <scan-info target="http://google.com/">
+        <audit>
+            <plugin name="file_upload"/>
+            <plugin name="csrf"/>
+            <plugin name="un_ssl"/>
+            <plugin name="os_commanding"/>
+            <plugin name="lfi"/>
+            <plugin name="sqli"/>
+            <plugin name="blind_sqli"/>
+            <plugin name="phishing_vector"/>
+            <plugin name="generic"/>
+            <plugin name="format_string"/>
+            <plugin name="websocket_hijacking"/>
+            <plugin name="shell_shock"/>
+            <plugin name="memcachei"/>
+            <plugin name="ldapi"/>
+            <plugin name="buffer_overflow"/>
+            <plugin name="redos"/>
+            <plugin name="global_redirect"/>
+            <plugin name="xpath"/>
+            <plugin name="cors_origin"/>
+            <plugin name="htaccess_methods"/>
+            <plugin name="dav"/>
+            <plugin name="ssi"/>
+            <plugin name="eval"/>
+            <plugin name="rosetta_flash"/>
+            <plugin name="xss"/>
+            <plugin name="xst"/>
+            <plugin name="ssl_certificate"/>
+            <plugin name="preg_replace"/>
+            <plugin name="mx_injection"/>
+            <plugin name="response_splitting"/>
+            <plugin name="rfd"/>
+            <plugin name="rfi"/>
+            <plugin name="frontpage"/>
+        </audit>
+        <infrastructure>
+            <plugin name="server_header"/>
+            <plugin name="allowed_methods"/>
+            <plugin name="frontpage_version"/>
+        </infrastructure>
+        <bruteforce/>
+        <grep>
+            <plugin name="error_500"/>
+        </grep>
+        <evasion/>
+        <output>
+            <plugin name="xml_file">
+                <config parameter="output_file" value="/home/djayasankar/Documents/webscanner/temporary/cNlgEAsAuU/w3af_results.xml"/>
+            </plugin>
+            <plugin name="console"/>
+        </output>
+        <mangle/>
+        <crawl/>
+        <auth/>
+    </scan-info>
+    <vulnerability id="[35]" method="GET" name="Server header" plugin="server_header" severity="Information" url="None" var="None">
+        <description>The server header for the remote web server is: &quot;gws&quot;.</description>
+        <http-transactions>
+            <http-transaction id="35">
+                <http-request>
+                    <status>GET http://google.com/ HTTP/1.1</status>
+                    <headers>
+                        <header content="google.com" field="Host"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 301 Moved Permanently</status>
+                    <headers>
+                        <header content="219" field="content-length"/>
+                        <header content="1; mode=block" field="x-xss-protection"/>
+                        <header content="Fri, 31 Mar 2017 23:26:30 GMT" field="expires"/>
+                        <header content="gws" field="server"/>
+                        <header content="http://www.google.com/" field="location"/>
+                        <header content="public, max-age=2592000" field="cache-control"/>
+                        <header content="Wed, 01 Mar 2017 23:26:30 GMT" field="date"/>
+                        <header content="SAMEORIGIN" field="x-frame-options"/>
+                        <header content="text/html; charset=UTF-8" field="content-type"/>
+                    </headers>
+                    <body content-encoding="text">&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;
+&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;H1&gt;301 Moved&lt;/H1&gt;
+The document has moved
+&lt;A HREF=&quot;http://www.google.com/&quot;&gt;here&lt;/A&gt;.
+&lt;/BODY&gt;&lt;/HTML&gt;
+</body>
+                </http-response>
+            </http-transaction>
+        </http-transactions>
+    </vulnerability>
+    <vulnerability id="[39, 58]" method="GET" name="Secure content over insecure channel" plugin="un_ssl" severity="Medium" url="http://google.com/" var="None">
+        <description>Secure content can be accessed using the insecure HTTP protocol. The vulnerable URLs used to verify this vulnerability are:
+ - https://google.com/
+ - http://google.com/
+</description>
+        <http-transactions>
+            <http-transaction id="39">
+                <http-request>
+                    <status>GET http://google.com/ HTTP/1.1</status>
+                    <headers>
+                        <header content="0" field="Content-length"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                        <header content="google.com" field="Host"/>
+                        <header content="application/x-www-form-urlencoded" field="Content-type"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 301 Moved Permanently</status>
+                    <headers>
+                        <header content="219" field="content-length"/>
+                        <header content="1; mode=block" field="x-xss-protection"/>
+                        <header content="Fri, 31 Mar 2017 23:26:31 GMT" field="expires"/>
+                        <header content="gws" field="server"/>
+                        <header content="http://www.google.com/" field="location"/>
+                        <header content="public, max-age=2592000" field="cache-control"/>
+                        <header content="Wed, 01 Mar 2017 23:26:31 GMT" field="date"/>
+                        <header content="SAMEORIGIN" field="x-frame-options"/>
+                        <header content="text/html; charset=UTF-8" field="content-type"/>
+                    </headers>
+                    <body content-encoding="text">&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;
+&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;H1&gt;301 Moved&lt;/H1&gt;
+The document has moved
+&lt;A HREF=&quot;http://www.google.com/&quot;&gt;here&lt;/A&gt;.
+&lt;/BODY&gt;&lt;/HTML&gt;
+</body>
+                </http-response>
+            </http-transaction>
+            <http-transaction id="58">
+                <http-request>
+                    <status>GET https://google.com/ HTTP/1.1</status>
+                    <headers>
+                        <header content="0" field="Content-length"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                        <header content="google.com" field="Host"/>
+                        <header content="application/x-www-form-urlencoded" field="Content-type"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 301 Moved Permanently</status>
+                    <headers>
+                        <header content="220" field="content-length"/>
+                        <header content="1; mode=block" field="x-xss-protection"/>
+                        <header content="Fri, 31 Mar 2017 23:26:31 GMT" field="expires"/>
+                        <header content="gws" field="server"/>
+                        <header content="https://www.google.com/" field="location"/>
+                        <header content="public, max-age=2592000" field="cache-control"/>
+                        <header content="Wed, 01 Mar 2017 23:26:31 GMT" field="date"/>
+                        <header content="SAMEORIGIN" field="x-frame-options"/>
+                        <header content="quic=&quot;:443&quot;; ma=2592000; v=&quot;36,35,34&quot;" field="alt-svc"/>
+                        <header content="text/html; charset=UTF-8" field="content-type"/>
+                    </headers>
+                    <body content-encoding="text">&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;
+&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;H1&gt;301 Moved&lt;/H1&gt;
+The document has moved
+&lt;A HREF=&quot;https://www.google.com/&quot;&gt;here&lt;/A&gt;.
+&lt;/BODY&gt;&lt;/HTML&gt;
+</body>
+                </http-response>
+            </http-transaction>
+        </http-transactions>
+    </vulnerability>
+    <vulnerability id="[40, 63, 81, 84]" method="GET" name="Allowed HTTP methods" plugin="allowed_methods" severity="Information" url="http://google.com/" var="None">
+        <description>The URL &quot;http://google.com/&quot; has the following enabled HTTP methods: CONNECT, GET, HEAD</description>
+        <long-description>There are a number of HTTP methods that can be used on a webserver (`OPTIONS`, `HEAD`, `GET`, `POST`, `PUT`, `DELETE` etc.). Each of these methods perform a different function and each have an associated level of risk when their use is permitted on the webserver.
+
+A client can use the `OPTIONS` method within a request to query a server to determine which methods are allowed.
+
+Cyber-criminals will almost always perform this simple test as it will give a very quick indication of any high-risk methods being permitted by the server. The tool discovered that several methods are supported by the server.</long-description>
+        <fix-guidance>It is recommended that a whitelisting approach be taken to explicitly permit the HTTP methods required by the application and block all others.
+
+Typically the only HTTP methods required for most applications are `GET` and `POST`. All other methods perform actions that are rarely required or perform actions that are inherently risky. These risky methods (such as `PUT`, `DELETE`, etc) should be protected by strict limitations, such as ensuring that the channel is secure (SSL/TLS enabled) and only authorised and trusted clients are permitted to use them.</fix-guidance>
+        <fix-effort>50</fix-effort>
+        <references>
+            <reference title="Apache.org" url="http://httpd.apache.org/docs/2.2/mod/core.html#limitexcept"/>
+        </references>
+        <http-transactions>
+            <http-transaction id="40">
+                <http-request>
+                    <status>OPTIONS http://google.com/ HTTP/1.1</status>
+                    <headers>
+                        <header content="google.com" field="Host"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 405 Method Not Allowed</status>
+                    <headers>
+                        <header content="1592" field="content-length"/>
+                        <header content="1; mode=block" field="x-xss-protection"/>
+                        <header content="gws" field="server"/>
+                        <header content="GET, HEAD" field="allow"/>
+                        <header content="Wed, 01 Mar 2017 23:26:31 GMT" field="date"/>
+                        <header content="SAMEORIGIN" field="x-frame-options"/>
+                        <header content="text/html; charset=UTF-8" field="content-type"/>
+                    </headers>
+                    <body content-encoding="text">&lt;!DOCTYPE html&gt;
+&lt;html lang=en&gt;
+  &lt;meta charset=utf-8&gt;
+  &lt;meta name=viewport content=&quot;initial-scale=1, minimum-scale=1, width=device-width&quot;&gt;
+  &lt;title&gt;Error 405 (Method Not Allowed)!!1&lt;/title&gt;
+  &lt;style&gt;
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* &gt; body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}
+  &lt;/style&gt;
+  &lt;a href=//www.google.com/&gt;&lt;span id=logo aria-label=Google&gt;&lt;/span&gt;&lt;/a&gt;
+  &lt;p&gt;&lt;b&gt;405.&lt;/b&gt; &lt;ins&gt;That’s an error.&lt;/ins&gt;
+  &lt;p&gt;The request method &lt;code&gt;OPTIONS&lt;/code&gt; is inappropriate for the URL &lt;code&gt;/&lt;/code&gt;.  &lt;ins&gt;That’s all we know.&lt;/ins&gt;
+</body>
+                </http-response>
+            </http-transaction>
+            <http-transaction id="63">
+                <http-request>
+                    <status>HEAD http://google.com/ HTTP/1.1</status>
+                    <headers>
+                        <header content="google.com" field="Host"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 301 Moved Permanently</status>
+                    <headers>
+                        <header content="219" field="content-length"/>
+                        <header content="1; mode=block" field="x-xss-protection"/>
+                        <header content="Fri, 31 Mar 2017 23:26:31 GMT" field="expires"/>
+                        <header content="gws" field="server"/>
+                        <header content="http://www.google.com/" field="location"/>
+                        <header content="public, max-age=2592000" field="cache-control"/>
+                        <header content="Wed, 01 Mar 2017 23:26:31 GMT" field="date"/>
+                        <header content="SAMEORIGIN" field="x-frame-options"/>
+                        <header content="text/html; charset=UTF-8" field="content-type"/>
+                    </headers>
+                </http-response>
+            </http-transaction>
+            <http-transaction id="81">
+                <http-request>
+                    <status>GET http://google.com/ HTTP/1.1</status>
+                    <headers>
+                        <header content="google.com" field="Host"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 301 Moved Permanently</status>
+                    <headers>
+                        <header content="219" field="content-length"/>
+                        <header content="1; mode=block" field="x-xss-protection"/>
+                        <header content="Fri, 31 Mar 2017 23:26:32 GMT" field="expires"/>
+                        <header content="gws" field="server"/>
+                        <header content="http://www.google.com/" field="location"/>
+                        <header content="public, max-age=2592000" field="cache-control"/>
+                        <header content="Wed, 01 Mar 2017 23:26:32 GMT" field="date"/>
+                        <header content="SAMEORIGIN" field="x-frame-options"/>
+                        <header content="text/html; charset=UTF-8" field="content-type"/>
+                    </headers>
+                    <body content-encoding="text">&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;
+&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;H1&gt;301 Moved&lt;/H1&gt;
+The document has moved
+&lt;A HREF=&quot;http://www.google.com/&quot;&gt;here&lt;/A&gt;.
+&lt;/BODY&gt;&lt;/HTML&gt;
+</body>
+                </http-response>
+            </http-transaction>
+            <http-transaction id="84">
+                <http-request>
+                    <status>CONNECT http://google.com/ HTTP/1.1</status>
+                    <headers>
+                        <header content="google.com" field="Host"/>
+                        <header content="gzip, deflate" field="Accept-encoding"/>
+                        <header content="*/*" field="Accept"/>
+                        <header content="Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; w3af.org)" field="User-agent"/>
+                    </headers>
+                </http-request>
+                <http-response>
+                    <status>HTTP/1.1 400 Bad Request</status>
+                    <headers>
+                        <header content="Wed, 01 Mar 2017 23:26:32 GMT" field="date"/>
+                        <header content="1555" field="content-length"/>
+                        <header content="text/html; charset=UTF-8" field="content-type"/>
+                    </headers>
+                    <body content-encoding="text">&lt;!DOCTYPE html&gt;
+&lt;html lang=en&gt;
+  &lt;meta charset=utf-8&gt;
+  &lt;meta name=viewport content=&quot;initial-scale=1, minimum-scale=1, width=device-width&quot;&gt;
+  &lt;title&gt;Error 400 (Bad Request)!!1&lt;/title&gt;
+  &lt;style&gt;
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* &gt; body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}
+  &lt;/style&gt;
+  &lt;a href=//www.google.com/&gt;&lt;span id=logo aria-label=Google&gt;&lt;/span&gt;&lt;/a&gt;
+  &lt;p&gt;&lt;b&gt;400.&lt;/b&gt; &lt;ins&gt;That’s an error.&lt;/ins&gt;
+  &lt;p&gt;Your client has issued a malformed or illegal request.  &lt;ins&gt;That’s all we know.&lt;/ins&gt;
+</body>
+                </http-response>
+            </http-transaction>
+        </http-transactions>
+    </vulnerability>
+</w3af-run>

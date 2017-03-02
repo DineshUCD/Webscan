@@ -28,7 +28,20 @@ function upload(handler) {
   data['resources'] = output;
   data['application_id'] = application_id;
   
-  ajaxHandler(data, url, true);
+  ajaxHandler(data, url, function(response) {
+    var response_alert = document.getElementById('upload-response');
+    var alertText = "";
+    var result = response['upload_response'];
+    console.log(result);
+    for (var file_upload = 0; file_upload < result.length; file_upload++) {
+      alertText = alertText + "File: " + result[file_upload]['file'] + " Status: " + result[file_upload]['threadfix_response'];
+    }
+    response_alert.innerText = alertText;
+    $('#upload-response').alert();
+    $('#upload-response').fadeTo(2000, 500).slideUp(500, function() {
+      $('#upload-response').slideUp(500);
+    });
+  });
 
   return true;
 }   

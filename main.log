@@ -102,3 +102,7 @@
 2017-02-08 22:52:40,499 [ERROR] scarab: Scan plan missing tool selection.
 2017-02-08 22:52:45,055 [ERROR] scarab: Scan plan missing tool selection.
 2017-02-08 22:52:50,600 [ERROR] scarab: Scan plan missing tool selection.
+2017-03-02 12:03:20,509 [ERROR] scarab: The requested resource does not support one or more of the given parameters.
+2017-03-02 12:08:37,579 [ERROR] scarab: The requested resource does not support one or more of the given parameters.
+2017-03-02 12:10:14,688 [ERROR] scarab: The requested resource does not support one or more of the given parameters.
+2017-03-02 12:20:13,929 [ERROR] scarab: The requested resource does not support one or more of the given parameters.

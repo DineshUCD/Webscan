@@ -68,7 +68,7 @@ def launch(request, template_name='scans/index.html'):
 def detail(request, pk, template_name='scans/detail.html'): 
     scan = get_object_or_404(Scan, user_profile__id=int(request.user.userprofile.id), pk=pk)
 
-    form = UploadForm(request.POST or None)
+    form = UploadForm(request.POST or None, { 'scan': scan})
     
     context = {
         'scan': scan,

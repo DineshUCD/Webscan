@@ -59,12 +59,11 @@ class UploadList(generics.ListCreateAPIView):
             for resource in request.data.get('resources', []):
                 resources.append(resource)
             scan_pk = request.data.get('scan', None)
-             
-            if Scan.objects.filter(pk=scan_pk, user_profile__id=self.request.userprofile.id).exists():
+            context = dict() 
+            if Scan.objects.filter(pk=scan_pk, user_profile__id=self.request.user.userprofile.id).exists():
                 unzipped = extract_from_archival(resources, scan_pk)
-                upload_response = upload_scans(unzipped)
-                
-             
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+                upload_response = upload_scans(unzipped, application_id)
+                context['upload_response'] = upload_response                
+            return Response(context, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     

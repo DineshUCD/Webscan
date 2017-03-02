@@ -107,7 +107,11 @@
   <br />
   <br />
 
-
+  <!-- Alert user of upload response -->
+  <div class="alert alert-success" id="upload-response" hidden="true">
+    <button type="button" class="close" data-dismiss="alert">X</button>
+      <!-- API callback inserts response message here! -->
+  </div>
 </div>
 
 <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
@@ -119,7 +123,6 @@
          <h4 class="modal-title" id="myModalLabel">Upload To ThreadFix Application</h4>
         </div>
         <div class="modal-body">
-          <!-- Container for Threadfix URL selector -->
           {% csrf_token %}
           {% bootstrap_form form %}
           {% buttons %}

@@ -43,6 +43,4 @@ def upload_scans(repository, application_id):
         assert not worker.is_alive()
 
     threadfix_responses = map(lambda pool_response: pool_response.get(timeout=30), pool_responses)  
-
     return threadfix_responses         
-        

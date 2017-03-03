@@ -20,15 +20,13 @@ def extract_from_archival(resources, scan_pk):
     #flatten the list of filepaths
     try:
         container = list()
-        for resource in resources:
-            if isinstance(resource, list):
-                container.extend(resource)
-            else:
-                container.append(resource)
+        if not isinstance(resources, list):
+           container.append(resources)
+        else: 
+           container.extend(resources)
     except (MemoryError, RuntimeError) as err:
         logger.error("Unexpected internal server error: {0}".format(err))
         return None
-
     archive = ZipArchive(scan=scan_pk)
     output = archive.unzip(container)
 
@@ -45,7 +43,7 @@ def send_file(request):
     if not request.method == 'GET':
         return JsonResponse(data={'message': 'View Does Not Exist.'}, status=404)
 
-    __file__ = request.GET.get('resources', None)
+    __file__ = request.GET.get('resources[]', None)
     scan_pk  = request.GET.get('scan', None)
 
     #Find __file__ using scan_pk
@@ -56,11 +54,11 @@ def send_file(request):
         __file__ = extract_from_archival(__file__, scan_pk)[0]
     except IndexError as err:
         return JsonResponse(data={'message': 'Resource Not Found'}, status=400)
-
+   
     filename = os.path.basename(__file__) #Select your file here.
     chunksize = 8192
     wrapper = FileWrapper(open(__file__), chunksize)
-    response = StreamingHttpResponse(wrapper, content_type=mimetype.guess_type(__file__)[0])
+    response = StreamingHttpResponse(wrapper, content_type=mimetypes.guess_type(__file__)[0])
     response['Content-Length'] = os.path.getsize(__file__)
     response['Content-Disposition'] = "attachment; filename=%s" % filename
     return response
@@ -75,12 +73,10 @@ def send_zipfile(request):
     if not request.method == 'GET':
         return JsonResponse(data={'message': 'View Does Not Exist.'}, status=404)
 
-    files = request.GET.get('resources', None)
+    files = request.GET.get('resources[]', None)
     scan_pk = request.GET.get('scan', None)
-
     if not Scan.objects.filter(pk=scan_pk, user_profile__id=request.user.userprofile.id).exists():
         return JsonResponse(data={'message': 'Suspicious Operation'}, status=400)
-
     #Find files using scan_pk
     files = extract_from_archival(files, scan_pk)
 
@@ -88,20 +84,20 @@ def send_zipfile(request):
         return JsonResponse(data={'message': 'Invalid Resource Request'}, status=400)
    
     #<fdopen>, indicating an open file handle, but no corresponding directory entry
-    temp = tempfile.TemporaryFile()
-    archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
-
+      
     try:
+        temp = tempfile.TemporaryFile()
+        archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
         for filename in files:
             archive.write(filename, '%s' % os.path.basename(filename))
+        archive.close()   
+        content_length = temp.tell()
+        temp.seek(0)
         wrapper = FileWrapper(temp)
         response = HttpResponse(wrapper, content_type='application/zip')
         response['Content-Disposition'] = 'attachment; filename=results.zip'
-        response['Content-Length'] = temp.tell()
-        temp.seek(0)
+        response['Content-Length'] = content_length
     except (TypeError, IOError) as err:
         return JsonResponse({'message': 'Suspicious Operation'}, status=400)
-    finally:
-        archive.close()
 
     return response

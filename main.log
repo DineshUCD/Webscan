@@ -106,3 +106,12 @@
 2017-03-02 12:08:37,579 [ERROR] scarab: The requested resource does not support one or more of the given parameters.
 2017-03-02 12:10:14,688 [ERROR] scarab: The requested resource does not support one or more of the given parameters.
 2017-03-02 12:20:13,929 [ERROR] scarab: The requested resource does not support one or more of the given parameters.
+2017-03-02 15:09:11,464 [ERROR] scarab: The requested resource does not support one or more of the given parameters.
+2017-03-02 15:11:59,521 [ERROR] scarab: I/O error: "There is no item named u'cNlgEAsAuU/w' in the archive"
+2017-03-02 15:11:59,521 [ERROR] scarab: Resource Not Found
+2017-03-02 15:12:51,861 [ERROR] scarab: I/O error: "There is no item named u'cNlgEAsAuU/w' in the archive"
+2017-03-02 15:12:51,861 [ERROR] scarab: Resource Not Found
+2017-03-02 15:14:08,735 [ERROR] scarab: I/O error: "There is no item named u'cNlgEAsAuU/w' in the archive"
+2017-03-02 15:14:08,735 [ERROR] scarab: Resource Not Found
+2017-03-02 15:47:04,721 [ERROR] scarab: The requested resource does not support one or more of the given parameters.
+2017-03-02 16:14:00,911 [ERROR] scarab: The requested resource does not support one or more of the given parameters.

@@ -55,8 +55,10 @@ class AbstractPlugin(object):
     def set_metafile(self, absolute_file_path, role):
         filename = os.path.basename(absolute_file_path)
         metafile = MetaFile(scan=self.model, store=self.model.zip, tool=self.tool, report=filename, role=role).save()
+        print metafile
         self.record(AbstractPlugin.FILES, [(absolute_file_path, role)])
         
+
     def record(self, key, value):
      
         if type(value) is list:

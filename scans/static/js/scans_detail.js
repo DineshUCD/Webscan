@@ -1,7 +1,7 @@
 //Ajax call customized for handling JSON API calls.
-function ajaxHandler(json, mapping, callback) {
+function ajaxHandler(json, verb, mapping, callback) {
   $.ajax({
-    type: "POST",
+    type: verb,
     contentType: "application/json",
     data: JSON.stringify(json),
     dataType: 'json',
@@ -9,6 +9,7 @@ function ajaxHandler(json, mapping, callback) {
     success: callback
   });
 }
+
 
 function upload(handler) {
   var data = {};
@@ -28,7 +29,7 @@ function upload(handler) {
   data['resources'] = output;
   data['application_id'] = application_id;
   
-  ajaxHandler(data, url, function(response) {
+  ajaxHandler(data, "POST", url, function(response) {
     var response_alert = document.getElementById('upload-response');
     var alertText = "";
     var result = response['upload_response'];
@@ -45,3 +46,23 @@ function upload(handler) {
 
   return true;
 }   
+
+function serialize(baseUrl, parameters) {
+  var param = jQuery.param( parameters );
+  var url = baseUrl + "?" + param;
+  return url;
+}
+
+function download(handler) {
+  var data = {};
+  var output = Array();
+  $("input:checkbox:checked").each(function() {
+    output.push($(this).val());
+  });
+
+  data['resources'] = output;
+  data['scan'] = parseInt(document.getElementsByName("pk")[0].value);
+  var url = serialize(handler, data);
+  alert(url);
+  window.open(url, "_blank");
+}

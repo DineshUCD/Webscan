@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<w3af-run start="1488410789" start-long="Wed Mar 01 15:26:29 2017" version="2.1">
+<w3af-run start="1488559720" start-long="Fri Mar 03 08:48:40 2017" version="2.1">
     <w3af-version>w3af - Web Application Attack and Audit Framework
 Version: 1.7.6
 Revision: b6d12b0dc3 - 20 Jan 2017 13:06
@@ -54,7 +54,7 @@ Author: Andres Riancho and the w3af team.</w3af-version>
         <evasion/>
         <output>
             <plugin name="xml_file">
-                <config parameter="output_file" value="/home/djayasankar/Documents/webscanner/temporary/cNlgEAsAuU/w3af_results.xml"/>
+                <config parameter="output_file" value="/home/djayasankar/Documents/webscanner/temporary/7okuMjFh4W/w3af_results.xml"/>
             </plugin>
             <plugin name="console"/>
         </output>
@@ -80,11 +80,11 @@ Author: Andres Riancho and the w3af team.</w3af-version>
                     <headers>
                         <header content="219" field="content-length"/>
                         <header content="1; mode=block" field="x-xss-protection"/>
-                        <header content="Fri, 31 Mar 2017 23:26:30 GMT" field="expires"/>
+                        <header content="Sun, 02 Apr 2017 16:48:40 GMT" field="expires"/>
                         <header content="gws" field="server"/>
                         <header content="http://www.google.com/" field="location"/>
                         <header content="public, max-age=2592000" field="cache-control"/>
-                        <header content="Wed, 01 Mar 2017 23:26:30 GMT" field="date"/>
+                        <header content="Fri, 03 Mar 2017 16:48:40 GMT" field="date"/>
                         <header content="SAMEORIGIN" field="x-frame-options"/>
                         <header content="text/html; charset=UTF-8" field="content-type"/>
                     </headers>
@@ -99,13 +99,13 @@ The document has moved
             </http-transaction>
         </http-transactions>
     </vulnerability>
-    <vulnerability id="[39, 58]" method="GET" name="Secure content over insecure channel" plugin="un_ssl" severity="Medium" url="http://google.com/" var="None">
+    <vulnerability id="[40, 59]" method="GET" name="Secure content over insecure channel" plugin="un_ssl" severity="Medium" url="http://google.com/" var="None">
         <description>Secure content can be accessed using the insecure HTTP protocol. The vulnerable URLs used to verify this vulnerability are:
  - https://google.com/
  - http://google.com/
 </description>
         <http-transactions>
-            <http-transaction id="39">
+            <http-transaction id="40">
                 <http-request>
                     <status>GET http://google.com/ HTTP/1.1</status>
                     <headers>
@@ -122,11 +122,11 @@ The document has moved
                     <headers>
                         <header content="219" field="content-length"/>
                         <header content="1; mode=block" field="x-xss-protection"/>
-                        <header content="Fri, 31 Mar 2017 23:26:31 GMT" field="expires"/>
+                        <header content="Sun, 02 Apr 2017 16:48:42 GMT" field="expires"/>
                         <header content="gws" field="server"/>
                         <header content="http://www.google.com/" field="location"/>
                         <header content="public, max-age=2592000" field="cache-control"/>
-                        <header content="Wed, 01 Mar 2017 23:26:31 GMT" field="date"/>
+                        <header content="Fri, 03 Mar 2017 16:48:42 GMT" field="date"/>
                         <header content="SAMEORIGIN" field="x-frame-options"/>
                         <header content="text/html; charset=UTF-8" field="content-type"/>
                     </headers>
@@ -139,7 +139,7 @@ The document has moved
 </body>
                 </http-response>
             </http-transaction>
-            <http-transaction id="58">
+            <http-transaction id="59">
                 <http-request>
                     <status>GET https://google.com/ HTTP/1.1</status>
                     <headers>
@@ -156,11 +156,11 @@ The document has moved
                     <headers>
                         <header content="220" field="content-length"/>
                         <header content="1; mode=block" field="x-xss-protection"/>
-                        <header content="Fri, 31 Mar 2017 23:26:31 GMT" field="expires"/>
+                        <header content="Sun, 02 Apr 2017 16:48:42 GMT" field="expires"/>
                         <header content="gws" field="server"/>
                         <header content="https://www.google.com/" field="location"/>
                         <header content="public, max-age=2592000" field="cache-control"/>
-                        <header content="Wed, 01 Mar 2017 23:26:31 GMT" field="date"/>
+                        <header content="Fri, 03 Mar 2017 16:48:42 GMT" field="date"/>
                         <header content="SAMEORIGIN" field="x-frame-options"/>
                         <header content="quic=&quot;:443&quot;; ma=2592000; v=&quot;36,35,34&quot;" field="alt-svc"/>
                         <header content="text/html; charset=UTF-8" field="content-type"/>
@@ -176,7 +176,7 @@ The document has moved
             </http-transaction>
         </http-transactions>
     </vulnerability>
-    <vulnerability id="[40, 63, 81, 84]" method="GET" name="Allowed HTTP methods" plugin="allowed_methods" severity="Information" url="http://google.com/" var="None">
+    <vulnerability id="[38, 62, 81, 84]" method="GET" name="Allowed HTTP methods" plugin="allowed_methods" severity="Information" url="http://google.com/" var="None">
         <description>The URL &quot;http://google.com/&quot; has the following enabled HTTP methods: CONNECT, GET, HEAD</description>
         <long-description>There are a number of HTTP methods that can be used on a webserver (`OPTIONS`, `HEAD`, `GET`, `POST`, `PUT`, `DELETE` etc.). Each of these methods perform a different function and each have an associated level of risk when their use is permitted on the webserver.
 
@@ -191,7 +191,7 @@ Typically the only HTTP methods required for most applications are `GET` and `PO
             <reference title="Apache.org" url="http://httpd.apache.org/docs/2.2/mod/core.html#limitexcept"/>
         </references>
         <http-transactions>
-            <http-transaction id="40">
+            <http-transaction id="38">
                 <http-request>
                     <status>OPTIONS http://google.com/ HTTP/1.1</status>
                     <headers>
@@ -208,7 +208,7 @@ Typically the only HTTP methods required for most applications are `GET` and `PO
                         <header content="1; mode=block" field="x-xss-protection"/>
                         <header content="gws" field="server"/>
                         <header content="GET, HEAD" field="allow"/>
-                        <header content="Wed, 01 Mar 2017 23:26:31 GMT" field="date"/>
+                        <header content="Fri, 03 Mar 2017 16:48:42 GMT" field="date"/>
                         <header content="SAMEORIGIN" field="x-frame-options"/>
                         <header content="text/html; charset=UTF-8" field="content-type"/>
                     </headers>
@@ -226,7 +226,7 @@ Typically the only HTTP methods required for most applications are `GET` and `PO
 </body>
                 </http-response>
             </http-transaction>
-            <http-transaction id="63">
+            <http-transaction id="62">
                 <http-request>
                     <status>HEAD http://google.com/ HTTP/1.1</status>
                     <headers>
@@ -241,11 +241,11 @@ Typically the only HTTP methods required for most applications are `GET` and `PO
                     <headers>
                         <header content="219" field="content-length"/>
                         <header content="1; mode=block" field="x-xss-protection"/>
-                        <header content="Fri, 31 Mar 2017 23:26:31 GMT" field="expires"/>
+                        <header content="Sun, 02 Apr 2017 16:48:42 GMT" field="expires"/>
                         <header content="gws" field="server"/>
                         <header content="http://www.google.com/" field="location"/>
                         <header content="public, max-age=2592000" field="cache-control"/>
-                        <header content="Wed, 01 Mar 2017 23:26:31 GMT" field="date"/>
+                        <header content="Fri, 03 Mar 2017 16:48:42 GMT" field="date"/>
                         <header content="SAMEORIGIN" field="x-frame-options"/>
                         <header content="text/html; charset=UTF-8" field="content-type"/>
                     </headers>
@@ -266,11 +266,11 @@ Typically the only HTTP methods required for most applications are `GET` and `PO
                     <headers>
                         <header content="219" field="content-length"/>
                         <header content="1; mode=block" field="x-xss-protection"/>
-                        <header content="Fri, 31 Mar 2017 23:26:32 GMT" field="expires"/>
+                        <header content="Sun, 02 Apr 2017 16:48:42 GMT" field="expires"/>
                         <header content="gws" field="server"/>
                         <header content="http://www.google.com/" field="location"/>
                         <header content="public, max-age=2592000" field="cache-control"/>
-                        <header content="Wed, 01 Mar 2017 23:26:32 GMT" field="date"/>
+                        <header content="Fri, 03 Mar 2017 16:48:42 GMT" field="date"/>
                         <header content="SAMEORIGIN" field="x-frame-options"/>
                         <header content="text/html; charset=UTF-8" field="content-type"/>
                     </headers>
@@ -296,7 +296,7 @@ The document has moved
                 <http-response>
                     <status>HTTP/1.1 400 Bad Request</status>
                     <headers>
-                        <header content="Wed, 01 Mar 2017 23:26:32 GMT" field="date"/>
+                        <header content="Fri, 03 Mar 2017 16:48:42 GMT" field="date"/>
                         <header content="1555" field="content-length"/>
                         <header content="text/html; charset=UTF-8" field="content-type"/>
                     </headers>

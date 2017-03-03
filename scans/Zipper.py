@@ -165,7 +165,7 @@ class ZipArchive():
         except (IOError, KeyError) as err:
             #There is no item named <item> in the archive.
             #No such file or directory
-            logger.error("I/O error({0}): {1}".format(e.errno, e.strerror))
+            logger.error("I/O error: {0}".format(err))
             return None
         finally:
             archive.close() #Close the zipfile

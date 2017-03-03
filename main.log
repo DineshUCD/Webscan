@@ -115,3 +115,6 @@
 2017-03-02 15:14:08,735 [ERROR] scarab: Resource Not Found
 2017-03-02 15:47:04,721 [ERROR] scarab: The requested resource does not support one or more of the given parameters.
 2017-03-02 16:14:00,911 [ERROR] scarab: The requested resource does not support one or more of the given parameters.
+2017-03-03 12:30:13,955 [ERROR] scarab: I/O error: "There is no item named u'7okuMjFh4W/w' in the archive"
+2017-03-03 12:30:22,048 [ERROR] scarab: I/O error: "There is no item named u'7okuMjFh4W/w' in the archive"
+2017-03-03 12:31:25,053 [ERROR] scarab: I/O error: "There is no item named u'7okuMjFh4W/w' in the archive"

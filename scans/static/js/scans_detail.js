@@ -63,6 +63,5 @@ function download(handler) {
   data['resources'] = output;
   data['scan'] = parseInt(document.getElementsByName("pk")[0].value);
   var url = serialize(handler, data);
-  alert(url);
   window.open(url, "_blank");
 }

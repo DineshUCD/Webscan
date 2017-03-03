@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.contrib import auth
+from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
@@ -8,7 +9,7 @@ from django.http import HttpResponseRedirect
 
 from scans.tasks import find_all_interfaces
 from plans.models import Plan
-from accounts.models import UserProfile
+from accounts.models import UserProfile, UserSession
 from webscanner.logger import logger
 
 # Create your views here.
@@ -27,7 +28,7 @@ def register(request, template_name="registration/register.html"):
             print new_user
             if new_user and new_user.is_active:
                 login(request, new_user)
-                url = urlresolvers.reverse('accounts:my_account')
+                url = urlresolvers.reverse('scans:index')
                 return HttpResponseRedirect(url)
     else: 
         form = UserCreationForm()
@@ -40,11 +41,15 @@ def my_account(request, template_name="registration/my_account.html"):
     name = request.user.username
     return render(request, template_name, locals()) 
 
-@login_required(login_url='/accounts/login/')
-def my_dashboard(request, template_name="dashboard/index.html"):
-    context = {
-        'tool_set' : find_all_interfaces(),
-        'plans':      Plan.objects.filter(user_profile__id=int(request.user.userprofile.id)),
-    }
-    return render(request, template_name, context)
- 
+@login_required(login_url='/accounts/login')
+def end(request, template_name="registration/logout.html"):
+    """
+    Invalidate the user's sessions and redirect the user to the login.
+    """
+    user_sessions = UserSession.objects.filter(user = request.user)
+    for user_session in user_sessions:
+        user_session.session.delete()
+
+    logout(request)
+
+    return render(request, template_name, locals())

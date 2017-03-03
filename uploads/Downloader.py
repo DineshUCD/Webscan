@@ -11,29 +11,6 @@ import os, mimetypes, logging
 
 logger = logging.getLogger('scarab')
 
-#Do not verify UserProfile here. Alllows for Admin use.
-def extract_from_archival(resources, scan_pk):
-    if not resources or not scan_pk:
-        logger.error("The requested resource does not support one or more of the given parameters.")
-        return None
-
-    #flatten the list of filepaths
-    try:
-        container = list()
-        if not isinstance(resources, list):
-           container.append(resources)
-        else: 
-           container.extend(resources)
-    except (MemoryError, RuntimeError) as err:
-        logger.error("Unexpected internal server error: {0}".format(err))
-        return None
-    archive = ZipArchive(scan=scan_pk)
-    output = archive.unzip(container)
-
-    if not output:
-        logger.error('Resource Not Found')
-    
-    return output
 
 def send_file(request):
     """
@@ -51,7 +28,8 @@ def send_file(request):
         return JsonResponse(data={'message': 'Suspicious Operation'}, status=400)
 
     try:
-        __file__ = extract_from_archival(__file__, scan_pk)[0]
+        archive = ZipArchive(scan=scan_pk)
+        __file__ = archive.unzip(list(__file__))
     except IndexError as err:
         return JsonResponse(data={'message': 'Resource Not Found'}, status=400)
    
@@ -61,6 +39,7 @@ def send_file(request):
     response = StreamingHttpResponse(wrapper, content_type=mimetypes.guess_type(__file__)[0])
     response['Content-Length'] = os.path.getsize(__file__)
     response['Content-Disposition'] = "attachment; filename=%s" % filename
+    archive.close()
     return response
 
 #workhorse class to download
@@ -77,15 +56,17 @@ def send_zipfile(request):
     scan_pk = request.GET.get('scan', None)
     if not Scan.objects.filter(pk=scan_pk, user_profile__id=request.user.userprofile.id).exists():
         return JsonResponse(data={'message': 'Suspicious Operation'}, status=400)
+
     #Find files using scan_pk
-    files = extract_from_archival(files, scan_pk)
+    zipper = ZipArchive(scan=scan_pk)  
+    files = zipper.unzip(str(files).translate(None, "[]'").split(','))
 
     if not files:
         return JsonResponse(data={'message': 'Invalid Resource Request'}, status=400)
    
-    #<fdopen>, indicating an open file handle, but no corresponding directory entry
-      
     try:
+        #<fdopen>, indicating an open file handle, but no corresponding directory entry
+      
         temp = tempfile.TemporaryFile()
         archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
         for filename in files:
@@ -99,5 +80,6 @@ def send_zipfile(request):
         response['Content-Length'] = content_length
     except (TypeError, IOError) as err:
         return JsonResponse({'message': 'Suspicious Operation'}, status=400)
-
+    finally:
+        zipper.close()
     return response

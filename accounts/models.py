@@ -44,10 +44,6 @@ class UserSession(models.Model):
     user    = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="user")
     session = models.ForeignKey(Session, on_delete=models.CASCADE, null=True)
 
-    def delete_user_session(self):
-        user_sessions = UserSessions.objects.filter(user = self.user)
-        for user_session in user_sessions:
-            user_sessions.session.delete()
 
     def set_session(self, task_function, **kwargs):
         session_dictionary = self.session.get_decoded()    

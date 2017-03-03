@@ -14,34 +14,8 @@ from uploads.Visualization import DndTree
 
 from uploads.serializers import UploadSerializer
 
-from uploads.Downloader import extract_from_archival
-
 from webscanner.logger import logger 
 
-"""
-@login_required(login_url='/accounts/login/')
-def results(request, upload_id):
-
-    upload = get_object_or_404(Upload, scan__user_profile__id=int(request.user.userprofile.id), id=upload_id)
-
-    threadfix_items = upload.scan.get_scan_data()['output']
-    form = ResultForm(request.POST or None, scan_results=threadfix_items)
-    viz = DndTree()
-    context = {
-        'form': form,
-    }
-
-    if form.is_valid():
-        upload_choices = form.cleaned_data['scan_results']
-        archive = ZipArchive(scan=upload.scan.id)
-        scan_unzip_files = archive.unzip(upload_choices)
-        repository = list()
-        add_files(repository, scan_unzip_files, upload.scan.application_id)
-        upload_response = upload_scans(repository)
-        context['upload_response'] = upload_response
-
-    $return render(request, 'uploads/results.html', context)
-"""
 
 class UploadList(generics.ListCreateAPIView):
     serializer_class = UploadSerializer
@@ -61,7 +35,9 @@ class UploadList(generics.ListCreateAPIView):
             scan_pk = request.data.get('scan', None)
             context = dict() 
             if Scan.objects.filter(pk=scan_pk, user_profile__id=self.request.user.userprofile.id).exists():
-                unzipped = extract_from_archival(resources, scan_pk)
+                archive = ZipArchive(scan=scan_pk)
+                unzipped = archive.unzip(resources)
+                archive.close()
                 upload_response = upload_scans(unzipped, application_id)
                 context['upload_response'] = upload_response                
             return Response(context, status=status.HTTP_201_CREATED)

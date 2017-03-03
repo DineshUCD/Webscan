@@ -101,6 +101,14 @@ class ZipArchive():
         if not os.path.exists( self.temporary_folder_path ):
             os.makedirs(self.temporary_folder_path)
 
+    def close(self):
+        for resource in self.extraction_paths:
+            directory = os.path.dirname(resource)
+            
+            if os.path.exists(directory):
+                shutil.rmtree(directory)
+
+
     def track_file(self, absolute_path):
         if not absolute_path or not os.path.exists(absolute_path[0]):
             return None
@@ -157,11 +165,11 @@ class ZipArchive():
         Unzip individual files from the archive and store the directory under temporary.
         Operates fine under succession.
         """
-        extraction_paths = list()
+        self.extraction_paths = list()
         try:
             archive = zipfile.ZipFile(self.archive_folder_path, 'r')
             for item in file_list:
-                extraction_paths.append(archive.extract(os.path.join(self.zip_basename, item), settings.TEMPORARY_DIR))
+                self.extraction_paths.append(archive.extract(os.path.join(self.zip_basename, item), settings.TEMPORARY_DIR))
         except (IOError, KeyError) as err:
             #There is no item named <item> in the archive.
             #No such file or directory
@@ -170,4 +178,6 @@ class ZipArchive():
         finally:
             archive.close() #Close the zipfile
 
-        return extraction_paths
+        return self.extraction_paths
+
+

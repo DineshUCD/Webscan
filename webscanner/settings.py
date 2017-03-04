@@ -14,7 +14,7 @@ import os
 
 AUTH_PROFILE_MODULE= 'accounts.userprofile'
 ENABLE_SSL=True
-LOGIN_REDIRECT_URL="/accounts/my_account/"
+LOGIN_REDIRECT_URL="/scans/"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

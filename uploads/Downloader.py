@@ -7,7 +7,7 @@ from wsgiref.util import FileWrapper
 from scans.models import Scan
 from scans.Zipper import ZipArchive
 
-import os, mimetypes, logging
+import os, mimetypes, logging, urlparse
 
 logger = logging.getLogger('scarab')
 
@@ -51,15 +51,26 @@ def send_zipfile(request):
     """
     if not request.method == 'GET':
         return JsonResponse(data={'message': 'View Does Not Exist.'}, status=404)
+    # Get the Query URL
+    url = request.GET.urlencode()
+    # Parse the query string 
+    queries = urlparse.parse_qs(url) 
 
-    files = request.GET.get('resources[]', None)
-    scan_pk = request.GET.get('scan', None)
+    try:
+        scan_pk = int(queries['scan'][0])
+        files   = queries['resources[]']
+    except (TypeError, KeyError) as err:
+        return JsonResponse(data={'message': 'Invalid Resource Request'}, status=400)
+    else: 
+       for index in range(len(files)):
+           files[index] = files[index].encode('utf-8')
+
     if not Scan.objects.filter(pk=scan_pk, user_profile__id=request.user.userprofile.id).exists():
         return JsonResponse(data={'message': 'Suspicious Operation'}, status=400)
 
     #Find files using scan_pk
     zipper = ZipArchive(scan=scan_pk)  
-    files = zipper.unzip(str(files).translate(None, "[]'").split(','))
+    files = zipper.unzip(files)
 
     if not files:
         return JsonResponse(data={'message': 'Invalid Resource Request'}, status=400)

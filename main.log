@@ -119,3 +119,8 @@
 2017-03-03 12:30:22,048 [ERROR] scarab: I/O error: "There is no item named u'7okuMjFh4W/w' in the archive"
 2017-03-03 12:31:25,053 [ERROR] scarab: I/O error: "There is no item named u'7okuMjFh4W/w' in the archive"
 2017-03-06 11:38:17,913 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: gauntlt, Class: <class 'plugins.gauntlt.Gauntlt'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/hFd3iNKcuS'
+2017-03-06 11:57:40,912 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: gauntlt, Class: <class 'plugins.gauntlt.Gauntlt'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/UVinxcfErR'
+2017-03-06 13:38:06,116 [ERROR] scarab: I/O error: "There is no item named u'UVinxcfErR/uw3af_results.xml' in the archive"
+2017-03-06 13:38:54,959 [ERROR] scarab: I/O error: "There is no item named u'UVinxcfErR/uw3af_results.xml' in the archive"
+2017-03-06 13:43:19,348 [ERROR] scarab: I/O error: "There is no item named u'UVinxcfErR/w3af_reslts.xml' in the archive"
+2017-03-06 13:44:53,232 [ERROR] scarab: I/O error: "There is no item named u'UVinxcfErR/w3af_reslts.xml' in the archive"

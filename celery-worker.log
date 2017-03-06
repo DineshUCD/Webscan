@@ -4,3 +4,22 @@
 [2017-03-06 11:53:40,886: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
   warnings.warn('Using settings.DEBUG leads to a memory leak, never '
 [2017-03-06 11:53:40,886: INFO/MainProcess] celery@sec-tools-02 ready.
+[2017-03-06 11:57:40,131: INFO/MainProcess] Received task: scans.tasks.delegate[8ce441a9-00e6-4b3a-9949-5a0b10d1fe6b]  
+[2017-03-06 11:57:40,132: INFO/MainProcess] Received task: scans.tasks.delegate[3c9d8b6b-a268-489f-961a-b89301087439]  
+[06/Mar/2017 11:57:40] ERROR [scarab:108] Scan: http://scanme.nmap.org, Tool: gauntlt, Class: <class 'plugins.gauntlt.Gauntlt'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/UVinxcfErR'
+[2017-03-06 11:57:40,912: ERROR/PoolWorker-13] Scan: http://scanme.nmap.org, Tool: gauntlt, Class: <class 'plugins.gauntlt.Gauntlt'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/UVinxcfErR'
+[2017-03-06 11:57:40,913: WARNING/PoolWorker-13] TOOL:
+[2017-03-06 11:57:40,913: WARNING/PoolWorker-13] gauntlt
+[2017-03-06 11:57:40,913: WARNING/PoolWorker-2] TOOL:
+[2017-03-06 11:57:40,913: WARNING/PoolWorker-2] w3af_console
+[2017-03-06 11:57:40,916: WARNING/PoolWorker-13] TOOL:
+[2017-03-06 11:57:40,916: WARNING/PoolWorker-13] gauntlt
+[2017-03-06 11:57:40,918: WARNING/PoolWorker-13] TOOL:
+[2017-03-06 11:57:40,918: WARNING/PoolWorker-13] gauntlt
+[2017-03-06 11:57:40,924: WARNING/PoolWorker-2] TOOL:
+[2017-03-06 11:57:40,924: WARNING/PoolWorker-2] w3af_console
+[2017-03-06 11:58:01,986: INFO/PoolWorker-2] Task scans.tasks.delegate[8ce441a9-00e6-4b3a-9949-5a0b10d1fe6b] succeeded in 21.089258763s: {'W3af': {'files': [(...), (...)]}}
+[2017-03-06 11:58:48,239: INFO/PoolWorker-13] Task scans.tasks.delegate[3c9d8b6b-a268-489f-961a-b89301087439] succeeded in 67.3428494586s: {'Gauntlt': {'files': [(...), (...), (...)]}}
+[2017-03-06 11:58:48,240: INFO/MainProcess] Received task: scans.tasks.collect_results[eb7f85b9-1e18-44fc-9fa4-b2a058d608f6]  
+[2017-03-06 11:58:48,253: INFO/PoolWorker-18] [[u'/home/djayasankar/Documents/webscanner/temporary/UVinxcfErR/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/UVinxcfErR/w3af_results.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/UVinxcfErR/arachni_tests.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/UVinxcfErR/arachni_tests.afr', u'D']]
+[2017-03-06 11:58:48,261: INFO/PoolWorker-18] Task scans.tasks.collect_results[eb7f85b9-1e18-44fc-9fa4-b2a058d608f6] succeeded in 0.0197637733072s: [['/home/djayasankar/Documents/webscanner/temporary/UVinxcfErR/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/UVinxcfErR/w3af_results.xml', 'S'], ['/home/djayasankar/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/UVinxcfErR/arachni_tests.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/UVinxcfErR/arachni_tests.afr', 'D']]

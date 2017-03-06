@@ -1,46 +1,6 @@
-[2017-03-03 08:46:23,532: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
-[2017-03-03 08:46:23,543: INFO/MainProcess] mingle: searching for neighbors
-[2017-03-03 08:46:24,564: INFO/MainProcess] mingle: all alone
-[2017-03-03 08:46:24,577: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+[2017-03-06 11:53:39,841: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-03-06 11:53:39,852: INFO/MainProcess] mingle: searching for neighbors
+[2017-03-06 11:53:40,873: INFO/MainProcess] mingle: all alone
+[2017-03-06 11:53:40,886: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
   warnings.warn('Using settings.DEBUG leads to a memory leak, never '
-[2017-03-03 08:46:24,577: INFO/MainProcess] celery@sec-tools-02 ready.
-
-worker: Warm shutdown (MainProcess)
- 
- -------------- celery@sec-tools-02 v4.0.2 (latentcall)
----- **** ----- 
---- * ***  * -- Linux-3.10.0-514.6.1.el7.x86_64-x86_64-with-oracle-7.3 2017-03-03 08:46:22
--- * - **** --- 
-- ** ---------- [config]
-- ** ---------- .> app:         webscanner:0x2820b90
-- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
-- ** ---------- .> results:     redis://localhost/
-- *** --- * --- .> concurrency: 24 (prefork)
--- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
---- ***** ----- 
- -------------- [queues]
-                .> celery           exchange=celery(direct) key=celery
-                
-
-[tasks]
-  . scans.tasks.collect_results
-  . scans.tasks.delegate
-  . webscanner.celery_tasks.debug_task
-
-[2017-03-03 08:47:18,524: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
-[2017-03-03 08:47:18,534: INFO/MainProcess] mingle: searching for neighbors
-[2017-03-03 08:47:19,555: INFO/MainProcess] mingle: all alone
-[2017-03-03 08:47:19,568: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
-  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
-[2017-03-03 08:47:19,568: INFO/MainProcess] celery@sec-tools-02 ready.
-[2017-03-03 08:48:38,438: INFO/MainProcess] Received task: scans.tasks.delegate[405bacf6-dd62-4e04-b708-2fc6698ae7d4]  
-[2017-03-03 08:48:38,439: INFO/MainProcess] Received task: scans.tasks.delegate[3b91fd9f-aa86-4def-bf92-d0e4873cfd40]  
-[2017-03-03 08:48:38,460: WARNING/PoolWorker-15] w3af_console
-[2017-03-03 08:48:38,463: WARNING/PoolWorker-15] None
-[2017-03-03 08:48:38,464: WARNING/PoolWorker-15] None
-[2017-03-03 08:48:38,464: INFO/PoolWorker-10] Task scans.tasks.delegate[3b91fd9f-aa86-4def-bf92-d0e4873cfd40] succeeded in 0.02404105803s: {'Dummy': {}}
-[2017-03-03 08:48:38,465: WARNING/PoolWorker-15] /home/djayasankar/w3af/w3af_console -s /home/djayasankar/Documents/webscanner/temporary/7okuMjFh4W/w3af_script.w3af
-[2017-03-03 08:48:44,977: INFO/PoolWorker-15] Task scans.tasks.delegate[405bacf6-dd62-4e04-b708-2fc6698ae7d4] succeeded in 6.53710448835s: {'W3af': {'files': [(...), (...)]}}
-[2017-03-03 08:48:44,978: INFO/MainProcess] Received task: scans.tasks.collect_results[03e16c58-d325-4a61-babb-df06649454ed]  
-[2017-03-03 08:48:44,991: INFO/PoolWorker-16] [[u'/home/djayasankar/Documents/webscanner/temporary/7okuMjFh4W/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/7okuMjFh4W/w3af_results.xml', u'S']]
-[2017-03-03 08:48:44,998: INFO/PoolWorker-16] Task scans.tasks.collect_results[03e16c58-d325-4a61-babb-df06649454ed] succeeded in 0.0186607688665s: [['/home/djayasankar/Documents/webscanner/temporary/7okuMjFh4W/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/7okuMjFh4W/w3af_results.xml', 'S']]
+[2017-03-06 11:53:40,886: INFO/MainProcess] celery@sec-tools-02 ready.

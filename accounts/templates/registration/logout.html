@@ -1,1 +1,16 @@
-<p>You have logged out!</p>
+{% extends 'registration/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<link href="{% static 'css/logout.css' %}" rel="stylesheet">
+
+
+<div class="container">
+
+  <div class="text-center col-md-4 col-md-offset-4">You have logged out!</div>
+
+</div> <!-- Container for logout -->
+
+{% endblock %}

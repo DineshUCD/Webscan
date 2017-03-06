@@ -29,7 +29,7 @@ class ScanList(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = None
         if self.request.method == 'GET' and 'recent' in self.request.GET:
-            queryset = Scan.objects.filter(user_profile__id=self.request.user.userprofile.id, date__gte=datetime.now()-timedelta(seconds=30))
+            queryset = Scan.objects.filter(user_profile__id=self.request.user.userprofile.id, date__gte=datetime.now()-timedelta(seconds=300))
         else:
             queryset = Scan.objects.filter(user_profile__id=int(self.request.user.userprofile.id))
 

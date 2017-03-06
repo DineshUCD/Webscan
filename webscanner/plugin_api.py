@@ -5,6 +5,9 @@ from webscanner.settings import *
 from webscanner.logger import logger
 from scans.models import *
 
+logger = logging.getLogger('scarab')
+
+
 class AbstractPlugin(object):
 
     __metaclass__ = abc.ABCMeta
@@ -54,8 +57,9 @@ class AbstractPlugin(object):
 
     def set_metafile(self, absolute_file_path, role):
         filename = os.path.basename(absolute_file_path)
+        print "TOOL: "
+        print self.tool
         metafile = MetaFile(scan=self.model, store=self.model.zip, tool=self.tool, report=filename, role=role).save()
-        print metafile
         self.record(AbstractPlugin.FILES, [(absolute_file_path, role)])
         
 
@@ -96,12 +100,12 @@ class AbstractPlugin(object):
 
         try:
             self.model = Scan.objects.get(pk=int(self.model_pk))
-            self.temporary_folder_path = os.path.join( settings.TEMPORARY_DIR, self.model.zip.name )
-            if not os.path.exists(self.temporary_folder_path):
-                os.makedirs(self.temporary_folder_path)
             self.tool = self.model.plan.tool_set.get(name=str(self.__class__.PLUGIN_NAME))
-            print self.tool
+            self.temporary_folder_path = os.path.join( settings.TEMPORARY_DIR, self.model.zip.name )
+            if not os.path.isdir(self.temporary_folder_path):
+                os.makedirs(self.temporary_folder_path)
         except (Scan.DoesNotExist, Tool.DoesNotExist, OSError) as e:
+            logger.error("Scan: {0}, Tool: {1}, Class: {2}, Other: {3}".format(str(self.model), str(self.tool), self.__class__, e))
             return None
 
     @abc.abstractmethod

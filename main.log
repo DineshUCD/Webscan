@@ -118,3 +118,4 @@
 2017-03-03 12:30:13,955 [ERROR] scarab: I/O error: "There is no item named u'7okuMjFh4W/w' in the archive"
 2017-03-03 12:30:22,048 [ERROR] scarab: I/O error: "There is no item named u'7okuMjFh4W/w' in the archive"
 2017-03-03 12:31:25,053 [ERROR] scarab: I/O error: "There is no item named u'7okuMjFh4W/w' in the archive"
+2017-03-06 11:38:17,913 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: gauntlt, Class: <class 'plugins.gauntlt.Gauntlt'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/hFd3iNKcuS'

@@ -1,27 +1,36 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap3 %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Custom style for this template. -->
+<link href="{% static 'css/signin.css' %}" rel="stylesheet">
+
+
 {% if form.errors %}
     <ul class="errorlist">
-        <li>You entered an invalid username or password/</li>
+        <li>You have entered invalid credentials.</li>
     </ul>
     <br />
 {% endif %}
 
-<form method="post" action={% url 'accounts:login' %}>
-{% csrf_token %}
-<table summary="Login" id="login">
-    <caption>Login</caption>
-    <tr>
-        <td>{{ form.username.label_tag }}:</td>
-        <td>{{ form.username }}</td>
-    </tr>
-    <tr>
-        <td>{{ form.password.label_tag }}:</td>
-        <td>{{ form.password }}</td>
-    </tr>
-    <tr>
-        <td colspan="2" class="right">
-            <input type="submit" value="Login" />
-        </td>
-    </tr>
-</table>
-<input type="hidden" name="next" value="{{ next }}" />
-<form>
+
+
+<div class="container">
+
+  <form class="form-signin" method="post" action={% url 'accounts:login' %}>
+    {% csrf_token %}
+    <h2 class="form-signin-heading">Please sign in</h2>
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    {% endbuttons %}
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+
+</div> <!-- /container -->
+
+
+{% endblock %}

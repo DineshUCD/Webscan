@@ -37,6 +37,9 @@ class Scan(models.Model):
 	return { 'output': map(lambda output: output.report, MetaFile.objects.filter(scan__id=self.id).filter(role=MetaFile.SCAN)), 'zip path': self.zip.name }       
 
     def get_state(self):
+        if self.state and self.state == Scan.SUCCESS:
+            return self.state
+
         result = app.AsyncResult(str(self.task_id))
         state = str(result.state)[:7]
         Scan.objects.filter(pk=self.pk).update(state=state) 
@@ -80,6 +83,9 @@ class Tool(models.Model):
     task_id        = models.UUIDField(default=uuid.uuid4, editable=True)
 
     def get_state(self):
+        if self.state and self.state == Scan.SUCCESS:
+            return self.state
+
         result = app.AsyncResult(str(self.task_id))
         state = str(result.state)[:7]
         Tool.objects.filter(pk=self.pk).update(state=state)

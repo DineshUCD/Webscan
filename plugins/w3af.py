@@ -50,7 +50,6 @@ class W3af(AbstractPlugin):
 
     def do_start(self):
         arguments = self.scanner_path + ' -s ' + self.w3af_script_file_path
-        print arguments
         super(W3af, self).spawn(arguments)
         return self.do_stop()
 

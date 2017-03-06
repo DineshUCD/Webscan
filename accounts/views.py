@@ -41,14 +41,15 @@ def my_account(request, template_name="registration/my_account.html"):
     name = request.user.username
     return render(request, template_name, locals()) 
 
-@login_required(login_url='/accounts/login')
+
 def end(request, template_name="registration/logout.html"):
     """
     Invalidate the user's sessions and redirect the user to the login.
     """
-    user_sessions = UserSession.objects.filter(user = request.user)
-    for user_session in user_sessions:
-        user_session.session.delete()
+    if request.user.is_authenticated():
+        user_sessions = UserSession.objects.filter(user = request.user)
+        for user_session in user_sessions:
+            user_session.session.delete()
 
     logout(request)
 

@@ -12,13 +12,13 @@ class ScanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scan
         fields = ('uniform_resource_locator', 'plan')
-         
+    """ 
     def validate_uniform_resource_locator(self, value):
         status_code = urlopen(value).code
         if (status_code / 100 >= 4):
             raise serializers.ValidationError("URL " + str(value) + " is not available.")
         return value
-
+    """
     def validate_plan(self, value):
         request = self.context.get("request")
          # Returns True if the QuerySet contains any results, and False if not.
@@ -26,6 +26,7 @@ class ScanSerializer(serializers.ModelSerializer):
             plan_copy = Plan.objects.create(user_profile=request.user.userprofile, name=value.name, description=value.description)
             for tool in value.tool_set.all():
                 Tool.objects.create(plan=plan_copy, module=tool.module, name=tool.name)
+                
             return plan_copy
         else:
             return None
@@ -46,6 +47,7 @@ class ScanSerializer(serializers.ModelSerializer):
         ret['state'] = instance.get_state()
         ret['date'] = instance.date
         ret['tools'] = list()
+        ret['pk'] = instance.id
         for tool in instance.plan.tool_set.all():
             state = tool.get_state()
             ret['tools'].append({tool.name:state})

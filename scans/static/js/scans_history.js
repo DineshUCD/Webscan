@@ -33,7 +33,7 @@ function getScanHistory() {
  
       //5. Action 
       var cell4 = row.insertCell(4);
-      duplicateDiv("action", cell4);
+      duplicateDiv(meta['pk'], cell4);
 
     } //for
 
@@ -47,14 +47,12 @@ function getScanHistory() {
     });
 }
 
-
 function duplicateDiv(divId, containerElement) {
-  var original = document.getElementById(divId);
+  var original = document.getElementById("action");
   var clone = original.cloneNode(true); // "deep" clone
-  clone.id = divId + ++duplicateDiv.counter;
+  clone.id = divId;
   clone.style.display=""; 
+  var li = clone.querySelectorAll("ul > li")[0];
+  li.onclick = function() { window.location.href = "/scans/" + divId.toString() + "/detail/" };  
   containerElement.appendChild(clone);
 }
-
-duplicateDiv.counter = 0;
-

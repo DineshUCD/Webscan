@@ -37,9 +37,11 @@ class UploadList(generics.ListCreateAPIView):
             if Scan.objects.filter(pk=scan_pk, user_profile__id=self.request.user.userprofile.id).exists():
                 archive = ZipArchive(scan=scan_pk)
                 unzipped = archive.unzip(resources)
-                archive.close()
                 upload_response = upload_scans(unzipped, application_id)
-                context['upload_response'] = upload_response                
+                context['upload_response'] = upload_response   
+                print context
+                print context['upload_response']
+                archive.close()
             return Response(context, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     

@@ -61,9 +61,9 @@ function recent() {
         }
       } //inner for
     } //for
+    $('#ongoing').dataTable();
 
   }).done(function() {
-      $('#ongoing').dataTable();
     })
     .fail(function() {
      console.log("Failed"); 

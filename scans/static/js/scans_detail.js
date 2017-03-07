@@ -31,7 +31,8 @@ function upload(handler) {
   
   ajaxHandler(data, "POST", url, function(response) {
     var response_alert = document.getElementById('upload-response');
-    var alertText = "";
+    var alertText = ""; 
+    console.log(response['upload_response']);
     var result = response['upload_response'];
     console.log(result);
     for (var file_upload = 0; file_upload < result.length; file_upload++) {
@@ -44,7 +45,7 @@ function upload(handler) {
     });
   });
 
-  return true;
+  return false;
 }   
 
 function serialize(baseUrl, parameters) {

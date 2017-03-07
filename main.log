@@ -124,3 +124,4 @@
 2017-03-06 13:38:54,959 [ERROR] scarab: I/O error: "There is no item named u'UVinxcfErR/uw3af_results.xml' in the archive"
 2017-03-06 13:43:19,348 [ERROR] scarab: I/O error: "There is no item named u'UVinxcfErR/w3af_reslts.xml' in the archive"
 2017-03-06 13:44:53,232 [ERROR] scarab: I/O error: "There is no item named u'UVinxcfErR/w3af_reslts.xml' in the archive"
+2017-03-07 10:11:48,688 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/gHtq6hv2YF'

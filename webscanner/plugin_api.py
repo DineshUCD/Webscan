@@ -160,7 +160,7 @@ class Gauntlt(AbstractPlugin):
         failed_count = 0
         if failed_phrase:
             failed_count = int(failed_phrase.group(1))
-        print self.tool.passfailtool
+
         try:
             if failed_count == 0:
                 self.tool.passfailtool.test = True

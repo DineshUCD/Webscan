@@ -1,0 +1,13 @@
+
+plugins
+audit all
+output xml_file
+output config xml_file
+set output_file /home/djayasankar/Documents/webscanner/temporary/yhM0n3AgEv/w3af_results.xml
+back
+back
+target
+set target http://scanme.nmap.org
+back
+start
+exit

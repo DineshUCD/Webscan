@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w3af-run start="1489017584" start-long="Wed Mar 08 15:59:44 2017" version="2.1">
+    <w3af-version>w3af - Web Application Attack and Audit Framework
+Version: 1.7.6
+Revision: b6d12b0dc3 - 20 Jan 2017 13:06
+Branch: master
+Local changes: Yes
+Author: Andres Riancho and the w3af team.</w3af-version>
+    <scan-info target="http://scanme.nmap.org/">
+        <audit>
+            <plugin name="file_upload"/>
+            <plugin name="csrf"/>
+            <plugin name="un_ssl"/>
+            <plugin name="os_commanding"/>
+            <plugin name="lfi"/>
+            <plugin name="sqli"/>
+            <plugin name="blind_sqli"/>
+            <plugin name="phishing_vector"/>
+            <plugin name="generic"/>
+            <plugin name="format_string"/>
+            <plugin name="websocket_hijacking"/>
+            <plugin name="shell_shock"/>
+            <plugin name="memcachei"/>
+            <plugin name="ldapi"/>
+            <plugin name="buffer_overflow"/>
+            <plugin name="redos"/>
+            <plugin name="global_redirect"/>
+            <plugin name="xpath"/>
+            <plugin name="cors_origin"/>
+            <plugin name="htaccess_methods"/>
+            <plugin name="dav"/>
+            <plugin name="ssi"/>
+            <plugin name="eval"/>
+            <plugin name="rosetta_flash"/>
+            <plugin name="xss"/>
+            <plugin name="xst"/>
+            <plugin name="ssl_certificate"/>
+            <plugin name="preg_replace"/>
+            <plugin name="mx_injection"/>
+            <plugin name="response_splitting"/>
+            <plugin name="rfd"/>
+            <plugin name="rfi"/>
+            <plugin name="frontpage"/>
+        </audit>
+        <infrastructure>
+            <plugin name="server_header"/>
+            <plugin name="allowed_methods"/>
+            <plugin name="frontpage_version"/>
+        </infrastructure>
+        <bruteforce/>
+        <grep>
+            <plugin name="error_500"/>
+        </grep>
+        <evasion/>
+        <output>
+            <plugin name="xml_file">
+                <config parameter="output_file" value="/home/djayasankar/Documents/webscanner/temporary/yhM0n3AgEv/w3af_results.xml"/>
+            </plugin>
+            <plugin name="console"/>
+        </output>
+        <mangle/>
+        <crawl/>
+        <auth/>
+    </scan-info>
+    <error caller="threading">The following error was detected and could not be resolved:
+The remote web server is not answering our HTTP requests, multiple errors have been found while trying to GET a response from the server.
+
+In most cases this means that the configured target is incorrect, the port is closed, there is a firewall blocking our packets or there is no HTTP daemon listening on that port.
+
+Please verify your target configuration and try again.
+</error>
+</w3af-run>

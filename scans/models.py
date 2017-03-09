@@ -80,7 +80,7 @@ class Tool(models.Model):
     name           = models.CharField(max_length=256, default="", blank=True)
     date           = models.DateTimeField(auto_now_add=True)
     state          = models.CharField(max_length=7, choices=Scan.ALL_STATES, blank=True)
-    task_id        = models.UUIDField(default=uuid.uuid4, editable=True)
+    task_id        = models.UUIDField(default=uuid.uuid4, editable=True, blank=True)
 
     def get_state(self):
         if self.state and self.state == Scan.SUCCESS:
@@ -93,6 +93,20 @@ class Tool(models.Model):
 
     def __unicode__(self):
         return "{0}".format(self.name)
+
+class PassFailTool(Tool):
+    """
+    We wish to define a subset of tools that are only for PassFailTests.
+    MTI creates a separate relational table for this model.
+    The subclass table will have a special additional column called "<model_name>_ptr_id,
+      a foreign key that points to the superclass table.
+    When an instance of the subclass model is pulled from the database, the ORM will 
+    pull the related row in the superclass table and build a model instance with data from 
+    both tables!
+    """
+
+    #This field is not required. It records whether the tool passed or failed its scenarios.
+    test = models.NullBooleanField() 
 
 class MetaFile(models.Model):
     DOCUMENTATION = 'D'

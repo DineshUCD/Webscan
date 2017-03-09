@@ -21,11 +21,8 @@ def register(request, template_name="registration/register.html"):
             form.save()
             un = postdata.get('username', '')
             pw = postdata.get('password1', '')
-            print un
-            print pw
             from django.contrib.auth import login, authenticate
             new_user = authenticate(username=un, password=pw)
-            print new_user
             if new_user and new_user.is_active:
                 login(request, new_user)
                 url = urlresolvers.reverse('scans:index')

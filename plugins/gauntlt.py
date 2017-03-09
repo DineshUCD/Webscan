@@ -5,18 +5,18 @@ from webscanner.plugin_api import *
 from webscanner.logger import logger
 from scans.models import *
 
-class Gauntlt(AbstractPlugin):
-    PLUGIN_NAME = "gauntlt"
+class GauntltArachni(Gauntlt):
+    PLUGIN_NAME = "Arachni - Gauntlt"
     PLUGIN_VERSION = "1.0"
 
     def __init__(self, *args, **kwargs):
-        super(Gauntlt, self).__init__(*args, **kwargs)
+        super(GauntltArachni, self).__init__(*args, **kwargs)
         #Call subclass's specific implementations of superclass's methods
         self.do_configure()
         
     def do_configure(self):
-        super(Gauntlt, self).do_configure(Gauntlt.PLUGIN_NAME)
-      
+        super(GauntltArachni, self).do_configure()
+
         #Configure Gauntlt
 
         #Editing the config\cucumber.yml file. A basic cucumber profile may consist of a 'default profile.'
@@ -42,9 +42,10 @@ class Gauntlt(AbstractPlugin):
 
     def do_start(self):
         arguments = self.scanner_path
-        super(Gauntlt, self).spawn(arguments)
+        super(GauntltArachni, self).spawn(arguments)
         return self.do_stop()
 
     def do_stop(self):
         scenarios = self.standard_output[len(self.standard_output)-3]
-        return super(Gauntlt, self).do_stop()
+        self.test(scenarios)
+        return super(GauntltArachni, self).do_stop()

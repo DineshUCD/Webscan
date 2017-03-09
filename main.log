@@ -125,3 +125,19 @@
 2017-03-06 13:43:19,348 [ERROR] scarab: I/O error: "There is no item named u'UVinxcfErR/w3af_reslts.xml' in the archive"
 2017-03-06 13:44:53,232 [ERROR] scarab: I/O error: "There is no item named u'UVinxcfErR/w3af_reslts.xml' in the archive"
 2017-03-07 10:11:48,688 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/gHtq6hv2YF'
+2017-03-07 15:12:31,368 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: gauntlt, Class: <class 'plugins.gauntlt.Gauntlt'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/xd4Aqkf1bb'
+2017-03-07 15:13:53,438 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: whoami, Class: <class 'plugins.dummy.Dummy'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/uDIDzIvpGL'
+2017-03-08 12:48:09,514 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: gauntlt, Class: <class 'plugins.gauntlt.Gauntlt'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/0GmCgEJ7OF'
+2017-03-08 14:22:13,492 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/s6toWpT79J'
+2017-03-08 14:29:26,897 [ERROR] scarab: I/O error: "There is no item named u'7NepibDQT1/w3af_results.xml' in the archive"
+2017-03-08 14:29:39,963 [ERROR] scarab: I/O error: "There is no item named u'7NepibDQT1/w3af_results.xml' in the archive"
+2017-03-08 14:29:58,355 [ERROR] scarab: I/O error: "There is no item named u'7NepibDQT1/arachni_tests.xml' in the archive"
+2017-03-08 14:34:09,936 [ERROR] scarab: I/O error: "There is no item named u'7NepibDQT1/w3af_results.xml' in the archive"
+2017-03-08 14:35:37,138 [ERROR] scarab: I/O error: [Errno 2] No such file or directory: u'/home/djayasankar/Documents/webscanner/archive/vIy8tUgBvi'
+2017-03-08 14:36:04,899 [ERROR] scarab: I/O error: "There is no item named u'vIy8tUgBvi/w3af_results.xml' in the archive"
+2017-03-08 14:36:18,112 [ERROR] scarab: I/O error: "There is no item named u'ZM9AGsaMVD/w3af_results.xml' in the archive"
+2017-03-08 14:38:48,340 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: Arachni - Gauntlt, Class: <class 'plugins.gauntlt.Gauntlt'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/tt9EipOW7w'
+2017-03-08 14:38:48,340 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/tt9EipOW7w'
+2017-03-08 14:53:10,658 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/5I5NwZNB24'
+2017-03-08 14:56:29,514 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: Arachni - Gauntlt, Class: <class 'plugins.gauntlt.Gauntlt'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/ihT7T8Vc4j'
+2017-03-08 15:59:42,819 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/yhM0n3AgEv'

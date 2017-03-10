@@ -47,8 +47,8 @@ function recent() {
 
       //2. Overall status and tool status
       var cell2 = row.insertCell(1);
-        //Overall Status
  
+        //Overall Status
       cell2.appendChild(createElement('p', "lead", "Scan Status: "));
       cell2.appendChild(createElement('p', statusColor[meta['state']], meta['state'])); 
 

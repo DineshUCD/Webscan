@@ -108,6 +108,12 @@ class PassFailTool(Tool):
     #This field is not required. It records whether the tool passed or failed its scenarios.
     test = models.NullBooleanField() 
 
+    def get_test(self):
+        return self.test
+
+    def __unicode__(self):
+        return "Test: {0}".format(self.test)
+
 class MetaFile(models.Model):
     DOCUMENTATION = 'D'
     SCAN          = 'S'

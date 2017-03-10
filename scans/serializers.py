@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from scans.models import Tool, Scan
+from scans.models import Tool, Scan, PassFailTool
 from plans.models import Plan
 from plans.serializers import PlanSerializer
 from urllib2 import urlopen
@@ -49,7 +49,13 @@ class ScanSerializer(serializers.ModelSerializer):
         ret['tools'] = list()
         ret['pk'] = instance.id
         for tool in instance.plan.tool_set.all():
+            # Get state of object
             state = tool.get_state()
-            ret['tools'].append({tool.name:state})
+            # Get pass/fail status if tool is of type PassFailTool
+            if PassFailTool.objects.filter(pk=tool.pk).exists():
+                test = tool.passfailtool.get_test()
+                ret['tools'].append({tool.name: state, 'test':test})
+            else:
+                ret['tools'].append({tool.name:state})
                                    
         return ret

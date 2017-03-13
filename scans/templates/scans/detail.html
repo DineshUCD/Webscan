@@ -62,9 +62,8 @@
       <thead>
         <tr>
           <th>Tool</th>
-          <th>Files</th>
+          <th>Document{{ num_metafiles|pluralize }}</th>
           <th>Status</th>
-          <th>Action</th>
         </tr>
       </thead>    
 
@@ -72,18 +71,32 @@
         {% for tool in tools %}
           {% ifchanged %}
             <tr>
+              <!-- 1. Tool Name -->
               <td>{{ tool.name }}</td>
+
+              <!-- 2. Tool's SCAN Files -->
               <td>
-                {% for output in tool.files %}
-                  <strong>{{ output.report }}</strong>
-                {% endfor %}
+                <table class="table table-bordered table-hover" style="border: 3px solid #000000;">
+                  <thead>
+                    <tr>
+                      <th>File Name</th>
+                      <th>Selection</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for output in tool.files %}
+                      <tr>
+                        <td><strong> {{ output.report }}</strong></td>
+                        <td><input type="checkbox" value={{ output.report }}></td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table> <!-- Inner table -->
               </td>
+            
+              <!-- 3. Tool's Status -->
               <td>{{ tool.state }}</td>
-              <td> 
-                {% for output in tool.files %}
-                  <input type="checkbox" value={{ output.report }}>
-                {% endfor %}
-              </td>
+              
             </tr>
           {% endifchanged %}
         {% endfor %}

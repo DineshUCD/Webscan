@@ -114,9 +114,10 @@ class AbstractPlugin(object):
         Treat both outputs as MetaFile.SCAN instead of documentation because
         plugins may be command line tools.
         """
-        stdout = os.path.join(self.temporary_folder_path, "stdout.txt")
-        stderr = os.path.join(self.temporary_folder_path, "stderr.txt")
-
+        plugin_name = self.__class__.PLUGIN_NAME
+        stdout = os.path.join(self.temporary_folder_path, str(plugin_name) + "stdout.txt")
+        stderr = os.path.join(self.temporary_folder_path, str(plugin_name) + "stderr.txt")
+        
         try:
             with open(stdout, 'w') as out:
                 for output in self.standard_output:
@@ -127,7 +128,7 @@ class AbstractPlugin(object):
                     err.write("%s" % error)
         except EnvironmentError as e:
             logger.error(e)
-            return None
+           
 
         self.set_metafile(stdout, MetaFile.SCAN)
         self.set_metafile(stderr, MetaFile.SCAN)

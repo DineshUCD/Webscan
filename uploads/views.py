@@ -39,8 +39,6 @@ class UploadList(generics.ListCreateAPIView):
                 unzipped = archive.unzip(resources)
                 upload_response = upload_scans(unzipped, application_id)
                 context['upload_response'] = upload_response   
-                print context
-                print context['upload_response']
                 archive.close()
             return Response(context, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

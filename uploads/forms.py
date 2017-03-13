@@ -7,6 +7,8 @@ from webscanner.settings import THREADFIX_URL, THREADFIX_API_KEY
 
 import configparser, requests, json, os, sys, logging
 
+from requests.exceptions import ConnectionError
+
 logger = logging.getLogger('scarab')
 
 class UploadForm(forms.Form):
@@ -20,11 +22,10 @@ class UploadForm(forms.Form):
         #If the response status code is not 200 OK, then return an empty choice list.
         try:
             # /rest/teams/ Get All Teams
-            threadfix_response = requests.get(THREADFIX_URL + "rest/teams/?apiKey=" + THREADFIX_API_KEY, verify=False)
-        except (HTTPError, ConnectionError, Timeout) as e:
+            threadfix_response = requests.get(THREADFIX_URL + "rest/teams/?apiKey=" + THREADFIX_API_KEY, timeout=2, verify=False)
+        except (ConnectionError, requests.Timeout) as e:
             logger.error(e.message)#.replace( '?apiKey=' + THREADFIX_API_KEY, '' ))                        
-            self.fields['application_id'].widget.attrs['readonly'] = True
-            self.fields['application_id'].widget.attrs['disabled'] = True
+            threadfix_response = None
             pass
 
         logger.info("Successful connection to " + THREADFIX_URL + "rest/teams")
@@ -33,7 +34,7 @@ class UploadForm(forms.Form):
         # Return a failed choice of empty, None if Django cannot reach Threadfix
         CHOICES.append( (-1, None) )
 
-        if threadfix_response.status_code == 200:
+        if threadfix_response and threadfix_response.status_code == 200:
             parsed_statistics = json.loads(threadfix_response.text)
             team_information  = parsed_statistics['object']
             if not parsed_statistics['success'] or not team_information:

@@ -141,3 +141,20 @@
 2017-03-08 14:53:10,658 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/5I5NwZNB24'
 2017-03-08 14:56:29,514 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: Arachni - Gauntlt, Class: <class 'plugins.gauntlt.Gauntlt'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/ihT7T8Vc4j'
 2017-03-08 15:59:42,819 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/yhM0n3AgEv'
+2017-03-10 13:23:43,233 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: Arachni - Gauntlt, Class: <class 'plugins.gauntlt.GauntltArachni'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/bdqXY263TF'
+2017-03-10 13:48:22,390 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: whoami, Class: <class 'plugins.dummy.Dummy'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/xeZQuRpQ5s'
+2017-03-10 13:54:22,913 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/8yhJehfBvk'
+2017-03-13 08:58:31,660 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-13 08:59:52,666 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-13 09:00:25,450 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-13 09:01:08,001 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-13 09:01:47,622 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-13 09:38:13,407 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/O6P1NkMP6l'
+2017-03-13 09:38:13,407 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: Arachni - Gauntlt, Class: <class 'plugins.gauntlt.GauntltArachni'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/O6P1NkMP6l'
+2017-03-13 09:40:45,335 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-13 09:41:43,986 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-13 09:41:54,703 [ERROR] scarab: I/O error: "There is no item named u'O6P1NkMP6l/Arachni' in the archive"
+2017-03-13 09:45:09,427 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-13 09:48:28,088 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: whoami, Class: <class 'plugins.dummy.Dummy'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY'
+2017-03-13 09:50:06,806 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-13 09:51:17,630 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)

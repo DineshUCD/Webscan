@@ -6,7 +6,7 @@ from webscanner.logger import logger
 from scans.models import *
 
 class GauntltArachni(Gauntlt):
-    PLUGIN_NAME = "Arachni - Gauntlt"
+    PLUGIN_NAME = "ArachniGauntlt"
     PLUGIN_VERSION = "1.0"
 
     def __init__(self, *args, **kwargs):

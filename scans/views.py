@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from scans.serializers import ScanSerializer
 
-from scans.models import Scan, Tool, MetaFile
+from scans.models import Scan, Tool, PassFailTool, MetaFile
 from uploads.models import Upload
 from uploads.forms import UploadForm
 from plans.models import Plan
@@ -69,20 +69,34 @@ def detail(request, pk, template_name='scans/detail.html'):
     scan = get_object_or_404(Scan, user_profile__id=int(request.user.userprofile.id), pk=pk)
 
     form = UploadForm(request.POST or None, { 'scan': scan})
-    
     context = {
         'scan': scan,
         'form': form,
         'tools':list()
     }
     context['scan_state'] = scan.get_state()
-
     # Require tool name, tool files, and tool status
     tools = scan.plan.tool_set.all()
+    num_metafiles = 0
+
     for tool in tools:  
         scan_files = tool.metafile_set.filter(role=MetaFile.SCAN)
+
+        #Sum the number of scan metafiles all the tool(s) contain.
+        num_metafiles = num_metafiles + scan_files.count()
         state = tool.get_state()
-        context['tools'].append({ 'name':tool.name, 'state': state, 'files': scan_files })
-     
+
+        # Structure the information for each tool.
+        tool_information = { 'name': tool.name, 'state': state, 'files': scan_files }
+
+        # Get pass/fail status if tool is of type PassFailTool
+        if PassFailTool.objects.filter(pk=tool.pk).exists():
+            test = tool.passfailtool.get_test()
+            tool_information['test'] = test
+       
+        context['tools'].append(tool_information)
+
+    context['num_metafiles'] = num_metafiles
+
     return render(request, template_name, context)
 

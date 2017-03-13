@@ -17,9 +17,6 @@ class Dummy(AbstractPlugin):
     def do_configure(self):
         super(Dummy, self).do_configure(Dummy.PLUGIN_NAME)
       
-        temporary_folder_path = os.path.join( settings.TEMPORARY_DIR, self.model.zip.name )
-        
-
     def do_start(self):
         super(Dummy, self).spawn(self.scanner_path)
         return self.do_stop()

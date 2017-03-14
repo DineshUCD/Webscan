@@ -158,3 +158,4 @@
 2017-03-13 09:48:28,088 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: whoami, Class: <class 'plugins.dummy.Dummy'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY'
 2017-03-13 09:50:06,806 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
 2017-03-13 09:51:17,630 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-14 16:33:41,980 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)

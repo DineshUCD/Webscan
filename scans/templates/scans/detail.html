@@ -72,7 +72,14 @@
           {% ifchanged %}
             <tr>
               <!-- 1. Tool Name -->
-              <td>{{ tool.name }}</td>
+              <td>
+                {{ tool.name }}
+                {% if tool.test and tool.test == True %} 
+                  <span class="glyphicon glyphicon-ok"></span>
+                {% elif tool.test and tool.test == False %}
+                  <span class="glyphicon glyphicon-remove"></span>
+                {% endif %}
+              </td>
 
               <!-- 2. Tool's SCAN Files -->
               <td>

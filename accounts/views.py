@@ -44,9 +44,7 @@ def end(request, template_name="registration/logout.html"):
     Invalidate the user's sessions and redirect the user to the login.
     """
     if request.user.is_authenticated():
-        user_sessions = UserSession.objects.filter(user = request.user)
-        for user_session in user_sessions:
-            user_session.session.delete()
+        request.user.userprofile.invalidate_sessions()
 
     logout(request)
 

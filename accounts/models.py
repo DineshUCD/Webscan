@@ -24,6 +24,17 @@ class UserProfile(models.Model):
     def get_latest_session(self):
         user_sessions = UserSession.objects.filter(user = self.user)
         return user_sessions[len(user_sessions)-1]
+
+    def invalidate_sessions(self):
+        user_sessions = UserSession.objects.filter(user = self.user)
+        try:
+            for user_session in user_sessions:
+                user_session.session.delete()
+        except models.ProtectedError as err:
+            logger.error("Cannot delete sessions collection")
+            return False
+        else: 
+            return True
         
 def create_profile(sender, **kwargs):
     """

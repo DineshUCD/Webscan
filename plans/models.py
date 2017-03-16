@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import Group, Permission
 
 from scans.models import Scan
 from accounts.models import UserProfile
@@ -9,6 +10,8 @@ from accounts.models import UserProfile
 class Plan(models.Model):
     # Each user profile saves zero or many scans.
     user_profile = models.ForeignKey(UserProfile)
+    # Restrict plans to users of certain groups
+    groups       = models.ManyToManyField(Group)
     # Each plan is associated with only one target URL vulnerability scan.
     scan         = models.OneToOneField(Scan, on_delete=models.CASCADE, null=True, blank=True)
     # Name of scan for client to identify them.

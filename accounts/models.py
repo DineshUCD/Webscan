@@ -21,7 +21,7 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return 'User Profile for: ' + self.user.username
 
-    def get_latest_session(self):
+    def get_current(self):
         user_sessions = UserSession.objects.filter(user = self.user)
         return user_sessions[len(user_sessions)-1]
 

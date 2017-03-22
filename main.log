@@ -159,3 +159,6 @@
 2017-03-13 09:50:06,806 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
 2017-03-13 09:51:17,630 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
 2017-03-14 16:33:41,980 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-17 10:24:35,126 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: whoami, Class: <class 'plugins.dummy.Dummy'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY'
+2017-03-17 10:24:35,126 [ERROR] scarab: Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY'
+2017-03-17 10:27:05,292 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=yGfGZcoPpjEMPwVdx6aqchbejiLn1GJQIUdnEDKMYes (Caused by NewConnectionError('<requests.packages.urllib3.connection.HTTPConnection object at 0x7f48104d44d0>: Failed to establish a new connection: [Errno 111] Connection refused',))

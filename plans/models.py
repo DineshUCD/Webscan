@@ -10,8 +10,6 @@ from accounts.models import UserProfile
 class Plan(models.Model):
     # Each user profile saves zero or many scans.
     user_profile = models.ForeignKey(UserProfile)
-    # Restrict plans to users of certain groups
-    groups       = models.ManyToManyField(Group)
     # Each plan is associated with only one target URL vulnerability scan.
     scan         = models.OneToOneField(Scan, on_delete=models.CASCADE, null=True, blank=True)
     # Name of scan for client to identify them.
@@ -19,6 +17,12 @@ class Plan(models.Model):
     created      = models.DateTimeField(auto_now_add=True)
     # Describes the motivation for each Plan.
     description  = models.CharField(max_length=256, default="", blank=True)
+
+    # Restrict plans to users of certain groups
+    class Meta:
+        permissions = (
+            ('view_plan', 'View Plan'),
+        )
 
     def __unicode__(self):
         return "Name: {0}, Description: {1}".format(self.name, self.description)

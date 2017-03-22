@@ -55,7 +55,7 @@ class ScanList(generics.ListCreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def launch(request, template_name='scans/index.html'):
-    user_session = request.user.userprofile.get_latest_session()
+    user_session = request.user.userprofile.get_current()
     plan_pks = user_session.getitem('plan')
 
     context = dict()

@@ -62,7 +62,7 @@ class PlanDelete(DeleteView):
 @login_required(login_url='/accounts/login')
 def select(request, pk):
     user_profile = request.user.userprofile
-    user_session = user_profile.get_latest_session()
+    user_session = user_profile.get_current()
     plan = get_object_or_404(Plan, user_profile__id=int(user_profile.id), pk=pk)
     if request.method == 'POST':
         if 'add' in request.POST:

@@ -1,0 +1,25 @@
+At least 2 groups: Administrators
+                   AppSec will be owning this service
+	           Users
+Having everything done through groups. A corollary to that is that a person can be associated with more than one group.
+1. Get all permissions for a user
+2. Get all groups for a user
+3. Get all objects with a certain permission for that user
+4. Get all objects for a the groups the user is assocated with in a JSON
+This is only for plans now
+Hierarchy:
+  User
+    GroupA
+      obj1
+    GroupB
+      obj1
+      obj2
+On the profile page, each profile card should be associated with a group the user is part of.
+Each group should list the permissions assocated with that group (the description part of the tuple).
+
+The dashboard button should show the plans associated with that group. 
+If a plan has a group or multiple groups associated with it, then we need to show that.
+
+How are plan objects associated with groups.
+Plans have permissions which are associated with groups.
+So Search user -> groups

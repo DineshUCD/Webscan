@@ -165,3 +165,4 @@
 2017-03-22 13:16:36,969 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
 2017-03-22 13:17:13,568 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
 2017-03-22 13:21:21,839 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Read timed out. (read timeout=2)
+2017-03-27 10:41:19,757 [ERROR] scarab: HTTPConnectionPool(host='sec-tools-01.eng.netsuite.com', port=80): Max retries exceeded with url: /threadfix/rest/teams/?apiKey=yGfGZcoPpjEMPwVdx6aqchbejiLn1GJQIUdnEDKMYes (Caused by NewConnectionError('<requests.packages.urllib3.connection.HTTPConnection object at 0x7f0eb00ddbd0>: Failed to establish a new connection: [Errno 111] Connection refused',))

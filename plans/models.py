@@ -9,7 +9,7 @@ from accounts.models import UserProfile
 # Create your models here.
 class Plan(models.Model):
     # Each user profile saves zero or many scans.
-    user_profile = models.ForeignKey(UserProfile)
+    user_profile = models.ForeignKey(UserProfile, blank=True, null=True)
     # Each plan is associated with only one target URL vulnerability scan.
     scan         = models.OneToOneField(Scan, on_delete=models.CASCADE, null=True, blank=True)
     # Name of scan for client to identify them.

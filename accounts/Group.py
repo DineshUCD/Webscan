@@ -4,7 +4,7 @@ import os, sys, logging, datetime, guardian
 
 from collections import defaultdict
 
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, ContentType
 from django.http import JsonResponse
 
 from accounts.models import UserProfile, UserSession
@@ -132,10 +132,17 @@ class Guardian():
             return False
         return True
 
-    def publicize_view(self, entity, content):
+    def verify_by_contenttype(self, model, entity, content_primary_key):
         """
-        Adds a Plan to the Group with User owning it. While the User has all permissions,
-        the group members can only view/use it.
+        Uses the content type to get the object with its primary key and
+        verify that entity has access to it.
         """
-        self.assign_object_permission('view', entity, content)
-        return True 
+        try:
+            model_type = ContentType.objects.get(model=model)
+            content = ContentType.get_object_for_this_type(model_type, pk=content_primary_key)
+        except (ContentType.DoesNotExist, Plan.DoesNotExist, TypeError) as err:
+            logger.error(err)
+            return None
+
+        authorization = self.check_permission(entity, content)
+        return content if authorization else None

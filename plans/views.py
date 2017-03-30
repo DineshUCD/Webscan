@@ -68,7 +68,13 @@ class PlanDelete(DeleteView):
 def select(request, pk):
     user_profile = request.user.userprofile
     user_session = user_profile.get_current()
-    plan = get_object_or_404(Plan, user_profile__id=int(user_profile.id), pk=pk)
+ 
+    guardian = Guardian()
+    plan = guardian.verify_by_contenttype('plan', request.user, pk)
+
+    if not plan:
+        plan = get_object_or_404(Plan, user_profile__id=int(user_profile.id), pk=pk)
+
     if request.method == 'POST':
         if 'add' in request.POST:
             user_session.set_session(user_session.appenditem  , plan=plan.id) 

@@ -1,6 +1,69 @@
-<h1>My Account</h1>
-<strong>Welcome, {{ name|capfirst }}!</strong>
-<br /><br />
-<fieldset class="my_account">
-</fieldset>
+{% extends 'scans/base.html' %}
+{% load static %}
 
+{% block content %}
+
+<!--
+  This page organizes Group information into cards. Each card represents a single group.
+  On the front side, one sees the Group label and Permission the user has within the group.
+  On the backside, one is linked to the group's content based on his or her role in the group.
+-->
+
+<script src="{% static 'js/my_account.js' %}" type="application/javascript"></script>
+<link href="{% static 'css/my_account.css' %}" rel="stylesheet" />
+
+<strong style="margin: 2em;">Welcome, {{ name|capfirst }}!</strong>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+   
+      <!-- Loop through card creation for each User's group. -->
+      {% for key, value in group_objects.items %}
+        <div class="col-md-4 col-sm-6">
+          <div class="card-container manual-flip"> <!-- Allow User to flip Group card information -->
+            <div class="card"> <!-- Begin card content division -->
+   
+              <!-- Front of card -->
+              <div class="front">
+
+                <div class="content">
+                  <div class="main">
+                    <br /> <br /> <br /> <br />
+                    <p class="text-center"> {{ key.name }} </p>
+                  </div>
+                </div>
+                <div class="footer">
+                  <button class="btn btn-simple" onclick="rotateCard(this)">
+                    <i class="fa fa-mail-forward"></i> Manual Rotation
+                  </button>
+                </div>
+              </div>
+ 
+              <!-- Back of card -->
+              <div class="back">
+                <div class="content">
+                  <div class="main">
+                    <p> Back of card </p>        
+                  </div> <!-- Main body of back of card content -->
+                </div> <!-- Back of card content end -->
+                <div class="footer">
+                  <button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">
+                    <i class="fa fa-reply"></i> Back
+                  </button>
+                </div>
+              </div> <!-- End back panel -->
+
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      <!-- End looped card creation. -->
+
+    </div> 
+  <!-- Align the card divisions in a row -->
+  </div>
+<!-- Container for the aligned cards --> 
+</div>
+
+{% endblock %}

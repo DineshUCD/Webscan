@@ -1,66 +1,15 @@
-[2017-03-13 09:46:03,931: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
-[2017-03-13 09:46:03,943: INFO/MainProcess] mingle: searching for neighbors
-[2017-03-13 09:46:04,964: INFO/MainProcess] mingle: all alone
-[2017-03-13 09:46:04,977: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+[2017-03-27 14:51:49,814: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-03-27 14:51:49,827: INFO/MainProcess] mingle: searching for neighbors
+[2017-03-27 14:51:50,847: INFO/MainProcess] mingle: all alone
+[2017-03-27 14:51:50,858: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
   warnings.warn('Using settings.DEBUG leads to a memory leak, never '
-[2017-03-13 09:46:04,977: INFO/MainProcess] celery@sec-tools-02 ready.
-
-worker: Warm shutdown (MainProcess)
- 
- -------------- celery@sec-tools-02 v4.0.2 (latentcall)
----- **** ----- 
---- * ***  * -- Linux-3.10.0-514.6.1.el7.x86_64-x86_64-with-oracle-7.3 2017-03-13 09:46:02
--- * - **** --- 
-- ** ---------- [config]
-- ** ---------- .> app:         webscanner:0x1be4810
-- ** ---------- .> transport:   amqp://guest:**@localhost:5672//
-- ** ---------- .> results:     redis://localhost/
-- *** --- * --- .> concurrency: 24 (prefork)
--- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
---- ***** ----- 
- -------------- [queues]
-                .> celery           exchange=celery(direct) key=celery
-                
-
-[tasks]
-  . scans.tasks.collect_results
-  . scans.tasks.delegate
-  . webscanner.celery_tasks.debug_task
-
-[2017-03-13 09:47:14,955: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
-[2017-03-13 09:47:14,966: INFO/MainProcess] mingle: searching for neighbors
-[2017-03-13 09:47:15,988: INFO/MainProcess] mingle: all alone
-[2017-03-13 09:47:16,001: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
-  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
-[2017-03-13 09:47:16,001: INFO/MainProcess] celery@sec-tools-02 ready.
-[2017-03-13 09:48:27,493: INFO/MainProcess] Received task: scans.tasks.delegate[aa4cfdf1-f685-4c85-a654-b75b1c7c9c48]  
-[2017-03-13 09:48:27,494: INFO/MainProcess] Received task: scans.tasks.delegate[681dc17c-505a-43fc-84ce-4ac088c39265]  
-[2017-03-13 09:48:27,494: INFO/MainProcess] Received task: scans.tasks.delegate[9b9e697a-d561-449d-b2d3-6f7cd2229158]  
-[13/Mar/2017 09:48:28] ERROR [scarab:108] Scan: http://scanme.nmap.org, Tool: whoami, Class: <class 'plugins.dummy.Dummy'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY'
-[2017-03-13 09:48:28,088: ERROR/PoolWorker-20] Scan: http://scanme.nmap.org, Tool: whoami, Class: <class 'plugins.dummy.Dummy'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY'
-[2017-03-13 09:48:28,101: INFO/PoolWorker-20] Task scans.tasks.delegate[681dc17c-505a-43fc-84ce-4ac088c39265] succeeded in 0.0285497740842s: {'Dummy': {'files': [(...), (...)]}}
-[2017-03-13 09:48:34,144: INFO/PoolWorker-22] Task scans.tasks.delegate[aa4cfdf1-f685-4c85-a654-b75b1c7c9c48] succeeded in 6.07156544318s: {'W3af': {'files': [(...), (...), (...), (...)]}}
-[2017-03-13 09:51:02,866: INFO/PoolWorker-24] Task scans.tasks.delegate[9b9e697a-d561-449d-b2d3-6f7cd2229158] succeeded in 154.793283558s: {'GauntltArachni': {'files': [(...), (...), (...), (...), (...)]}}
-[2017-03-13 09:51:02,867: INFO/MainProcess] Received task: scans.tasks.collect_results[15ac489c-1fed-4a09-a016-06b4892c06e0]  
-[2017-03-13 09:51:02,881: INFO/PoolWorker-1] [[u'/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/whoamistdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/whoamistderr.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/w3af_results.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/w3af_consolestdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/w3af_consolestderr.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/arachni_tests.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/arachni_tests.afr', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/ArachniGauntltstdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/ArachniGauntltstderr.txt', u'S']]
-[2017-03-13 09:51:02,894: INFO/PoolWorker-1] Task scans.tasks.collect_results[15ac489c-1fed-4a09-a016-06b4892c06e0] succeeded in 0.0254254508764s: [['/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/whoamistdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/whoamistderr.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/w3af_results.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/w3af_consolestdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/w3af_consolestderr.txt', 'S'], ['/home/djayasankar/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/arachni_tests.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/arachni_tests.afr', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/ArachniGauntltstdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/yZBzxy4HnY/ArachniGauntltstderr.txt', 'S']]
-[2017-03-17 10:24:35,096: INFO/MainProcess] Received task: scans.tasks.delegate[37db8610-ea92-4f0e-b420-c78be2454df5]  
-[2017-03-17 10:24:35,098: INFO/MainProcess] Received task: scans.tasks.delegate[6ffd2a31-0a75-414b-a9de-8aa9a73bdd10]  
-[2017-03-17 10:24:35,099: INFO/MainProcess] Received task: scans.tasks.delegate[29b5fd58-df0b-452e-9962-f4a776dced67]  
-[17/Mar/2017 10:24:35] ERROR [scarab:108] Scan: http://scanme.nmap.org, Tool: whoami, Class: <class 'plugins.dummy.Dummy'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY'
-[17/Mar/2017 10:24:35] ERROR [scarab:108] Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY'
-[2017-03-17 10:24:35,126: ERROR/PoolWorker-23] Scan: http://scanme.nmap.org, Tool: whoami, Class: <class 'plugins.dummy.Dummy'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY'
-[2017-03-17 10:24:35,126: ERROR/PoolWorker-18] Scan: http://scanme.nmap.org, Tool: w3af_console, Class: <class 'plugins.w3af.W3af'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY'
-[2017-03-17 10:24:35,138: INFO/PoolWorker-23] Task scans.tasks.delegate[6ffd2a31-0a75-414b-a9de-8aa9a73bdd10] succeeded in 0.0356017062441s: {'Dummy': {'files': [(...), (...)]}}
-[2017-03-17 10:24:41,721: INFO/PoolWorker-18] Task scans.tasks.delegate[37db8610-ea92-4f0e-b420-c78be2454df5] succeeded in 6.61934630852s: {'W3af': {'files': [(...), (...), (...), (...)]}}
-[2017-03-17 10:26:54,084: INFO/PoolWorker-12] Task scans.tasks.delegate[29b5fd58-df0b-452e-9962-f4a776dced67] succeeded in 138.981846286s: {'GauntltArachni': {'files': [(...), (...), (...), (...), (...)]}}
-[2017-03-17 10:26:54,085: INFO/MainProcess] Received task: scans.tasks.collect_results[76215902-2c0a-45c9-8594-afe68201f8ab]  
-[2017-03-17 10:26:54,099: INFO/PoolWorker-15] [[u'/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/whoamistdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/whoamistderr.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/w3af_results.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/w3af_consolestdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/w3af_consolestderr.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/arachni_tests.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/arachni_tests.afr', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/ArachniGauntltstdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/ArachniGauntltstderr.txt', u'S']]
-[2017-03-17 10:26:54,112: INFO/PoolWorker-15] Task scans.tasks.collect_results[76215902-2c0a-45c9-8594-afe68201f8ab] succeeded in 0.025262770243s: [['/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/whoamistdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/whoamistderr.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/w3af_results.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/w3af_consolestdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/w3af_consolestderr.txt', 'S'], ['/home/djayasankar/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/arachni_tests.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/arachni_tests.afr', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/ArachniGauntltstdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/QhmfmLZpZY/ArachniGauntltstderr.txt', 'S']]
-[2017-03-22 13:16:18,060: INFO/MainProcess] Received task: scans.tasks.delegate[abe37035-dbb8-4a22-bf71-2d050834dd4e]  
-[2017-03-22 13:16:18,061: INFO/MainProcess] Received task: scans.tasks.delegate[93a7f4d3-cf21-48cb-993e-34cbd7b53ceb]  
-[2017-03-22 13:16:18,133: INFO/PoolWorker-14] Task scans.tasks.delegate[93a7f4d3-cf21-48cb-993e-34cbd7b53ceb] succeeded in 0.0273389099166s: {'Dummy': {'files': [(...), (...)]}}
-[2017-03-22 13:16:24,768: INFO/PoolWorker-2] Task scans.tasks.delegate[abe37035-dbb8-4a22-bf71-2d050834dd4e] succeeded in 6.662373106s: {'W3af': {'files': [(...), (...), (...), (...)]}}
-[2017-03-22 13:16:24,769: INFO/MainProcess] Received task: scans.tasks.collect_results[f683a965-6f91-485d-9fcc-7edd4a7d6471]  
-[2017-03-22 13:16:24,784: INFO/PoolWorker-8] [[u'/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/whoamistdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/whoamistderr.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/w3af_results.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/w3af_consolestdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/w3af_consolestderr.txt', u'S']]
-[2017-03-22 13:16:24,793: INFO/PoolWorker-8] Task scans.tasks.collect_results[f683a965-6f91-485d-9fcc-7edd4a7d6471] succeeded in 0.021342433989s: [['/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/whoamistdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/whoamistderr.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/w3af_results.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/w3af_consolestdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/651WqoA76D/w3af_consolestderr.txt', 'S']]
+[2017-03-27 14:51:50,858: INFO/MainProcess] celery@sec-tools-02 ready.
+[2017-03-28 14:24:06,896: INFO/MainProcess] Received task: scans.tasks.delegate[3c62465a-1975-4a06-a336-debc1da71297]  
+[2017-03-28 14:24:06,897: INFO/MainProcess] Received task: scans.tasks.delegate[41bfc1a2-3221-4bab-a935-45e8b7ed9d02]  
+[28/Mar/2017 14:24:08] ERROR [scarab:108] Scan: http://scanme.nmap.org, Tool: whoami, Class: <class 'plugins.dummy.Dummy'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60'
+[2017-03-28 14:24:08,499: ERROR/PoolWorker-9] Scan: http://scanme.nmap.org, Tool: whoami, Class: <class 'plugins.dummy.Dummy'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60'
+[2017-03-28 14:24:08,512: INFO/PoolWorker-9] Task scans.tasks.delegate[41bfc1a2-3221-4bab-a935-45e8b7ed9d02] succeeded in 0.0287396367639s: {'Dummy': {'files': [(...), (...)]}}
+[2017-03-28 14:24:15,068: INFO/PoolWorker-3] Task scans.tasks.delegate[3c62465a-1975-4a06-a336-debc1da71297] succeeded in 6.58445913251s: {'W3af': {'files': [(...), (...), (...), (...)]}}
+[2017-03-28 14:24:15,069: INFO/MainProcess] Received task: scans.tasks.collect_results[aa08cc9e-5370-4834-9375-b93628199986]  
+[2017-03-28 14:24:15,083: INFO/PoolWorker-5] [[u'/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/whoamistdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/whoamistderr.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/w3af_results.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/w3af_consolestdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/w3af_consolestderr.txt', u'S']]
+[2017-03-28 14:24:15,091: INFO/PoolWorker-5] Task scans.tasks.collect_results[aa08cc9e-5370-4834-9375-b93628199986] succeeded in 0.021159443073s: [['/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/whoamistdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/whoamistderr.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/w3af_results.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/w3af_consolestdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/cLnIdZEh60/w3af_consolestderr.txt', 'S']]

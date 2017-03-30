@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group, User
 from django.template import RequestContext
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
@@ -10,6 +11,7 @@ from django.http import HttpResponseRedirect
 from scans.tasks import find_all_interfaces
 from plans.models import Plan
 from accounts.models import UserProfile, UserSession
+from accounts.Group import Guardian
 from webscanner.logger import logger
 
 # Create your views here.
@@ -34,9 +36,15 @@ def register(request, template_name="registration/register.html"):
 
 @login_required(login_url='/accounts/login/')
 def my_account(request, template_name="registration/my_account.html"):
-    page_title='My Account'
-    name = request.user.username
-    return render(request, template_name, locals()) 
+    context = { }
+
+    guardian = Guardian()
+ 
+    context[ 'page_title' ]    ='Groups'
+    context[ 'name' ]          = request.user.username
+    context[ 'group_objects' ] = guardian.order_by_group(request.user)
+        
+    return render(request, template_name, context) 
 
 
 def end(request, template_name="registration/logout.html"):

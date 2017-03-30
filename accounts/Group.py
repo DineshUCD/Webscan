@@ -79,7 +79,7 @@ class Guardian():
             queryset = GroupObjectPermission.objects.filter(group_id=int(group.id))
             objects = [ rule.content_object for rule in queryset ]
             for content in objects:
-                data[ content ].append( group.name )
+                data[ content ].append( group )
         return data
 
     def __get_objects_for_group(self, group):
@@ -100,7 +100,7 @@ class Guardian():
         data = { }
         groups = user.groups.all()
         for group in groups:
-            data[ group.name ] = self.__get_objects_for_group(group)
+            data[ group ] = self.__get_objects_for_group(group)
         return data
 
     def check_permission(self, entity, content):
@@ -132,10 +132,10 @@ class Guardian():
             return False
         return True
 
-    def publicize_to(self, entity, content):
+    def publicize_view(self, entity, content):
         """
         Adds a Plan to the Group with User owning it. While the User has all permissions,
         the group members can only view/use it.
         """
-        
+        self.assign_object_permission('view', entity, content)
         return True 

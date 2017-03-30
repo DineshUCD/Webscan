@@ -21,7 +21,7 @@ class Plan(models.Model):
     # Restrict plans to users of certain groups
     class Meta:
         permissions = (
-            ('view_plan', 'View Plan'),
+            ('view', 'View Plan'),
         )
 
     def __unicode__(self):

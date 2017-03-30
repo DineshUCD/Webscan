@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $('#planning').dataTable();
+  $('#group').dataTable();
 });
 
 function ajaxHandler(json, mapping, callback) {

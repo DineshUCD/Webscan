@@ -4,15 +4,20 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 
+from accounts.Group import Guardian
 from scans.models import Tool
 from .models import Plan
 from .forms import PlanForm
 
 # Create your views here.
 def my_plans(request, template_name='plans/index.html'):
+    guardian = Guardian()
+
     context = {
-        'plans': Plan.objects.filter(user_profile__id=int(request.user.userprofile.id), scan=None)
+        'plans': Plan.objects.filter(user_profile__id=int(request.user.userprofile.id), scan=None),
+        'group_objects' : dict(guardian.order_by_object(request.user))
     }
+
     return render(request, template_name, context)
  
 class PlanCreate(CreateView):
@@ -67,8 +72,6 @@ def select(request, pk):
     if request.method == 'POST':
         if 'add' in request.POST:
             user_session.set_session(user_session.appenditem  , plan=plan.id) 
-            print plan.id
         elif 'remove' in request.POST:
             user_session.set_session(user_session.unappenditem, plan=plan.id)  
-            print plan.id
     return HttpResponseRedirect(reverse('plans:plans-list'))

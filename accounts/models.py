@@ -4,7 +4,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.signals import user_logged_in
 from django.contrib.sessions.models import Session
 from django.http import HttpRequest
@@ -13,6 +13,24 @@ from webscanner.logger import logger
 
 import sys, os
 # Create your models here.
+
+#Modification on Group class for user levels within a group.
+"""
+NONE   = 0
+VIEW   = 1
+CREATE = 2
+EDIT   = 3
+FULL   = 4
+KLEVEL = (
+    (NONE, "None"),
+    (VIEW, "View"),
+    (CREATE, "Create"),
+    (EDIT, "Edit"),
+    (FULL, "Full"),
+)
+Group.add_to_class('level', models.CharField(max_length=10, choices=KLEVEL, default=VIEW))
+"""
+
 class UserProfile(models.Model):
     user      = models.OneToOneField(User, unique=True)
     date      = models.DateTimeField(auto_now_add=True)

@@ -36,6 +36,7 @@ class ScanList(generics.ListCreateAPIView):
         return queryset
             
         return data
+
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():

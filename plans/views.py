@@ -41,7 +41,7 @@ class PlanUpdate(UpdateView):
     success_url = reverse_lazy('plans:plans-list')
      
     def get_form(self):
-        form = super(PlanUpdate, self).get_form()
+        form  = super(PlanUpdate, self).get_form()
         tools = [tool.module for tool in self.get_object().tool_set.all()]
         form.initial['plugins'] = tools
         return form
@@ -58,7 +58,7 @@ class PlanUpdate(UpdateView):
 class PlanDelete(DeleteView):
     model = Plan
     template_name = 'plans/index.html'
-    success_url = reverse_lazy('plans:plans-list')
+    success_url   = reverse_lazy('plans:plans-list')
    
     def get_object(self, queryset=None):
         obj = get_object_or_404(Plan, user_profile__id=self.request.user.userprofile.id, pk=int(self.kwargs['pk']))
@@ -70,7 +70,7 @@ def select(request, pk):
     user_session = user_profile.get_current()
  
     guardian = Guardian()
-    plan = guardian.verify_by_contenttype('plan', request.user, pk)
+    plan     = guardian.verify_by_contenttype('plan', request.user, pk)
 
     if not plan:
         plan = get_object_or_404(Plan, user_profile__id=int(user_profile.id), pk=pk)

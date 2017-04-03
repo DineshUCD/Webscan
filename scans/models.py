@@ -4,6 +4,8 @@ from django.db import models
 from django.db.models import signals
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
 from accounts.models import UserProfile
 from webscanner.celery_tasks  import app
@@ -27,23 +29,12 @@ class Scan(models.Model):
     user_profile             = models.ForeignKey(UserProfile)
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False, help_text="Please use the following format: http(s)://")
     date                     = models.DateTimeField(auto_now_add=True)
-    state                    = models.CharField(max_length=7, choices=ALL_STATES, default=PENDING)
-    task_id                  = models.UUIDField(default=uuid.uuid4, editable=True)
 
     class Meta:
         unique_together = ['user_profile', 'id']
 
     def get_scan_data(self):
 	return { 'output': map(lambda output: output.report, MetaFile.objects.filter(scan__id=self.id).filter(role=MetaFile.SCAN)), 'zip path': self.zip.name }       
-
-    def get_state(self):
-        if self.state and self.state == Scan.SUCCESS:
-            return self.state
-
-        result = app.AsyncResult(str(self.task_id))
-        state = str(result.state)[:7]
-        Scan.objects.filter(pk=self.pk).update(state=state) 
-        return state
 
     def __unicode__(self):
         return "{0}".format(self.uniform_resource_locator)
@@ -71,16 +62,23 @@ def create_zip_for_scan(sender, instance, created, **kwargs):
         zip_name      = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(10))
         zip_meta_data = Zip(scan=instance, name=zip_name)
         zip_meta_data.save()
-    
+
 class Tool(models.Model):
-    plan           = models.ForeignKey('plans.Plan')
+    plan   = models.ManyToManyField('plans.Plan')
+    name   = models.CharField(max_length=256, default="", blank=True)
+
     # Example: "<class 'plugins.w3af.W3af'>"
-    module         = models.CharField(max_length=256, default="", blank=True)
-    # Example: 'w3af_console'
-    name           = models.CharField(max_length=256, default="", blank=True)
+    module = models.CharField(max_length=256, default="", blank=True)
+ 
+class State(models.Model):
+    scan           = models.ForeignKey(Scan)
+    tool           = models.ForeignKey(Tool, blank=True, null=True)
+
     date           = models.DateTimeField(auto_now_add=True)
     state          = models.CharField(max_length=7, choices=Scan.ALL_STATES, blank=True)
     task_id        = models.UUIDField(default=uuid.uuid4, editable=True, blank=True)
+
+    test = models.NullBooleanField() 
 
     def get_state(self):
         if self.state and self.state == Scan.SUCCESS:
@@ -88,31 +86,11 @@ class Tool(models.Model):
 
         result = app.AsyncResult(str(self.task_id))
         state = str(result.state)[:7]
-        Tool.objects.filter(pk=self.pk).update(state=state)
+        State.objects.filter(pk=self.pk).update(state=state)
         return state
 
     def __unicode__(self):
-        return "{0}".format(self.name)
-
-class PassFailTool(Tool):
-    """
-    We wish to define a subset of tools that are only for PassFailTests.
-    MTI creates a separate relational table for this model.
-    The subclass table will have a special additional column called "<model_name>_ptr_id,
-      a foreign key that points to the superclass table.
-    When an instance of the subclass model is pulled from the database, the ORM will 
-    pull the related row in the superclass table and build a model instance with data from 
-    both tables!
-    """
-
-    #This field is not required. It records whether the tool passed or failed its scenarios.
-    test = models.NullBooleanField() 
-
-    def get_test(self):
-        return self.test
-
-    def __unicode__(self):
-        return "Test: {0}".format(self.test)
+        return "{0}".format(self.content_object)
 
 class MetaFile(models.Model):
     DOCUMENTATION = 'D'

@@ -32,6 +32,7 @@ class PlanForm(forms.ModelForm):
         self.instance.save()
 
         for plugin in plugin_choices:
-            Tool.objects.create(plan=self.instance, module=plugin, name=self.options.get(plugin))
+            tool, created = Tool.objects.get_or_create(module=plugin, name=self.options.get(plugin))
+            State.objects.create(content_object=self.instance, description=self.options.get(plugin))            
 
         return cleaned_data

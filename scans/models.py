@@ -64,20 +64,24 @@ def create_zip_for_scan(sender, instance, created, **kwargs):
         zip_meta_data.save()
 
 class Tool(models.Model):
-    plan   = models.ManyToManyField('plans.Plan')
+    # A Tool can be run from multiple Plan objects, and a Plan has multiple Tool objects.
+    plans  = models.ManyToManyField('plans.Plan')
     name   = models.CharField(max_length=256, default="", blank=True)
 
     # Example: "<class 'plugins.w3af.W3af'>"
     module = models.CharField(max_length=256, default="", blank=True)
- 
+
+    def __unicode__(self):
+        return "{0} {1}".format(name, module)
+
 class State(models.Model):
     scan           = models.ForeignKey(Scan)
     tool           = models.ForeignKey(Tool, blank=True, null=True)
-
+                      
     date           = models.DateTimeField(auto_now_add=True)
     state          = models.CharField(max_length=7, choices=Scan.ALL_STATES, blank=True)
     task_id        = models.UUIDField(default=uuid.uuid4, editable=True, blank=True)
-
+    
     test = models.NullBooleanField() 
 
     def get_state(self):

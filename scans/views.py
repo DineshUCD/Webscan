@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from scans.serializers import ScanSerializer
 
-from scans.models import Scan, Tool, PassFailTool, MetaFile
+from scans.models import Scan, Tool, State
 from uploads.models import Upload
 from uploads.forms import UploadForm
 from plans.models import Plan
@@ -43,15 +43,13 @@ class ScanList(generics.ListCreateAPIView):
             scan = serializer.save()
             header = [delegate.s(tool.module, scan.id) for tool in scan.plan.tool_set.all()]
             result = (group(header) | collect_results.s(scan_identification=scan.id))()
-            
-            #Store Queue task id in Scan model & Save
-            Scan.objects.filter(pk=scan.pk).update(task_id=str(result))
-            scan.refresh_from_db()
+           
+            State.objects.filter(scan=scan, tool=None).update(task_id=str(result))
 
             #Store group task results in appropriate tools. 
             #result.parent[#] gives appropriate task id in the order tasks were listed in group.
             for task_uuid, tool in zip(result.parent, scan.plan.tool_set.all()):
-                Tool.objects.filter(pk=tool.pk).update(task_id=str(task_uuid))
+                State.objects.filter(scan=scan, tool=tool).update(task_id=str(task_uuid))
             
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -86,15 +84,14 @@ def detail(request, pk, template_name='scans/detail.html'):
 
         #Sum the number of scan metafiles all the tool(s) contain.
         num_metafiles = num_metafiles + scan_files.count()
-        state = tool.get_state()
+        state = State.objects.filter(scan=scan, tool=tool).get_state()
 
         # Structure the information for each tool.
         tool_information = { 'name': tool.name, 'state': state, 'files': scan_files }
 
         # Get pass/fail status if tool is of type PassFailTool
-        if PassFailTool.objects.filter(pk=tool.pk).exists():
-            test = tool.passfailtool.get_test()
-            tool_information['test'] = test
+        if state.test != None:
+            tool_information['test'] = state.test
        
         context['tools'].append(tool_information)
 

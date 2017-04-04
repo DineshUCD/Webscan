@@ -24,7 +24,8 @@ class PlanForm(forms.ModelForm):
 
         plugin_choices = cleaned_data.get('plugins')
 
-        Tool.objects.filter(plan__id=self.instance.id).delete()
+        self.instance.tool_set.clear()
+        #Tool.objects.filter(plan__id=self.instance.id).delete()
         
         if not self.instance.user_profile_id:
             self.instance.user_profile_id = self.user_profile_id
@@ -33,6 +34,6 @@ class PlanForm(forms.ModelForm):
 
         for plugin in plugin_choices:
             tool, created = Tool.objects.get_or_create(module=plugin, name=self.options.get(plugin))
-            State.objects.create(content_object=self.instance, description=self.options.get(plugin))            
+            tool.plans.add(self.instance)
 
         return cleaned_data

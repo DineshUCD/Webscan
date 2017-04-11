@@ -42,7 +42,7 @@ class PlanUpdate(UpdateView):
      
     def get_form(self):
         form  = super(PlanUpdate, self).get_form()
-        tools = [tool.module for tool in self.get_object().tool_set.all()]
+        tools = [ tool.module for tool in self.get_object().tool_set.all() ]
         form.initial['plugins'] = tools
         return form
    

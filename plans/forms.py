@@ -23,17 +23,17 @@ class PlanForm(forms.ModelForm):
         cleaned_data = super(PlanForm, self).clean()
 
         plugin_choices = cleaned_data.get('plugins')
-
-        self.instance.tool_set.clear()
-        #Tool.objects.filter(plan__id=self.instance.id).delete()
         
         if not self.instance.user_profile_id:
             self.instance.user_profile_id = self.user_profile_id
 
         self.instance.save()
 
+        self.instance.tool_set.clear()
+
         for plugin in plugin_choices:
             tool, created = Tool.objects.get_or_create(module=plugin, name=self.options.get(plugin))
-            tool.plans.add(self.instance)
+            tool.plans.add(self.instance) # Adds the specified model objects to the related object set. 
+                                          # applies database changes immediately for all types of related fields.
 
         return cleaned_data

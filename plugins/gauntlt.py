@@ -16,7 +16,6 @@ class GauntltArachni(Gauntlt):
         
     def do_configure(self):
         super(GauntltArachni, self).do_configure()
-
         #Configure Gauntlt
 
         #Editing the config\cucumber.yml file. A basic cucumber profile may consist of a 'default profile.'
@@ -27,7 +26,6 @@ class GauntltArachni(Gauntlt):
         # Write out to cucumber.yml first
         gauntlt_yaml_configuration = "CURRENT_DIRECTORY=" + str( self.temporary_folder_path ) + " URL=" + str( self.model.uniform_resource_locator )
         cucumber_profile_file_path = os.path.join(settings.CONFIG_DIR, 'cucumber.yml')
-        
 
         # The Gauntlt metafiles 
         self.set_metafile(cucumber_profile_file_path, MetaFile.DOCUMENTATION)
@@ -36,7 +34,6 @@ class GauntltArachni(Gauntlt):
        
         with open(cucumber_profile_file_path, 'w') as cucumber_profile:
             cucumber_profile.write(yaml.dump(dict(default=gauntlt_yaml_configuration), default_flow_style=False))
-        
         os.chmod(cucumber_profile_file_path, 0o757)
         # End configuration of gauntlt
 

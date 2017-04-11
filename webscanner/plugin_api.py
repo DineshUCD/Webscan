@@ -160,37 +160,31 @@ class Gauntlt(AbstractPlugin):
     @abc.abstractmethod
     def do_configure(self):
         super(Gauntlt, self).do_configure("gauntlt")
-         
-        #Specialize Gauntlt as a pass fail tool.
-        special_tool = PassFailTool(tool_ptr_id=self.tool.id)
-        special_tool.__dict__.update(self.tool.__dict__)
-        special_tool.save()
-        self.tool = special_tool
 
     def test(self, check):
         if check is None:
             logger.error("Std Output: {0}, Check: {1}".format(check, self.standard_output))
 
-        scenario_phrase = re.search("(\d+) scenarios?", check)
-        scenario_count = int(scenario_phrase.group(1))
+        scenario = re.search("(\d+) scenarios?", check)
+        scenario_count = int(scenario.group(1))
   
-        passed_phrase = re.search("(\d+) passed", check)
+        passed = re.search("(\d+) passed", check)
         passed_count = 0
-        if passed_phrase:
+
+        if passed:
             passed_count = int(passed_phrase.group(1))
          
-        failed_phrase = re.search("(\d) failed", check)
+        failed = re.search("(\d) failed", check)
         failed_count = 0
+
         if failed_phrase:
             failed_count = int(failed_phrase.group(1))
 
-        try:
-            if failed_count == 0:
-                self.tool.passfailtool.test = True
-                self.tool.passfailtool.save()
-            else:
-                self.tool.passfailtool.test = False
-                self.tool.passfailtool.save()
-        except RelatedObjectDoesNotExist as err:
-            logger.error(err)
-            return None 
+        state = State.objects.get(scan=self.model, tool=self.tool)
+
+        if failed_count == 0:
+            state.test = True
+        else:
+            state.test = False
+ 
+        state.save()

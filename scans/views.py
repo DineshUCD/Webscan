@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 from scans.serializers import ScanSerializer
 
-from scans.models import Scan, Tool, State
+from scans.models import MetaFile, Scan, Tool, State
 from uploads.models import Upload
 from uploads.forms import UploadForm
 from plans.models import Plan
@@ -41,6 +41,7 @@ class ScanList(generics.ListCreateAPIView):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             scan = serializer.save()
+            print scan.uniform_resource_locator
             header = [delegate.s(tool.module, scan.id) for tool in scan.plan.tool_set.all()]
             result = (group(header) | collect_results.s(scan_identification=scan.id))()
            
@@ -74,7 +75,7 @@ def detail(request, pk, template_name='scans/detail.html'):
         'form': form,
         'tools':list()
     }
-    context['scan_state'] = scan.get_state()
+    context['scan_state'] = State.objects.get(scan=scan, tool=None).get_state()
     # Require tool name, tool files, and tool status
     tools = scan.plan.tool_set.all()
     num_metafiles = 0
@@ -84,10 +85,10 @@ def detail(request, pk, template_name='scans/detail.html'):
 
         #Sum the number of scan metafiles all the tool(s) contain.
         num_metafiles = num_metafiles + scan_files.count()
-        state = State.objects.filter(scan=scan, tool=tool).get_state()
+        state = State.objects.get(scan=scan, tool=tool)
 
         # Structure the information for each tool.
-        tool_information = { 'name': tool.name, 'state': state, 'files': scan_files }
+        tool_information = { 'name': tool.name, 'state': state.get_state(), 'files': scan_files }
 
         # Get pass/fail status if tool is of type PassFailTool
         if state.test != None:

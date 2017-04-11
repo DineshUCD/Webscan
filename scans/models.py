@@ -36,6 +36,9 @@ class Scan(models.Model):
     def get_scan_data(self):
 	return { 'output': map(lambda output: output.report, MetaFile.objects.filter(scan__id=self.id).filter(role=MetaFile.SCAN)), 'zip path': self.zip.name }       
 
+    def get_state(self):
+        return State.objects.get(scan__pk=self.pk, tool=None).get_state()
+
     def __unicode__(self):
         return "{0}".format(self.uniform_resource_locator)
 
@@ -72,7 +75,7 @@ class Tool(models.Model):
     module = models.CharField(max_length=256, default="", blank=True)
 
     def __unicode__(self):
-        return "{0} {1}".format(name, module)
+        return "{0} {1}".format(self.name, self.module)
 
 class State(models.Model):
     scan           = models.ForeignKey(Scan)

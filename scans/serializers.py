@@ -17,7 +17,7 @@ class ScanSerializer(serializers.ModelSerializer):
     def validate_plan(self, value):
         request = self.context.get("request")
          # Returns True if the QuerySet contains any results, and False if not.
-        plan = Plan.objects.filter(pk=value.id, user_profile__id=request.user.userprofile.id)
+        plan = Plan.objects.get(pk=value.id, user_profile__id=request.user.userprofile.id)
         plan_copy = None
         if plan:
             plan_copy    = deepcopy(plan)
@@ -35,24 +35,24 @@ class ScanSerializer(serializers.ModelSerializer):
         validated_data['plan'].scan = scan
         validated_data['plan'].save()
 
-        State.objects.create(scan=scan)
+        State.objects.create(scan=scan) # Create overall state for scan. Tool is null.
 
         #Create State for each Tool in the Scan
-        tools = validated_data['plan']
+        tools = validated_data['plan'].tool_set.all()
         for tool in tools:
-            State.objects.create(scan=scan, tool=tool)
+            State.objects.create(scan=scan, tool=tool) # Create state for each tool.
                     
         return scan
 
     def to_representation(self, instance):
         ret = super(ScanSerializer, self).to_representation(instance)
         ret['plan'] = str(instance.plan).lower()
-        ret['state'] = State.objects.filter(scan=instance, tool=None).get_state()
+        ret['state'] = State.objects.get(scan=instance, tool=None).get_state()
         ret['date'] = instance.date
         ret['tools'] = list()
         ret['pk'] = instance.id
         for tool in instance.plan.tool_set.all():
-            state = State.objects.get(scan=scan, tool=tool)
+            state = State.objects.get(scan=instance, tool=tool)
             tool_information = { tool.name: state.get_state() }
             if state.test != None:
                 tool_information['test'] = state.test

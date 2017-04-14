@@ -13,6 +13,8 @@ from uploads.models import Upload
 from uploads.forms import UploadForm
 from plans.models import Plan
 
+from accounts.Group import Guardian
+
 from celery import chord, group
 from .tasks import delegate, collect_results
 
@@ -34,14 +36,11 @@ class ScanList(generics.ListCreateAPIView):
             queryset = Scan.objects.filter(user_profile__id=int(self.request.user.userprofile.id))
 
         return queryset
-            
-        return data
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             scan = serializer.save()
-            print scan.uniform_resource_locator
             header = [delegate.s(tool.module, scan.id) for tool in scan.plan.tool_set.all()]
             result = (group(header) | collect_results.s(scan_identification=scan.id))()
            
@@ -58,17 +57,20 @@ class ScanList(generics.ListCreateAPIView):
 def launch(request, template_name='scans/index.html'):
     user_session = request.user.userprofile.get_current()
     plan_pks = user_session.getitem('plan')
+    guardian = Guardian()
 
     context = dict()
-  
+    context['plans'] = list()
+
     if plan_pks and isinstance(plan_pks, list):
         context['plans'] = Plan.objects.filter(pk__in=plan_pks, user_profile__id=int(request.user.userprofile.id)) 
-    
+        context['plans'].extend([item[0] for item in guardian.order_by_object(request.user)])
+
     return render(request, template_name, context)
 
 def detail(request, pk, template_name='scans/detail.html'): 
     scan = get_object_or_404(Scan, user_profile__id=int(request.user.userprofile.id), pk=pk)
-
+.
     form = UploadForm(request.POST or None, { 'scan': scan})
     context = {
         'scan': scan,

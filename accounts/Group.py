@@ -26,7 +26,7 @@ class Guardian():
         permission must be in app_label.codename or codename
         """
         try:
-            object_permission = assign_perm(permission, user_or_group, obj)
+            object_permission = assign_perm(permission, user_or_group, obj) 
         except (AttributeError, NameError, guardian.exceptions.NotUserNorGroup) as err:
             logger.warn("Cannot assign perm {0} to {1} for {2}.".format(user_or_group, permission, obj))
             return None

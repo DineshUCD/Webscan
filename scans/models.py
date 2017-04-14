@@ -15,16 +15,6 @@ import datetime, sys, os, uuid, string, random
 
 # Create your models here.
 class Scan(models.Model):
-    PENDING = 'PENDING'
-    STARTED = 'STARTED'
-    SUCCESS = 'SUCCESS' # Erfolg
-    FAILURE = 'FAILURE'
-    ALL_STATES = (
-        (PENDING, 'Pending'),
-        (STARTED, 'Started'),
-        (SUCCESS, 'Success'),
-        (FAILURE, 'Failure'),
-    )
 
     user_profile             = models.ForeignKey(UserProfile)
     uniform_resource_locator = models.URLField(max_length=2083, blank=False, null=False, help_text="Please use the following format: http(s)://")
@@ -78,17 +68,27 @@ class Tool(models.Model):
         return "{0} {1}".format(self.name, self.module)
 
 class State(models.Model):
+    PENDING = 'PENDING'
+    STARTED = 'STARTED'
+    SUCCESS = 'SUCCESS' # Erfolg
+    FAILURE = 'FAILURE'
+    ALL_STATES = (
+        (PENDING, 'Pending'),
+        (STARTED, 'Started'),
+        (SUCCESS, 'Success'),
+        (FAILURE, 'Failure'),
+    )
     scan           = models.ForeignKey(Scan)
     tool           = models.ForeignKey(Tool, blank=True, null=True)
                       
     date           = models.DateTimeField(auto_now_add=True)
-    state          = models.CharField(max_length=7, choices=Scan.ALL_STATES, blank=True)
+    state          = models.CharField(max_length=7, choices=ALL_STATES, blank=True)
     task_id        = models.UUIDField(default=uuid.uuid4, editable=True, blank=True)
     
     test = models.NullBooleanField() 
 
     def get_state(self):
-        if self.state and self.state == Scan.SUCCESS:
+        if self.state and self.state == SUCCESS:
             return self.state
 
         result = app.AsyncResult(str(self.task_id))

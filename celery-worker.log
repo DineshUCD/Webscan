@@ -1,33 +1,15 @@
-[2017-04-04 13:07:58,198: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
-[2017-04-04 13:07:58,209: INFO/MainProcess] mingle: searching for neighbors
-[2017-04-04 13:07:59,230: INFO/MainProcess] mingle: all alone
-[2017-04-04 13:07:59,243: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+[2017-04-11 14:56:24,441: INFO/MainProcess] Connected to amqp://guest:**@127.0.0.1:5672//
+[2017-04-11 14:56:24,453: INFO/MainProcess] mingle: searching for neighbors
+[2017-04-11 14:56:25,474: INFO/MainProcess] mingle: all alone
+[2017-04-11 14:56:25,487: WARNING/MainProcess] /usr/lib64/python2.7/site-packages/celery/fixups/django.py:202: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
   warnings.warn('Using settings.DEBUG leads to a memory leak, never '
-[2017-04-04 13:07:59,243: INFO/MainProcess] celery@sec-tools-02 ready.
-[2017-04-04 13:08:16,634: INFO/MainProcess] Received task: scans.tasks.delegate[ffa934ce-789d-469c-a87d-07d412e55c50]  
-[2017-04-04 13:08:16,635: INFO/MainProcess] Received task: scans.tasks.delegate[97d976e1-0609-476e-a8ed-45b0b0e64c02]  
-[04/Apr/2017 13:08:17] ERROR [scarab:108] Scan: http://scanme.nmap.org, Tool: ArachniGauntlt <class 'plugins.gauntlt.GauntltArachni'>, Class: <class 'plugins.gauntlt.GauntltArachni'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/G3pfYwRqjQ'
-[2017-04-04 13:08:17,276: ERROR/PoolWorker-23] Scan: http://scanme.nmap.org, Tool: ArachniGauntlt <class 'plugins.gauntlt.GauntltArachni'>, Class: <class 'plugins.gauntlt.GauntltArachni'>, Other: [Errno 17] File exists: '/home/djayasankar/Documents/webscanner/temporary/G3pfYwRqjQ'
-[2017-04-04 13:08:17,278: ERROR/PoolWorker-23] Task scans.tasks.delegate[97d976e1-0609-476e-a8ed-45b0b0e64c02] raised unexpected: NameError("global name 'PassFailTool' is not defined",)
-Traceback (most recent call last):
-  File "/usr/lib64/python2.7/site-packages/celery/app/trace.py", line 367, in trace_task
-    R = retval = fun(*args, **kwargs)
-  File "/usr/lib64/python2.7/site-packages/celery/app/trace.py", line 622, in __protected_call__
-    return self.run(*args, **kwargs)
-  File "/home/djayasankar/Documents/webscanner/scans/tasks.py", line 32, in delegate
-    instance = plugin(model_pk=int(model_id))
-  File "/home/djayasankar/Documents/webscanner/plugins/gauntlt.py", line 15, in __init__
-    self.do_configure()
-  File "/home/djayasankar/Documents/webscanner/plugins/gauntlt.py", line 18, in do_configure
-    super(GauntltArachni, self).do_configure()
-  File "/home/djayasankar/Documents/webscanner/webscanner/plugin_api.py", line 165, in do_configure
-    special_tool = PassFailTool(tool_ptr_id=self.tool.id)
-NameError: global name 'PassFailTool' is not defined
-[2017-04-04 13:08:23,415: ERROR/PoolWorker-18] Chord callback for 'd67c41b3-f05d-43d7-aae9-996c871e7695' raised: ChordError(u'Dependency 97d976e1-0609-476e-a8ed-45b0b0e64c02 raised NameError("global name \'PassFailTool\' is not defined",)',)
-Traceback (most recent call last):
-  File "/usr/lib64/python2.7/site-packages/celery/backends/redis.py", line 281, in on_chord_part_return
-    callback.delay([unpack(tup, decode) for tup in resl])
-  File "/usr/lib64/python2.7/site-packages/celery/backends/redis.py", line 234, in _unpack_chord_result
-    raise ChordError('Dependency {0} raised {1!r}'.format(tid, retval))
-ChordError: Dependency 97d976e1-0609-476e-a8ed-45b0b0e64c02 raised NameError("global name 'PassFailTool' is not defined",)
-[2017-04-04 13:08:23,417: INFO/PoolWorker-18] Task scans.tasks.delegate[ffa934ce-789d-469c-a87d-07d412e55c50] succeeded in 6.15913096536s: {'W3af': {'files': [(...), (...), (...), (...)]}}
+[2017-04-11 14:56:25,487: INFO/MainProcess] celery@sec-tools-02 ready.
+[2017-04-11 14:59:48,976: INFO/MainProcess] Received task: scans.tasks.delegate[33222138-1050-4d1e-b6dd-b6636a43138d]  
+[2017-04-11 14:59:48,977: INFO/MainProcess] Received task: scans.tasks.delegate[70afedd5-6b61-4a87-b594-363ff5eb4c0c]  
+[2017-04-11 14:59:48,979: INFO/MainProcess] Received task: scans.tasks.delegate[18bf70ce-d96c-458e-a959-2204c4b58eba]  
+[2017-04-11 14:59:49,706: INFO/PoolWorker-5] Task scans.tasks.delegate[18bf70ce-d96c-458e-a959-2204c4b58eba] succeeded in 0.0262052109465s: {'Dummy': {'files': [(...), (...)]}}
+[2017-04-11 14:59:55,613: INFO/PoolWorker-20] Task scans.tasks.delegate[33222138-1050-4d1e-b6dd-b6636a43138d] succeeded in 6.63429664262s: {'W3af': {'files': [(...), (...), (...), (...)]}}
+[2017-04-11 15:02:20,388: INFO/PoolWorker-24] Task scans.tasks.delegate[70afedd5-6b61-4a87-b594-363ff5eb4c0c] succeeded in 151.409030924s: {'GauntltArachni': {'files': [(...), (...), (...), (...), (...)]}}
+[2017-04-11 15:02:20,389: INFO/MainProcess] Received task: scans.tasks.collect_results[18588266-7da3-4276-b069-e0473cfbad2b]  
+[2017-04-11 15:02:20,403: INFO/PoolWorker-18] [[u'/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/whoamistdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/whoamistderr.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/w3af_script.w3af', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/w3af_results.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/w3af_consolestdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/w3af_consolestderr.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/config/cucumber.yml', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/arachni_tests.xml', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/arachni_tests.afr', u'D'], [u'/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/ArachniGauntltstdout.txt', u'S'], [u'/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/ArachniGauntltstderr.txt', u'S']]
+[2017-04-11 15:02:20,415: INFO/PoolWorker-18] Task scans.tasks.collect_results[18588266-7da3-4276-b069-e0473cfbad2b] succeeded in 0.0247520599514s: [['/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/whoamistdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/whoamistderr.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/w3af_script.w3af', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/w3af_results.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/w3af_consolestdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/w3af_consolestderr.txt', 'S'], ['/home/djayasankar/Documents/webscanner/config/cucumber.yml', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/arachni_tests.xml', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/arachni_tests.afr', 'D'], ['/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/ArachniGauntltstdout.txt', 'S'], ['/home/djayasankar/Documents/webscanner/temporary/AWQYB7R1XV/ArachniGauntltstderr.txt', 'S']]

@@ -172,13 +172,13 @@ class Gauntlt(AbstractPlugin):
         passed_count = 0
 
         if passed:
-            passed_count = int(passed_phrase.group(1))
+            passed_count = int(passed.group(1))
          
         failed = re.search("(\d) failed", check)
         failed_count = 0
 
-        if failed_phrase:
-            failed_count = int(failed_phrase.group(1))
+        if failed:
+            failed_count = int(failed.group(1))
 
         state = State.objects.get(scan=self.model, tool=self.tool)
 

@@ -64,13 +64,12 @@ def launch(request, template_name='scans/index.html'):
 
     if plan_pks and isinstance(plan_pks, list):
         context['plans'] = Plan.objects.filter(pk__in=plan_pks, user_profile__id=int(request.user.userprofile.id)) 
-        context['plans'].extend([item[0] for item in guardian.order_by_object(request.user)])
+        #context['plans'].extend([item[0] for item in guardian.order_by_object(request.user)])
 
     return render(request, template_name, context)
 
 def detail(request, pk, template_name='scans/detail.html'): 
     scan = get_object_or_404(Scan, user_profile__id=int(request.user.userprofile.id), pk=pk)
-.
     form = UploadForm(request.POST or None, { 'scan': scan})
     context = {
         'scan': scan,
@@ -83,7 +82,7 @@ def detail(request, pk, template_name='scans/detail.html'):
     num_metafiles = 0
 
     for tool in tools:  
-        scan_files = tool.metafile_set.filter(role=MetaFile.SCAN)
+        scan_files = tool.metafile_set.filter(role=MetaFile.SCAN, scan=scan)
 
         #Sum the number of scan metafiles all the tool(s) contain.
         num_metafiles = num_metafiles + scan_files.count()
@@ -99,6 +98,4 @@ def detail(request, pk, template_name='scans/detail.html'):
         context['tools'].append(tool_information)
 
     context['num_metafiles'] = num_metafiles
-
     return render(request, template_name, context)
-

@@ -88,7 +88,7 @@ class State(models.Model):
     test = models.NullBooleanField() 
 
     def get_state(self):
-        if self.state and self.state == SUCCESS:
+        if self.state and self.state == State.SUCCESS:
             return self.state
 
         result = app.AsyncResult(str(self.task_id))

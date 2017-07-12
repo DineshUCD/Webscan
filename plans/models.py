@@ -25,4 +25,4 @@ class Plan(models.Model):
         )
 
     def __unicode__(self):
-        return "Name: {0}, Description: {1}".format(self.name, self.description)
+        return "{0} | {1}".format(self.name, self.description)

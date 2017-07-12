@@ -14,23 +14,6 @@ from webscanner.logger import logger
 import sys, os
 # Create your models here.
 
-#Modification on Group class for user levels within a group.
-"""
-NONE   = 0
-VIEW   = 1
-CREATE = 2
-EDIT   = 3
-FULL   = 4
-KLEVEL = (
-    (NONE, "None"),
-    (VIEW, "View"),
-    (CREATE, "Create"),
-    (EDIT, "Edit"),
-    (FULL, "Full"),
-)
-Group.add_to_class('level', models.CharField(max_length=10, choices=KLEVEL, default=VIEW))
-"""
-
 class UserProfile(models.Model):
     user      = models.OneToOneField(User, unique=True)
     date      = models.DateTimeField(auto_now_add=True)
@@ -45,14 +28,8 @@ class UserProfile(models.Model):
 
     def invalidate_sessions(self):
         user_sessions = UserSession.objects.filter(user = self.user)
-        try:
-            for user_session in user_sessions:
-                user_session.session.delete()
-        except models.ProtectedError as err:
-            logger.error("Cannot delete sessions collection")
-            return False
-        else: 
-            return True
+        for user_session in user_sessions:
+            user_session.session.delete()
         
 def create_profile(sender, **kwargs):
     """

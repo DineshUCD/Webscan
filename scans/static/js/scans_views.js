@@ -22,7 +22,7 @@ var statusColor = {
 }
 
 function createElement(element, addClass, text) {
-  var creation = document.createElement('p');
+  var creation = document.createElement(element);
   creation.className = addClass;
   creation.innerText = text;
   return creation;
@@ -39,27 +39,40 @@ function recent() {
     //For each recent scan (within t time of current date & time)
     for (var scan = 0; scan < data.length; scan++) {
       var meta = data[scan];
-      var row = tbody.insertRow(tbody.rows.length);
+      var row = tbody.insertRow(tbody.rows.length); //get the latest row
       
       //1. Plan Information
       var cell1 = row.insertCell(0);
-      jQuery(cell1).text(meta['plan'] + " : " + meta['uniform_resource_locator']);
+      jQuery(cell1).text(meta['plan'] + "\n" + meta['uniform_resource_locator']);
 
       //2. Overall status and tool status
       var cell2 = row.insertCell(1);
  
-        //Overall Status
-      cell2.appendChild(createElement('p', "lead", "Scan Status: "));
-      cell2.appendChild(createElement('p', statusColor[meta['state']], meta['state'])); 
+      //Create a table in cell two for display.
+      var statusTable = document.createElement("TABLE");
+      cell2.appendChild(statusTable);
+      
+      //Create table head for Status and Tool
+      var header             = statusTable.createTHead();
+      
+      //Create the data row.
+      var dataRow = statusTable.insertRow(0);
+      
+      //Populate Cell # 0
+      var statusCell = dataRow.insertCell(0);
+      statusCell.appendChild(createElement('p', statusColor[meta['state']], meta['state']));
+ 
+      var componentCell = dataRow.insertCell(1);
+      statusTable.style = componentCell.style  = statusCell.style =  "border: 1px solid black";  
 
-        //For each tool, list the status.
       for (var tool = 0; tool < meta['tools'].length; tool++) {
-        var item = meta['tools'][tool];
-        for (var key in item) {
-          cell2.appendChild(createElement('p', "lead", key + ":"));
-          cell2.appendChild(createElement('p', statusColor[item[key]], item[key]));
-        }
-      } //inner for
+        var component = meta['tools'][tool];
+        //Print out <Component Name> 
+        for (var key in component) {
+          componentCell.appendChild(createElement('p', statusColor[component[key]], key + " : " + component[key]));         
+        } //nested for 
+      } //nested for      
+
     } //for
     $('#ongoing').dataTable();
 

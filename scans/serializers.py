@@ -53,7 +53,7 @@ class ScanSerializer(serializers.ModelSerializer):
         ret['pk'] = instance.id
         for tool in instance.plan.tool_set.all():
             state = State.objects.get(scan=instance, tool=tool)
-            tool_information = { tool.name: state.get_state() }
+            tool_information = { tool.name : state.get_state() }
             if state.test != None:
                 tool_information['test'] = state.test
             ret['tools'].append(tool_information)

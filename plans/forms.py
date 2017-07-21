@@ -5,6 +5,8 @@ from .models import Plan
 from scans.models import Tool
 from scans.tasks import find_all_interfaces
 
+from django.forms.models import inlineformset_factory
+
 class PlanForm(forms.ModelForm):
     class Meta:
         model = Plan
@@ -12,6 +14,7 @@ class PlanForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.user_profile_id = kwargs.pop('user_profile_id', None)
+
         super(PlanForm, self).__init__(*args, **kwargs)
 
         CHOICES = tuple(find_all_interfaces())

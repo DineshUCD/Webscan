@@ -1,10 +1,32 @@
 {% load bootstrap3 %}
+{% load static %}
+
+{%  block content %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="{% static 'js/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+  $('.cliFormSet').formset({
+    addText: 'Add Script',
+    deleteText: 'Remove Script'
+  });
+</script>
+
 <form action="{{ action }}" method="POST">
   {% csrf_token %}
   {% bootstrap_form form %}
+  {% for cliForm in cliForms %}
+    <div class="cliFormSet">
+      {% bootstrap_form cliForm %} 
+    </div>
+  {% endfor %}
+  {{ cliForms.management_form }} 
     {% buttons %}
       <button type="submit" class="btn btn-primary">
         {% bootstrap_icon "star" %} Submit
       </button>
     {% endbuttons %}
 </form>
+
+
+{% endblock %}

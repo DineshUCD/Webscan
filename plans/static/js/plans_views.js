@@ -25,13 +25,22 @@ function select(element, url) {
   )});
 }
 
-function create(url) {
+function createCli(url) {
+  $('#extraTool').load(url);
+}
+
+function updateCli(url) {
+  createCli(url);
+  $('#cli').modal('show');
+}
+
+function createPlan(url) {
   $('#planConfiguration').load(url);
 }
 
-function update(url) {
-  create(url);
-  $("#myModal").modal('show');
+function updatePlan(url) {
+  createPlan(url);
+  $('#myModal').modal('show');
 }
 
 function remove(element, url) {

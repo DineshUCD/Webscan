@@ -58,8 +58,9 @@ def create_zip_for_scan(sender, instance, created, **kwargs):
 
 class Tool(models.Model):
     # A Tool can be run from multiple Plan objects, and a Plan has multiple Tool objects.
-    plans  = models.ManyToManyField('plans.Plan')
-    name   = models.CharField(max_length=256, default="", blank=True)
+    plans         = models.ManyToManyField('plans.Plan')
+    name          = models.CharField(max_length=256, default="", blank=True)
+    configuration = models.TextField(max_length=10000, blank=True, null=True) 
 
     # Example: "<class 'plugins.w3af.W3af'>"
     module = models.CharField(max_length=256, default="", blank=True)

@@ -153,8 +153,22 @@ class AbstractPlugin(object):
     def __repr__(self):
         return json.dumps(self.__dict__)
 
-class Gauntlt(AbstractPlugin):
+class Cli(AbstractPlugin):
+    """
+    Accept a command line tool supported in the webscanner/plugin directory and process its request.
+    If the arguments are not empty, then we are dealing with a Cli
+    """
+    __metaclass__ = abc.ABCMeta
+    
+    #Override the do_configure on a per plugin basis.
+    
+    #Must pass tool model to attach configuration to command.
 
+class Gauntlt(AbstractPlugin):
+    """
+    This class is used for quick pass/fail tests via the
+    BDD framework. 
+    """
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod

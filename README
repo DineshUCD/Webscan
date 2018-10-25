@@ -1,32 +1,22 @@
-Dependency
-pip install django-user-roles
+Problem Statement: 
+When many testers periodically perform penetration testing on a website, they generate data about that website. Some tests on a website are cursory while others may take longer for a more thorough report on the target. Whether these tests are coarse or fine, a tester might find it more efficient to run multiple of them at once in their own environments. Moreover, a team may perform a battery of tests on their scrum boxes to verify whether developers fixed old issues. Thus, testing an application might gather historical data on it too. Thus, a tester requires a platform to not only effortlessly run multiple tests at once, but also aggregate the historical test data as reference. 
 
-With Gauntlt you can store additional step definitions  in the attack_adapters directory.
-Gauntlt also provides flexibility through a few generic step definitions that allow you to 
-check the output of arbitrary raw command lines. 
+Solution Summary:
+The Web Scanner is a test automation platform. It will help security team members perform automated web security scans with a set of tools and re-execute those scans as required. This platform can support tools of various rigor. Ideally, a team member can log into the Web Scanner and launch scans on any URL. The application is both real-time and responsive. This means a user can view his or her tool's result as soon as it is finished running tests, see the status of a tool as it runs on the queue, and fail safely. Each action is followed up with an appropriate confirmation and/or status update. Our goal is to abstract the complexities and rote of basic tool tests with a easy to use interface and organize a team's scanning factory. 
 
-Sample Gauntlt Hello world example:
-
-Background:
-@final
-Feature: hello world with gauntlt using the generic command line attack
-  Scenario: Check for the existence of the root user in /etc/passwd
-   When I launch a "generic" attack with:
-   """
-   cat /etc/passwd
-   """
-   Then the output should contain:
-   """
-   root
-   """
-Tags:
-The @slow tag tells Gauntlt to allow for a 30-second timeout.
-The @veryslow allows for a five-minute timeout.
-Anything witht he @ is a tag in gauntlt and it is one way to organize your attacks.
-Feel free to mix in tags that have origanizational meaning like @prod with tags that describe
-attack type, lke @web.
-
-
-Feature:
-Each attack should say what it is doing. We use the Feature keyword to express what the attack is doing,
-but take this space to give a good description to what you are doing in this attack. 
+Requirements:
+As a user, I must be able to run multiple tools on a target URL. 
+A set of tools is called a 'Plan'. When a 'Plan' executes, it is called a 'Scan'.
+Each tool may run a different test and must execute in a different process. Currently, each rule runs in its own process space. 
+As a user, I may view a summarized history of the 'Scan's I ran on the application. 
+As a user, I may view the details of an ongoing, failed, or completed 'Scan' on a separate page.
+As a user, I must be able to see and sift through real-time status of all my or my group's ongoing 'Scan's.
+As a user, I must be able to view the lifecycle of both personal and group 'Plan's.
+As a user, I must be able to stop 'Scan's and/or restart 'Scan's.
+As a user, I must be able to upload a tool's analysis file to ThreadFix. 
+As a user, I must be able to modify, create, and remove 'Plan's. 
+As a user, I must not be able to view my peer's 'Plan's.
+As a user, I must be able to download the standard output, standard error, and analysis of a scan from the Scan Details page.
+The Task Engine must operate independently of the Web UI.
+If the user starts a Scan and the server quits, the Scan should continue its processes. When the Web UI restarts, then the user must be able to view the Scan diagnostics in the Scan Details/History page. Thus, a failure in the Web UI does not affect the Task Engine.
+If a user logs out with active Scan(s), then he or she may view the Scan(s)'s results after re-logging in in the Scan Details/History page.
